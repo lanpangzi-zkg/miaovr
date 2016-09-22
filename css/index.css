@@ -1,0 +1,263 @@
+a{
+    color: inherit;
+    text-decoration: none;
+}
+a:hover{
+    text-decoration: none;
+}
+/***********banner**************/
+#banner { 
+    position: relative; 
+    overflow: auto; 
+    text-align: center;
+    padding: 0;
+}
+#banner li { list-style: none; }
+#banner ul li { float: left; }
+#banner .dots { position: absolute; left: 0; right: 0; bottom: 20px;}
+#banner .dots li { 
+    display: inline-block; 
+    width: 10px; 
+    height: 10px; 
+    margin: 0 4px; 
+    text-indent: -999em; 
+    border: 2px solid #fff; 
+    border-radius: 6px; 
+    cursor: pointer; 
+    opacity: .4; 
+    -webkit-transition: background .5s, opacity .5s; 
+    -moz-transition: background .5s, opacity .5s; 
+    transition: background .5s, opacity .5s;
+}
+#banner .dots li.active {
+    background: #fff;
+    opacity: 1;
+}
+#banner .arrow { position: absolute; top: 160px;}
+#banner #al { left: 15px;}
+#banner #ar { right: 15px;}
+/***********content*************/
+.container-white{
+    background-color: #fff;
+}
+.container-title{
+    line-height: 30px;
+    height: 30px;
+    font-size: 1.5em;
+    margin: 20px 0;
+}
+.bg-white{
+    background-color: #fff;
+}
+.vr-box{
+    position: relative;
+    margin: 10px auto;
+    box-shadow: 0px 2px 5px #bdbdbd;
+}
+.vr-box .more-link{
+    position: absolute;
+    right: 10px;
+    top:10px;
+}
+.vr-box .more-link span{
+    display: inline-block;
+    line-height: 40px;
+    vertical-align: middle;
+}
+.vr-box .more-link .more-icon{
+    width: 28px;
+    height: 7px;
+    display: inline-block;
+    background: url('../images/common/more.png') no-repeat;
+    line-height: 40px;
+    vertical-align: middle;
+}
+.vr-box-header{
+
+}
+.header-main{
+    padding: 10px 0;
+}
+.header-main .box-header-icon{
+    display: inline-block;
+    *display: inline;
+    *zoom:1;
+    line-height: 44px;
+    vertical-align: middle;
+    margin-left: 10px;
+}
+.header-main .title{
+    line-height: 44px;
+    vertical-align: middle;
+    font-size: 1.2em;
+    font-weight: bold;
+    margin-left: 10px;
+}
+.black-line{
+    height: 3px;
+    background: url('../images/common/black-line.png') repeat-x;
+}
+.vr-grid{
+    margin-left: 0;
+    margin-right: 0;
+}
+/************vr资讯**************/
+.vr-info-user{
+    display: inline-block;
+    line-height: 50px;
+    vertical-align: middle;
+    margin-left: 10px;
+}
+.header-main .more-link{
+
+}
+.header-main .more-link .more-icon{
+
+}
+.vr-info-sub{
+    padding: 10px 0;
+}
+.vr-info-sub .sub-txt{
+    line-height: 50px;
+    vertical-align: middle;
+    font-weight: bold;
+}
+.line-mb-10{
+    margin-bottom: 10px;
+}
+/*************vr tv****************/
+.vr-box .col-sm-9 .col-sm-3{
+    margin: 5px 0;
+}
+.hot-video-list{
+
+}
+.hot-video-list li{
+    margin: 10px 0;
+}
+.hot-video-list .video-icon{
+    float: left;
+}
+.hot-video-list .video-info{
+    height: 120px;
+    position: relative;
+    margin-left: 128px;
+    margin-right: 10px;
+    font-size: 12px;
+    line-height: 1.5em;
+}
+.video-info .video-info-title{
+
+}
+.video-info .video-info-content{
+
+}
+.video-info .video-rank{
+    position: absolute;
+    right: 17px;
+    bottom: 0;
+    background: #87c5fe;
+    color: #fff;
+    padding: 0 5px;
+    border-radius: 5px;
+}
+/***********vr game*************/
+.vr-game .game-tabs{
+    width: 100%;
+    float: right;
+    margin-bottom: 10px;
+}
+.vr-game .game-tabs li{
+    float: left;
+}
+.vr-game .game-tabs li a{
+    height: 30px;
+    line-height: 30px;
+    display: block;
+    padding: 0 5px;
+}
+.vr-game .game-tabs li .active{
+    background-color: #ff8b3d;
+    color:#fff;
+}
+.vr-game .game-info{
+    line-height: 30px;
+    height: 30px;
+    text-align: center;
+}
+.hot-equipment-list li{
+    margin:5px 0;
+}
+.equipment-icon{
+    float: left;
+}
+.equipment-info{
+    position: relative;
+    margin-left: 200px;
+    height: 68px;
+}
+.equipment-info .equipment-rank{
+    position: absolute;
+    right: 28px;
+    bottom: 0;
+}
+.img-game-tips{
+    margin-top:15px;
+    margin-left: 0;
+}
+
+/***********vr community***************/
+.row-chapter{
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+.community-chapter-icon{
+    margin-left: 10px;
+}
+.community-chapter{
+    padding: 5px;
+}
+.community-left-nav li{
+    margin: 5px 0;
+}
+.community-temp{
+    height: 100px;
+    background-color: #ccc;
+}
+.chapter-bottom{
+    padding: 10px 0;
+}
+.chapter-bottom .user-icon{
+    float: left;
+    width: 50px;
+    height: 50px;
+    background-color: #555;
+    border-radius: 50%;
+}
+.chapter-interactive{
+    position: relative;
+    margin-left: 50px;
+    padding: inherit;
+    text-align: right;
+}
+.chapter-interactive i{
+    display: inline-block;
+    vertical-align: middle;
+}
+.chapter-interactive span{
+    color: #dedede;
+}
+.chapter-interactive .chapter-off-icon{
+    width: 18px;
+    height: 10px;
+    background: url('../images/index/OFF.png') no-repeat;
+}
+.chapter-interactive .chapter-chat-icon{
+    width: 16px;
+    height: 15px;
+    background: url('../images/index/Chat.png') no-repeat;
+}
+.hot-community-list li{
+    padding-right: 28px;
+    margin-top: 10px;
+}
