@@ -1,0 +1,247 @@
+.user-center-box{
+    background-color: #fff;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+.user-header{
+    padding: 10px 0 10px 40px;
+    border-bottom: 1px solid #eee;
+}
+.aside-menu{
+    padding: 10px;
+}
+.aside-menu .menu{
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+    cursor: pointer;
+}
+.aside-menu .menu.cur{
+    background-color: #ffd737;
+    color: #fff;
+}
+.aside-menu .menu i,.aside-menu .menu span{
+    line-height: 22px;
+    vertical-align: middle;
+}
+.aside-menu .menu i{
+    margin-left: 10px;
+}
+.aside-menu .menu .name{
+    margin-left:10px;
+}
+.aside-menu .menu .icon{
+    width: 26px;
+    height: 22px;
+}
+.menu-basic .icon{
+    background: url('../images/userCenter/Man-nor.png') no-repeat;
+}
+.menu-message .icon{
+    background: url('../images/userCenter/Mail-nor.png') no-repeat;
+}
+.menu-score .icon{
+    background: url('../images/userCenter/Coins-nor.png') no-repeat;
+}
+.menu-basic.cur .icon{
+    background: url('../images/userCenter/Man.png') no-repeat;
+}
+.menu-message.cur .icon{
+    background: url('../images/userCenter/Mail.png') no-repeat;
+}
+.menu-score.cur .icon{
+    background: url('../images/userCenter/Coins.png') no-repeat;
+}
+.tabs{
+    margin: 10px 0;
+}
+.tabs .tab{
+    padding: 10px;
+    color: #d2d2d3;
+    cursor: pointer;
+}
+.tabs .tab+.tab{
+    margin: 0 15px;
+}
+.tabs .tab.choose{
+    background-color: #ff8b3d;
+    color: #fff;
+}
+.tab-pages{
+    width: 80%;
+    min-height: 450px;
+}
+.tab-pages .page{
+    padding: 20px 0;
+    display: none;
+}
+.tab-pages .active-page{
+    display: block;  
+}
+.tabs .tab a{
+    color: inherit;
+} 
+.user-basic{
+    margin: 10px 0;
+}
+.user-basic .user-icon{
+    float: left;
+    width: 128px;
+    height: 128px;
+    background:url('../images/userCenter/user-icon.png') no-repeat;
+}
+.user-basic .info{
+    margin-left: 130px;
+    position: relative;
+}
+.user-basic .info .info-item{
+    padding: 15px;
+}
+.user-basic .info .info-name{
+    padding-top: 0;
+}
+.user-basic .user-name{
+    font-size: 1.2em;
+}
+.user-basic .edit-name{
+    color: #ffd737;
+}
+.edit-name .icon{
+    width: 17px;
+    height: 16px;
+    background:url('../images/userCenter/Pencil.png')  no-repeat;
+}
+.info-item .edit-sex{
+    width: 30px;
+    height: 16px;
+    background:url('../images/userCenter/edit.png')  no-repeat;
+}
+.info-item .radio-group{
+    margin-left: 20px;
+}
+.info-date{
+    margin-top: 18px;
+}
+.validate-box{
+    width: 80%;
+}
+.validate-box .v-item{
+    float: left;
+    width: 50%;   
+}
+.validate-icon{
+    float: left;
+    width: 98px;
+    height: 98px;
+}
+.mobile .validate-icon{
+    background: url('../images/userCenter/Vmobile.png');
+}
+.mail .validate-icon{
+    background: url('../images/userCenter/Vmail.png');
+}
+.validate-r{
+    position: relative;
+    margin-left: 130px;
+}
+.btn-auth{
+    width: 107px;
+    height: 32px;
+    border: none;
+    background: url('../images/userCenter/comfirm-auth.png');
+    margin-top: 10px;
+}
+.validate-result{
+    padding: 10px 0;
+}
+.tips{
+    padding: 10px 0;
+    text-align: center;
+    color: #cfcfd4;
+}
+.v-body{
+    margin: 10px;
+    padding: 10px;
+    border: 1px solid #ffd737;
+}
+.edit-icon-box{
+
+}
+.edit-icon-box .current-icon{
+    float: left;
+    width: 120px;
+    height: 120px;
+    background-color: #eee;
+}
+.edit-icon-box  .edit-area{
+    position: relative;
+    margin-left: 130px;
+}
+.edit-box{
+    padding: 10px;
+    background-color: #f5f5f5;
+}
+.edit-box .form-item{
+    padding: 10px 0;
+}
+.edit-box .form-item label{
+    display: inline-block;
+    width: 100px;
+    font-weight: normal;
+    color: #999999;
+}
+.edit-box .form-item .inp{
+    width: 180px;
+    padding: 5px 0;
+}
+.edit-box .form-item .btn{
+    background-color: #ffd737;
+    color: #fff;
+    border-radius: 0;
+    width: 120px;
+    margin-left: 105px;
+}
+.send-code{
+    background: none;
+    border: none;
+    color: #ff8b3d;
+}
+
+.aside-page{
+    display: none;
+}
+.aside-page.cur{
+    display: block;
+}
+.message-list{
+
+}
+.message-list  li{
+    border-bottom: 2px dashed #eaeaea;
+    margin: 12px 0;
+    padding-bottom: 5px;
+    color: #c7c7c8;
+}
+.message-list  li span{
+    vertical-align: middle;
+    margin: 0 20px;
+}
+.message-list .message-icon{
+    width: 33px;
+    height: 33px;
+    background: url('../images/userCenter/message.png');
+}
+.message-list .message-author{
+    color: #ffd737;
+}
+.tab-pages .score-tips{
+    text-align: center;
+    padding: 10px 0;
+}
+.tab-pages .score{
+    text-align: center;
+    color: #ff8b3d;
+    font-size: 1.5em;
+}
+.tab-pages .score-rule li{
+    padding: 10px 0;
+}

@@ -1,0 +1,77 @@
+.wrapper{
+    background-image:url('../images/login/bg.png');
+    background-size: cover;
+    padding: 100px 0;
+}
+.login-box{
+    margin: 0 auto;
+    width: 600px;
+    background-color: white;
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 8px 2px #e6e6e6;
+    /* width: 800px;
+    background-image: url('../images/login/login-box.png');
+    background-size: cover; */
+}
+.login-form{
+    width: 300px;
+    margin: 0 auto;
+}
+.login-title{
+    font-size: 1.2em;
+    padding: 15px 0;
+}
+.login-item{
+    margin: 10px 0;
+}
+.login-item .inp{
+    width: 100%;
+    padding: 5px;
+    border: 1px solid #cdced0;
+}
+.login-item .forget{
+    float: right;
+}
+.login-item .btn-login{
+    width: 100%;
+    height: 40px;
+    border: none;
+    color: #fff;
+    background-color: #ffd737;
+}
+.login-item .register{
+    margin-left: 15px;
+    color: #ffd737;
+}
+.login-r{
+    margin-top: 45px;
+    padding: 20px 0;
+    border-left: 1px solid #eee;
+}
+.login-r .other-way{
+    font-size: 1.2em;
+    padding: 15px 0;
+    text-align: center;
+}
+.login-r .other-way span{
+    vertical-align: middle;
+}
+.login-r .other-way .line{
+    width: 40px;
+    height: 1px;
+    background-color: #d8d8d8;
+    margin: 0 5px;
+}
+.login-r .apps{
+    padding: 20px 0;
+    text-align: center;
+}
+.login-r .apps span{
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    border-radius: 50%;
+    background-color: #eee;
+    margin: 0 5px;
+}

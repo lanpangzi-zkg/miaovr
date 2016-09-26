@@ -1,0 +1,75 @@
+.history-box{
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+.history-header{
+    padding: 10px 15px;
+    background-color: #fff;
+    position: relative;
+}
+.history-header .delete-box{
+    float: right;
+    cursor: pointer;
+}
+.history-header .delete-box .delete-icon{
+    width: 13px;
+    height: 16px;
+    background:url('../images/history/Bin.png') no-repeat;
+    vertical-align: middle;
+    margin: 0 4px;
+}
+.time-aside{
+    position: relative;
+    float: left;
+    padding: 10px 0;
+}
+.time-aside .time-line{
+    height: 106px;
+}
+.main-ul{
+    position: relative;
+    margin-left: 100px;
+    padding: 10px 0;
+}
+.time-line .time-tag{
+    background-color: #fff;
+    border-radius: 5px;
+    color: #ffd737;
+    padding: 2px 2px;
+    margin-left: 10px;
+}
+.time-line .time-axis{
+    position: relative;
+}
+.time-line .ver-line{
+    height: 100px;
+    width: 1px;
+    background-color: #d6d6d6;
+    position: absolute;
+    left: 3px;
+    top: 12px;
+}
+.time-dot-box{
+
+}
+.time-dot-box .time-dot{
+    width: 7px;
+    height: 7px;
+    background: url('../images/history/dot.png') no-repeat;
+}
+.time-details li{
+    margin: 0 5px;
+}
+.delete-dialog{
+    position: absolute;
+    right: 0;
+    top: 40px;
+    width: 250px;
+    height: 114px;
+    background: url('../images/history/dialog.png');
+    display: none;
+    text-align: center;
+}
+.delete-dialog .title{
+    margin-top: 30px;
+}

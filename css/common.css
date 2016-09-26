@@ -55,6 +55,11 @@ table {
 .img-responsive{
     margin:0 auto;
 }
+.inb{
+    display: inline-block;
+    *display: inline;
+    *zoom: 1;
+}
 /*************header**************/
 .header{
     position: relative;
@@ -86,11 +91,21 @@ table {
 }
 #main-navbar .navbar .navbar-left>li>a {
     text-decoration: none;
-    padding: 35px 15px;
     color: inherit;
+    padding-top: 35px;
+    padding-bottom: 35px;
+    padding-left: 0;
+    padding-right: 0;
+    width: 70px;
+    text-align: center;
+}
+#main-navbar .navbar .navbar-right>li{
+    margin:0 5px;
 }
 #main-navbar .navbar .navbar-right>li>a {
     text-decoration: none;
+    padding-left: 5px;
+    padding-right: 5px;
 }
 #main-navbar nav ul li {
     display: inline-block;
@@ -107,7 +122,9 @@ table {
     vertical-align: top;
 }
 .input-search{
+    width: 150px;
     height: 32px;
+    padding-left: 30px;
     border:none;
     background: url('../images/index/Loop.png') no-repeat 5px 5px;
 }
@@ -125,11 +142,15 @@ table {
     height: 25px;
     width: auto;
 }
+.choose .nav-r-name{
+    color: #fff;
+}
 .nav-r-name{
-    margin: 5px 0;
+    margin: 7px 0;
 }
 /***********content*************/
 .container-white{
+    position: relative;
     background-color: #fff;
 }
 .container-title{
@@ -144,47 +165,11 @@ table {
     background: url('../images/common/line.png') no-repeat;
     margin-bottom:10px; 
 }
-.vr-category-link{
-    display: block;
-    margin:20px auto;
-}
-.vr-category-link .vr-category{
-    margin:0 auto;
-}
-.col-sm-20{
-    width: 20%;
-}
-.col-sm-40{
-    width: 40%;
-}
-.col-sm-60{
-    width: 60%;
-}
-.row-pb-10{
-    padding-bottom: 30px;
-}
-.col-sm-20{
-    padding-bottom: 20px;
-}
-.row-vr{
-    margin-top: 10px;
-    padding-bottom: 15px;
-}
-.img-left.vr-category-link{
-    margin-left: 0;
-}
-.img-left.vr-category-link .vr-category{
-    margin: inherit;
-}
-.img-right.vr-category-link{
-    margin-right: 0;
-}
-.img-right.vr-category-link .vr-category{
-    margin: inherit;
-}
-.banner-box{
-    height: 80px;
-    background-color: #eee;
+.hor-y-line{
+    position: relative;
+    height: 5px;
+    background-color: #ffd737;
+    z-index:99;
 }
 /************footer***********/
 .footer{

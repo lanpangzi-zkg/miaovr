@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>VR播放</title>
+
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+    <link href="../css/common.css" rel="stylesheet">
+    <link href="../css/playvr.css" rel="stylesheet">
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="http://cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="header">
+      <div id="main-navbar" class="container">
+        <nav class="navbar navbar-default">
+          <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a id="logo" title="Start..." class="navbar-brand" href="#">
+                    <img src="../images/common/logo1.png" alt="miaovr Logo">
+                </a>
+                <div class="clearfix"></div>
+            </div>
+            <div class="navbar-collapse collapse" id="bs-example-navbar-collapse-1" aria-expanded="false">
+                <ul class="nav navbar-nav navbar-left">
+                    <li>
+                        <a href="../index.html">首页</a>
+                    </li>
+                    <li class="choose">
+                        <a href="./vrinfo.html">VR资讯</a>
+                    </li>
+                    <li>
+                        <a href="./vrtv.html">VR TV</a>
+                    </li>
+                    <li>
+                        <a href="./vrgame.html">VR游戏</a>
+                    </li>
+                    <li>
+                        <a href="./community.html">VR社区</a>
+                    </li>
+                </ul>
+
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                      <a href="#">
+                        <img src="../images/common/mobile.png" alt='' class="img-responsive nav-r-icon"/>
+                        <p class="nav-r-name">客户端</p>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="#">
+                        <img src="../images/common/history.png" alt='' class="img-responsive nav-r-icon"/>
+                        <p class="nav-r-name">上传视频</p>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="./views/history.html">
+                        <img src="../images/common/history.png" alt='' class="img-responsive nav-r-icon"/>
+                        <p class="nav-r-name">历史观看</p>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="./views/login.html">
+                        <img src="../images/common/man.png" alt='' class="img-responsive nav-r-icon"/>
+                        <p class="nav-r-name">登陆/注册</p>
+                      </a>
+                    </li>
+                    <li class="search-i">
+                        <form class="form-search">
+                          <span class="input-search-box">
+                            <input type="text" class="input-search">
+                          </span><span class="btn-search-box">
+                            <input type="submit" value="搜索" class="btn-search">
+                          </span>
+                        </form>
+                    </li>
+                </ul>
+
+            </div>
+            <!-- end of navbar-collapse -->
+          </div>
+          <!-- end of container-fluid -->
+        </nav>
+      </div>
+    </div>
+    <div class="container">
+      <div class="vr-player-box">
+        <div id="detu_container" style="height: 100%;width: 100%;"></div>
+      </div>
+      <div class="vr-video-info">
+        <div class="row">
+          <div class="col-sm-9">
+            <div class="vr-video-basic">
+              <div class="row">
+                <div class="col-sm-3">
+                  <div class="vr-video-icon">icon</div>
+                  <div class="download-box">
+                    <input type="button" value="下载" class="btn-download"/>
+                  </div>
+                </div>
+                <div class="col-sm-9">
+                  <div class="video-title">清迈圣殿之旅</div>
+                  <p class="video-item">
+                    <span>发布时间:</span>
+                    <span class="date val">2016-7-11</span>
+                    <span>文件大小:</span>
+                    <span class="f-size val">333M</span>
+                    <span>视频语言:</span>
+                    <span class="lang val">中文</span>
+                  </p>
+                  <p class="video-item">
+                    <span>作者:</span>
+                    <span class="author val">未知</span>
+                  </p>
+
+                  <p class="video-item">
+                    <span>视频类型:</span>
+                    <span class="video-type">
+                      <span class="video-type-tag">游戏</span>
+                      <span class="video-type-tag">动画</span>
+                      <span class="video-type-tag">电影</span>
+                      <span class="video-type-tag">美女</span>
+                    </span>
+                  </p>
+
+                </div>
+              </div>
+              <div class="vr-video-description">
+                <p class="title">视频描述</p>
+                <p class="content">视频描述视频描述视频描述视频描述视频描述视频描述视频描述视频描述视频描述视频描述视频描述视频描述视频描述</p>
+              </div>
+              <div class="vr-video-comment">
+                <p class="title">视频点评</p>
+                <form action="#">
+                  <textarea class="commment-body"></textarea>
+                  <div class="btn-group">
+                    <input type="submit" value="发布" class="btn-publish">
+                  </div>
+                </form>
+              </div>
+              <div class="comments-box">
+                <ul class="comments-list">
+                  <li class="comment-item">
+                    <div class="user-icon"></div>
+                    <div class="comment-main">
+                      <div class="user-info">
+                        <span class="user-name">哈哈</span>
+                        <span class="floor">23#</span>
+                      </div>
+                      <div class="user-comment">
+                        很好玩,有木有
+                      </div>
+                    </div>
+                    <div class="reply-box">
+                       <input type="button" class="btn-reply" value="回复"/> 
+                    </div>
+                  </li>
+                  <li class="comment-item">
+                    <div class="user-icon"></div>
+                    <div class="comment-main">
+                      <div class="user-info">
+                        <span class="user-name">哈哈</span>
+                        <span class="floor">23#</span>
+                      </div>
+                      <div class="user-comment">
+                        很好玩,有木有
+                      </div>
+                    </div>
+                    <div class="reply-box">
+                       <input type="button" class="btn-reply" value="回复"/> 
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-3">
+            <div class="other-videos-box">
+              <div class="other-videos-title">
+                相关视频
+              </div>
+              <div class="other-video">
+                <div class="other-video-icon"></div>
+                <p class="other-video-title">相关视频</p>
+              </div>
+              <div class="other-video">
+                <div class="other-video-icon"></div>
+                <p class="other-video-title">相关视频</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="footer">
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-3">
+            <img src="../images/common/logo2.png" class="img-responsive footer-logo">
+          </div>
+          <div class="col-sm-6">
+            <div class="row">
+              <div class="col-sm-3 footer-menu">
+                VR资讯
+              </div>
+              <div class="col-sm-3 footer-menu">
+                VR TV
+              </div>
+              <div class="col-sm-3 footer-menu">
+                VR 游戏
+              </div>
+              <div class="col-sm-3 footer-menu">
+                VR社区
+              </div>
+            </div>
+            <div class="footer-link content-center">
+              <div class="footer-link-line"></div>
+              <div class="row">
+                <div class="col-sm-12">
+                  <span>关于我们</span>
+                  <span class="sperate-line">-</span>
+                  <span>法律申明</span>
+                  <span class="sperate-line">-</span>
+                  <span>免责申明</span>
+                  <span class="sperate-line">-</span>
+                  <span>隐私条款</span>
+                  <span class="sperate-line">-</span>
+                  <span>商务合作</span>
+                </div>
+              </div>
+            </div>
+          </div>  
+          <div class="col-sm-3">
+            <img src="../images/common/wx.png" class="img-responsive">
+          </div>
+        </div>
+      </div> 
+      <!--end of container-->
+      <div class="coryright content-center">
+        <div class="container">
+          <div class="row">
+           <div class="col-sm-12">
+              <span class="coryright-s1">2016 瞄瞄互娱科技有限公司版权所有  沪ICP备12012543号-1</span>
+            </div>
+          </div>
+          <div class="row">
+           <div class="col-sm-12">
+              <span class="coryright-s2">国内专业VR播放技术服务供应商</span>
+            </div>
+          </div>
+        </div>
+      </div> 
+    </div>
+    <!--end of footer-->
+    <script src="../js/jquery-1.11.1.min.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="http://media.qicdn.detu.com/@/sdk-1.2.0/sdk.js"></script>
+    <script type="text/javascript">
+      var config = {
+          target: "detu_container",
+          islive: false,
+          videos:[
+              {name: "bq", txt: "标清", video: "http://media.qicdn.detu.com/@/68095950-956A-82A0-AC71-F66F23312713/2016-05-05/572aa0ac7f0d3-512x256.mp4", mp3: "http://media.qicdn.detu.com/@/68095950-956A-82A0-AC71-F66F23312713/2016-05-05/572aa0ac7f0d3.mp3", poster: "", play: true},
+              {name: "gq", txt: "高清", video: "http://media.qicdn.detu.com/@/68095950-956A-82A0-AC71-F66F23312713/2016-05-05/572aa0ac7f0d3-1024x512-1.3m.mp4", mp3: "http://media.qicdn.detu.com/@/68095950-956A-82A0-AC71-F66F23312713/2016-05-05/572aa0ac7f0d3.mp3", poster: "", play: false},
+              {name: "cq", txt: "超清", video: "http://media.qicdn.detu.com/@/68095950-956A-82A0-AC71-F66F23312713/2016-05-05/572aa0ac7f0d3-2048x1024.mp4", mp3: "http://media.qicdn.detu.com/@/68095950-956A-82A0-AC71-F66F23312713/2016-05-05/572aa0ac7f0d3.mp3", poster: "", play: false}
+          ],
+          ready: function(pano){
+              //开启陀螺仪
+              pano.gyro(true);
+          }
+      };
+      detupano(config);
+    </script>
+  </body>
+</html>

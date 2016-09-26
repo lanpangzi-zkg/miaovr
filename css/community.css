@@ -1,0 +1,164 @@
+.community-main{
+    background-color: #fcfcfd;
+    margin-top: 15px;
+    min-height: 500px;
+}
+.main-header{
+    background-color: #fff;
+    border-bottom: 1px solid #eee;
+    padding: 10px 0;
+}
+.main-header-r{
+    padding: 10px;
+}
+.main-header .theme{
+    font-size: 1.1em;
+    color: #006987;
+    margin: 0 13px;
+}
+.main-header .new-theme{
+    color: #ffd737;
+}
+.community-title{
+    font-size: 1.2em;
+    padding: 10px 0;
+}
+.community-nav{
+
+}
+.community-nav li{
+    float: left;
+    margin: 0 5px;
+    color: #c2c2c2;
+}
+.notes-box{
+    padding: 10px;
+}
+.notes-box .notes-list{
+    
+}
+.note-item{
+    padding: 10px 0;
+}
+.note-item .note-icon{
+    float: left;
+    width: 35px;
+    height: 35px;
+    background-color: #555;
+    border-radius: 50%;
+}
+.note-item .note-main{
+    position: relative;
+    margin-left: 60px;
+    line-height: 30px;
+    border-bottom: 1px solid #eee;
+}
+.note-main .note-info{
+
+}
+.note-main .note-info span{
+    vertical-align: middle;
+}
+.note-main .note-info .tag{
+    width: 29px;
+    height: 16px;
+    margin-left: 10px;
+}
+.tag-new{
+  background:url('../images/community/new.png') no-repeat;  
+}
+.tag-hot{
+  background:url('../images/community/hot.png') no-repeat;  
+}
+.note-main .note-info .note-name{
+   font-size: 1.1em;
+}
+.note-extra{
+    color: #dfdfe0;
+}
+.note-extra .note-author{
+
+}
+.note-extra .note-date{
+    margin-left: 10px;
+}
+.note-extra .note-r{
+    float: right;
+    margin: 0 5px;
+}
+.note-extra .note-r .icon{
+    width: 18px;
+    height: 15px;
+}
+.note-extra .note-off .icon{
+    background:url('../images/common/off.png') no-repeat;
+}
+.note-extra .note-chat .icon{
+    background:url('../images/common/chat.png') no-repeat;
+}
+.note-extra .note-r .num{
+    
+}
+
+.aside-box{
+    padding: 10px;
+}
+.aside-box .title{
+    padding: 0 10px;
+    margin: 0 15px;
+    line-height: 30px;
+    height: 30px;
+    font-size: 1.2em;
+    font-weight: bold;
+    border-left: 3px solid #ffd737;
+    margin-bottom: 10px;
+}
+.aside-box .line{
+    height: 1px;
+    background-color: #eee;
+    margin: 0 10px 10px 10px;
+}
+.trends{
+    margin: 15px 0 10px 0;
+    padding: 10px 0;
+    background-color: #fff;
+}
+.trends .trends-list li{
+
+}
+.trends .trends-list li a{
+    width: 100%;
+    height: 100px;
+    background-color: #555;
+    display: block;
+}
+.trends .trends-list .trends-title{
+    text-align: center;
+    padding: 10px 0;
+}
+.sign{
+    margin: 25px 0;
+}
+.miao-app{
+    background-color: #fff;
+}
+.pagination-box{
+    text-align: center;
+    margin: 10px 0 35px 0;
+}
+.pagination-box .btn-page{
+    width: 200px;
+    padding: 16px 20px;
+    left: 35px;
+    border: none;
+    background-color: #ffd737;
+    color: #fff;
+}
+.pagination-box .pages .page{
+    display: inherit;
+}
+.pagination-box .pages a{
+    display: inherit;
+    padding: 15px 20px;
+    border: 1px solid #d7d7d7;
+}

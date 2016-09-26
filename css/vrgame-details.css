@@ -1,0 +1,251 @@
+.vr-game-info{
+    position: relative;
+}
+.game-basic{
+    background-image: url('../images/vrgameDetails/top-bg.png');
+    background-size: cover;
+    color: #fff;
+    padding-top: 50px;
+    padding-bottom: 50px;
+}
+.vr-game-slider{
+    background-color: #272727;
+}
+.vr-game-icon{
+    width: 200px;
+    height: 200px;
+    margin: 0 auto;
+    background-image:url('../images/vrgameDetails/game-icon.png'); 
+    background-size: cover;
+}
+.download-box{
+    padding: 10px;
+}
+.download-box .btn-download{
+    width: 120px;
+    height: 40px;
+    border: none;
+    color: #fff;
+    font-size: 1.2em;
+    background-color: #FF9800;
+}
+.vr-game-stars{
+    text-align: center;
+    margin-top: 10px;
+}
+.vr-game-stars .star{
+    display: inline-block;
+    *display: inline;
+    *zoom:1;
+}
+.game-header{
+    
+}
+.game-header span{
+    vertical-align: middle;
+    height: 30px;
+    line-height: 30px;
+}
+.game-header .game-title{
+    font-size: 1.8em;
+}
+.game-header .os-icon{
+    width: 30px;
+    height: 30px;
+    background-size: cover;
+    display: inline-block;
+    *display: inline;
+    *zoom:1;
+}
+.game-header .apple{
+    background-image:url('../images/vrgameDetails/apple.png'); 
+}
+.game-header .android{
+    background-image:url('../images/vrgameDetails/android.png'); 
+}
+.game-header .pc{
+    background-image:url('../images/vrgameDetails/pc.png'); 
+}
+.game-item{
+    padding: 10px 0;
+}
+.game-item span{
+    line-height: 24px;
+    vertical-align: middle;
+}
+.game-tags .game-type{
+
+}
+.game-tags .game-type-tag{
+    width:50px;
+    height:24px;    
+    display: inline-block;
+    *display: inline;
+    *zoom: 1;
+    background-size: cover;
+    margin: 0 3px;
+}
+.game-tags .shoot{
+    background-image:url('../images/vrgameDetails/shoot.png'); 
+}
+.game-tags .risk{
+    background-image:url('../images/vrgameDetails/risk.png'); 
+}
+.game-tags .scene{
+    background-image:url('../images/vrgameDetails/scene.png'); 
+}
+.game-tags .building{
+    background-image:url('../images/vrgameDetails/building.png'); 
+}
+
+/***********banner**************/
+#banner { 
+    position: relative; 
+    overflow: auto; 
+    text-align: center;
+    padding: 0;
+}
+#banner li { list-style: none; }
+#banner ul li { float: left; }
+#banner .dots { position: absolute; left: 0; right: 0; bottom: 20px;}
+#banner .dots li { 
+    display: inline-block; 
+    width: 10px; 
+    height: 10px; 
+    margin: 0 4px; 
+    text-indent: -999em; 
+    border: 2px solid #fff; 
+    border-radius: 6px; 
+    cursor: pointer; 
+    opacity: .4; 
+    -webkit-transition: background .5s, opacity .5s; 
+    -moz-transition: background .5s, opacity .5s; 
+    transition: background .5s, opacity .5s;
+}
+#banner .dots li.active {
+    background: #fff;
+    opacity: 1;
+}
+#banner .arrow { position: absolute; top: 160px;}
+#banner #al { left: 15px;}
+#banner #ar { right: 15px;}
+
+/*********************/
+.game-item .val{
+    margin: 0 5px;
+}
+.game-item .date{
+    margin-right: 20px;
+}
+.game-item .f-size{
+    margin-right: 20px;
+}
+
+.vr-game-description{
+    padding: 10px;
+}
+.vr-game-basic p{
+    height: 30px;
+    line-height: 30px;
+    padding-left: 10px;
+}
+.vr-game-basic .title{
+   border-left: 5px solid #ffd737;
+}
+.vr-game-basic .content{
+    margin: 10px 0;
+}
+.other-games-box{
+    padding: 10px;
+}
+.other-games-title{
+    height: 40px;
+    line-height: 40px;
+    background-color: #dad9d8;
+    color: #fff;
+    text-align: center;
+    font-size: 1.2em;
+}
+.other-game{
+    margin-top: 10px;
+}
+.other-game .other-game-icon{
+    height: 100px;
+    background-color: #555;
+}
+.other-game .other-game-title{
+    padding-top: 8px;
+}
+.vr-game-comment{
+    padding: 10px;
+}
+.vr-game-comment form{
+    margin: 15px 0px 10px 0;
+}
+.vr-game-comment .commment-body{
+    width: 100%;
+    height: 120px;
+    border: 1px solid #e0e0e0;
+}
+.vr-game-comment .btn-group{
+    display: block;
+    text-align: right;
+}
+.vr-game-comment .btn-group .btn-publish{
+    width: 120px;
+    height: 35px;
+    line-height: 35px;
+    border: none;
+    background-color: #ffd737;
+    color: #fff;
+    margin: 10px 0;
+}
+
+.comments-box{
+    padding: 10px;
+    margin-bottom: 80px;
+}
+.comments-box .comments-list{
+
+}
+.comment-item{
+    padding: 10px 0;
+}
+.comment-item .user-icon{
+    float: left;
+    width: 35px;
+    height: 35px;
+    background-color: #555;
+    border-radius: 50%;
+}
+.comment-item .comment-main{
+    position: relative;
+    margin-left: 60px;
+    line-height: 30px;
+}
+.comment-item .user-info{
+
+}
+.user-info .user-name{
+    color: #ffd737;
+}
+.user-info .floor{
+    float: right;
+    color: #d7d7d7;
+}
+.user-info .user-comment{
+
+}
+.comment-item .reply-box{
+    text-align: right;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #eee;
+}
+.comment-item .btn-reply{
+    border: none;
+    background-color: #d7d7d7;
+    color: #fff;
+    padding: 4px 8px;
+    border-radius: 10px;
+    font-size: 12px;
+}

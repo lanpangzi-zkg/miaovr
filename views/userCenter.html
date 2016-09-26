@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>个人中心</title>
+
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+    <link href="../css/common.css" rel="stylesheet">
+    <link href="../css/user-center.css" rel="stylesheet">
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="http://cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="header">
+      <div id="main-navbar" class="container">
+        <nav class="navbar navbar-default">
+          <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a id="logo" title="Start..." class="navbar-brand" href="#">
+                    <img src="../images/common/logo1.png" alt="miaovr Logo">
+                </a>
+                <div class="clearfix"></div>
+            </div>
+
+            <div class="navbar-collapse collapse" id="bs-example-navbar-collapse-1" aria-expanded="false">
+                <ul class="nav navbar-nav navbar-left">
+                    <li>
+                        <a href="../index.html">首页</a>
+                    </li>
+                    <li>
+                        <a href="./vrinfo.html">VR资讯</a>
+                    </li>
+                    <li>
+                        <a href="./vrtv.html">VR TV</a>
+                    </li>
+                    <li>
+                        <a href="./vrgame.html">VR游戏</a>
+                    </li>
+                    <li>
+                        <a href="./community.html">VR社区</a>
+                    </li>
+                </ul>
+
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                      <a href="#">
+                        <img src="../images/common/mobile.png" alt='' class="img-responsive nav-r-icon"/>
+                        <p class="nav-r-name">客户端</p>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="#">
+                        <img src="../images/common/history.png" alt='' class="img-responsive nav-r-icon"/>
+                        <p class="nav-r-name">上传视频</p>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="./history.html">
+                        <img src="../images/common/history.png" alt='' class="img-responsive nav-r-icon"/>
+                        <p class="nav-r-name">历史观看</p>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="./login.html">
+                        <img src="../images/common/man.png" alt='' class="img-responsive nav-r-icon"/>
+                        <p class="nav-r-name">登陆/注册</p>
+                      </a>
+                    </li>
+                    <li class="search-i">
+                        <form class="form-search">
+                          <span class="input-search-box">
+                            <input type="text" class="input-search">
+                          </span><span class="btn-search-box">
+                            <input type="submit" value="搜索" class="btn-search">
+                          </span>
+                        </form>
+                    </li>
+                </ul>
+
+            </div>
+            <!-- end of navbar-collapse -->
+          </div>
+          <!-- end of container-fluid -->
+        </nav>
+      </div>
+    </div>    
+    <div class="container">
+      <div class="user-center-box">
+        <div class="user-header">
+          <h3>个人中心</h3>
+        </div>
+        <div class="row">
+          <div class="col-sm-2">
+            <ul class="aside-menu">
+              <li class="menu-basic menu cur" role-page="aside-page-1">
+                <i class="inb icon"></i>
+                <span class="name">个人信息</span>
+              </li>
+              <li class="menu-message menu" role-page="aside-page-2">
+                <i class="inb icon"></i>
+                <span class="name">消息中心</span>
+              </li>
+              <li class="menu-score menu" role-page="aside-page-3">
+                <i class="inb icon"></i>
+                <span class="name">积分中心</span>
+              </li>
+            </ul>
+          </div>
+          <div class="col-sm-10">
+            <div class="aside-page cur" id="aside-page-1">
+              <ul class="tabs">
+                <li class="tab inb choose" role-page="basic-page-1">
+                  <span>基本资料</span>
+                </li>
+                <li class="tab inb" role-page="basic-page-2">
+                  <span>修改头像</span>
+                </li>
+                <li class="tab inb" role-page="basic-page-3">
+                  <span>修改密码</span>
+                </li>
+                <li class="tab inb" role-page="basic-page-4">
+                  <span>修改昵称</span>
+                </li>
+                <li class="tab inb" role-page="basic-page-5">
+                  <span>修改手机</span>
+                </li>
+              </ul>
+              <div class="tab-pages">
+                <div class="page active-page" id="basic-page-1">
+                  <div class="user-basic">
+                    <div class="user-icon"></div>
+                    <div class="info">
+                      <p class="info-item info-name">
+                        <span class="user-name">瞄女郎</span>
+                        <span class="edit-name">
+                          <i class="icon inb"></i>
+                          <span>修改昵称</span>
+                        </span>
+                      </p>
+                      <p class="info-item">
+                        <label for="user-sex">性别:</label>
+                        <span id="user-sex">男</span>
+                        <span class="edit-sex inb"></span>
+                         <span class="radio-group">
+                          <input type="radio" name="sex" id="sex-man" value="男">
+                          <label for="sex-man">男</label>
+                          <input type="radio" name="sex" id="sex-women" value="女">
+                          <label for="sex-women">女</label>
+                         </span> 
+                      </p>
+                      <p class="info-item info-date">
+                        <span>注册时间:</span>
+                        <span class="date">2016-8-8 12:12</span>
+                      </p>
+                    </div>
+                    <div class="clearfix"></div>
+                  </div>
+                    <div class="validate-box">
+                      <div class="mobile v-item">
+                        <div class="v-body">
+                          <div class="content">
+                            <div class="validate-icon">
+                            </div>
+                            <div class="validate-r">
+                              <p class="validate-result">手机未验证</p>
+                              <input type="button" class="btn-auth"/>
+                            </div>
+                            <div class="clearfix"></div>
+                          </div>
+                          <div class="tips">
+                            注:未认证手机无法下载相关资源
+                          </div>
+                        </div>
+                      </div>
+                      <div class="mail v-item">
+                        <div class="v-body">
+                          <div class="content">
+                            <div class="validate-icon">
+                            </div>
+                            <div class="validate-r">
+                              <p class="validate-result">邮箱未验证</p>
+                              <input type="button" class="btn-auth"/>
+                            </div>
+                            <div class="clearfix"></div>
+                          </div>
+                          <div class="tips">
+                            注:未认证邮箱无法下载相关资源
+                          </div>
+                        </div>
+                      </div>
+                      <div class="clearfix"></div>
+                    </div>
+                </div>
+                <div class="page" id="basic-page-2">
+                  <div class="edit-icon-box edit-box">
+                    <div class="current-icon"></div>
+                    <div class="edit-area">
+                      <input type="button" value="上传">
+                    </div>
+                    <div class="clearfix"></div>
+                  </div>
+                </div>
+                <div class="page" id="basic-page-3">
+                  <div class="change-pass-box edit-box">
+                    <form action="#">
+                      <p class="form-item">
+                        <label>当前密码</label>
+                        <input type="password" class="inp" name="cur-pass">
+                      </p>
+                      <p class="form-item">
+                        <label>新密码</label>
+                        <input type="password" class="inp" name="new-pass">
+                      </p>
+                      <p class="form-item">
+                        <label>确认密码</label>
+                        <input type="password" class="inp" name="repeat-pass">
+                      </p>
+                      <p class="form-item">
+                        <input type="submit" class="btn" value="确认修改">
+                      </p>
+                    </form>
+                  </div>
+                </div>
+                <div class="page" id="basic-page-4">
+                  <div class="edit-nickname-box edit-box">
+                    <form action="#">
+                      <p class="form-item cur-nickname">
+                        <label>当前昵称</label>
+                        <span>瞄女郎</span>
+                      </p>
+                      <p class="form-item edit-nickname">
+                        <label>新昵称</label>
+                        <input type="text" class="inp" name="new-nickname">
+                      </p>
+                      <p class="form-item">
+                        <input type="submit" class="btn" value="确认修改">
+                      </p>
+                    </form>
+                  </div>
+                </div>
+                <div class="page" id="basic-page-5">
+                  <div class="edit-phone-box edit-box">
+                    <form action="#">
+                      <p class="form-item">
+                        <label>当前手机</label>
+                        <input type="text" class="inp">
+                        <input type="button" class="send-code" value="发送验证码">
+                      </p>
+                      <p class="form-item edit-nickname">
+                        <label>短信验证码</label>
+                        <input type="text" class="inp" name="new-nickname">
+                      </p>
+                      <p class="form-item">
+                        <input type="submit" class="btn" value="下一步">
+                      </p>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="aside-page" id="aside-page-2">
+              <ul class="tabs">
+                <li class="tab inb choose" role-page="message-page-1">
+                  <span>系统消息</span>
+                </li>
+                <li class="tab inb" role-page="message-page-2">
+                  <span>聊聊</span>
+                </li>
+              </ul>
+              <div class="tab-pages">
+                <div class="page active-page" id="message-page-1">
+                  <ul class="message-sys message-list">
+                    <li>
+                      <span class="message-icon inb"></span>
+                      <span class="message-author">瞄瞄团队</span>
+                      <span class="message-title">测试测试测试</span>
+                      <span class="message-date">2016-09-18</span>
+                    </li>
+                    <li>
+                      <span class="message-icon inb"></span>
+                      <span class="message-author">瞄瞄团队</span>
+                      <span class="message-title">测试测试测试</span>
+                      <span class="message-date">2016-09-18</span>
+                    </li>
+                    <li>
+                      <span class="message-icon inb"></span>
+                      <span class="message-author">瞄瞄团队</span>
+                      <span class="message-title">测试测试测试</span>
+                      <span class="message-date">2016-09-18</span>
+                    </li>
+                  </ul>
+                </div>
+                <div class="page" id="message-page-2">
+                  <ul class="message-list">
+                    <li>
+                      <span class="message-icon inb"></span>
+                      <span class="message-author">瞄瞄团队</span>
+                      <span class="message-title">测试测试测试</span>
+                      <span class="message-date">2016-09-18</span>
+                    </li>
+                    <li>
+                      <span class="message-icon inb"></span>
+                      <span class="message-author">瞄瞄团队</span>
+                      <span class="message-title">测试测试测试</span>
+                      <span class="message-date">2016-09-18</span>
+                    </li>
+                    <li>
+                      <span class="message-icon inb"></span>
+                      <span class="message-author">瞄瞄团队</span>
+                      <span class="message-title">测试测试测试</span>
+                      <span class="message-date">2016-09-18</span>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div class="aside-page" id="aside-page-3">
+              <ul class="tabs">
+                <li class="tab inb choose" role-page="score-page-1">
+                  <span>查询积分</span>
+                </li>
+                <li class="tab inb" role-page="score-page-2">
+                  <span>积分规则</span>
+                </li>
+              </ul>
+              <div class="tab-pages">
+                <div class="page active-page" id="score-page-1">
+                  <p class="score-tips">已有积分</p>
+                  <p class="score">100</p>
+                </div>
+                <div class="page" id="score-page-2">    
+                  <ul class="score-rule">
+                    <li>1.每日签到+20积分</li>
+                    <li>2.发布一篇帖子+50积分</li>
+                    <li>1.每获10人评论+50积分</li>
+                  </ul>            
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="footer">
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-3">
+            <img src="../images/common/logo2.png" class="img-responsive footer-logo">
+          </div>
+          <div class="col-sm-6">
+            <div class="row">
+              <div class="col-sm-3 footer-menu">
+                VR资讯
+              </div>
+              <div class="col-sm-3 footer-menu">
+                VR TV
+              </div>
+              <div class="col-sm-3 footer-menu">
+                VR 游戏
+              </div>
+              <div class="col-sm-3 footer-menu">
+                VR社区
+              </div>
+            </div>
+            <div class="footer-link content-center">
+              <div class="footer-link-line"></div>
+              <div class="row">
+                <div class="col-sm-12">
+                  <span>关于我们</span>
+                  <span class="sperate-line">-</span>
+                  <span>法律申明</span>
+                  <span class="sperate-line">-</span>
+                  <span>免责申明</span>
+                  <span class="sperate-line">-</span>
+                  <span>隐私条款</span>
+                  <span class="sperate-line">-</span>
+                  <span>商务合作</span>
+                </div>
+              </div>
+            </div>
+          </div>  
+          <div class="col-sm-3">
+            <img src="../images/common/wx.png" class="img-responsive">
+          </div>
+        </div>
+      </div> 
+      <!--end of container-->
+      <div class="coryright content-center">
+        <div class="container">
+          <div class="row">
+           <div class="col-sm-12">
+              <span class="coryright-s1">2016 瞄瞄互娱科技有限公司版权所有  沪ICP备12012543号-1</span>
+            </div>
+          </div>
+          <div class="row">
+           <div class="col-sm-12">
+              <span class="coryright-s2">国内专业VR播放技术服务供应商</span>
+            </div>
+          </div>
+        </div>
+      </div> 
+    </div>
+    <!--end of footer-->
+    <script src="../js/jquery-1.11.1.min.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
+    <script type="text/javascript">
+      $(document).ready(function(){
+        $(".tabs li").bind("click",function(){
+            $(this).addClass("choose").siblings().removeClass("choose");
+            var tab_id=$(this).attr("role-page");
+            $("#"+tab_id).addClass("active-page").siblings().removeClass("active-page");
+        });
+        $(".aside-menu .menu").bind("click",function(){
+            var _id=$(this).attr("role-page");
+            $(this).addClass("cur").siblings().removeClass("cur");
+            $("#"+_id).addClass("cur").siblings().removeClass("cur");
+        });
+      });
+    </script>
+  </body>
+</html>

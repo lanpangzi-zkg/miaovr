@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>用户登陆</title>
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+    <link href="../css/common.css" rel="stylesheet">
+    <link href="../css/login.css" rel="stylesheet">
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="http://cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="header">
+      <div id="main-navbar" class="container">
+        <nav class="navbar navbar-default">
+          <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a id="logo" title="Start..." class="navbar-brand" href="#">
+                    <img src="../images/common/logo1.png" alt="miaovr Logo">
+                </a>
+                <div class="clearfix"></div>
+            </div>
+            <div class="navbar-collapse collapse" id="bs-example-navbar-collapse-1" aria-expanded="false">
+                <ul class="nav navbar-nav navbar-left">
+                    <li>
+                        <a href="../index.html">首页</a>
+                    </li>
+                    <li>
+                        <a href="./vrinfo.html">VR资讯</a>
+                    </li>
+                    <li>
+                        <a href="./vrtv.html">VR TV</a>
+                    </li>
+                    <li>
+                        <a href="./vrgame.html">VR游戏</a>
+                    </li>
+                    <li>
+                        <a href="./community.html">VR社区</a>
+                    </li>
+                </ul>
+
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                      <a href="#">
+                        <img src="../images/common/mobile.png" alt='' class="img-responsive nav-r-icon"/>
+                        <p class="nav-r-name">客户端</p>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="#">
+                        <img src="../images/common/history.png" alt='' class="img-responsive nav-r-icon"/>
+                        <p class="nav-r-name">上传视频</p>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="./history.html">
+                        <img src="../images/common/history.png" alt='' class="img-responsive nav-r-icon"/>
+                        <p class="nav-r-name">历史观看</p>
+                      </a>
+                    </li>
+                    <li class="choose">
+                      <a href="#">
+                        <img src="../images/common/man.png" alt='' class="img-responsive nav-r-icon"/>
+                        <p class="nav-r-name">登陆/注册</p>
+                      </a>
+                    </li>
+                    <li class="search-i">
+                        <form class="form-search">
+                          <span class="input-search-box">
+                            <input type="text" class="input-search">
+                          </span><span class="btn-search-box">
+                            <input type="submit" value="搜索" class="btn-search">
+                          </span>
+                        </form>
+                    </li>
+                </ul>
+            </div>
+            <!-- end of navbar-collapse -->
+          </div>
+          <!-- end of container-fluid -->
+        </nav>
+      </div>
+    </div>  
+    <div class="wrapper">
+      <div class="login-box">
+        <div class="row">
+          <div class="col-sm-7">
+            <form action="./userCenter.html" class="login-form">
+              <p class="login-title">
+                账号登陆
+              </p>
+              <p class="login-item">
+                <input type="text" class="inp" placeHolder="手机号/邮箱">
+              </p>
+              <p class="login-item">
+                <input type="password" class="inp" placeHolder="密码">
+              </p>
+              <p class="login-item">
+                <input type="checkbox" id="remember">
+                <label for="remember">记住我</label>
+                <a href="#" class="forget">忘记密码?</a>
+              </p>
+              <p class="login-item">
+                <input type="submit" value="登陆" class="btn-login"/>
+              </p>
+              <p class="login-item">
+                没有账号?<a href="./register.html" class="register">免费注册</a>
+              </p>
+            </form>
+          </div>
+          <div class="col-sm-5">
+            <div class="login-r">
+              <div class="other-way">
+                <span class="line inb"></span>
+                <span>其他方式</span>
+                <span class="line inb"></span>
+              </div>
+              <div class="apps">
+                <span class="qq inb">A</span>
+                <span class="weibo inb">B</span>
+                <span class="weixin inb">C</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--end of wrapper-->
+    <div class="footer">
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-3">
+            <img src="../images/common/logo2.png" class="img-responsive footer-logo">
+          </div>
+          <div class="col-sm-6">
+            <div class="row">
+              <div class="col-sm-3 footer-menu">
+                VR资讯
+              </div>
+              <div class="col-sm-3 footer-menu">
+                VR TV
+              </div>
+              <div class="col-sm-3 footer-menu">
+                VR 游戏
+              </div>
+              <div class="col-sm-3 footer-menu">
+                VR社区
+              </div>
+            </div>
+            <div class="footer-link content-center">
+              <div class="footer-link-line"></div>
+              <div class="row">
+                <div class="col-sm-12">
+                  <span>关于我们</span>
+                  <span class="sperate-line">-</span>
+                  <span>法律申明</span>
+                  <span class="sperate-line">-</span>
+                  <span>免责申明</span>
+                  <span class="sperate-line">-</span>
+                  <span>隐私条款</span>
+                  <span class="sperate-line">-</span>
+                  <span>商务合作</span>
+                </div>
+              </div>
+            </div>
+          </div>  
+          <div class="col-sm-3">
+            <img src="../images/common/wx.png" class="img-responsive">
+          </div>
+        </div>
+      </div> 
+      <!--end of container-->
+      <div class="coryright content-center">
+        <div class="container">
+          <div class="row">
+           <div class="col-sm-12">
+              <span class="coryright-s1">2016 瞄瞄互娱科技有限公司版权所有  沪ICP备12012543号-1</span>
+            </div>
+          </div>
+          <div class="row">
+           <div class="col-sm-12">
+              <span class="coryright-s2">国内专业VR播放技术服务供应商</span>
+            </div>
+          </div>
+        </div>
+      </div> 
+    </div>
+    <!--end of footer-->
+    <script src="../js/jquery-1.11.1.min.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
+    <script type="text/javascript">
+      $(document).ready(function(e) {
+      });
+    </script>
+  </body>
+</html>
