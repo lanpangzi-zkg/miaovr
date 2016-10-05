@@ -75,3 +75,8 @@
     background-color: #eee;
     margin: 0 5px;
 }
+@media (max-width: 600px) {
+    .login-box{
+        width: inherit;
+    }
+}

@@ -1,0 +1,259 @@
+.user-center-box{
+    background-color: #fff;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    min-height: 350px;
+}
+.user-header{
+    position: relative;
+    padding: 10px 0 10px 40px;
+    border-bottom: 1px solid #eee;
+}
+.user-header .chat{
+    width: 90px;
+    height: 36px;
+    background: url('../images/visitUserHome/chat.png') no-repeat;
+    position: absolute;
+    right: 5px;
+    bottom: 5px;
+}
+
+.aside-menu{
+    padding: 10px;
+}
+.aside-menu .menu{
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+    cursor: pointer;
+}
+.aside-menu .menu.cur{
+    background-color: #ffd737;
+    color: #fff;
+}
+.aside-menu .menu i,.aside-menu .menu span{
+    line-height: 22px;
+    vertical-align: middle;
+}
+.aside-menu .menu i{
+    margin-left: 10px;
+}
+.aside-menu .menu .name{
+    margin-left:10px;
+}
+.aside-menu .menu .icon{
+    width: 26px;
+    height: 22px;
+}
+.menu-basic .icon{
+    background: url('../images/userCenter/Man-nor.png') no-repeat;
+}
+.menu-note .icon{
+    background: url('../images/visitUserHome/Pencil.png') no-repeat;
+}
+.menu-media .icon{
+    background: url('../images/visitUserHome/Media.png') no-repeat;
+}
+.menu-basic.cur .icon{
+    background: url('../images/userCenter/Man.png') no-repeat;
+}
+.menu-note.cur .icon{
+    background: url('../images/visitUserHome/Pencil-active.png') no-repeat;
+}
+.menu-media.cur .icon{
+    background: url('../images/visitUserHome/Media-active.png') no-repeat;
+}
+.tabs{
+    margin: 10px 0;
+}
+.tabs .tab{
+    padding: 10px;
+    color: #d2d2d3;
+    cursor: pointer;
+}
+.tabs .tab+.tab{
+    margin: 0 15px;
+}
+.tabs .tab.choose{
+    background-color: #ff8b3d;
+    color: #fff;
+}
+.tab-pages{
+    width: 80%;
+    min-height: 450px;
+}
+.tab-pages .page{
+    padding: 20px 0;
+    display: none;
+}
+.tab-pages .active-page{
+    display: block;  
+}
+.tabs .tab a{
+    color: inherit;
+} 
+.user-basic{
+    margin: 10px 0;
+    color: #999999;
+}
+.user-basic .info{
+    position: relative;
+}
+.user-basic .info .info-item{
+    padding: 10px 15px;
+}
+.user-basic .cell{
+    width: 200px;
+}
+.edit-icon-box .current-icon{
+    float: left;
+    width: 120px;
+    height: 120px;
+    background-color: #eee;
+}
+.edit-icon-box  .edit-area{
+    position: relative;
+    margin-left: 130px;
+}
+.edit-box{
+    padding: 10px;
+    background-color: #f5f5f5;
+}
+.edit-box .form-item{
+    padding: 10px 0;
+}
+.edit-box .form-item label{
+    display: inline-block;
+    width: 100px;
+    font-weight: normal;
+    color: #999999;
+}
+.edit-box .form-item .inp{
+    width: 180px;
+    padding: 5px 0;
+}
+.edit-box .form-item .btn{
+    background-color: #ffd737;
+    color: #fff;
+    border-radius: 0;
+    width: 120px;
+    margin-left: 105px;
+}
+.send-code{
+    background: none;
+    border: none;
+    color: #ff8b3d;
+}
+.aside-page{
+    display: none;
+}
+.aside-page.cur{
+    display: block;
+}
+
+.note-list{
+
+}
+.note-list li{
+    border-bottom: 2px dashed #eaeaea;
+    margin: 12px 0;
+    padding-bottom: 5px;
+    color: #c7c7c8;
+}
+.note-list li span{
+    vertical-align: middle;
+}
+.note-list li .note-title{
+    font-size: 1.2em;
+    color: #000;
+}
+.note-list li .note-r{
+    float: right;
+    margin: 0 5px;
+}
+.note-list li .note-chat .icon{
+    background: url('../images/common/chat.png') no-repeat;
+}
+.note-list li .note-off .icon{
+    background: url('../images/common/off.png') no-repeat;
+}
+.note-list li .note-r .icon{
+    width: 18px;
+    height: 15px;
+    vertical-align: middle;
+}
+.note-list li .note-r .num{
+    vertical-align: middle;
+}
+.note-list .hot-icon{
+    width: 29px;
+    height: 16px;
+    margin-left: 15px;
+    background: url('../images/community/hot.png') no-repeat;
+}
+
+
+.reply-list{
+
+}
+.reply-list li{
+    margin: 10px 0;
+}
+.reply-list .reply-title{
+    padding:5px;
+}
+.reply-outer-box{
+    width: 70%;
+    padding:10px;
+    background-color: #f1f1f1;
+}
+.reply-outer-box .reply-inner-box .quote-icon{
+    width: 24px;
+    height: 21px;
+}
+.quote-box-end{
+    text-align: right;
+}
+.reply-outer-box .reply-inner-box .front-quote{
+    background: url('../images/visitUserHome/front-quote.png') no-repeat;
+}
+.reply-outer-box .reply-inner-box .back-quote{
+    background: url('../images/visitUserHome/back-quote.png') no-repeat;
+}
+.reply-outer-box .reply-inner-box .reply-content{
+    color: #a5a5a5;
+    padding: 10px;
+    line-height: 1.5;
+}
+.reply-content .reply-title{
+    padding: 10px 0;
+}
+.publish-video li{
+    margin:0 5px;
+}
+.publish-video li a{
+    position: relative;
+    display: block;
+}
+.publish-video .video-title{
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 36px;
+    line-height: 36px;
+    color: #fff;
+    background: url('../images/common/bottom-txt.png') repeat-x;
+}
+.publish-video .video-title .video-name{
+    margin-left: 5px;
+}
+.publish-video .video-title .last-time{
+    float: right;
+    margin-right: 5px;
+}
+.publish-video li .publish-date{
+    line-height: 30px;
+    height: 30px;
+    text-align: right;
+    margin-top: 5px;
+    color: #a6a6a6;
+}

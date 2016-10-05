@@ -60,7 +60,7 @@
                       </a>
                     </li>
                     <li>
-                      <a href="#">
+                      <a href="./views/upload.html">
                         <img src="./images/common/history.png" alt='' class="img-responsive nav-r-icon"/>
                         <p class="nav-r-name">上传视频</p>
                       </a>
@@ -97,21 +97,25 @@
     </div> 
     <!-- end of main-navbar -->
     <div class="hor-line"></div>
-    <div class="container" id="banner">
+    <div class="container" id="banner" role-mn="4">
       <ul>
         <li>
-          <img src="./images/index/banner-01.jpg" alt="banner-01" width="100%" height="auto" class="img-responsive"></li>
+          <a href="#" class="slider-item">
+            <img src="./images/index/banner-01.jpg" role-err="./images/index/banner-01.jpg" alt="banner-01" width="100%" height="auto" class="img-responsive"/>
+          </a>
         <li>
-          <img src="./images/index/banner-02.jpg" alt="banner-02" width="100%" height="auto" class="img-responsive"></li>
+          <a href="#" class="slider-item">
+            <img src="./images/index/banner-02.jpg" role-err="./images/index/banner-01.jpg" alt="banner-02" width="100%" height="auto" class="img-responsive"/>
+          </a>
         <li>
-          <img src="./images/index/banner-03.jpg" alt="banner-03" width="100%" height="auto" class="img-responsive"></li>
+          <a href="#" class="slider-item">
+            <img src="./images/index/banner-03.jpg" role-err="./images/index/banner-01.jpg" alt="banner-03" width="100%" height="auto" class="img-responsive"/>
+          </a>
         <li>
-          <img src="./images/index/banner-04.jpg" alt="banner-04" width="100%" height="auto" class="img-responsive"></li>
+          <a href="#" class="slider-item">
+            <img src="./images/index/banner-04.jpg" role-err="./images/index/banner-01.jpg" alt="banner-04" width="100%" height="auto" class="img-responsive"/>
+          </a>
       </ul>
-<!--       <a href="javascript:void(0);" class="unslider-arrow04 prev">
-        <img class="arrow" id="al" src="./images/index/arrowl.png" alt="prev" width="20" height="35"></a>
-      <a href="javascript:void(0);" class="unslider-arrow04 next">
-        <img class="arrow" id="ar" src="./images/index/arrowr.png" alt="next" width="20" height="37"></a> -->
     </div>
     <!--end of banner-->
     <div class="container">
@@ -121,38 +125,47 @@
             <img src="./images/index/Note.png" class="img-responsive box-header-icon">
             <span class="title">VR资讯</span>
           </div>
-          <a href="#" class="more-link">
+          <a href="./views/vrinfo.html" class="more-link">
             <span>更多</span><i class="more-icon"></i>
           </a>
         </div>
         <div class="black-line line-mb-10"></div>
-        <div class="row">
-          <div class="col-sm-4">
-            <div class="vr-info-icon">
-              <img src="./images/index/pic.png" class="img-responsive"/>
-            </div>
-            <div class="vr-info-sub">
-              <img src="./images/index/user.png" class="img-responsive vr-info-user"/>
-              <span class="sub-txt">日出前的珠江明月</span>
-            </div>
+        <div class="row" id="index-vrinfo" role-mn="3">
+          <div class="mask-loading">
+            <div class="loading-icon"></div>
           </div>
           <div class="col-sm-4">
-            <div class="vr-info-icon">
-              <img src="./images/index/pic.png" class="img-responsive"/>
-            </div>
-            <div class="vr-info-sub">
-              <img src="./images/index/user.png" class="img-responsive vr-info-user"/>
-              <span class="sub-txt">日出前的珠江明月</span>
-            </div>
+            <a href="#">
+              <div class="vr-info-icon">
+                <img src="./images/index/pic.png" role-err="./images/index/pic.png" class="img-responsive"/>
+              </div>
+              <div class="vr-info-sub">
+                <img src="./images/index/user.png" class="img-responsive vr-info-user"/>
+                <span class="sub-txt">瞄瞄vr</span>
+              </div>
+            </a>
           </div>
           <div class="col-sm-4">
-            <div class="vr-info-icon">
-              <img src="./images/index/pic.png" class="img-responsive"/>
-            </div>
-            <div class="vr-info-sub">
-              <img src="./images/index/user.png" class="img-responsive vr-info-user"/>
-              <span class="sub-txt">日出前的珠江明月</span>
-            </div>
+            <a href="#">
+              <div class="vr-info-icon">
+                <img src="./images/index/pic.png" role-err="./images/index/pic.png" class="img-responsive"/>
+              </div>
+              <div class="vr-info-sub">
+                <img src="./images/index/user.png" class="img-responsive vr-info-user"/>
+                <span class="sub-txt">瞄瞄vr</span>
+              </div>
+            </a>
+          </div>
+          <div class="col-sm-4">
+            <a href="#">
+              <div class="vr-info-icon">
+                <img src="./images/index/pic.png" role-err="./images/index/pic.png" class="img-responsive"/>
+              </div>
+              <div class="vr-info-sub">
+                <img src="./images/index/user.png" class="img-responsive vr-info-user"/>
+                <span class="sub-txt">瞄瞄vr</span>
+              </div>
+            </a>
           </div>
         </div>
       </div>  
@@ -165,44 +178,71 @@
             <img src="./images/index/Note.png" class="img-responsive box-header-icon">
             <span class="title">VR TV</span>
           </div>
-          <a href="#" class="more-link">
+          <a href="./views/vrtv.html" class="more-link">
             <span>更多</span><i class="more-icon"></i>
           </a>
         </div>
         <div class="black-line"></div>
-        <div class="row">
-          <div class="col-sm-9">
+        <div class="row">          
+          <div class="col-sm-9" id="index-vrtv-l" role-mn="8">
+            <div class="mask-loading">
+              <div class="loading-icon"></div>
+            </div>
             <div class="row vr-tv-sub-header">
               <div class="col-sm-12">
-                <img src="./images/index/TV_bg.png" class="img-responsive">
+                <img src="./images/index/TV_bg.png" role-err="./images/index/vrtv.ipg" class="img-responsive">
               </div>
             </div>
             <div class="row vr-grid">
               <div class="col-sm-3">
-                <img src="./images/index/vrtv.jpg" class="img-responsive">
+                <a href="#" role-base="http://api2.app.miaomiaotv.cn:8080/miaomiaotv/">
+                  <img src="./images/index/vrtv.jpg" role-err="./images/index/vrtv.ipg" class="img-responsive">
+                  <p class="vrtv-item-title">瞄瞄vr</p>
+                </a>
               </div>
               <div class="col-sm-3">
-                <img src="./images/index/vrtv.jpg" class="img-responsive">
+                <a href="#" role-base="http://api2.app.miaomiaotv.cn:8080/miaomiaotv/">
+                  <img src="./images/index/vrtv.jpg" role-err="./images/index/vrtv.ipg" class="img-responsive">
+                  <p class="vrtv-item-title">瞄瞄vr</p>
+                </a>
               </div>
               <div class="col-sm-3">
-                <img src="./images/index/vrtv.jpg" class="img-responsive">
+                <a href="#" role-base="http://api2.app.miaomiaotv.cn:8080/miaomiaotv/">
+                  <img src="./images/index/vrtv.jpg" role-err="./images/index/vrtv.ipg" class="img-responsive">
+                  <p class="vrtv-item-title">瞄瞄vr</p>
+                </a>
               </div>
               <div class="col-sm-3">
-                <img src="./images/index/vrtv.jpg" class="img-responsive">
+                <a href="#" role-base="http://api2.app.miaomiaotv.cn:8080/miaomiaotv/">
+                  <img src="./images/index/vrtv.jpg" role-err="./images/index/vrtv.ipg" class="img-responsive">
+                  <p class="vrtv-item-title">瞄瞄vr</p>
+                </a>
               </div>
             </div>
             <div class="row vr-grid">
               <div class="col-sm-3">
-                <img src="./images/index/vrtv.jpg" class="img-responsive">
+                <a href="#" role-base="http://api2.app.miaomiaotv.cn:8080/miaomiaotv/">
+                  <img src="./images/index/vrtv.jpg" role-err="./images/index/vrtv.ipg" class="img-responsive">
+                  <p class="vrtv-item-title">瞄瞄vr</p>
+                </a>
               </div>
               <div class="col-sm-3">
-                <img src="./images/index/vrtv.jpg" class="img-responsive">
+                <a href="#" role-base="http://api2.app.miaomiaotv.cn:8080/miaomiaotv/">
+                  <img src="./images/index/vrtv.jpg" role-err="./images/index/vrtv.ipg" class="img-responsive">
+                  <p class="vrtv-item-title">瞄瞄vr</p>
+                </a>
               </div>
               <div class="col-sm-3">
-                <img src="./images/index/vrtv.jpg" class="img-responsive">
+                <a href="#" role-base="http://api2.app.miaomiaotv.cn:8080/miaomiaotv/">
+                  <img src="./images/index/vrtv.jpg" role-err="./images/index/vrtv.ipg" class="img-responsive">
+                  <p class="vrtv-item-title">瞄瞄vr</p>
+                </a>
               </div>
               <div class="col-sm-3">
-                <img src="./images/index/vrtv.jpg" class="img-responsive">
+                <a href="#" role-base="http://api2.app.miaomiaotv.cn:8080/miaomiaotv/">
+                  <img src="./images/index/vrtv.jpg" role-err="./images/index/vrtv.ipg" class="img-responsive">
+                  <p class="vrtv-item-title">瞄瞄vr</p>
+                </a>
               </div>
             </div>
           </div>
@@ -212,7 +252,10 @@
                 <img src="./images/index/TV_bg_02.png" class="img-responsive">
               </div>
             </div>
-            <div class="row">
+            <div class="row" id="index-vrtv-r" role-mn="3">
+              <div class="mask-loading">
+                <div class="loading-icon"></div>
+              </div>
               <div class="col-sm-12" style="padding:0">
                 <ul class="hot-video-list">
                   <li>
@@ -278,56 +321,61 @@
               <li><a href="#">索尼PS VR</a></li>
               <li><a href="#">Mobile VR</a></li>
             </ul>
-            <div class="row vr-grid">
-              <div class="col-sm-3">
-                <a href="#">
-                  <img src="./images/index/game-pic.png" class="img-responsive">
-                  <p class="game-info">智能危机</p>
-                </a>
+            <div id="index-vrgame-l" role-mn="8">
+              <div class="mask-loading">
+                <div class="loading-icon"></div>
               </div>
-              <div class="col-sm-3">
-                <a href="#">
-                  <img src="./images/index/game-pic.png" class="img-responsive">
-                  <p class="game-info">智能危机</p>
-                </a>
+              <div class="row vr-grid">
+                <div class="col-sm-3">
+                  <a href="#">
+                    <img src="./images/index/game-pic.png" role-err="./images/index/game-pic.png" class="img-responsive">
+                    <p class="game-info">智能危机</p>
+                  </a>
+                </div>
+                <div class="col-sm-3">
+                  <a href="#">
+                    <img src="./images/index/game-pic.png" role-err="./images/index/game-pic.png" class="img-responsive">
+                    <p class="game-info">智能危机</p>
+                  </a>
+                </div>
+                <div class="col-sm-3">
+                  <a href="#">
+                    <img src="./images/index/game-pic.png" role-err="./images/index/game-pic.png" class="img-responsive">
+                    <p class="game-info">智能危机</p>
+                  </a>
+                </div>
+                <div class="col-sm-3">
+                  <a href="#">
+                    <img src="./images/index/game-pic.png" role-err="./images/index/game-pic.png" class="img-responsive">
+                    <p class="game-info">智能危机</p>
+                  </a>
+                </div>
               </div>
-              <div class="col-sm-3">
-                <a href="#">
-                  <img src="./images/index/game-pic.png" class="img-responsive">
-                  <p class="game-info">智能危机</p>
-                </a>
-              </div>
-              <div class="col-sm-3">
-                <a href="#">
-                  <img src="./images/index/game-pic.png" class="img-responsive">
-                  <p class="game-info">智能危机</p>
-                </a>
-              </div>
-            </div>
-            <div class="row vr-grid">
-              <div class="col-sm-3">
-                <a href="#">
-                  <img src="./images/index/game-pic.png" class="img-responsive">
-                  <p class="game-info">智能危机</p>
-                </a>
-              </div>
-              <div class="col-sm-3">
-                <a href="#">
-                  <img src="./images/index/game-pic.png" class="img-responsive">
-                  <p class="game-info">智能危机</p>
-                </a>
-              </div>
-              <div class="col-sm-3">
-                <a href="#">
-                  <img src="./images/index/game-pic.png" class="img-responsive">
-                  <p class="game-info">智能危机</p>
-                </a>
-              </div>
-              <div class="col-sm-3">
-                <a href="#">
-                  <img src="./images/index/game-pic.png" class="img-responsive">
-                  <p class="game-info">智能危机</p>
-                </a>
+              <div class="row vr-grid">
+                <div class="col-sm-3">
+                  <a href="#">
+                    <img src="./images/index/game-pic.png" role-err="./images/index/game-pic.png" class="img-responsive">
+                    <p class="game-info">智能危机</p>
+                  </a>
+                </div>
+                <div class="col-sm-3">
+                  <a href="#">
+                    <img src="./images/index/game-pic.png" role-err="./images/index/game-pic.png" class="img-responsive">
+                    <p class="game-info">智能危机</p>
+                  </a>
+                </div>
+                <div class="col-sm-3">
+                  <a href="#">
+                    <img src="./images/index/game-pic.png" role-err="./images/index/game-pic.png" class="img-responsive">
+                    <p class="game-info">智能危机</p>
+                  </a>
+                </div>
+                <div class="col-sm-3">
+                  <a href="#">
+                    <img src="./images/index/game-pic.png" role-err="./images/index/game-pic.png" class="img-responsive">
+                    <p class="game-info">智能危机</p>
+                  </a>
+                </div>
               </div>
             </div>
           </div>
@@ -594,21 +642,107 @@
     </div>
     <!--end of footer-->
     <script src="./js/jquery-1.11.1.min.js"></script>
-     <script src="./js/miaovr.js"></script>
+    <script src="./js/common.js"></script>
     <script src="./js/unslider.min.js"></script>
     <script src="./js/bootstrap.min.js"></script>
     <script type="text/javascript">
       $(document).ready(function(e) {
-        var unslider= $('#banner').unslider({
-          dots: true
-        }),
-        data04 = unslider.data('unslider');
-        $('.unslider-arrow04').click(function() {
-              var fn = this.className.split(' ')[1];
-              data04[fn]();
-          });
+        initSlider();
+        queryVrInfo();
+        queryVrTv();
+        queryVrHotTv();
+        queryVrGame();
       });
-      $("#banner").width($("#banner").width()-30);
+      function initSlider(){
+        var $banner=$("#banner");
+        var unslider= $banner.unslider({
+            dots: true
+        }),
+        data04 = unslider.data("unslider");
+        $(".unslider-arrow04").click(function() {
+          var fn = this.className.split(' ')[1];
+          data04[fn]();
+        });
+        $banner.width($banner.width()-30);
+        querySlider($banner);
+      }
+      function querySlider($banner){
+        Base.queryData("/v1/sliders.php?limit=10",null,null,function(data){
+          Base.handleResult("banner",data,
+            {"childrenBox":"li",
+              "img":"img",
+              "title":".slider-item",
+              "href":"a"},
+            {"img":"titlepic",
+              "title":"title",
+              "href":"titleurl"},"slider_items");
+        },function(err){  
+          console.log("querySlider err:"+err);
+        });
+      }
+      function queryVrInfo(){
+        Base.queryData("/news/all?offset=0&limit=3",null,null,function(data){
+          Base.handleResult("index-vrinfo",data,
+            {"childrenBox":".col-sm-4",
+              "img":".vr-info-icon img",
+              "txt":".vr-info-sub .sub-txt",
+              "role-id":"a"},
+            {"img":"news_url",
+              "txt":"description",
+              "role-id":"newsId"});
+        },function(err){  
+          console.log("queryVrInfo err:"+err);
+        });
+      }
+
+      function queryVrTv(){
+        Base.queryData("/search/allByPage?offset=0&length=8",null,null,function(data){
+          Base.handleResult("index-vrtv-l",data,
+              {"childrenBox":".col-sm-3",
+                "img":"img",
+                "txt":".vrtv-item-title",
+                "href":"a"},
+              {"img":"pic_url",
+                "txt":"showname",
+                "href":"url"}
+            );
+          },function(err){  
+            console.log("queryVrTv err:"+err);
+        });
+      }
+      function queryVrHotTv(){
+        return;
+        Base.queryData("/search/selection",null,null,function(data){
+          Base.handleResult("index-vrtv-r",data,
+              {"childrenBox":"li",
+                "img":".video-icon",
+                "txt":".video-info-title",
+                "subtxt":".video-info-content",
+                "othertxt":".video-rank",
+                "href":"a"},
+              {"img":"pic_url",
+                "txt":"showname",
+                "href":"url"}
+            );
+          },function(err){  
+            console.log("queryVrHotTv err:"+err);
+        });
+      }
+      function queryVrGame(){
+        Base.queryData("/game/selection",null,null,function(data){
+          Base.handleResult("index-vrgame-l",data,
+              {"childrenBox":".col-sm-3",
+                "img":"img",
+                "txt":".game-info",
+                "role-id":"a"},
+              {"img":"none",
+                "txt":"game_name",
+                "role-id":"gameId"}
+            );
+          },function(err){  
+            console.log("queryVrGame err:"+err);
+        });
+      }
     </script>
   </body>
 </html>

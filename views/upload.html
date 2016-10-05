@@ -4,10 +4,11 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>VR社区</title>
+    <title>我要上传</title>
+
     <link href="../css/bootstrap.min.css" rel="stylesheet">
     <link href="../css/common.css" rel="stylesheet">
-    <link href="../css/community.css" rel="stylesheet">
+    <link href="../css/upload.css" rel="stylesheet">
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -46,8 +47,8 @@
                     <li>
                         <a href="./vrgame.html">VR游戏</a>
                     </li>
-                    <li class="choose">
-                        <a href="#">VR社区</a>
+                    <li>
+                        <a href="./community.html">VR社区</a>
                     </li>
                 </ul>
 
@@ -58,7 +59,7 @@
                         <p class="nav-r-name">客户端</p>
                       </a>
                     </li>
-                    <li>
+                    <li class="choose">
                       <a href="#">
                         <img src="../images/common/history.png" alt='' class="img-responsive nav-r-icon"/>
                         <p class="nav-r-name">上传视频</p>
@@ -93,121 +94,131 @@
         </nav>
       </div>
     </div>
-    <div class="container community-main">
-      <div class="row main-header">
-        <div class="col-sm-9">
-          <span class="community-title inb">VR社区</span>
-          <ul class="community-nav inb">
-            <li>首页</li>
-            <li>></li>
-            <li>VR社区</li>
-          </ul>
+    <!-- end of main-navbar -->
+    <div class="hor-line"></div>
+    <div class="container">
+      <div class="upload-box">
+        <div class="banner">
+          <img src="../images/upload/banner.png" alt="#" class="img-responsive">
         </div>
-        <div class="col-sm-3 main-header-r">
-          <a class="theme new-theme">最新主题</a>
-          <a class="theme">推荐主题</a>
-        </div>
-      </div>
-      <div class="row">
-          <div class="col-sm-9">
-            <div class="notes-box">
-              <ul class="notes-list">
-                <li class="note-item">
-                  <div class="note-icon"></div>
-                  <div class="note-main">
-                    <div class="note-info">
-                      <a href="./comDetails.html" class="note-name">行业大咖到访谷居，深入了解VR家装</a>
-                      <span class="tag inb tag-new"></span>
-                    </div>
-                    <div class="note-extra">
-                      <span class="note-author">喵女郎</span>
-                      <span class="note-date">2016-8-8</span>
-                      <span class="note-chat note-r">
-                        <i class="icon inb"></i>
-                        <span class="num">20</span>
-                      </span>
-                      <span class="note-off note-r">
-                        <i class="icon inb"></i>
-                        <span class="num">20</span>
-                      </span>
-                    </div>
-                  </div>
-                </li>
-                <li class="note-item">
-                  <div class="note-icon"></div>
-                  <div class="note-main">
-                    <div class="note-info">
-                      <a href="./comDetails.html" class="note-name">行业大咖到访谷居，深入了解VR家装</a>
-                      <span class="tag inb tag-hot"></span>
-                    </div>
-                    <div class="note-extra">
-                      <span class="note-author">喵女郎</span>
-                      <span class="note-date">2016-8-8</span>
-                      <span class="note-chat note-r">
-                        <i class="icon inb"></i>
-                        <span class="num">20</span>
-                      </span>
-                      <span class="note-off note-r">
-                        <i class="icon inb"></i>
-                        <span class="num">20</span>
-                      </span>
-                    </div>
-                  </div>
-                </li>
-              </ul>
-            </div>
-            <div class="pagination-box">
-              <input type="button" value="上一页" class="btn-page">
-              <ul class="pages inb">
-                <li class="page"><a href="#">1</a></li>
-                <li class="page"><a href="#">2</a></li>
-                <li class="page"><a href="#">3</a></li>
-                <li class="page"><a href="#">4</a></li>
-              </ul>
-              <input type="button" value="下一页" class="btn-page">
-            </div>
-          </div>
-          <div class="col-sm-3">
-            <div class="aside-box">
-              <div class="publish-theme">
-                <a href="#" class="btn-publish-theme">
-                  <img src="../images/community/publish-theme.png" alt='' class="img-responsive"/>
-                </a>
-              </div>
-             <div class="trends">
-               <p class="title">热点动态</p>
-               <div class="line"></div>
-               <ul class="trends-list">
-                <li>
-                  <a href="#"></a>
-                  <p class="trends-title">测试测试测试</p>
-                </li>
-                <li>
-                  <a href="#"></a>
-                  <p class="trends-title">测试测试测试</p>
-                </li>
-                <li>
-                  <a href="#"></a>
-                  <p class="trends-title">测试测试测试</p>
-                </li>
-               </ul>
-             </div>
-             <div class="sign">
-              <a href="#" class="btn-sign">
-                  <img src="../images/community/sign.png" alt='' class="img-responsive"/>
-              </a>
-             </div>
-             <div class="miao-app">
-               <p class="title">
-                 喵喵社区APP下载
-               </p>
-               <div class="line"></div>
-               <img src="../images/community/down-app.jpg" alt='' class="img-responsive"/>
-             </div>
-            </div>
-          </div>
       </div>
     </div>
+    <!--end of container-->
+    <div class="container">
+      <div class="upload-box">
+        <ul class="upload-tabs">
+          <li class="tab">
+            <div class="tab-content">
+              <div class="tab-icon">
+                <img src="../images/upload/Picture.png" alt="#" class="img-responsive">
+              </div>
+              <div class="tab-btn-group">
+                <input type="button" value="上传全景图片" class="btn" role-id="upload-picture"/>
+              </div>
+            </div>
+          </li>
+          <li class="tab" role-id="upload-video">
+            <div class="tab-content">
+              <div class="tab-icon">
+                <img src="../images/upload/Media.png" alt="#" class="img-responsive">
+              </div>
+              <div class="tab-btn-group">
+                <input type="button" value="上传全景图片" class="btn" role-id="upload-video"/>
+              </div>
+            </div>
+          </li>
+          <div class="clearfix"></div>
+        </ul>
+      </div>
+    </div>
+    <div class="box">
+      <div class="container upload-main" id="upload-picture">
+        <div class="upload-box">
+          <div class="upload-header">
+            上传全景图片
+          </div>
+          <div class="upload-title">
+            <input type="text" class="inp-title">
+          </div>
+          <div class="upload-content">
+            <input type="button" class="upload-add">
+          </div>
+          <div class="upload-btn-group">
+            <div class="row">
+              <div class="col-sm-6">
+                <input type="button" value="上传规则" class="btn btn-rule">
+              </div>
+              <div class="col-sm-6">
+                <input type="button" value="立即发布" class="btn btn-publish">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="container upload-main" id="upload-video">
+        <div class="upload-box">
+          <div class="upload-header">
+            上传全景视频
+          </div>
+          <div class="upload-title">
+            <input type="text" class="inp-title" placeHolder="请输入标题">
+            <input type="button" value="视频类型" class="btn-video-type">
+            <div class="video-type-box">
+              <ul>
+                <li  class="inb" role-type="1">
+                  <img src="../images/upload/game.png" class="img-responsive">
+                </li>
+                <li  class="inb" role-type="2">
+                  <img src="../images/upload/cartoon.png" class="img-responsive">
+                </li>
+                <li  class="inb" role-type="3">
+                  <img src="../images/upload/film.png" class="img-responsive">
+                </li>
+                <li  class="inb" role-type="4">
+                  <img src="../images/upload/lady.png" class="img-responsive">
+                </li>
+                <li  class="inb" role-type="5">
+                  <img src="../images/upload/scenery.png" class="img-responsive">
+                </li>
+                <li  class="inb" role-type="6">
+                  <img src="../images/upload/thrill.png" class="img-responsive">
+                </li>
+                <li  class="inb" role-type="7">
+                  <img src="../images/upload/scare.png" class="img-responsive">
+                </li>
+                <li  class="inb" role-type="8">
+                  <img src="../images/upload/music.png" class="img-responsive">
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-6">
+              <div class="upload-content">
+                <input type="button" class="upload-add">
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="upload-description">
+                <textarea class="description"></textarea>
+              </div>
+            </div>
+          </div>
+          <div class="upload-btn-group">
+            <div class="row">
+              <div class="col-sm-6">
+                <input type="button" value="上传规则" class="btn btn-rule">
+              </div>
+              <div class="col-sm-6">
+                <input type="button" value="立即发布" class="btn btn-publish">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+   
+    <!--end of container-->
     <div class="footer">
       <div class="container">
         <div class="row">
@@ -270,5 +281,24 @@
     <!--end of footer-->
     <script src="../js/jquery-1.11.1.min.js"></script>
     <script src="../js/bootstrap.min.js"></script>
+    <script type="text/javascript">
+      $(document).ready(function(){
+          $("#upload-video .btn-video-type").on("click",function(){
+              $typeBox=$(".video-type-box");
+              if($typeBox.css("display")==="none"){
+                $(".video-type-box").fadeIn();
+              }else{
+                $(".video-type-box").fadeOut();
+              }
+          });
+          $("#upload-video .video-type-box li").on("click",function(){
+              $(".video-type-box").fadeOut();
+          });
+          $(".tab-btn-group .btn").on("click",function(){
+            var id=$(this).attr("role-id");
+            $("#"+id).css("display","block").siblings().css("display","none");
+          });
+      });
+    </script>
   </body>
 </html>

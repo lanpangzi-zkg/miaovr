@@ -67,7 +67,7 @@ table {
     box-shadow: 0px 3px 3px #dedede;
 }
 #main-navbar {
-    z-index: 9999;
+    z-index: 9995;
     position: relative;
 }
 #main-navbar .navbar-default {
@@ -226,7 +226,26 @@ table {
 .footer-logo{
     margin-top: 25px;
 }
-
+.mask-loading{
+    position: absolute;
+    left: 0;
+    top:0;
+    right: 0;
+    bottom: 0;
+    background-color: #fff;
+    z-index: 9999;
+}
+.mask-loading .loading-icon{
+    width: 60px;
+    height: 60px;
+    position: absolute;
+    left: 50%;
+    top:50%;
+    background:url('../images/common/loading.gif') no-repeat;
+    border-radius: 50%;
+    margin-left: -30px;
+    margin-top: -30px;
+}
 /********media**********/
 @media (max-width: 600px) {
     .navbar-header .navbar-brand{
@@ -275,5 +294,11 @@ table {
     }
     .sperate-line {
         margin: 0 3px;
+    }
+    .row-chapter .community-chapter-icon{
+        margin-left:0;
+    }
+    .hot-community-list{
+        padding-bottom: 10px;
     }
 }

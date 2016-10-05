@@ -1,0 +1,110 @@
+.upload-box{
+    background-color: #fff;
+}
+.upload-tabs{
+    padding: 20px 0;
+}
+.upload-tabs .tab{
+    float: left;
+    width: 50%;
+    padding: 10px 0;
+}
+.upload-tabs .tab .tab-icon{
+    margin: 20px 0;
+}
+.tab-btn-group{
+    text-align: center;
+    margin: 10px 0;
+}
+.tab-btn-group .btn{
+    background-color: #ffd737;
+    color: #fff;
+    padding: 8px 45px;
+    border-radius: 0;
+}
+.upload-main{
+    margin-top:20px;
+    margin-bottom:20px;
+}
+.upload-main .upload-box{
+    padding: 0 20px;
+    background-color: #fcfcfd;
+}
+.upload-header{
+    height: 30px;
+    line-height: 30px;
+}
+.upload-title{
+    position: relative;
+    margin: 10px 0;
+}
+.upload-title .inp-title{
+    width: 100%;
+    padding: 5px;
+    border: 1px solid #cccccc;
+}
+.upload-content{
+    text-align: center;
+    padding: 60px 0;
+    background-color: #f5f5f5;
+    margin: 20px 0;
+}
+.upload-description{
+    margin: 20px 0;
+    text-align: center;
+    background-color: #fff;
+}
+.upload-description .description{
+    width: 100%;
+    height: 260px;
+    border: 1px solid #cccccc;
+}
+.upload-content .upload-add{
+    width: 140px;
+    height: 140px;
+    border: none;
+    background: url('../images/upload/upload-add.png') no-repeat;
+}
+.upload-btn-group{
+    padding-bottom: 20px;
+}
+.upload-btn-group .btn{
+    width: 100%;
+    color: #fff;
+    border-radius: 0;
+    background-color: #ffd737;
+}
+.upload-btn-group .btn.btn-rule{
+    background-color: #fff;
+    border: 1px solid #ffd737;
+    color: #ffd737;
+}
+#upload-video{
+    display: none;
+}
+#upload-video .inp-title{
+    width: 80%;
+}
+.btn-video-type{
+    border: 1px dotted #ccc;
+    background-color: #fcfcfd;
+    padding: 8px 20px;
+    float: right;
+}
+.video-type-box{
+    position: absolute;
+    right: 0;
+    bottom: -300%;
+    padding: 10px;
+    display: none;
+    background-color: #fff;
+    border: 1px solid #eee;
+    z-index: 99;
+}
+.video-type-box ul{
+    width: 255px;
+}
+.video-type-box ul li{
+    margin: 3px 5px;  
+    cursor: pointer;
+}

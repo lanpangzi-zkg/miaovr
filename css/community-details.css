@@ -206,3 +206,46 @@
     border-radius: 10px;
     font-size: 12px;
 }
+.chat-mask{
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #000;
+    opacity: 0.5;
+    z-index: 9998;
+}
+.chat-dialog{
+    position: absolute;
+    left: 50%;
+    top:50%;
+    z-index: 9999;
+    background-color: #fff;
+    padding: 30px 20px;
+}
+.chat-dialog .chat-close{
+
+}
+.chat-dialog .chat-header{
+    text-align: center;
+}
+.chat-dialog .chat-header .chat-user-icon{
+
+}
+.chat-dialog .chat-header .chat-user-name{
+    margin: 15px 0;
+}
+.chat-dialog .chart-content .main-chat{
+
+}
+.chat-dialog .chart-btn-group{
+    text-align: right;
+    margin: 5px 0;
+}
+.chat-dialog .chart-btn-group .btn-send{
+    border: none;
+    background-color: #ffd737;
+    color: #fff;
+    padding: 5px 15px;
+}

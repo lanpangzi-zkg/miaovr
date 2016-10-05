@@ -69,6 +69,7 @@
     background: url('../images/history/dialog.png');
     display: none;
     text-align: center;
+    z-index: 999;
 }
 .delete-dialog .title{
     margin-top: 30px;

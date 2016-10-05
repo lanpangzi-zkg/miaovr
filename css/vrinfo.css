@@ -131,3 +131,44 @@
 .center-box .arrow-right{
     background: url('../images/vrinfo/arrow-right.png') no-repeat;
 }
+@media (max-width: 600px) {
+    .user-icon-box{
+        top: 100px;
+        left: 20px;
+    }
+    .vr-menus.menus-ul li{
+        float: none;
+        margin-top: 8px;
+        margin-bottom: 8px;
+    }
+    .center-box{
+        top: -5%;
+    }
+    .social-apps{
+        padding: 0;
+        right: inherit;
+        bottom: 0;
+        background-color: transparent;
+    }
+    .social-apps .menus-ul{
+        margin:5px 0;
+    }
+    .social-apps .menus-ul li{
+        margin: 5px;
+    }
+    .social-apps .menus-ul li img{
+        width: 35px;
+    }
+    .vr-comment-box{
+        width: 100%;
+        margin-left: 0;
+        left: 0;
+        bottom: 75px;
+    }
+    .comment-form .vr-comment{
+        width: 100%;
+    }
+    .bottom-menus .menus-ul{
+        margin: 0;
+    }
+}

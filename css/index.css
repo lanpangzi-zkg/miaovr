@@ -101,6 +101,14 @@ a:hover{
     margin-left: 0;
     margin-right: 0;
 }
+.vrtv-item-title{
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    text-align: center;
+    color: #fff;
+}
 /************vr资讯**************/
 .vr-info-user{
     display: inline-block;
@@ -160,6 +168,9 @@ a:hover{
     color: #fff;
     padding: 0 5px;
     border-radius: 5px;
+}
+#index-vrtv-r .mask-loading{
+    margin-right:15px;
 }
 /***********vr game*************/
 .vr-game .game-tabs{
@@ -260,4 +271,9 @@ a:hover{
 .hot-community-list li{
     padding-right: 28px;
     margin-top: 10px;
+}
+@media (max-width: 600px) {
+    .img-game-tips{
+        margin: auto;
+    }
 }

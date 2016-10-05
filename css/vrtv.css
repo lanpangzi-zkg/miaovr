@@ -40,3 +40,22 @@
     width: 100%;
     text-align: center;
 }
+
+@media (max-width: 600px) {
+   .img-left.vr-category-link .vr-category,.img-right.vr-category-link .vr-category{
+        margin: 0 auto;
+   } 
+   .col-sm-20,.col-sm-40,.col-sm-60{
+        width: inherit;
+   }
+   .col-sm-4{
+        margin: 10px auto;
+   }
+   .row-pb-10{
+        padding-bottom: inherit; 
+   }
+   .banner-box{
+        margin: 0;
+        padding: 0;
+   }
+}

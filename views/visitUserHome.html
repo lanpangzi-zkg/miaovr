@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>个人中心</title>
+
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
+    <link href="../css/common.css" rel="stylesheet">
+    <link href="../css/visit-user-home.css" rel="stylesheet">
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="http://cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="header">
+      <div id="main-navbar" class="container">
+        <nav class="navbar navbar-default">
+          <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a id="logo" title="Start..." class="navbar-brand" href="#">
+                    <img src="../images/common/logo1.png" alt="miaovr Logo">
+                </a>
+                <div class="clearfix"></div>
+            </div>
+
+            <div class="navbar-collapse collapse" id="bs-example-navbar-collapse-1" aria-expanded="false">
+                <ul class="nav navbar-nav navbar-left">
+                    <li>
+                        <a href="../index.html">首页</a>
+                    </li>
+                    <li>
+                        <a href="./vrinfo.html">VR资讯</a>
+                    </li>
+                    <li>
+                        <a href="./vrtv.html">VR TV</a>
+                    </li>
+                    <li>
+                        <a href="./vrgame.html">VR游戏</a>
+                    </li>
+                    <li>
+                        <a href="./community.html">VR社区</a>
+                    </li>
+                </ul>
+
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                      <a href="#">
+                        <img src="../images/common/mobile.png" alt='' class="img-responsive nav-r-icon"/>
+                        <p class="nav-r-name">客户端</p>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="#">
+                        <img src="../images/common/history.png" alt='' class="img-responsive nav-r-icon"/>
+                        <p class="nav-r-name">上传视频</p>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="./history.html">
+                        <img src="../images/common/history.png" alt='' class="img-responsive nav-r-icon"/>
+                        <p class="nav-r-name">历史观看</p>
+                      </a>
+                    </li>
+                    <li>
+                      <a href="./login.html">
+                        <img src="../images/common/man.png" alt='' class="img-responsive nav-r-icon"/>
+                        <p class="nav-r-name">登陆/注册</p>
+                      </a>
+                    </li>
+                    <li class="search-i">
+                        <form class="form-search">
+                          <span class="input-search-box">
+                            <input type="text" class="input-search">
+                          </span><span class="btn-search-box">
+                            <input type="submit" value="搜索" class="btn-search">
+                          </span>
+                        </form>
+                    </li>
+                </ul>
+
+            </div>
+            <!-- end of navbar-collapse -->
+          </div>
+          <!-- end of container-fluid -->
+        </nav>
+      </div>
+    </div>    
+    <div class="container">
+      <div class="user-center-box">
+        <div class="user-header">
+          <h3>瞄女郎</h3>
+          <a class="chat" href="#"></a>
+        </div>
+        <div class="row">
+          <div class="col-sm-2">
+            <ul class="aside-menu">
+              <li class="menu-basic menu cur" role-page="aside-page-1">
+                <i class="inb icon"></i>
+                <span class="name">个人资料</span>
+              </li>
+              <li class="menu-note menu" role-page="aside-page-2">
+                <i class="inb icon"></i>
+                <span class="name">帖子</span>
+              </li>
+              <li class="menu-media menu" role-page="aside-page-3">
+                <i class="inb icon"></i>
+                <span class="name">视频</span>
+              </li>
+            </ul>
+          </div>
+          <div class="col-sm-10">
+            <div class="aside-page cur" id="aside-page-1">
+              <div class="page active-page" id="basic-page-1">
+                  <div class="user-basic">
+                    <div class="info">
+                      <p class="info-item">
+                        <span class="cell inb">
+                          <span>昵称:</span>
+                          <span class="user-name">瞄女郎</span>
+                        </span>
+                        <span class="cell inb">                          
+                          <span>性别:</span>
+                          <span class="user-sex">男</span>
+                        </span>
+                      </p>
+                      <p class="info-item">
+                        <span class="cell inb">
+                          <span>手机认证:</span>
+                          <span>未认证</span>
+                        </span>
+                        <span class="cell inb">
+                          <span>邮箱认证:</span>
+                          <span>未认证</span>
+                        </span>
+                      </p>
+                      <p class="info-item">
+                        <span>注册时间:</span>
+                        <span class="date">2016-8-8 12:12</span>
+                      </p>
+                    </div>
+                    <div class="clearfix"></div>
+                  </div>
+              </div>
+            </div>
+            <div class="aside-page" id="aside-page-2">
+              <ul class="tabs">
+                <li class="tab inb choose" role-page="note-page-1">
+                  <span>主题(5)</span>
+                </li>
+                <li class="tab inb" role-page="reply-page-2">
+                  <span>回复(6)</span>
+                </li>
+              </ul>
+              <div class="tab-pages">
+                <div class="page active-page" id="note-page-1">
+                  <p class="note-t">帖子</p>
+                  <ul class="note-list">
+                    <li>
+                      <span class="note-title">瞄瞄团队</span>
+                      <span class="hot-icon inb"></span>
+                      <span class="note-chat note-r">
+                        <i class="icon inb"></i>
+                        <span class="num">20</span>
+                      </span>
+                      <span class="note-off note-r">
+                        <i class="icon inb"></i>
+                        <span class="num">20</span>
+                      </span>
+                    </li>
+                    <li>
+                      <span class="note-title">瞄瞄团队</span>
+                      <span class="hot-icon inb"></span>
+                      <span class="note-chat note-r">
+                        <i class="icon inb"></i>
+                        <span class="num">20</span>
+                      </span>
+                      <span class="note-off note-r">
+                        <i class="icon inb"></i>
+                        <span class="num">20</span>
+                      </span>
+                    </li>
+                    <li>
+                      <span class="note-title">瞄瞄团队</span>
+                      <span class="hot-icon inb"></span>
+                      <span class="note-chat note-r">
+                        <i class="icon inb"></i>
+                        <span class="num">20</span>
+                      </span>
+                      <span class="note-off note-r">
+                        <i class="icon inb"></i>
+                        <span class="num">20</span>
+                      </span>
+                    </li>
+                  </ul>
+                </div>
+                <div class="page" id="reply-page-2">
+                  <ul class="reply-list">
+                    <li>
+                      <p class="reply-title">很好玩,有木有</p>
+                      <div class="reply-outer-box">
+                        <div class="reply-inner-box">
+                          <div class="quote-box-start">
+                            <span class="quote-icon front-quote inb"></span>
+                          </div>
+                          <div class="reply-content">
+                            <p class="reply-title">哈哈哈哈哈哈哈</p>     
+                            <p>呵呵呵呵呵呵呵呵呵呵额呵呵呵呵呵鹅鹅鹅鹅鹅鹅鹅鹅鹅呵呵呵呵呵呵呵呵呵呵额呵呵呵呵呵鹅鹅鹅鹅鹅鹅鹅鹅鹅</p>
+                          </div>
+                          <div class="quote-box-end">
+                            <span class="quote-icon back-quote inb"></span>
+                          </div>
+                        </div>
+                      </div>
+                    </li>
+                    <li>
+                      <p class="reply-title">很好玩,有木有</p>
+                      <div class="reply-outer-box">
+                        <div class="reply-inner-box">
+                          <div class="quote-box-start">
+                            <span class="quote-icon front-quote inb"></span>
+                          </div>
+                          <div class="reply-content">
+                            <p class="reply-title">哈哈哈哈哈哈哈</p>     
+                            <p>呵呵呵呵呵呵呵呵呵呵额呵呵呵呵呵鹅鹅鹅鹅鹅鹅鹅鹅鹅呵呵呵呵呵呵呵呵呵呵额呵呵呵呵呵鹅鹅鹅鹅鹅鹅鹅鹅鹅</p>
+                          </div>
+                          <div class="quote-box-end">
+                            <span class="quote-icon back-quote inb"></span>
+                          </div>
+                        </div>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div class="aside-page" id="aside-page-3">
+              <div class="page active-page">    
+                <ul class="publish-video">
+                  <li class="inb">
+                    <a href="#">
+                      <img src="../images/visitUserHome/demo.png" class="img-responsive">
+                      <p class="video-title">
+                        <span class="video-name">高达系列动漫</span>
+                        <span class="last-time">30:30</span>
+                      </p>
+                    </a>
+                    <p class="publish-date">发布时间：
+                      <span class="date-v">2016-08-08</span>
+                    </p>
+                  </li>
+                  <li class="inb">
+                    <a href="#">
+                      <img src="../images/visitUserHome/demo.png" class="img-responsive">
+                      <p class="video-title">
+                        <span class="video-name">高达系列动漫</span>
+                        <span class="last-time">30:30</span>
+                      </p>
+                    </a>
+                    <p class="publish-date">发布时间：
+                      <span class="date-v">2016-08-08</span>
+                    </p>
+                  </li>
+                  <li class="inb">
+                    <a href="#">
+                      <img src="../images/visitUserHome/demo.png" class="img-responsive">
+                      <p class="video-title">
+                        <span class="video-name">高达系列动漫</span>
+                        <span class="last-time">30:30</span>
+                      </p>
+                    </a>
+                    <p class="publish-date">发布时间：
+                      <span class="date-v">2016-08-08</span>
+                    </p>
+                  </li>
+                </ul>            
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="footer">
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-3">
+            <img src="../images/common/logo2.png" class="img-responsive footer-logo">
+          </div>
+          <div class="col-sm-6">
+            <div class="row">
+              <div class="col-sm-3 footer-menu">
+                VR资讯
+              </div>
+              <div class="col-sm-3 footer-menu">
+                VR TV
+              </div>
+              <div class="col-sm-3 footer-menu">
+                VR 游戏
+              </div>
+              <div class="col-sm-3 footer-menu">
+                VR社区
+              </div>
+            </div>
+            <div class="footer-link content-center">
+              <div class="footer-link-line"></div>
+              <div class="row">
+                <div class="col-sm-12">
+                  <span>关于我们</span>
+                  <span class="sperate-line">-</span>
+                  <span>法律申明</span>
+                  <span class="sperate-line">-</span>
+                  <span>免责申明</span>
+                  <span class="sperate-line">-</span>
+                  <span>隐私条款</span>
+                  <span class="sperate-line">-</span>
+                  <span>商务合作</span>
+                </div>
+              </div>
+            </div>
+          </div>  
+          <div class="col-sm-3">
+            <img src="../images/common/wx.png" class="img-responsive">
+          </div>
+        </div>
+      </div> 
+      <!--end of container-->
+      <div class="coryright content-center">
+        <div class="container">
+          <div class="row">
+           <div class="col-sm-12">
+              <span class="coryright-s1">2016 瞄瞄互娱科技有限公司版权所有  沪ICP备12012543号-1</span>
+            </div>
+          </div>
+          <div class="row">
+           <div class="col-sm-12">
+              <span class="coryright-s2">国内专业VR播放技术服务供应商</span>
+            </div>
+          </div>
+        </div>
+      </div> 
+    </div>
+    <!--end of footer-->
+    <script src="../js/jquery-1.11.1.min.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
+    <script type="text/javascript">
+      $(document).ready(function(){
+        $(".tabs li").bind("click",function(){
+            $(this).addClass("choose").siblings().removeClass("choose");
+            var tab_id=$(this).attr("role-page");
+            $("#"+tab_id).addClass("active-page").siblings().removeClass("active-page");
+        });
+        $(".aside-menu .menu").bind("click",function(){
+            var _id=$(this).attr("role-page");
+            $(this).addClass("cur").siblings().removeClass("cur");
+            $("#"+_id).addClass("cur").siblings().removeClass("cur");
+        });
+      });
+    </script>
+  </body>
+</html>

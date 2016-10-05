@@ -59,7 +59,7 @@
                       </a>
                     </li>
                     <li>
-                      <a href="#">
+                      <a href="./upload.html">
                         <img src="../images/common/history.png" alt='' class="img-responsive nav-r-icon"/>
                         <p class="nav-r-name">上传视频</p>
                       </a>
@@ -199,8 +199,8 @@ Coup共享平台的创始人Mat Schubert认为Coup平台有两大优势：一是
               </p>
               <p class="fen">积分</p>
               <p class="btn-group">
-                <a href="#" class="home">主页</a>
-                <a href="#" class="chat">聊聊</a>
+                <a href="./visitUserHome.html" class="home">主页</a>
+                <a href="javascript:void(0);" class="chat" id="chat">聊聊</a>
               </p>
              </div>
              <div class="sign">
@@ -293,7 +293,31 @@ Coup共享平台的创始人Mat Schubert认为Coup平台有两大优势：一是
       </div> 
     </div>
     <!--end of footer-->
+    <div class="chat-mask"></div>
+    <div class="chat-dialog">
+      <div class="chart-close"></div>
+      <div class="chat-header">
+        <div class="chat-user-icon">
+          <img src="../images/comDetails/user-icon.png">
+        </div>
+        <p class="chat-user-name">瞄女郎</p>
+      </div>
+      <div class="chart-content">
+        <textarea class="main-chat"></textarea>
+      </div>
+      <div class="chart-btn-group">
+        <input type="button" value="发送" class="btn-send"/>
+      </div>
+    </div>
     <script src="../js/jquery-1.11.1.min.js"></script>
     <script src="../js/bootstrap.min.js"></script>
+    <script type="text/javascript">
+      $(document).ready(function(){
+        $("#chart").on("click",function(e){
+          e.preventDefault();
+
+        });
+      });
+    </script>
   </body>
 </html>
