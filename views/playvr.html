@@ -38,10 +38,10 @@
                     <li>
                         <a href="../index.html">首页</a>
                     </li>
-                    <li class="choose">
+                    <li>
                         <a href="./vrinfo.html">VR资讯</a>
                     </li>
-                    <li>
+                    <li class="choose">
                         <a href="./vrtv.html">VR TV</a>
                     </li>
                     <li>
@@ -105,18 +105,20 @@
             <div class="vr-video-basic">
               <div class="row">
                 <div class="col-sm-3">
-                  <div class="vr-video-icon">icon</div>
+                  <div class="vr-video-icon">
+                    <img src="#" id="pic_url" class="img-responsive"/>
+                  </div>
                   <div class="download-box">
                     <input type="button" value="下载" class="btn-download"/>
                   </div>
                 </div>
                 <div class="col-sm-9">
-                  <div class="video-title">清迈圣殿之旅</div>
+                  <div class="video-title" id="showname"></div>
                   <p class="video-item">
                     <span>发布时间:</span>
-                    <span class="date val">2016-7-11</span>
+                    <span class="date val" id="publishtime"></span>
                     <span>文件大小:</span>
-                    <span class="f-size val">333M</span>
+                    <span class="f-size val" id="filesize"></span>
                     <span>视频语言:</span>
                     <span class="lang val">中文</span>
                   </p>
@@ -128,10 +130,10 @@
                   <p class="video-item">
                     <span>视频类型:</span>
                     <span class="video-type">
-                      <span class="video-type-tag">游戏</span>
-                      <span class="video-type-tag">动画</span>
-                      <span class="video-type-tag">电影</span>
-                      <span class="video-type-tag">美女</span>
+                      <span class="video-type-tag" id="category-0">游戏</span>
+                      <span class="video-type-tag" id="category-1">动画</span>
+                      <span class="video-type-tag" id="category-2">电影</span>
+                      <span class="video-type-tag" id="category-3">美女</span>
                     </span>
                   </p>
 
@@ -139,47 +141,33 @@
               </div>
               <div class="vr-video-description">
                 <p class="title">视频描述</p>
-                <p class="content">视频描述视频描述视频描述视频描述视频描述视频描述视频描述视频描述视频描述视频描述视频描述视频描述视频描述</p>
+                <p class="content" id="description"></p>
               </div>
               <div class="vr-video-comment">
                 <p class="title">视频点评</p>
-                <form action="#">
-                  <textarea class="commment-body"></textarea>
+                <form action="/vod/comment/vod" method="post">
+                  <textarea class="commment-body" id="tv-comment" name="comment"></textarea>
                   <div class="btn-group">
                     <input type="submit" value="发布" class="btn-publish">
                   </div>
                 </form>
               </div>
-              <div class="comments-box">
+              <div class="comments-box" id="tv-comments-box">
+                <div class="mask-loading">
+                  <div class="loading-icon"></div>
+                </div>
                 <ul class="comments-list">
                   <li class="comment-item">
                     <div class="user-icon"></div>
                     <div class="comment-main">
                       <div class="user-info">
-                        <span class="user-name">哈哈</span>
-                        <span class="floor">23#</span>
+                        <span class="user-name"></span>
+                        <span class="floor">0#</span>
                       </div>
-                      <div class="user-comment">
-                        很好玩,有木有
-                      </div>
+                      <div class="user-comment"></div>
                     </div>
                     <div class="reply-box">
-                       <input type="button" class="btn-reply" value="回复"/> 
-                    </div>
-                  </li>
-                  <li class="comment-item">
-                    <div class="user-icon"></div>
-                    <div class="comment-main">
-                      <div class="user-info">
-                        <span class="user-name">哈哈</span>
-                        <span class="floor">23#</span>
-                      </div>
-                      <div class="user-comment">
-                        很好玩,有木有
-                      </div>
-                    </div>
-                    <div class="reply-box">
-                       <input type="button" class="btn-reply" value="回复"/> 
+                      <input type="button" class="btn-show-reply btn" value="回复"/> 
                     </div>
                   </li>
                 </ul>
@@ -191,13 +179,18 @@
               <div class="other-videos-title">
                 相关视频
               </div>
-              <div class="other-video">
-                <div class="other-video-icon"></div>
-                <p class="other-video-title">相关视频</p>
-              </div>
-              <div class="other-video">
-                <div class="other-video-icon"></div>
-                <p class="other-video-title">相关视频</p>
+              <div id="other-video-aside">
+                <div class="mask-loading">
+                  <div class="loading-icon"></div>
+                </div>
+                <div class="other-video">
+                  <a href="#">
+                    <div class="other-video-icon">
+                      <img src="#" class="img-responsive">
+                    </div>
+                    <p class="other-video-title">相关视频</p>                    
+                  </a>
+                </div>
               </div>
             </div>
           </div>
@@ -266,8 +259,189 @@
     <!--end of footer-->
     <script src="../js/jquery-1.11.1.min.js"></script>
     <script src="../js/bootstrap.min.js"></script>
+    <script src="../js/jquery.cookie.js"></script>
+    <script src="../js/common.js"></script>
     <script type="text/javascript" src="http://media.qicdn.detu.com/@/sdk-1.2.0/sdk.js"></script>
     <script type="text/javascript">
+      var vid="";
+      $(document).ready(function(){
+        vid=Base.searchParam("vid","id");
+        if(!vid){
+          alert("抱歉,你所查找的资源不存在");
+        }else{
+          //查询视频信息
+          Base.queryData("/search/fileid","POST",{"fileid":vid},function(data){
+            console.log("查询视频信息");
+            console.log(data);
+            if(Base.isSuccess(data)&&data.list_result.length>0){
+              var info=data.list_result[0];
+              $("#category-"+info.category).css("display","inherit");
+              $("#pic_url").attr("src",info.pic_url);
+              $("#filesize").html(Math.floor(info.filesize/1024/1024)+"M");
+              $("#showname").html(info.showname);
+              $("#description").html(info.showname||"暂无");
+              //console.log(info.url);
+            }else{
+              Base.showAlert(data.error_msg);
+            }
+          },function(err){
+             Base.showAlert(err);
+          });
+          //查询视频评论信息
+          Base.queryData("/vod/comment/fileId","POST",{"fileid":vid},function(data){
+            console.log("查询视频评论信息");
+            console.log(data);
+            if(Base.isSuccess(data)){
+              if(data.list_result.length<1){
+                  $(".comments-list").css("display","none");
+                  $("#tv-comments-box").find(".mask-loading").fadeOut();
+              }else{
+                Base.handleResult("tv-comments-box",data,
+                {"childrenBox":".comment-item",
+                  "txt":".user-comment",
+                  "txt-1":".user-name",
+                  "role-id":".btn-show-reply"},
+                {"txt":"comment",
+                 "txt-1":"from_uuid",
+                 "role-id":"commentId"
+                });                
+              }
+            }else{
+              Base.showAlert(data.error_msg);
+            }
+          },function(err){
+            Base.showAlert(err);
+          });
+          //查询相关视频
+          Base.queryData("/search/category?offset=0&length=5","POST",{"category":"0"},function(data){
+            console.log("查询相关视频");
+            console.log(data);
+            if(Base.isSuccess(data)){
+              if(data.list_result.length<1){
+                  $(".other-video").css("display","none");
+                  $("#other-video-aside").find(".mask-loading").fadeOut();
+              }else{
+                Base.handleResult("other-video-aside",data,
+                {"childrenBox":".other-video",
+                 "img":"img",
+                "txt":".other-video-title",
+                "href":"a"},
+                {"img":"pic_url",
+                "txt":"showname",
+                "href":"url"});                
+              }
+            }else{
+              Base.showAlert(data.error_msg);
+            }
+          },function(err){
+            Base.showAlert(err);
+          });
+
+        }
+
+        $(".btn-show-reply").on("click",function(){
+          var _this=$(this);
+          console.log(_this.attr("role-id"));
+          var reply_main=_this.parent().find(".reply-main");
+          if(reply_main.length<1){
+            reply_main=$(replyMainModule(_this.attr("role-id")));
+            reply_main.insertAfter(_this);
+          }
+          if(reply_main.css("display")!=="block"){
+            _this.val("取消回复");
+            reply_main.css("display","block");
+          }else{
+            _this.val("回复");
+            reply_main.css("display","none");
+          }
+        });
+
+        $(".btn-publish").on("click",function(e){
+          e.preventDefault();
+          var btn=$(this);
+          btn.attr("disabled","disabled").addClass("btn-disabled");
+          var comment=$("#tv-comment").val();
+          console.log(comment);
+          if(!comment){
+             Base.showAlert("请输入视频点评","error");
+             $("#tv-comment").focus();
+             return;
+          }
+          Base.queryData("/vod/comment/vod","POST",
+            {"comment":comment,
+            "from_uuid":"jajajaja",//$.cookie("uuid")
+            "fileid":vid},function(data){
+            console.log("提交评论");
+            console.log(data);
+            if(Base.isSuccess(data)){
+              addComment(data.list_result[0]);
+              Base.showAlert("点评成功");
+            }else{
+              Base.showAlert(data.error_msg,"error");
+            }
+            btn.removeAttr("disabled").removeClass("btn-disabled");
+          },function(err){
+            Base.showAlert(err);
+            btn.removeAttr("disabled").removeClass("btn-disabled");
+          });
+        });
+        $(".comments-list").delegate(".btn-reply","click",function(){
+          var _btn=$(this);
+          var reply_content=_btn.parent().siblings(".reply-content");
+          var reply=reply_content.val();
+          if(!reply){
+            Base.showAlert("请填写回复内容","error");
+            reply_content.focus();
+            return;
+          }
+          _btn.attr("disabled","disabled").addClass("btn-disabled");
+          Base.queryData("/vod/comment/reply","POST",
+            {"comment":reply,
+            "from_uuid":"xixixixi",//$.cookie("uuid")
+            "to_commentId":_btn.attr("reply-id"),
+            "fileid":vid},function(data){
+            console.log("提交回复");
+            console.log(data);
+            if(Base.isSuccess(data)){
+              //addComment(data.list_result[0]);
+              Base.showAlert("回复成功");
+            }else{
+              Base.showAlert(data.error_msg,"error");
+            }
+            _btn.removeAttr("disabled").removeClass("btn-disabled");
+          },function(err){
+            Base.showAlert(err);
+            _btn.removeAttr("disabled").removeClass("btn-disabled");
+          });        
+        });
+      });
+      function replyMainModule(commentId){
+        return "<div class='reply-main'>"
+            +"<textarea class='reply-content'></textarea>"
+            +"<div class='btn-reply-group'>"
+              +"<input type='button' value='提交' class='btn-reply' reply-id='"+commentId+"'>"
+            +"</div>"
+          +"</div>";
+      }
+      function addComment(data){
+        if(data.list_result.length<1){
+          return;
+        }
+        var commentItem="<li class='comment-item'>"+
+          "<div class='user-icon'></div>"+
+          "<div class='comment-main'>"+
+            "<div class='user-info'>"+
+              "<span class='user-name'>"+data.from_uuid+"</span>"+
+              "<span class='floor'>0#</span>"+
+            "</div>"+
+            "<div class='user-comment'>"+data.comment+"</div>"+
+          "</div>"+
+          "<div class='reply-box'>"+
+             "<input type='button' class='btn-reply btn' role-commentId='"+data.commentId+"' value='回复'/>"+
+          "</div>"+
+        "</li>";
+        $(commentItem).appendTo($(".comments-list"));
+      }
       var config = {
           target: "detu_container",
           islive: false,

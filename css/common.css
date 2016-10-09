@@ -56,9 +56,12 @@ table {
     margin:0 auto;
 }
 .inb{
-    display: inline-block;
-    *display: inline;
+    display: inline-block!important;
+    *display: inline!important;
     *zoom: 1;
+}
+input{
+    outline:none
 }
 /*************header**************/
 .header{
@@ -245,6 +248,26 @@ table {
     border-radius: 50%;
     margin-left: -30px;
     margin-top: -30px;
+}
+.alertBox{
+    position: fixed;
+    right: 0;
+    top:0;
+}
+.alertBox .alert-tip{
+    width: 120px;
+    background-color: #FFEB3B;
+    color: #fff;
+    text-align: center;
+    margin: 5px;
+    padding: 12px 0;
+    display: none;
+}
+.alertBox .alert-tip.error{
+    background-color: red;
+}
+.btn-disabled{
+    background-color: #d6d4cd!important;
 }
 /********media**********/
 @media (max-width: 600px) {

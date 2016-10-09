@@ -75,6 +75,37 @@
     background-color: #eee;
     margin: 0 5px;
 }
+
+.inp.err-tip{
+    border-color:red;
+}
+.err-tips{
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    z-index: 9999;
+    padding: 15px 10px;
+    background-color: #ff9a37;
+    border-radius: 3px;
+    color: #fff;
+    opacity: 0;
+    *filter:alpha(opacity=0);
+}
+.err-tips:before{
+    position: absolute;
+    left: -20px;
+    top: 50%;
+    margin-top: -10px;
+    content: "";
+    display: block;
+    width: 0;
+    height: 0;
+    border: 10px solid transparent;
+    border-right: 10px solid #ff9a37;
+}
+.btn-login.disabled{
+    background-color: #c1c1c1;
+}
 @media (max-width: 600px) {
     .login-box{
         width: inherit;

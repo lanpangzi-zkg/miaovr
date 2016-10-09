@@ -316,6 +316,7 @@
     <script src="../js/jquery-1.11.1.min.js"></script>
     <script src="../js/unslider.min.js"></script>
     <script src="../js/bootstrap.min.js"></script>
+    <script src="../js/common.js"></script>
     <script type="text/javascript">
       $(document).ready(function(e) {
         var unslider= $('#banner').unslider({
@@ -328,6 +329,26 @@
           });
       });
       $("#banner").width($("#banner").width()-30);
+      var search_param=window.location.search;
+      var game_id=null;
+      if(search_param.match(/(game_id=)[a-z0-9A-Z]+/g)){
+        var search_arr=search_param.slice(1).split("&");
+        for(var i=0,j=search_arr.length;i<j;i++){
+          if(search_arr[i].indexOf("game_id")>=0){
+            game_id=search_arr[i].split("=")[1];
+            i=j;
+          }
+        }
+      }
+      if(game_id){
+        Base.queryData("/game/"+game_id,null,null,function(data){
+            if(Base.isSuccess(data)){
+              console.log(data);
+            }
+          },function(err){
+            console.log(err);
+          });
+      }
     </script>
   </body>
 </html>

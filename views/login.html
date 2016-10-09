@@ -97,15 +97,15 @@
       <div class="login-box">
         <div class="row">
           <div class="col-sm-7">
-            <form action="./userCenter.html" class="login-form">
+            <form action="/v1/account_password_login.php" class="login-form" id="login-form">
               <p class="login-title">
                 账号登陆
               </p>
               <p class="login-item">
-                <input type="text" class="inp" placeHolder="手机号/邮箱">
+                <input type="text" role-type="mobile" role-null="请输入手机号" role-err="请检查手机号码格式" class="inp" placeHolder="手机号" id="uname">
               </p>
               <p class="login-item">
-                <input type="password" class="inp" placeHolder="密码">
+                <input type="password" role-type="pass" name="pass" role-null="请输入密码" role-err="密码包含数字字母或者下划线，6~16位长度" class="inp" placeHolder="密码" id="pass">
               </p>
               <p class="login-item">
                 <input type="checkbox" id="remember">
@@ -113,7 +113,7 @@
                 <a href="#" class="forget">忘记密码?</a>
               </p>
               <p class="login-item">
-                <input type="submit" value="登陆" class="btn-login"/>
+                <input type="submit" value="登录" id="btn-login" class="btn-login"/>
               </p>
               <p class="login-item">
                 没有账号?<a href="./register.html" class="register">免费注册</a>
@@ -199,9 +199,13 @@
     </div>
     <!--end of footer-->
     <script src="../js/jquery-1.11.1.min.js"></script>
+    <script src="../js/common.js"></script>
     <script src="../js/bootstrap.min.js"></script>
+    <script src="../js/login.js"></script>
+    <script src="../js/jquery.cookie.js"></script>
     <script type="text/javascript">
-      $(document).ready(function(e) {
+      $(document).ready(function() {
+        LoginValid.init("login-form");
       });
     </script>
   </body>

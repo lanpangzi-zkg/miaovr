@@ -85,9 +85,6 @@
 }
 .user-basic .user-icon{
     float: left;
-    width: 128px;
-    height: 128px;
-    background:url('../images/userCenter/user-icon.png') no-repeat;
 }
 .user-basic .info{
     margin-left: 130px;
@@ -101,25 +98,63 @@
 }
 .user-basic .user-name{
     font-size: 1.2em;
+    vertical-align: middle;
 }
 .user-basic .edit-name{
     color: #ffd737;
+    cursor: pointer;
+    vertical-align: middle;
 }
 .edit-name .icon{
     width: 17px;
     height: 16px;
+    line-height: 20px;
+    vertical-align: middle;
     background:url('../images/userCenter/Pencil.png')  no-repeat;
+}
+.edit-name span{
+    line-height: 20px;
+    vertical-align: middle;  
+}
+.sex-item span,.sex-item label{
+    vertical-align: middle;
+    line-height: 20px;
+}
+.sex-item .radio-group input{
+    margin-top: 0;
+    line-height: 20px;
+    vertical-align: middle;
 }
 .info-item .edit-sex{
     width: 30px;
     height: 16px;
+    line-height: 22px;
+    cursor: pointer;
     background:url('../images/userCenter/edit.png')  no-repeat;
 }
 .info-item .radio-group{
+    display: none;
     margin-left: 20px;
+    height: 20px;
+}
+.info-item .radio-group .btn{
+    padding: 0 5px;
+    border-radius: 0;
+    font-size: 12px;
+    color: #ffffff;
+    background-color: #ff8b3d;
+    margin-left: 5px;
+}
+.info-item .radio-group .btn-cancel-sex{
+    background-color: #b19480;
+}
+.info-item .radio-group.inb{
+    display: inline-block;
+    *display: inline;
+    *zoom:1;
 }
 .info-date{
-    margin-top: 18px;
+    margin-top: 14px;
 }
 .validate-box{
     width: 80%;
@@ -193,19 +228,24 @@
     width: 180px;
     padding: 5px 0;
 }
-.edit-box .form-item .btn{
+.edit-box .form-item .btn,.edit-icon-box .upload-btn{
     background-color: #ffd737;
     color: #fff;
     border-radius: 0;
     width: 120px;
     margin-left: 105px;
 }
+.edit-icon-box .upload-btn{
+    border: none;
+    margin-left: 0;
+    margin-top: 20px;
+}
 .send-code{
     background: none;
     border: none;
     color: #ff8b3d;
+    cursor: pointer;
 }
-
 .aside-page{
     display: none;
 }
@@ -244,4 +284,55 @@
 }
 .tab-pages .score-rule li{
     padding: 10px 0;
+}
+input.disabled{
+    background-color: #c1c1c1;
+}
+/*****tip css******/
+.err-tip{
+    border-color:red;
+}
+.err-tips{
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    z-index: 9999;
+    padding: 15px 10px;
+    background-color: #ff9a37;
+    border-radius: 3px;
+    color: #fff;
+    opacity: 0;
+    *filter:alpha(opacity=0);
+}
+.err-tips:before{
+    position: absolute;
+    left: -20px;
+    top: 50%;
+    margin-top: -10px;
+    content: "";
+    display: block;
+    width: 0;
+    height: 0;
+    border: 10px solid transparent;
+    border-right: 10px solid #ff9a37;
+}
+.seconds-count{
+    display: none;
+}
+#alert-box{
+    position: absolute;
+    right: 0;
+    top:0;
+    padding: 10px;
+}
+#alert-box .alert-item{
+    background-color: #006987;
+    color: #fff;
+    width: 100px;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+}
+#alert-box .alert-item.fail{
+    background-color: #E91E63;
 }

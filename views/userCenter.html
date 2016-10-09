@@ -133,31 +133,35 @@
                 <li class="tab inb" role-page="basic-page-4">
                   <span>修改昵称</span>
                 </li>
-                <li class="tab inb" role-page="basic-page-5">
+                <!-- <li class="tab inb" role-page="basic-page-5">
                   <span>修改手机</span>
-                </li>
+                </li> -->
               </ul>
               <div class="tab-pages">
                 <div class="page active-page" id="basic-page-1">
                   <div class="user-basic">
-                    <div class="user-icon"></div>
+                    <div class="user-icon">
+                      <img id="thumb_avatar" src="../images/userCenter/user-icon.png" class="img-responsive">
+                    </div>
                     <div class="info">
                       <p class="info-item info-name">
-                        <span class="user-name">瞄女郎</span>
-                        <span class="edit-name">
+                        <span class="user-name" id="nickname">瞄女郎</span>
+                        <span class="edit-name" id="edit-nickname-b">
                           <i class="icon inb"></i>
                           <span>修改昵称</span>
                         </span>
                       </p>
-                      <p class="info-item">
-                        <label for="user-sex">性别:</label>
-                        <span id="user-sex">男</span>
-                        <span class="edit-sex inb"></span>
+                      <p class="info-item sex-item">
+                        <label for="user-sex" class="label-sex">性别:</label>
+                        <span id="user-sex">未知</span>
+                        <span class="edit-sex inb" id="edit-sex-b"></span>
                          <span class="radio-group">
                           <input type="radio" name="sex" id="sex-man" value="男">
                           <label for="sex-man">男</label>
                           <input type="radio" name="sex" id="sex-women" value="女">
                           <label for="sex-women">女</label>
+                          <input type="button" class="btn btn-edit-sex" value="确定">
+                          <input type="button" class="btn btn-cancel-sex" value="取消">
                          </span> 
                       </p>
                       <p class="info-item info-date">
@@ -167,7 +171,7 @@
                     </div>
                     <div class="clearfix"></div>
                   </div>
-                    <div class="validate-box">
+                    <!-- <div class="validate-box">
                       <div class="mobile v-item">
                         <div class="v-body">
                           <div class="content">
@@ -201,69 +205,75 @@
                         </div>
                       </div>
                       <div class="clearfix"></div>
-                    </div>
+                    </div> -->
                 </div>
                 <div class="page" id="basic-page-2">
                   <div class="edit-icon-box edit-box">
-                    <div class="current-icon"></div>
+                    <div class="current-icon">
+                      <img src="../images/userCenter/user-icon.png" class="img-responsive">
+                    </div>
                     <div class="edit-area">
-                      <input type="button" value="上传">
+                    <form action="/v1/account_avatar.php" enctype="multipart/form-data">
+                      <input type="file" name="avatar"/>
+                      <input type="submit" class="upload-btn btn" value="上传">
+                    </form>
                     </div>
                     <div class="clearfix"></div>
                   </div>
                 </div>
                 <div class="page" id="basic-page-3">
                   <div class="change-pass-box edit-box">
-                    <form action="#">
+                    <form action="/v1/account_password_modify.php" id="form-change-pass">
                       <p class="form-item">
                         <label>当前密码</label>
-                        <input type="password" class="inp" name="cur-pass">
+                        <input type="password" role-type="pass" id="origin-pass" role-null="请输入当前密码" role-err="密码格式错误" class="inp" name="origin_password">
                       </p>
                       <p class="form-item">
                         <label>新密码</label>
-                        <input type="password" class="inp" name="new-pass">
+                        <input type="password" role-type="pass" id="new-pass" role-null="请输入新密码" role-err="密码格式错误" class="inp" id="password" name="password">
                       </p>
                       <p class="form-item">
                         <label>确认密码</label>
-                        <input type="password" class="inp" name="repeat-pass">
+                        <input type="password" role-repeat="new-pass" id="new-repass" role-type="repass" role-null="请重新输入新密码" role-err="密码输入不一致" class="inp" name="repeat-password">
                       </p>
                       <p class="form-item">
-                        <input type="submit" class="btn" value="确认修改">
+                        <input type="submit" role-load="修改中..." role-nor="确认修改" role-type="submit" class="btn" value="确认修改">
                       </p>
                     </form>
                   </div>
                 </div>
                 <div class="page" id="basic-page-4">
                   <div class="edit-nickname-box edit-box">
-                    <form action="#">
+                    <form action="/v1/account_nickname.php" id="form-edit-nickname">
                       <p class="form-item cur-nickname">
                         <label>当前昵称</label>
-                        <span>瞄女郎</span>
+                        <span id="cur-nickname"></span>
                       </p>
                       <p class="form-item edit-nickname">
                         <label>新昵称</label>
-                        <input type="text" class="inp" name="new-nickname">
+                        <input type="text" role-type="nickname" role-null="请输入昵称" role-err="昵称包含数字字母或者中文" class="inp" id="new-nickname" name="nickname">
                       </p>
                       <p class="form-item">
-                        <input type="submit" class="btn" value="确认修改">
+                        <input type="submit" role-type="submit" role-load="修改中..." role-nor="确认修改" class="btn" value="确认修改">
                       </p>
                     </form>
                   </div>
                 </div>
                 <div class="page" id="basic-page-5">
                   <div class="edit-phone-box edit-box">
-                    <form action="#">
+                    <form action="" id="form-edit-phone">
                       <p class="form-item">
                         <label>当前手机</label>
-                        <input type="text" class="inp">
-                        <input type="button" class="send-code" value="发送验证码">
+                        <input type="text" role-type="mobile" role-null="请输入手机号" role-err="请检查手机号码格式" class="inp" id="mobile">
+                        <input type="button" class="send-code" id="btn-send-code" value="发送验证码">
+                        <span class="seconds-count" id="seconds-count">60秒</span>
                       </p>
                       <p class="form-item edit-nickname">
                         <label>短信验证码</label>
-                        <input type="text" class="inp" name="new-nickname">
+                        <input type="text" role-type="code" role-null="请输入验证码" role-err="验证码为六位数字" class="inp" name="code">
                       </p>
                       <p class="form-item">
-                        <input type="submit" class="btn" value="下一步">
+                        <input type="submit" role-type="submit" class="btn" value="下一步">
                       </p>
                     </form>
                   </div>
@@ -328,7 +338,7 @@
             </div>
             <div class="aside-page" id="aside-page-3">
               <ul class="tabs">
-                <li class="tab inb choose" role-page="score-page-1">
+                <li class="tab inb choose query-score" role-page="score-page-1">
                   <span>查询积分</span>
                 </li>
                 <li class="tab inb" role-page="score-page-2">
@@ -338,7 +348,7 @@
               <div class="tab-pages">
                 <div class="page active-page" id="score-page-1">
                   <p class="score-tips">已有积分</p>
-                  <p class="score">100</p>
+                  <p class="score" id="user-score">0</p>
                 </div>
                 <div class="page" id="score-page-2">    
                   <ul class="score-rule">
@@ -415,19 +425,8 @@
     <!--end of footer-->
     <script src="../js/jquery-1.11.1.min.js"></script>
     <script src="../js/bootstrap.min.js"></script>
-    <script type="text/javascript">
-      $(document).ready(function(){
-        $(".tabs li").bind("click",function(){
-            $(this).addClass("choose").siblings().removeClass("choose");
-            var tab_id=$(this).attr("role-page");
-            $("#"+tab_id).addClass("active-page").siblings().removeClass("active-page");
-        });
-        $(".aside-menu .menu").bind("click",function(){
-            var _id=$(this).attr("role-page");
-            $(this).addClass("cur").siblings().removeClass("cur");
-            $("#"+_id).addClass("cur").siblings().removeClass("cur");
-        });
-      });
-    </script>
+    <script src="../js/jquery.cookie.js"></script>
+    <script src="../js/common.js"></script>
+    <script src="../js/userCenter.js"></script>
   </body>
 </html>

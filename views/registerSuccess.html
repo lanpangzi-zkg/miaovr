@@ -4,17 +4,40 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>观看历史</title>
-
+    <title>用户注册成功</title>
     <link href="../css/bootstrap.min.css" rel="stylesheet">
     <link href="../css/common.css" rel="stylesheet">
-    <link href="../css/history.css" rel="stylesheet">
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
       <script src="http://cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
       <script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
+    <style type="text/css">
+      .wrapper{
+        background-image:url('../images/login/bg.png');
+        background-size: cover;
+        padding: 100px 0;
+      }
+      .register-box{
+        margin: 20px auto;
+        width: 450px;
+        padding: 60px 10px;
+        background-color: white;
+        border-radius: 10px;
+        box-shadow: 0px 0px 8px 2px #e6e6e6;
+        text-align: center;
+      }
+      .register-box .title{
+        margin: 10px 0;
+        padding-bottom: 10px;
+        border-bottom: 1px solid #ffd737;
+      }
+      .register-box .tips{
+        line-height: 30px;
+        font-size: 1.2em;
+      }
+    </style>
   </head>
   <body>
     <div class="header">
@@ -65,14 +88,14 @@
                         <p class="nav-r-name">上传视频</p>
                       </a>
                     </li>
-                    <li  class="choose">
-                      <a href="#">
+                    <li>
+                      <a href="./history.html">
                         <img src="../images/common/history.png" alt='' class="img-responsive nav-r-icon"/>
                         <p class="nav-r-name">历史观看</p>
                       </a>
                     </li>
-                    <li>
-                      <a href="./login.html">
+                    <li class="choose">
+                      <a href="#">
                         <img src="../images/common/man.png" alt='' class="img-responsive nav-r-icon"/>
                         <p class="nav-r-name">登陆/注册</p>
                       </a>
@@ -93,71 +116,14 @@
           <!-- end of container-fluid -->
         </nav>
       </div>
-    </div>    
-    <div class="container history-box">
-      <div class="history-header">
-        <span>记录了我的<span id="history-count">0</span>条记录</span>
-        <span class="delete-box">
-          <i class="delete-icon inb"></i>
-          <span>清空我的观看记录</span>
-        </span>
-        <div class="delete-dialog">
-          <p class="title">确定要清除所有记录吗</p>
-          <div class="history-btn-group">
-            <input type="button" class="btn btn-ok" value="确认">
-            <input type="button" class="btn btn-cancel" value="取消">            
-          </div>
-        </div>
-      </div>
-      <div class="history-details">
-        <div class="history-list">
-          <div class="history-time-box">
-            <div class="time-line">
-              <span class="time-tag inb">一周内</span>
-              <div class="time-axis">
-                <div class="time-dot-box">
-                  <i class="time-dot inb"></i>
-                </div>
-                <div class="ver-line">
-                </div>
-              </div>
-            </div>
-            <ul class="time-details">
-              <li class="inb">
-                <img src="../images/history/his.jpg" class="img-responsive" alt="#">
-                <p>测试测试测试</p>
-              </li>
-              <li class="inb">
-                <img src="../images/history/his.jpg" class="img-responsive" alt="#">
-                <p>测试测试测试</p>
-              </li>
-            </ul>
-          </div>
-          <div class="history-time-box">
-            <div class="time-line">
-              <span class="time-tag inb">一周内</span>
-              <div class="time-axis">
-                <div class="time-dot-box">
-                  <i class="time-dot inb"></i>
-                </div>
-                <div class="ver-line">
-                </div>
-              </div>
-            </div>
-            <ul class="time-details">
-              <li class="inb">
-                <img src="../images/history/his.jpg" class="img-responsive" alt="#">
-                <p>测试测试测试</p>
-              </li>
-              <li class="inb">
-                <img src="../images/history/his.jpg" class="img-responsive" alt="#">
-                <p>测试测试测试</p>
-              </li>
-            </ul>
-          </div>
-        </div>
+    </div>   
+    <div class="wrapper">
+      <div class="register-box">
+          <h2 class="title">恭喜您，注册成功</h2>
+          <p class="tips">现在<a href="./login.html">登录</a>吧</p>
       </div>
     </div>
+    <!--end of wrapper-->
     <div class="footer">
       <div class="container">
         <div class="row">
@@ -220,45 +186,5 @@
     <!--end of footer-->
     <script src="../js/jquery-1.11.1.min.js"></script>
     <script src="../js/bootstrap.min.js"></script>
-    <script src="../js/common.js"></script>
-    <script src="../js/jquery.cookie.js"></script>
-    <script type="text/javascript">
-      var access_token=$.cookie("access_token");
-      if(!access_token){
-        alert("请先登录");
-      }else{
-        $(".delete-box").on("click",function(){
-            var _dialog=$(".delete-dialog");
-            if(_dialog.css("display")=="none"){
-              _dialog.css("display","block");
-            }else{
-              _dialog.css("display","none");            
-            }
-        });
-        $(".btn-ok").on("click",function(){
-          $(".delete-dialog").css("display","none");
-        });
-        $(".btn-cancel").on("click",function(){
-          $(".delete-dialog").css("display","none");
-        });
-        //查询历史记录
-        Base.queryData("/v1/lives_history.php?offset=1&limit=10",null,null,function(data){
-          if(Base.isSuccess(data)){
-            console.log(data);
-            // Base.handleResult("vr-recommend-box",data,
-            // {"childrenBox":".recommed-item",
-            //   "img":"img",
-            //   "txt":".title",
-            //   "href":"a"},
-            // {"img":"pic_url",
-            //   "txt":"showname",
-            //   "href":"url"});
-          }
-        },function(err){
-          console.log(err);
-        });
-
-      }
-    </script>
   </body>
 </html>

@@ -23,6 +23,7 @@
 .row-vr{
     margin-top: 10px;
     padding-bottom: 15px;
+    position: relative;
 }
 .img-left.vr-category-link{
     margin-left: 0;
@@ -40,7 +41,17 @@
     width: 100%;
     text-align: center;
 }
-
+#game-selection-box{
+  position: relative;
+}
+.row-vr .title,.recommed-item .title{
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 30px;
+  line-height: 30px;
+  text-align: center;
+}
 @media (max-width: 600px) {
    .img-left.vr-category-link .vr-category,.img-right.vr-category-link .vr-category{
         margin: 0 auto;

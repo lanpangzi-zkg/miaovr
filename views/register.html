@@ -97,33 +97,34 @@
       <div class="register-box">
         <div class="row">
           <div class="col-sm-12">
-            <form action="#" class="register-form">
+            <form action="/v1/mobile_register.php" class="register-form" id="register-form">
               <p class="register-title">
                 欢迎注册瞄瞄VR
               </p>
               <p class="register-item">
-                <input type="text" class="inp" name="uname" placeHolder="手机号/邮箱">
+                <input type="text" role-type="mobile" role-null="请输入手机号" role-err="请检查手机号码格式" class="inp" id="mobile" name="uname" placeHolder="手机号">
               </p>
               <p class="register-item">
-                <input type="text" class="inp validate-code" name="code" placeHolder="验证码">
-                <input type="button" class="btn-code" value="获取验证码">
+                <input type="text" role-type="code" role-null="请输入验证码" role-err="验证码为六位数字" class="inp validate-code" name="code" id="code" placeHolder="验证码">
+                <input type="button" class="btn-code" id="btn-send-code" value="获取验证码">
+                <span class="seconds-count">60秒</span>
               </p>
               <p class="register-item">
-                <input type="password" name="pass" class="inp" placeHolder="登陆密码">
+                <input type="password" role-type="pass" name="pass" role-null="请输入密码" role-err="密码包含数字字母或者下划线，6~16位长度" class="inp" id="pass" placeHolder="登陆密码">
               </p>
               <p class="register-item">
-                <input type="password" name="repass" class="inp" placeHolder="确认密码">
+                <input type="password" role-type="repass" role-repeat="pass" name="repass" role-null="请再次输入密码" role-err="两次密码输入不一致" class="inp" id="repass" placeHolder="确认密码">
               </p>
               <p class="register-item">
-                <input type="checkbox" id="remember">
-                <label for="remember">
+                <input type="checkbox" role-type="checkbox" id="agree" role-err="请确保已阅读并同意瞄瞄VR用户协议">
+                <label for="agree" class="agree-label">
                   <span>我已阅读并同意</span>
                   <a href="#" class="register-deal">瞄瞄VR用户协议</a>
                 </label>
                 
               </p>
               <p class="register-item">
-                <input type="submit" value="注册" class="btn-register"/>
+                <input type="submit" value="注册" class="btn-register" id="btn-register"/>
               </p>
               <p class="register-item">
                 已有账号?<a href="./login.html" class="login">立即登陆</a>
@@ -195,10 +196,13 @@
     </div>
     <!--end of footer-->
     <script src="../js/jquery-1.11.1.min.js"></script>
+    <script src="../js/common.js"></script>
+    <script src="../js/validateForm.js"></script>
     <script src="../js/bootstrap.min.js"></script>
     <script type="text/javascript">
       $(document).ready(function(e) {
-      });
+          RegisterValid.init("register-form");
+      });     
     </script>
   </body>
 </html>
