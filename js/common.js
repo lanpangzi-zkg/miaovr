@@ -58,19 +58,19 @@ var Base=(function($,b){
         var vnum=0;
         var temp_child=null;
         for (var i=0,j=list.length; i<j; i++){
-          temp=list[i];
+          temp_result=list[i];
           if(!mn){//不限制
-            if(childrenBoxs.length<i){
+            if(childrenBoxs.length<=i){
                 temp_box= $(childrenBoxs[0]).clone(true); 
                 $parentBox.append(temp_box);
             }else{
                 temp_box=$(childrenBoxs[i]);
             }
-            handleResultItem(temp,temp_box,searchItems,resultItems);
+            handleResultItem(temp_result,temp_box,searchItems,resultItems);
           }else{//限制显示条数
              if(i<mn){
                 temp_box=$(childrenBoxs[i]);
-                handleResultItem(temp,temp_box,searchItems,resultItems);
+                handleResultItem(temp_result,temp_box,searchItems,resultItems);
                 vnum++;
               }else{
                 i=j;
@@ -153,6 +153,85 @@ var Base=(function($,b){
             }             
         }
     }
-
+    b.isLogin=function(){
+        return true;
+    };
+    b.setBtnDisabled=function(selector){
+        var btn=$(selector);
+        if(btn.length>0){
+             btn.attr("disabled","disabled").addClass("btn-disabled");  
+             return btn; 
+        }
+    };
+    b.setBtnEnabled=function(selector){
+        var btn=$(selector);
+        if(btn.length>0){
+             btn.removeAttr("disabled","disabled").removeClass("btn-disabled");   
+             return btn;
+        }
+    };
+    b.formatDate=function(longtime){
+        var date=new Date(longtime);
+        return date.getFullYear()+"-"+
+        handleDate(date.getMonth())+
+        "-"+handleDate(date.getDate());
+    };
+    b.errorBack=function(msg){
+        
+    };
+    b.handleComments=function(data){
+        var $parentBox=$("#user-comments-box");
+        $parentBox.find("img").on("error",function(){
+          var _this=$(this);
+          _this.attr("src",_this.attr("role-err"));
+          _this.off("error");
+        });
+        var childrenBoxs=$parentBox.find(".comment-item");
+        var temp_result=null;
+        var temp_box=null;
+        var vnum=0;
+        var temp_child=null;
+        var list=data.list_result;
+        var list_length=list.length;
+        var answer_list=[];
+        for (var i=0; i<list_length; i++){
+            temp_result=list[i];
+            if(temp_result.to_commentId){
+                answer_list.push(temp_result);
+                console.log("yes");
+                continue;
+            }
+            // if(childrenBoxs.length<=i){
+            //     temp_box= $(childrenBoxs[0]).clone(true); 
+            //     $parentBox.append(temp_box);
+            // }else{
+            //     temp_box=$(childrenBoxs[i]);
+            // }
+            temp_box=addComment(temp_result);
+            // temp_box.find(".user-comment").html(temp_result.comment);
+            // temp_box.find(".user-name").html(temp_result.from_uuid);
+            // temp_box.find(".btn-show-reply").attr("role-id",temp_result.commentId);
+        }
+        $parentBox.find(".mask-loading").fadeOut();
+    };
+    //根据回复信息找到该回复的评论
+    function searchReplyComment(comments,to_commentId){
+        var parComment=null;
+        for(var i=0,j=comments.length;i<j;i++){
+            if(comments[i].commentId==to_commentId){//找到评论
+                console.log(comments[i].comment);
+                parComment=comments[i];
+                i=j;
+            }
+        }
+        return parComment;
+    }
+    function test(commentData){
+        return
+        "<div></div>";
+    }
+    function handleDate(t){
+        return ("0"+t).slice(-2);
+    }
     return b;
 })($,Base||{});

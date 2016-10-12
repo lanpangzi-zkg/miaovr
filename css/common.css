@@ -1,7 +1,17 @@
+
+@font-face{
+  font-family: "glyphicons";
+  src:url("../fonts/glyphicons-halflings-regular.eot") format("eot"),
+      url("../fonts/glyphicons-halflings-regular.svg") format("svg"),
+      url("../fonts/glyphicons-halflings-regular.ttf") format("truetype"),
+      url("../fonts/glyphicons-halflings-regular.woff") format("woff");
+      font-weight: normal;
+      font-style: normal;
+}
 body{
     background-color: #f1f2f6;
     font-size: 14px;
-    font-family: "microsoft yahei",Arial;
+    font-family: "glyphicons","Noto Sans chinese regural","microsoft yahei",Arial;
     color: #000;
     -webkit-font-smoothing: antialiased;
 }
@@ -63,11 +73,22 @@ table {
 input{
     outline:none
 }
+.vr-box .row a{
+    display: block;
+    position: relative;
+}
+#main-navbar .container-fluid{
+    padding-left: 0;
+    padding-right: 0;
+}
 /*************header**************/
 .header{
     position: relative;
     background-color: #fff;
     box-shadow: 0px 3px 3px #dedede;
+    color: #8a8a8a;
+    font-size: 13px;
+    /*background: url(../images/common/header-bg.png);*/
 }
 #main-navbar {
     z-index: 9995;
@@ -103,7 +124,7 @@ input{
     text-align: center;
 }
 #main-navbar .navbar .navbar-right>li{
-    margin:0 5px;
+    margin:0 8px;
 }
 #main-navbar .navbar .navbar-right>li>a {
     text-decoration: none;
@@ -112,6 +133,10 @@ input{
 }
 #main-navbar nav ul li {
     display: inline-block;
+    margin:0 6px;
+}
+#main-navbar .navbar .navbar-right .search-i{
+    margin-right: 0;
 }
 .form-search{
     margin: 22px 0;
@@ -150,6 +175,7 @@ input{
 }
 .nav-r-name{
     margin: 7px 0;
+    font-size: 10px;
 }
 /***********content*************/
 .container-white{
@@ -217,14 +243,19 @@ input{
     height: 60px;
     line-height: 60px;
     text-align: center;
-    font-size: 1.2em;
+    font-size: 14px;
+    color: #d4e9fa;
+    cursor: pointer;
+}
+.footer-menu:hover{
+    color: #ffd737;
 }
 .footer-link{
     color: #949494;
     margin-top: 100px;
 }
 .footer-link span{
-    color: inherit;
+    color: #616a72;
 }
 .footer-logo{
     margin-top: 25px;
@@ -236,7 +267,7 @@ input{
     right: 0;
     bottom: 0;
     background-color: #fff;
-    z-index: 9999;
+    z-index: 9996;
 }
 .mask-loading .loading-icon{
     width: 60px;
@@ -253,6 +284,7 @@ input{
     position: fixed;
     right: 0;
     top:0;
+    z-index: 9999;
 }
 .alertBox .alert-tip{
     width: 120px;

@@ -48,9 +48,15 @@
   position: absolute;
   left: 0;
   right: 0;
+  bottom: 0;
   height: 30px;
   line-height: 30px;
   text-align: center;
+  color: #fff;
+}
+.container .row-vr a{
+  display: block;
+  position: relative;
 }
 @media (max-width: 600px) {
    .img-left.vr-category-link .vr-category,.img-right.vr-category-link .vr-category{

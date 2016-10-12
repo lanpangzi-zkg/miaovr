@@ -65,7 +65,7 @@
                         <p class="nav-r-name">上传视频</p>
                       </a>
                     </li>
-                    <li  class="choose">
+                    <li>
                       <a href="#">
                         <img src="../images/common/history.png" alt='' class="img-responsive nav-r-icon"/>
                         <p class="nav-r-name">历史观看</p>
@@ -225,7 +225,7 @@
     <script type="text/javascript">
       var access_token=$.cookie("access_token");
       if(!access_token){
-        alert("请先登录");
+        Base.showAlert("请先登录","error");
       }else{
         $(".delete-box").on("click",function(){
             var _dialog=$(".delete-dialog");

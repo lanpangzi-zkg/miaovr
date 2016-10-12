@@ -152,12 +152,12 @@
                   </div>
                 </form>
               </div>
-              <div class="comments-box" id="tv-comments-box">
+              <div class="comments-box" id="user-comments-box">
                 <div class="mask-loading">
                   <div class="loading-icon"></div>
                 </div>
                 <ul class="comments-list">
-                  <li class="comment-item">
+                  <!-- <li class="comment-item">
                     <div class="user-icon"></div>
                     <div class="comment-main">
                       <div class="user-info">
@@ -169,7 +169,7 @@
                     <div class="reply-box">
                       <input type="button" class="btn-show-reply btn" value="回复"/> 
                     </div>
-                  </li>
+                  </li> -->
                 </ul>
               </div>
             </div>
@@ -267,7 +267,7 @@
       $(document).ready(function(){
         vid=Base.searchParam("vid","id");
         if(!vid){
-          alert("抱歉,你所查找的资源不存在");
+          Base.showAlert("抱歉,你所查找的资源不存在","error");
         }else{
           //查询视频信息
           Base.queryData("/search/fileid","POST",{"fileid":vid},function(data){
@@ -279,13 +279,14 @@
               $("#pic_url").attr("src",info.pic_url);
               $("#filesize").html(Math.floor(info.filesize/1024/1024)+"M");
               $("#showname").html(info.showname);
-              $("#description").html(info.showname||"暂无");
-              //console.log(info.url);
+              $("#description").html(info.description||"暂无");
+              config.videos[0].video=info.http_url;
+              detupano(config);
             }else{
-              Base.showAlert(data.error_msg);
+              Base.showAlert(data.error_msg,"error");
             }
           },function(err){
-             Base.showAlert(err);
+             Base.showAlert(err,"error");
           });
           //查询视频评论信息
           Base.queryData("/vod/comment/fileId","POST",{"fileid":vid},function(data){
@@ -296,18 +297,10 @@
                   $(".comments-list").css("display","none");
                   $("#tv-comments-box").find(".mask-loading").fadeOut();
               }else{
-                Base.handleResult("tv-comments-box",data,
-                {"childrenBox":".comment-item",
-                  "txt":".user-comment",
-                  "txt-1":".user-name",
-                  "role-id":".btn-show-reply"},
-                {"txt":"comment",
-                 "txt-1":"from_uuid",
-                 "role-id":"commentId"
-                });                
+                Base.handleComments(data);                
               }
             }else{
-              Base.showAlert(data.error_msg);
+              Base.showAlert(data.error_msg,"error");
             }
           },function(err){
             Base.showAlert(err);
@@ -331,15 +324,44 @@
                 "href":"url"});                
               }
             }else{
-              Base.showAlert(data.error_msg);
+              Base.showAlert(data.error_msg,"error");
             }
           },function(err){
-            Base.showAlert(err);
+            Base.showAlert(err,"error");
           });
 
         }
 
-        $(".btn-show-reply").on("click",function(){
+        $(".btn-publish").on("click",function(e){
+          e.preventDefault();
+          var btn=$(this);
+          btn.attr("disabled","disabled").addClass("btn-disabled");
+          var comment=$("#tv-comment").val();
+          console.log(comment);
+          if(!comment){
+             Base.showAlert("请输入视频点评","error");
+             $("#tv-comment").focus();
+             return;
+          }
+          Base.queryData("/vod/comment/vod","POST",
+            {"comment":comment,
+            "from_uuid":"bb90efc3-27c4-240c-b5ba-4561e3faf3e2",//$.cookie("uuid")
+            "fileid":vid},function(data){
+            console.log("提交评论");
+            console.log(data);
+            if(Base.isSuccess(data)){
+              Base.showAlert("点评成功");
+              addComment(data.list_result[0]);
+            }else{
+              Base.showAlert(data.error_msg,"error");
+            }
+            btn.removeAttr("disabled").removeClass("btn-disabled");
+          },function(err){
+            Base.showAlert(err);
+            btn.removeAttr("disabled").removeClass("btn-disabled");
+          });
+        });
+        $(".comments-list").delegate(".btn-show-reply","click",function(){
           var _this=$(this);
           console.log(_this.attr("role-id"));
           var reply_main=_this.parent().find(".reply-main");
@@ -355,36 +377,6 @@
             reply_main.css("display","none");
           }
         });
-
-        $(".btn-publish").on("click",function(e){
-          e.preventDefault();
-          var btn=$(this);
-          btn.attr("disabled","disabled").addClass("btn-disabled");
-          var comment=$("#tv-comment").val();
-          console.log(comment);
-          if(!comment){
-             Base.showAlert("请输入视频点评","error");
-             $("#tv-comment").focus();
-             return;
-          }
-          Base.queryData("/vod/comment/vod","POST",
-            {"comment":comment,
-            "from_uuid":"jajajaja",//$.cookie("uuid")
-            "fileid":vid},function(data){
-            console.log("提交评论");
-            console.log(data);
-            if(Base.isSuccess(data)){
-              addComment(data.list_result[0]);
-              Base.showAlert("点评成功");
-            }else{
-              Base.showAlert(data.error_msg,"error");
-            }
-            btn.removeAttr("disabled").removeClass("btn-disabled");
-          },function(err){
-            Base.showAlert(err);
-            btn.removeAttr("disabled").removeClass("btn-disabled");
-          });
-        });
         $(".comments-list").delegate(".btn-reply","click",function(){
           var _btn=$(this);
           var reply_content=_btn.parent().siblings(".reply-content");
@@ -395,21 +387,21 @@
             return;
           }
           _btn.attr("disabled","disabled").addClass("btn-disabled");
-          Base.queryData("/vod/comment/reply","POST",
-            {"comment":reply,
+          var paramObj={"comment":reply,
             "from_uuid":"xixixixi",//$.cookie("uuid")
             "to_commentId":_btn.attr("reply-id"),
-            "fileid":vid},function(data){
-            console.log("提交回复");
-            console.log(data);
+            "fileid":vid};
+          Base.queryData("/vod/comment/reply","POST",paramObj,function(data){
             if(Base.isSuccess(data)){
-              //addComment(data.list_result[0]);
               Base.showAlert("回复成功");
+              addReplyComment(paramObj);
             }else{
               Base.showAlert(data.error_msg,"error");
             }
+            reply_content.val("");
             _btn.removeAttr("disabled").removeClass("btn-disabled");
           },function(err){
+            reply_content.val("");
             Base.showAlert(err);
             _btn.removeAttr("disabled").removeClass("btn-disabled");
           });        
@@ -424,9 +416,6 @@
           +"</div>";
       }
       function addComment(data){
-        if(data.list_result.length<1){
-          return;
-        }
         var commentItem="<li class='comment-item'>"+
           "<div class='user-icon'></div>"+
           "<div class='comment-main'>"+
@@ -437,25 +426,30 @@
             "<div class='user-comment'>"+data.comment+"</div>"+
           "</div>"+
           "<div class='reply-box'>"+
-             "<input type='button' class='btn-reply btn' role-commentId='"+data.commentId+"' value='回复'/>"+
+             "<input type='button' class='btn-show-reply btn' role-id='"+data.commentId+"' value='回复'/>"+
           "</div>"+
         "</li>";
         $(commentItem).appendTo($(".comments-list"));
+      }
+      function addReplyComment(data){
+          
       }
       var config = {
           target: "detu_container",
           islive: false,
           videos:[
-              {name: "bq", txt: "标清", video: "http://media.qicdn.detu.com/@/68095950-956A-82A0-AC71-F66F23312713/2016-05-05/572aa0ac7f0d3-512x256.mp4", mp3: "http://media.qicdn.detu.com/@/68095950-956A-82A0-AC71-F66F23312713/2016-05-05/572aa0ac7f0d3.mp3", poster: "", play: true},
-              {name: "gq", txt: "高清", video: "http://media.qicdn.detu.com/@/68095950-956A-82A0-AC71-F66F23312713/2016-05-05/572aa0ac7f0d3-1024x512-1.3m.mp4", mp3: "http://media.qicdn.detu.com/@/68095950-956A-82A0-AC71-F66F23312713/2016-05-05/572aa0ac7f0d3.mp3", poster: "", play: false},
-              {name: "cq", txt: "超清", video: "http://media.qicdn.detu.com/@/68095950-956A-82A0-AC71-F66F23312713/2016-05-05/572aa0ac7f0d3-2048x1024.mp4", mp3: "http://media.qicdn.detu.com/@/68095950-956A-82A0-AC71-F66F23312713/2016-05-05/572aa0ac7f0d3.mp3", poster: "", play: false}
+            {name: "bq", txt: "标清", video: "http://media.qicdn.detu.com/@/68095950-956A-82A0-AC71-F66F23312713/2016-05-05/572aa0ac7f0d3-512x256.mp4", mp3: "http://media.qicdn.detu.com/@/68095950-956A-82A0-AC71-F66F23312713/2016-05-05/572aa0ac7f0d3.mp3", poster: "", play: true}
           ],
+          // videos:[
+          //     {name: "bq", txt: "标清", video: "http://media.qicdn.detu.com/@/68095950-956A-82A0-AC71-F66F23312713/2016-05-05/572aa0ac7f0d3-512x256.mp4", mp3: "http://media.qicdn.detu.com/@/68095950-956A-82A0-AC71-F66F23312713/2016-05-05/572aa0ac7f0d3.mp3", poster: "", play: true},
+          //     {name: "gq", txt: "高清", video: "http://media.qicdn.detu.com/@/68095950-956A-82A0-AC71-F66F23312713/2016-05-05/572aa0ac7f0d3-1024x512-1.3m.mp4", mp3: "http://media.qicdn.detu.com/@/68095950-956A-82A0-AC71-F66F23312713/2016-05-05/572aa0ac7f0d3.mp3", poster: "", play: false},
+          //     {name: "cq", txt: "超清", video: "http://media.qicdn.detu.com/@/68095950-956A-82A0-AC71-F66F23312713/2016-05-05/572aa0ac7f0d3-2048x1024.mp4", mp3: "http://media.qicdn.detu.com/@/68095950-956A-82A0-AC71-F66F23312713/2016-05-05/572aa0ac7f0d3.mp3", poster: "", play: false}
+          // ],
           ready: function(pano){
               //开启陀螺仪
               pano.gyro(true);
           }
       };
-      detupano(config);
     </script>
   </body>
 </html>

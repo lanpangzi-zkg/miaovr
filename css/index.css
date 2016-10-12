@@ -57,26 +57,25 @@ a:hover{
 .vr-box .more-link{
     position: absolute;
     right: 10px;
-    top:10px;
+    top:14px;
+    line-height: 22px;
 }
 .vr-box .more-link span{
-    display: inline-block;
-    line-height: 40px;
     vertical-align: middle;
 }
 .vr-box .more-link .more-icon{
     width: 28px;
     height: 7px;
-    display: inline-block;
     background: url('../images/common/more.png') no-repeat;
-    line-height: 40px;
-    vertical-align: middle;
+    margin-left: 3px;
+    line-height: 44px;
+    vertical-align: sub;
 }
 .vr-box-header{
 
 }
 .header-main{
-    padding: 10px 0;
+    padding: 6px 0;
 }
 .header-main .box-header-icon{
     display: inline-block;
@@ -89,9 +88,8 @@ a:hover{
 .header-main .title{
     line-height: 44px;
     vertical-align: middle;
-    font-size: 1.2em;
-    font-weight: bold;
-    margin-left: 10px;
+    font-size: 24px;
+    color:#333333;
 }
 .black-line{
     height: 3px;
@@ -108,6 +106,7 @@ a:hover{
     bottom: 0;
     text-align: center;
     color: #fff;
+    background: url('../images/common/item-title-bg.png') repeat-x;
 }
 /************vr资讯**************/
 .vr-info-user{
@@ -123,25 +122,53 @@ a:hover{
 
 }
 .vr-info-sub{
-    padding: 10px 0;
+    padding: 8px 0;
 }
 .vr-info-sub .sub-txt{
     line-height: 50px;
     vertical-align: middle;
-    font-weight: bold;
+    font-size: 16px;
+    color: #333333;
 }
 .line-mb-10{
     margin-bottom: 10px;
 }
 /*************vr tv****************/
+.vr-tv .col-sm-9 .mask-loading{
+    margin-left: 15px;
+}
 .vr-box .col-sm-9 .col-sm-3{
     margin: 5px 0;
 }
+.vr-tv .vr-grid a:hover .hover-mask{
+    display: block;
+}
+.vr-tv .vr-grid .hover-mask{
+    position: absolute;
+    left:0;
+    top:0;
+    right: 0;
+    bottom: 0;
+    background-color: #000;
+    z-index: 99;
+    opacity: 0.5; 
+    display: none;
+}
+.play-icon{
+    width: 47px;
+    height:47px;
+    position: absolute;
+    left: 50%;
+    top:50%;
+    margin-left: -23px;
+    margin-top: -23px;
+    background: url('../images/common/play.png') no-repeat;
+}
 .hot-video-list{
-
+    margin-right: 15px;
 }
 .hot-video-list li{
-    margin: 10px 0;
+    margin: 10px;
 }
 .hot-video-list .video-icon{
     float: left;
@@ -171,6 +198,7 @@ a:hover{
 }
 #index-vrtv-r .mask-loading{
     margin-right:15px;
+    margin-left: -15px;
 }
 /***********vr game*************/
 .vr-game .game-tabs{
@@ -186,6 +214,8 @@ a:hover{
     line-height: 30px;
     display: block;
     padding: 0 5px;
+    color: #333333;
+    font-size: 14px;
 }
 .vr-game .game-tabs li .active{
     background-color: #ff8b3d;
@@ -194,7 +224,8 @@ a:hover{
 .vr-game .game-info{
     line-height: 30px;
     height: 30px;
-    text-align: center;
+    font-size: 12px;
+    color: #5c5c5c;
 }
 .hot-equipment-list li{
     margin:5px 0;
@@ -250,6 +281,9 @@ a:hover{
     margin-left: 50px;
     padding: inherit;
     text-align: right;
+}
+.chapter-interactive a {
+    display: inline;
 }
 .chapter-interactive i{
     display: inline-block;

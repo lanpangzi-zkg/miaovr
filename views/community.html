@@ -110,46 +110,30 @@
       </div>
       <div class="row">
           <div class="col-sm-9">
-            <div class="notes-box">
+            <div class="notes-box" id="note-list-box">
+              <div class="mask-loading">
+                <div class="loading-icon"></div>
+              </div>
               <ul class="notes-list">
                 <li class="note-item">
-                  <div class="note-icon"></div>
+                  <div class="note-icon">
+                    <img src="../images/common/default.png" role-err="../images/common/default.png" class="img-responsive user-icon">
+                  </div>
                   <div class="note-main">
                     <div class="note-info">
-                      <a href="./comDetails.html" class="note-name">行业大咖到访谷居，深入了解VR家装</a>
+                      <a href="#" class="note-name"></a>
                       <span class="tag inb tag-new"></span>
                     </div>
                     <div class="note-extra">
-                      <span class="note-author">喵女郎</span>
-                      <span class="note-date">2016-8-8</span>
+                      <span class="note-author"></span>
+                      <span class="note-date"></span>
                       <span class="note-chat note-r">
                         <i class="icon inb"></i>
-                        <span class="num">20</span>
+                        <span class="num comment-count">0</span>
                       </span>
                       <span class="note-off note-r">
                         <i class="icon inb"></i>
-                        <span class="num">20</span>
-                      </span>
-                    </div>
-                  </div>
-                </li>
-                <li class="note-item">
-                  <div class="note-icon"></div>
-                  <div class="note-main">
-                    <div class="note-info">
-                      <a href="./comDetails.html" class="note-name">行业大咖到访谷居，深入了解VR家装</a>
-                      <span class="tag inb tag-hot"></span>
-                    </div>
-                    <div class="note-extra">
-                      <span class="note-author">喵女郎</span>
-                      <span class="note-date">2016-8-8</span>
-                      <span class="note-chat note-r">
-                        <i class="icon inb"></i>
-                        <span class="num">20</span>
-                      </span>
-                      <span class="note-off note-r">
-                        <i class="icon inb"></i>
-                        <span class="num">20</span>
+                        <span class="num visit-count">0</span>
                       </span>
                     </div>
                   </div>
@@ -267,8 +251,118 @@
         </div>
       </div> 
     </div>
+    <div class="theme-mask"></div>
+    <div class="add-theme-box">
+      <div class="new-theme-top">
+        <p class="theme-label">标题</p>
+        <div class="inputs-area">
+          <input type="text" id="new-theme-title">
+        </div>
+      </div>
+      <div class="new-theme-center">
+        <p class="theme-label">内容</p>
+        <div class="inputs-area">
+          <textarea class="content" id="new-theme-content"></textarea>
+        </div>
+      </div>
+      <div class="new-theme-bottom">
+        <input type="button" value="确定" class="btn-theme-add btn">
+        <input type="button" value="取消" class="btn-theme-cancel btn">
+      </div>
+    </div>
     <!--end of footer-->
     <script src="../js/jquery-1.11.1.min.js"></script>
     <script src="../js/bootstrap.min.js"></script>
+    <script src="../js/common.js"></script>
+    <script type="text/javascript">
+      var off=5;
+      var len=5;
+      $(document).ready(function(){
+        queryPage(0);
+        $(".btn-publish-theme").on("click",function(e){
+          e.preventDefault();
+          if(Base.isLogin()){
+            $(".theme-mask").height($(document).height()).fadeIn();
+            $(".add-theme-box").fadeIn();
+          }
+        });
+        $(".btn-theme-cancel").on("click",function(){
+          hideThemePop();
+        });
+        $(".btn-theme-add").on("click",function(){
+          var _title=$("#new-theme-title").val();
+          var _content=$("#new-theme-content").val();
+          if(!_title){
+            Base.showAlert("请输入主题标题","error");
+            return;
+          }
+          if(!_content){
+            Base.showAlert("请输入主题内容","error");
+            return;
+          }
+          console.log(_title+":"+_content);
+          Base.queryData("/forum/save","POST",{"title":_title,"forum_details":_content,"uuid":"bb90efc3-27c4-240c-b5ba-4561e3faf3e2"},function(data){
+            hideThemePop();
+            console.log(data);
+            if(Base.isSuccess(data)){
+              Base.showAlert("发表成功");
+            }else{
+              Base.showAlert(data.error_msg,"error");
+            }
+          },function(err){
+             hideThemePop();
+             Base.showAlert(err);
+          });
+        });
+      });
+      function hideThemePop(){
+        $(".theme-mask").fadeOut();
+        $(".add-theme-box").fadeOut();
+      }
+      function queryPage(pageId){
+        var _pageId=parseInt(pageId);
+        off=_pageId*len;
+        $("#note-list-box").find("mask-loading").fadeIn();
+        Base.queryData("/forum/all?offset="+off+"&length=5",null,null,function(data){
+          console.log(data);
+          if(Base.isSuccess(data)){
+            handleNote(data);
+          }else{
+            Base.showAlert(data.error_msg,"error");
+          }
+        },function(err){
+           Base.showAlert(err);
+        });
+      }
+      function handleNote(data){
+        var $parentBox=$("#note-list-box");
+        $parentBox.find("img").on("error",function(){
+          var _this=$(this);
+          _this.attr("src",_this.attr("role-err"));
+          _this.off("error");
+        });
+        var childrenBoxs=$parentBox.find(".note-item");
+        var list=data.list_result;
+        var temp_result=null;
+        var temp_box=null;
+        var vnum=0;
+        var temp_child=null;
+        for (var i=0,j=list.length; i<j; i++){
+          temp=list[i];
+          if(childrenBoxs.length<=i){
+            temp_box= $(childrenBoxs[0]).clone(true); 
+            $parentBox.append(temp_box);
+          }else{
+            temp_box=$(childrenBoxs[i]);
+          }
+          temp_box.find(".user-icon").attr("src",temp.user.thumbAvatar);
+          temp_box.find(".note-name").attr("href","./comDetails.html?nid="+temp.forumId).html(temp.title);
+          temp_box.find(".note-author").html(temp.user.nickname);
+          temp_box.find(".note-date").html(Base.formatDate(temp.publish_time));
+          temp_box.find(".comment-count").html(temp.commentNums);
+        }
+        $parentBox.find(".mask-loading").fadeOut();
+      }
+    </script>
   </body>
 </html>

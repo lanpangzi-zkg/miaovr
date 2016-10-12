@@ -147,6 +147,9 @@
     <div class="container container-white">
       <div class="container-title">VR TV<span id="category-name"></span></div>
       <div id="tv-category-box" role-mn="10">
+        <div class="mask-loading">
+          <div class="loading-icon"></div>
+        </div>
         <div class="row row-vr">
           <div class="col-sm-2 col-sm-20">
             <a href="#" role-base="./playvr.html?vid=">
@@ -213,8 +216,7 @@
         </div>
       </div>
       <div class="up-box">
-        <div class="up-normal up-icon"></div>
-        <div class="up-active up-icon"></div>
+        <div class="up-icon"></div>
       </div>
     </div>
     <!--end of container-->
@@ -298,7 +300,8 @@
           alert("获取栏目信息失败");
         }else{
           $("#category-name").html(categoryName[category]);
-          Base.queryData("/search/category?offset=0&length=10","POST",{"category":categoryName[category]},function(data){
+          Base.queryData("/search/category?offset=0&length=10","POST",{"category":category},function(data){
+            console.log(data);
             if(Base.isSuccess(data)){
               Base.handleResult("tv-category-box",data,
               {"childrenBox":".col-sm-2",
@@ -308,11 +311,17 @@
               {"img":"pic_url",
                 "txt":"showname",
                 "href":"url"});
+            }else{
+              Base.showAlert(data.error_msg,"error");
             }
           },function(err){
+            Base.showAlert(err,"error");
             console.log(err);
           });
         }
+        $(".up-box .up-icon").on("click",function(){
+          $('html,body').animate({scrollTop:0},'slow');
+        });
       });
     </script>
   </body>

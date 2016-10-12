@@ -56,6 +56,9 @@
     line-height: 30px;
     padding-left: 10px;
 }
+.vr-video-description .content{
+    height: inherit;
+}
 .vr-video-basic .title{
    border-left: 5px solid #ffd737;
 }
@@ -120,6 +123,7 @@
 }
 .comment-item{
     padding: 10px 0;
+    list-style: none;
 }
 .comment-item .user-icon{
     float: left;
@@ -146,6 +150,7 @@
 .user-info .user-comment{
 
 }
+/**********comment***********/
 .comment-item .reply-box{
     text-align: right;
     padding-bottom: 10px;
@@ -160,10 +165,7 @@
     font-size: 12px;
     margin-top: 5px;
 }
-.vr-video-basic .mask-loading{
-    left: 15px;
-}
-.comments-list .reply-box .btn-show-reply{
+.reply-box .btn-show-reply{
     color: #fff;
     background-color:#b1afaa;
     border-radius: 0;
@@ -181,6 +183,10 @@
 }
 .btn-reply-group{
     margin: 10px 0;
+}
+/**********comment***********/
+.vr-video-basic .mask-loading{
+    left: 15px;
 }
 #other-video-aside{
     position: relative;

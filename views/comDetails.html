@@ -44,10 +44,10 @@
                         <a href="./vrtv.html">VR TV</a>
                     </li>
                     <li>
-                        <a href="../vrgame.html">VR游戏</a>
+                        <a href="./vrgame.html">VR游戏</a>
                     </li>
                     <li class="choose">
-                        <a href="#">VR社区</a>
+                        <a href="./community.html">VR社区</a>
                     </li>
                 </ul>
 
@@ -108,28 +108,22 @@
       </div>
       <div class="row">
           <div class="col-sm-9">
-            <div class="note-details-box">
+            <div class="note-details-box" id="details-box">
+              <div class="mask-loading">
+                  <div class="loading-icon"></div>
+              </div>
               <h2 class="note-title">
-                在德推电动摩托车共享，这家全球顶级供应商也玩跨界
               </h2>
               <div class="note-info">
-                <span class="note-author">瞄女郎</span>
-                <span class="publish-date">2016-8-8</span>
+                <span class="note-author"></span>
+                <span class="publish-date"></span>
                 <span class="view-mobile"><i class="icon"></i>手机看贴</span>
               </div>
               <div class="note-body">
-                <div class="note-summary">
-                  近期共享租车服务火遍全球：福特汽车此前宣布进入私人巴士和共享自行车，汽车租赁平台Zipcar开始布局自行车共享，而现在连博世这样的一级供应商也要做共享电动车服务了。
+                <!-- <div class="note-summary">
                 </div>
-                <p class="note-img"></p>
+                <p class="note-img"></p> -->
                 <p class="note-txt">
-                  Markus Heyn表示，像柏林这样的大城市，基础的服务设施已经达到了上线。城市经常发生堵车现象，车主们很难找到停车位，需要快速、灵活、便捷的出行解决方案。
-
-因此，博世推出了更好的个人出行服务方案。很多项出行服务的方案正在制定中，比如在城区化停车和主动式停车管理，此外还有针对联合运输的出行服务方案。
-
-Coup共享平台的创始人Mat Schubert认为Coup平台有两大优势：一是在硬件上采用互联网化很高的电动摩托车Gogoro（来自台湾的科技创业公司）；二是软件和波士顿咨询公司电子事业部合作，在B2C方面非常专业。
-
- Schubert表示：相比公共交通，这种出行方式更快速、便宜和便捷。
                 </p>
                 <p class="end-line">
                   end
@@ -137,7 +131,7 @@ Coup共享平台的创始人Mat Schubert认为Coup平台有两大优势：一是
               </div>
             </div>
             <div class="note-comment">
-              <p class="title">视频点评</p>
+              <p class="title">主题点评</p>
               <form action="#">
                 <textarea class="commment-body"></textarea>
                 <div class="btn-group">
@@ -147,36 +141,6 @@ Coup共享平台的创始人Mat Schubert认为Coup平台有两大优势：一是
             </div>
             <div class="comments-box">
                 <ul class="comments-list">
-                  <li class="comment-item">
-                    <div class="user-icon"></div>
-                    <div class="comment-main">
-                      <div class="user-info">
-                        <span class="user-name">哈哈</span>
-                        <span class="floor">23#</span>
-                      </div>
-                      <div class="user-comment">
-                        很好玩,有木有
-                      </div>
-                    </div>
-                    <div class="reply-box">
-                       <input type="button" class="btn-reply" value="回复"/> 
-                    </div>
-                  </li>
-                  <li class="comment-item">
-                    <div class="user-icon"></div>
-                    <div class="comment-main">
-                      <div class="user-info">
-                        <span class="user-name">哈哈</span>
-                        <span class="floor">23#</span>
-                      </div>
-                      <div class="user-comment">
-                        很好玩,有木有
-                      </div>
-                    </div>
-                    <div class="reply-box">
-                       <input type="button" class="btn-reply" value="回复"/> 
-                    </div>
-                  </li>
                 </ul>
             </div>
           </div>
@@ -309,14 +273,49 @@ Coup共享平台的创始人Mat Schubert认为Coup平台有两大优势：一是
         <input type="button" value="发送" class="btn-send"/>
       </div>
     </div>
-    <script src="../js/jquery-1.11.1.min.js"></script>
-    <script src="../js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../js/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../js/common.js"></script>
+    <script type="text/javascript" src="../js/comment.js"></script>
     <script type="text/javascript">
       $(document).ready(function(){
-        $("#chart").on("click",function(e){
+        // $("#chart").on("click",function(e){
+        //   e.preventDefault();
+        // });
+        $(".btn-publish-theme").on("click",function(){
           e.preventDefault();
-
         });
+        nid=Base.searchParam("nid","id");
+        if(!nid){
+          Base.showAlert("抱歉,你所查找的资源不存在","error");
+        }else{
+          //查询主题信息
+          Base.queryData("/forum/forumId","POST",{"forumId":nid},function(data){
+            console.log("查询主题信息");
+            console.log(data);
+            if(Base.isSuccess(data)&&data.list_result.length>0){
+              var info=data.list_result[0];
+              $(".note-title").html(info.title);
+              $(".note-author").html(info.user.nickname||'佚名');
+              $(".publish-date").html(Base.formatDate(info.publish_time));
+              $(".note-txt").html(info.forum_details);
+              var comments=info.forumComments;
+            }else{
+              Base.showAlert(data.error_msg,"error");
+            }
+            $("#details-box").find(".mask-loading").fadeOut();
+          },function(err){
+             Base.showAlert(err);
+          });
+        }
+        comment.init({
+            "query":"/forum/comment/forumId?offset=0&length=5",
+            "publish":"/forum/comment/save",
+            "reply":"/forum/comment/reply",
+            "nameId":"forumId",
+            "id":nid
+        });
+        comment.queryComment();
       });
     </script>
   </body>
