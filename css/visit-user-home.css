@@ -17,7 +17,9 @@
     right: 5px;
     bottom: 5px;
 }
-
+.user-main{
+    min-height: 550px;
+}
 .aside-menu{
     padding: 10px;
 }
@@ -159,12 +161,19 @@
     padding-bottom: 5px;
     color: #c7c7c8;
 }
+a.link-details{
+    color: #333;
+}
+a.link-details:hover {
+    text-decoration: none;
+    color: #ffd737;
+}
 .note-list li span{
     vertical-align: middle;
 }
 .note-list li .note-title{
-    font-size: 1.2em;
-    color: #000;
+    font-size: 14px;
+    color: inherit;
 }
 .note-list li .note-r{
     float: right;

@@ -41,7 +41,7 @@
                         <a href="./vrinfo.html">VR资讯</a>
                     </li>
                     <li>
-                        <a href="./vrtv.html">VR TV</a>
+                        <a href="./vrtv.html">VRTV</a>
                     </li>
                     <li>
                         <a href="./vrgame.html">VR游戏</a>
@@ -53,13 +53,13 @@
 
                 <ul class="nav navbar-nav navbar-right">
                     <li>
-                      <a href="#">
+                      <a href="http://miaomiaotv.cn/index.html">
                         <img src="../images/common/mobile.png" alt='' class="img-responsive nav-r-icon"/>
                         <p class="nav-r-name">客户端</p>
                       </a>
                     </li>
                     <li>
-                      <a href="#">
+                      <a href="./upload.html">
                         <img src="../images/common/history.png" alt='' class="img-responsive nav-r-icon"/>
                         <p class="nav-r-name">上传视频</p>
                       </a>
@@ -275,8 +275,8 @@
     <script src="../js/bootstrap.min.js"></script>
     <script src="../js/common.js"></script>
     <script type="text/javascript">
-      var off=5;
-      var len=5;
+      var off=0;
+      var len=10;
       $(document).ready(function(){
         queryPage(0);
         $(".btn-publish-theme").on("click",function(e){
@@ -323,7 +323,7 @@
         var _pageId=parseInt(pageId);
         off=_pageId*len;
         $("#note-list-box").find("mask-loading").fadeIn();
-        Base.queryData("/forum/all?offset="+off+"&length=5",null,null,function(data){
+        Base.queryData("/forum/all?offset="+off+"&length="+len,null,null,function(data){
           console.log(data);
           if(Base.isSuccess(data)){
             handleNote(data);

@@ -8,18 +8,26 @@
     top: 20px;
     left: -70px;
 }
+.vr-info-box .player{
+    height: 700px;
+    overflow: hidden;
+}
 .vr-info-box{
     position: relative;
-    height: 700px;
-    background-image: url('../images/vrinfo/bg-chat.jpg');
+/*    background-image: url('../images/vrinfo/bg-chat.jpg');
     background-repeat:no-repeat;
     background-position: 0 0;
-    margin-top: 20px;
+*/    margin-top: 20px;
 }
 .vr-info-box .live-logo{
     position: absolute;
     top: 20px;
     left: 20px;
+}
+.vr-info-box .vr-menus{
+    position: absolute;
+    right: 20px;
+    top:20px;
 }
 .menus-ul{
     float: right;
@@ -49,9 +57,16 @@
     position: absolute;
     right: 30px;
     bottom: 150px;
-    padding: 10px;
-    background-color: #ccc;
-    border-radius: 5px;
+    width: 300px;
+    background: url('../images/vrinfo/icon-bg.png') no-repeat;
+}
+.social-apps ul{
+    position: relative;
+    text-align: center;
+    padding: 40px 0;
+}
+.social-apps a{
+    display: block;
 }
 .vr-comment-box{
     position: absolute;

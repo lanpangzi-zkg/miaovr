@@ -44,19 +44,53 @@
 #game-selection-box{
   position: relative;
 }
-.row-vr .title,.recommed-item .title{
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  height: 30px;
-  line-height: 30px;
-  text-align: center;
-  color: #fff;
-}
 .container .row-vr a{
   display: block;
   position: relative;
+}
+#vr-recommend-box .recommed-item{
+  display: inline-block;
+  *display: inline;
+  *zoom:1;
+}
+.item-title {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    color: #fff;
+    height: 36px;
+    line-height: 36px;
+    padding-left: 5px;
+    padding-right: 5px;
+    background: url('../images/common/item-title-bg.png') repeat-x;
+}
+.item-title .duration-time {
+    float: right;
+}
+.hover-mask{
+    position: absolute;
+    left:0;
+    top:0;
+    right: 0;
+    bottom: 0;
+    background-color: #000;
+    z-index: 99;
+    opacity: 0.5; 
+    display: none;
+}
+.play-icon{
+    width: 47px;
+    height:47px;
+    position: absolute;
+    left: 50%;
+    top:50%;
+    margin-left: -23px;
+    margin-top: -23px;
+    background: url('../images/common/play.png') no-repeat;
+}
+.row-vr a:hover .hover-mask {
+    display: block;
 }
 @media (max-width: 600px) {
    .img-left.vr-category-link .vr-category,.img-right.vr-category-link .vr-category{

@@ -81,6 +81,9 @@ input{
     padding-left: 0;
     padding-right: 0;
 }
+.display-box{
+    position: relative;
+}
 /*************header**************/
 .header{
     position: relative;
@@ -287,7 +290,7 @@ input{
     z-index: 9999;
 }
 .alertBox .alert-tip{
-    width: 120px;
+    width: 160px;
     background-color: #FFEB3B;
     color: #fff;
     text-align: center;
@@ -302,6 +305,20 @@ input{
     background-color: #d6d4cd!important;
 }
 /********media**********/
+@media (max-width: 1200px) {
+    #main-navbar .navbar-nav.navbar-right{
+        width: 100%;
+        padding-left: 0;
+    }
+}
+@media (max-width: 768px) {
+    .navbar-brand{
+        height: auto;
+    }
+    .navbar-toggle{
+        margin-top: 30px;
+    }
+}
 @media (max-width: 600px) {
     .navbar-header .navbar-brand{
         height: auto;
@@ -311,19 +328,25 @@ input{
         padding-bottom: 5px;
     }
     .navbar-toggle{
-        margin: 18px 0 10px 10px;
+        margin: 18px 5px 10px 10px;
     }
     #main-navbar .navbar-nav{
         border-top: 1px solid #eee;
+        margin: 0;
     }
     #main-navbar .navbar .navbar-left>li>a{
         padding: 10px;
     }
     #main-navbar .navbar .navbar-left>li{
         display: block;
+        margin: 0 5px;
+    }
+    #main-navbar .navbar-nav.navbar-right{
+        text-align: center; 
+        padding-top: 5px;
     }
     #main-navbar .navbar .navbar-right>li>a{
-        padding: 10px;
+        padding: 10px 7px;
     }
     #main-navbar nav ul li.search-i{
         display: block;
@@ -356,4 +379,12 @@ input{
     .hot-community-list{
         padding-bottom: 10px;
     }
+}
+@media (max-width: 360px) {
+    #main-navbar .navbar .navbar-right>li>a {
+        padding: 10px 0px;
+    }
+}
+@media (max-width: 320px) {
+ 
 }

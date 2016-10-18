@@ -23,6 +23,7 @@
 .row-vr{
     margin-top: 10px;
     padding-bottom: 15px;
+    position: relative;
 }
 .img-left.vr-category-link{
     margin-left: 0;
@@ -39,4 +40,36 @@
 .banner-box{
     width: 100%;
     text-align: center;
+}
+#game-selection-box{
+  position: relative;
+}
+.container .row-vr a{
+  display: block;
+  position: relative;
+}
+.container .row-vr a:hover{
+    text-decoration: none;
+}
+.container .row-vr a .title{
+    color: #333333;
+    padding: 5px 0;
+}
+@media (max-width: 600px) {
+   .img-left.vr-category-link .vr-category,.img-right.vr-category-link .vr-category{
+        margin: 0 auto;
+   } 
+   .col-sm-20,.col-sm-40,.col-sm-60{
+        width: inherit;
+   }
+   .col-sm-4{
+        margin: 10px auto;
+   }
+   .row-pb-10{
+        padding-bottom: inherit; 
+   }
+   .banner-box{
+        margin: 0;
+        padding: 0;
+   }
 }

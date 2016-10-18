@@ -3,20 +3,24 @@ var comment=(function(c){
     var $comments_list=null;
     var $comment_body=null;
     var nameId="";
+    var textArea="";
+    var commentBox="";
     c.init=function(config_params){
         config=config_params;
         nameId=config.nameId;
+        textArea=config.textArea||".commment-body";
+        commentBox=config.commentBox||"#c-comment-box";
         //发布评论
         $(".btn-publish").on("click",function(e){
           e.preventDefault();
           var btn=$(this);
-          btn.attr("disabled","disabled").addClass("btn-disabled");
           var comment=$(".commment-body").val();
           if(!comment){
-             Base.showAlert("请输入视频点评","error");
-             $("#tv-comment").focus();
+             Base.showAlert("请输入点评内容","error");
+             $(""+textArea).focus();
              return;
           }
+          btn.attr("disabled","disabled").addClass("btn-disabled");
           Base.queryData(config.publish,"POST",
             {"comment":comment,
             "from_uuid":"bb90efc3-27c4-240c-b5ba-4561e3faf3e2",
@@ -25,7 +29,7 @@ var comment=(function(c){
             console.log(data);
             if(Base.isSuccess(data)){
               Base.showAlert("点评成功");
-              //addItemComment(data.list_result[0]);
+              c.queryComment();
             }else{
               Base.showAlert(data.error_msg,"error");
             }
@@ -39,7 +43,6 @@ var comment=(function(c){
         //显示与隐藏回复输入框
         $comments_list.delegate(".btn-show-reply","click",function(){
           var _this=$(this);
-          console.log(_this.attr("role-id"));
           var reply_main=_this.parent().find(".reply-main");
           if(reply_main.length<1){
             reply_main=$(replyMainModule(_this.attr("role-id")));
@@ -88,7 +91,9 @@ var comment=(function(c){
     };
     //查询评论
     c.queryComment=function(){
-        console.log("queryComment:"+nameId);
+        if($(commentBox).find("li").length>0){
+          $(commentBox).empty();
+        }
         Base.queryData(config.query,"POST",{"forumId":config.id},function(data){
             console.log("查询评论信息");
             console.log(data);
@@ -126,6 +131,14 @@ var comment=(function(c){
             addItemComment(temp_result);
         }
         $parentBox.find(".mask-loading").fadeOut();
+    }
+    function replyMainModule(commentId){
+      return "<div class='reply-main'>"
+          +"<textarea class='reply-content'></textarea>"
+          +"<div class='btn-reply-group'>"
+            +"<input type='button' value='提交' class='btn-reply' reply-id='"+commentId+"'>"
+          +"</div>"
+        +"</div>";
     }
     function addItemComment(data){
         var commentItem="<li class='comment-item'>"+

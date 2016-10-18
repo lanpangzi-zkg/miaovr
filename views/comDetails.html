@@ -41,7 +41,7 @@
                         <a href="./vrinfo.html">VR资讯</a>
                     </li>
                     <li>
-                        <a href="./vrtv.html">VR TV</a>
+                        <a href="./vrtv.html">VRTV</a>
                     </li>
                     <li>
                         <a href="./vrgame.html">VR游戏</a>
@@ -53,7 +53,7 @@
 
                 <ul class="nav navbar-nav navbar-right">
                     <li>
-                      <a href="#">
+                      <a href="http://miaomiaotv.cn/index.html">
                         <img src="../images/common/mobile.png" alt='' class="img-responsive nav-r-icon"/>
                         <p class="nav-r-name">客户端</p>
                       </a>
@@ -140,7 +140,7 @@
               </form>
             </div>
             <div class="comments-box">
-                <ul class="comments-list">
+                <ul class="comments-list" id="c-comment-box">
                 </ul>
             </div>
           </div>
@@ -153,17 +153,17 @@
               </div>
              <div class="author-box">
               <div class="icon">
-                <img src="../images/comDetails/user-icon.png"  alt='' class="img-responsive"/>
+                <img src="../images/comDetails/user-icon.png" id="thumbAvatar"  alt='' class="img-responsive"/>
               </div>
-              <p class="author-name">喵女郎</p>
+              <p class="author-name note-author"></p>
               <p class="author-score">
                 <span class="score-line inb"></span>
-                <span class="score-val">6060</span>
+                <span class="score-val" id="usercode">0</span>
                 <span class="score-line inb"></span>
               </p>
               <p class="fen">积分</p>
               <p class="btn-group">
-                <a href="./visitUserHome.html" class="home">主页</a>
+                <a href="#" id="user-home" class="home">主页</a>
                 <a href="javascript:void(0);" class="chat" id="chat">聊聊</a>
               </p>
              </div>
@@ -273,6 +273,25 @@
         <input type="button" value="发送" class="btn-send"/>
       </div>
     </div>
+    <div class="theme-mask"></div>
+    <div class="add-theme-box">
+      <div class="new-theme-top">
+        <p class="theme-label">标题</p>
+        <div class="inputs-area">
+          <input type="text" id="new-theme-title">
+        </div>
+      </div>
+      <div class="new-theme-center">
+        <p class="theme-label">内容</p>
+        <div class="inputs-area">
+          <textarea class="content" id="new-theme-content"></textarea>
+        </div>
+      </div>
+      <div class="new-theme-bottom">
+        <input type="button" value="确定" class="btn-theme-add btn">
+        <input type="button" value="取消" class="btn-theme-cancel btn">
+      </div>
+    </div>
     <script type="text/javascript" src="../js/jquery-1.11.1.min.js"></script>
     <script type="text/javascript" src="../js/bootstrap.min.js"></script>
     <script type="text/javascript" src="../js/common.js"></script>
@@ -282,8 +301,40 @@
         // $("#chart").on("click",function(e){
         //   e.preventDefault();
         // });
-        $(".btn-publish-theme").on("click",function(){
+        $(".btn-publish-theme").on("click",function(e){
           e.preventDefault();
+          if(Base.isLogin()){
+            $(".theme-mask").height($(document).height()).fadeIn();
+            $(".add-theme-box").fadeIn();
+          }
+        });
+        $(".btn-theme-cancel").on("click",function(){
+          hideThemePop();
+        });
+        $(".btn-theme-add").on("click",function(){
+          var _title=$("#new-theme-title").val();
+          var _content=$("#new-theme-content").val();
+          if(!_title){
+            Base.showAlert("请输入主题标题","error");
+            return;
+          }
+          if(!_content){
+            Base.showAlert("请输入主题内容","error");
+            return;
+          }
+          console.log(_title+":"+_content);
+          Base.queryData("/forum/save","POST",{"title":_title,"forum_details":_content,"uuid":"bb90efc3-27c4-240c-b5ba-4561e3faf3e2"},function(data){
+            hideThemePop();
+            console.log(data);
+            if(Base.isSuccess(data)){
+              Base.showAlert("发表成功");
+            }else{
+              Base.showAlert(data.error_msg,"error");
+            }
+          },function(err){
+             hideThemePop();
+             Base.showAlert(err);
+          });
         });
         nid=Base.searchParam("nid","id");
         if(!nid){
@@ -299,7 +350,15 @@
               $(".note-author").html(info.user.nickname||'佚名');
               $(".publish-date").html(Base.formatDate(info.publish_time));
               $(".note-txt").html(info.forum_details);
+              $("#thumbAvatar").attr("src",info.user.thumbAvatar).on("error",function(){
+                $(this).attr("src","../images/comDetails/user-icon.png").off("error");
+              });
+              $("#usercode").html(info.user.usercode);
+              $("#user-home").attr("href","./visitUserHome.html?uid="+info.user.uuid);
               var comments=info.forumComments;
+              if(comments.length<1){
+                $(".pagination-box").css("display","none");
+              } 
             }else{
               Base.showAlert(data.error_msg,"error");
             }
@@ -313,10 +372,15 @@
             "publish":"/forum/comment/save",
             "reply":"/forum/comment/reply",
             "nameId":"forumId",
-            "id":nid
+            "id":nid,
+            "textArea":".commment-body"
         });
         comment.queryComment();
       });
+      function hideThemePop(){
+        $(".theme-mask").fadeOut();
+        $(".add-theme-box").fadeOut();
+      }
     </script>
   </body>
 </html>

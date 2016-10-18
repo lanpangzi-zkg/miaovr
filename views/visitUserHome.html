@@ -43,7 +43,7 @@
                         <a href="./vrinfo.html">VR资讯</a>
                     </li>
                     <li>
-                        <a href="./vrtv.html">VR TV</a>
+                        <a href="./vrtv.html">VRTV</a>
                     </li>
                     <li>
                         <a href="./vrgame.html">VR游戏</a>
@@ -55,13 +55,13 @@
 
                 <ul class="nav navbar-nav navbar-right">
                     <li>
-                      <a href="#">
+                      <a href="http://miaomiaotv.cn/index.html">
                         <img src="../images/common/mobile.png" alt='' class="img-responsive nav-r-icon"/>
                         <p class="nav-r-name">客户端</p>
                       </a>
                     </li>
                     <li>
-                      <a href="#">
+                      <a href="./upload.html">
                         <img src="../images/common/history.png" alt='' class="img-responsive nav-r-icon"/>
                         <p class="nav-r-name">上传视频</p>
                       </a>
@@ -99,21 +99,21 @@
     <div class="container">
       <div class="user-center-box">
         <div class="user-header">
-          <h3>瞄女郎</h3>
+          <h3 class="nickname"></h3>
           <a class="chat" href="#"></a>
         </div>
-        <div class="row">
+        <div class="row user-main">
           <div class="col-sm-2">
             <ul class="aside-menu">
               <li class="menu-basic menu cur" role-page="aside-page-1">
                 <i class="inb icon"></i>
                 <span class="name">个人资料</span>
               </li>
-              <li class="menu-note menu" role-page="aside-page-2">
+              <li class="menu-note menu" role-page="aside-page-2" role-q="-1">
                 <i class="inb icon"></i>
                 <span class="name">帖子</span>
               </li>
-              <li class="menu-media menu" role-page="aside-page-3">
+              <li class="menu-media menu" role-page="aside-page-3" role-q="-1">
                 <i class="inb icon"></i>
                 <span class="name">视频</span>
               </li>
@@ -127,27 +127,33 @@
                       <p class="info-item">
                         <span class="cell inb">
                           <span>昵称:</span>
-                          <span class="user-name">瞄女郎</span>
+                          <span class="user-name nickname"></span>
                         </span>
                         <span class="cell inb">                          
                           <span>性别:</span>
-                          <span class="user-sex">男</span>
+                          <span class="user-sex" id="gender">未知</span>
                         </span>
                       </p>
                       <p class="info-item">
                         <span class="cell inb">
-                          <span>手机认证:</span>
-                          <span>未认证</span>
+                          <span>粉丝数:</span>
+                          <span id="followers"></span>
                         </span>
                         <span class="cell inb">
-                          <span>邮箱认证:</span>
-                          <span>未认证</span>
+                          <span>关注数:</span>
+                          <span id="focuses"></span>
                         </span>
                       </p>
                       <p class="info-item">
+                        <span class="inb">
+                          用户签名：
+                        </span>
+                        <span id="signature"></span>
+                      </p>
+                    <!--   <p class="info-item">
                         <span>注册时间:</span>
-                        <span class="date">2016-8-8 12:12</span>
-                      </p>
+                        <span class="date">2016-8-8</span>
+                      </p> -->
                     </div>
                     <div class="clearfix"></div>
                   </div>
@@ -156,83 +162,49 @@
             <div class="aside-page" id="aside-page-2">
               <ul class="tabs">
                 <li class="tab inb choose" role-page="note-page-1">
-                  <span>主题(5)</span>
+                  <span>主题(<span id="note-count">0</span>)</span>
                 </li>
                 <li class="tab inb" role-page="reply-page-2">
-                  <span>回复(6)</span>
+                  <span>评论(<span id="reply-count">0</span>)</span>
                 </li>
               </ul>
               <div class="tab-pages">
                 <div class="page active-page" id="note-page-1">
                   <p class="note-t">帖子</p>
-                  <ul class="note-list">
-                    <li>
-                      <span class="note-title">瞄瞄团队</span>
+                  <ul class="note-list" id="note-list-main">
+                    <div class="mask-loading">
+                      <div class="loading-icon"></div>
+                    </div>
+                    <li class="note">
+                      <a href="./comDetails.html?nid=" class="link-details">
+                        <span class="note-title"></span>
+                      </a>
                       <span class="hot-icon inb"></span>
                       <span class="note-chat note-r">
                         <i class="icon inb"></i>
-                        <span class="num">20</span>
+                        <span class="num">0</span>
                       </span>
                       <span class="note-off note-r">
                         <i class="icon inb"></i>
-                        <span class="num">20</span>
-                      </span>
-                    </li>
-                    <li>
-                      <span class="note-title">瞄瞄团队</span>
-                      <span class="hot-icon inb"></span>
-                      <span class="note-chat note-r">
-                        <i class="icon inb"></i>
-                        <span class="num">20</span>
-                      </span>
-                      <span class="note-off note-r">
-                        <i class="icon inb"></i>
-                        <span class="num">20</span>
-                      </span>
-                    </li>
-                    <li>
-                      <span class="note-title">瞄瞄团队</span>
-                      <span class="hot-icon inb"></span>
-                      <span class="note-chat note-r">
-                        <i class="icon inb"></i>
-                        <span class="num">20</span>
-                      </span>
-                      <span class="note-off note-r">
-                        <i class="icon inb"></i>
-                        <span class="num">20</span>
+                        <span class="num">0</span>
                       </span>
                     </li>
                   </ul>
                 </div>
                 <div class="page" id="reply-page-2">
-                  <ul class="reply-list">
-                    <li>
-                      <p class="reply-title">很好玩,有木有</p>
+                  <ul class="reply-list" id="reply-list-main">
+                    <div class="mask-loading">
+                      <div class="loading-icon"></div>
+                    </div>
+                    <li class="reply">
+                      <!-- <p class="reply-title t1">很好玩,有木有</p> -->
                       <div class="reply-outer-box">
                         <div class="reply-inner-box">
                           <div class="quote-box-start">
                             <span class="quote-icon front-quote inb"></span>
                           </div>
                           <div class="reply-content">
-                            <p class="reply-title">哈哈哈哈哈哈哈</p>     
-                            <p>呵呵呵呵呵呵呵呵呵呵额呵呵呵呵呵鹅鹅鹅鹅鹅鹅鹅鹅鹅呵呵呵呵呵呵呵呵呵呵额呵呵呵呵呵鹅鹅鹅鹅鹅鹅鹅鹅鹅</p>
-                          </div>
-                          <div class="quote-box-end">
-                            <span class="quote-icon back-quote inb"></span>
-                          </div>
-                        </div>
-                      </div>
-                    </li>
-                    <li>
-                      <p class="reply-title">很好玩,有木有</p>
-                      <div class="reply-outer-box">
-                        <div class="reply-inner-box">
-                          <div class="quote-box-start">
-                            <span class="quote-icon front-quote inb"></span>
-                          </div>
-                          <div class="reply-content">
-                            <p class="reply-title">哈哈哈哈哈哈哈</p>     
-                            <p>呵呵呵呵呵呵呵呵呵呵额呵呵呵呵呵鹅鹅鹅鹅鹅鹅鹅鹅鹅呵呵呵呵呵呵呵呵呵呵额呵呵呵呵呵鹅鹅鹅鹅鹅鹅鹅鹅鹅</p>
+                            <p class="reply-title t2"></p>     
                           </div>
                           <div class="quote-box-end">
                             <span class="quote-icon back-quote inb"></span>
@@ -246,41 +218,19 @@
             </div>
             <div class="aside-page" id="aside-page-3">
               <div class="page active-page">    
-                <ul class="publish-video">
-                  <li class="inb">
+                <ul class="publish-video" id="publish-video-main">
+                  <div class="mask-loading">
+                    <div class="loading-icon"></div>
+                  </div>
+                  <li class="inb video">
                     <a href="#">
-                      <img src="../images/visitUserHome/demo.png" class="img-responsive">
+                      <img src="../images/visitUserHome/demo.png" role-err="../images/visitUserHome/demo.png" class="img-responsive">
                       <p class="video-title">
-                        <span class="video-name">高达系列动漫</span>
-                        <span class="last-time">30:30</span>
+                        <span class="video-name"></span>
+                        <span class="last-time"></span>
                       </p>
                     </a>
-                    <p class="publish-date">发布时间：
-                      <span class="date-v">2016-08-08</span>
-                    </p>
-                  </li>
-                  <li class="inb">
-                    <a href="#">
-                      <img src="../images/visitUserHome/demo.png" class="img-responsive">
-                      <p class="video-title">
-                        <span class="video-name">高达系列动漫</span>
-                        <span class="last-time">30:30</span>
-                      </p>
-                    </a>
-                    <p class="publish-date">发布时间：
-                      <span class="date-v">2016-08-08</span>
-                    </p>
-                  </li>
-                  <li class="inb">
-                    <a href="#">
-                      <img src="../images/visitUserHome/demo.png" class="img-responsive">
-                      <p class="video-title">
-                        <span class="video-name">高达系列动漫</span>
-                        <span class="last-time">30:30</span>
-                      </p>
-                    </a>
-                    <p class="publish-date">发布时间：
-                      <span class="date-v">2016-08-08</span>
+                    <p class="publish-date">发布时间：<span class="date-v"></span>
                     </p>
                   </li>
                 </ul>            
@@ -351,6 +301,7 @@
     </div>
     <!--end of footer-->
     <script src="../js/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../js/common.js"></script>
     <script src="../js/bootstrap.min.js"></script>
     <script type="text/javascript">
       $(document).ready(function(){
@@ -360,11 +311,85 @@
             $("#"+tab_id).addClass("active-page").siblings().removeClass("active-page");
         });
         $(".aside-menu .menu").bind("click",function(){
-            var _id=$(this).attr("role-page");
-            $(this).addClass("cur").siblings().removeClass("cur");
+            var _this=$(this);
+            var _id=_this.attr("role-page");
+            if(_id==="aside-page-2"&&_this.attr("role-q")==="-1"){
+              _this.attr("role-q","0");
+              queryPublishNote();
+            }else if(_id==="aside-page-3"&&_this.attr("role-q")==="-1"){
+              _this.attr("role-q","0");
+              queryPublishVideo();
+            }
+            _this.addClass("cur").siblings().removeClass("cur");
             $("#"+_id).addClass("cur").siblings().removeClass("cur");
         });
+        uid=Base.searchParam("uid","id");
+        if(!uid){
+          Base.showAlert("抱歉,你所查找的资源不存在","error");
+        }else{
+          Base.queryData("/v1/friend_detail.php","POST",{"uuid":uid},function(data){
+            if(Base.isSuccess(data)){
+              $(".nickname").html(data.nickname);
+              $("#gender").html(Base.handleGender(data.gender));
+              $("#followers").html(data.followers||0);
+              $("#focuses").html(data.focuses||0);
+              $("#signature").html(data.signature||'暂无');
+            }else{
+              Base.showAlert(data.error_msg,"error");
+            }
+            },function(err){
+              console.log(err);
+              Base.showAlert(err,"error");
+          });
+        }
       });
+      function queryPublishNote(){
+        //查询发帖
+        Base.queryData("/forum/uuid?offset=0&length=10","POST",{"uuid":uid},function(data){
+          if(Base.isSuccess(data)){
+            $("#note-count").html(data.list_result.length||0);
+            Base.handleResult("note-list-main",data,
+              {"childrenBox":".note",
+                "href":".link-details",
+                "txt":".note-title",
+                "txt-1":".note-off .num"},
+              {"href":"forumId",
+                "txt":"title",
+                "txt-1":"views"});
+            }else{
+              Base.showAlert(data.error_msg,"error");
+            }
+        },function(err){  
+          Base.showAlert(err,"error");
+        });
+
+        //查询回复
+        Base.queryData("/forum/comment/uuid?offset=0&length=10","POST",{"from_uuid":uid},function(data){
+          if(Base.isSuccess(data)){
+            $("#reply-count").html(data.list_result.length||0);
+            Base.handleResult("reply-list-main",data,
+              {"childrenBox":".reply",
+                "txt":".t2"},
+              {"txt":"comment"});
+            }else{
+              Base.showAlert(data.error_msg,"error");
+            }
+        },function(err){  
+          Base.showAlert(err,"error");
+        });
+
+      }
+      function queryPublishVideo(){
+        Base.queryData("/news/uuid","POST",{"fromUuid":uid},function(data){
+          if(Base.isSuccess(data)){
+            console.log(data);
+            }else{
+              Base.showAlert(data.error_msg,"error");
+            }
+        },function(err){  
+          Base.showAlert(err,"error");
+        });
+      }
     </script>
   </body>
 </html>

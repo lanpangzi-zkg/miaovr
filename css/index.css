@@ -99,14 +99,23 @@ a:hover{
     margin-left: 0;
     margin-right: 0;
 }
+.row.vr-grid+.vr-grid {
+    margin-top: 20px;
+}
 .vrtv-item-title{
     position: absolute;
     left: 0;
     right: 0;
     bottom: 0;
-    text-align: center;
     color: #fff;
+    height: 36px;
+    line-height: 36px;
+    padding-left: 5px;
+    padding-right: 5px;
     background: url('../images/common/item-title-bg.png') repeat-x;
+}
+.vrtv-item-title .duration-time{
+    float: right;
 }
 /************vr资讯**************/
 .vr-info-user{
@@ -191,10 +200,6 @@ a:hover{
     position: absolute;
     right: 17px;
     bottom: 0;
-    background: #87c5fe;
-    color: #fff;
-    padding: 0 5px;
-    border-radius: 5px;
 }
 #index-vrtv-r .mask-loading{
     margin-right:15px;
@@ -259,6 +264,16 @@ a:hover{
 .community-chapter{
     padding: 5px;
 }
+.community-chapter .chapter-title{
+    font-size: 16px;
+    padding: 10px 0;
+    color: #333333;
+}
+.community-chapter .chapter-date{
+    font-size: 12px;
+    padding: 10px 0;
+    color: #8c8c8c;
+}
 .community-left-nav li{
     margin: 5px 0;
 }
@@ -283,7 +298,7 @@ a:hover{
     text-align: right;
 }
 .chapter-interactive a {
-    display: inline;
+    display: inline!important;
 }
 .chapter-interactive i{
     display: inline-block;
@@ -305,6 +320,59 @@ a:hover{
 .hot-community-list li{
     padding-right: 28px;
     margin-top: 10px;
+}
+.aside-nav{
+    position: fixed;
+    right: 10px;
+    top:15%;
+}
+.aside-nav .nav-item{
+    
+}
+.aside-nav .nav-item a{
+    display: block;
+    width: 70px;
+    height: 70px;
+}
+.aside-nav .nav-line{
+    
+}
+.aside-nav .nav-line .line{
+    height: 40px;
+    display: block;
+    width: 2px;
+    background-color: #ffd737;
+    margin: 0 auto;
+}
+.nav-top{
+    background-image: url('../images/index/top.png');
+}
+.nav-top:hover{
+    background-image: url('../images/index/top-active.png');
+}
+.nav-vrinfo{
+    background: url('../images/index/vrinfo.png');
+}
+.nav-vrinfo:hover{
+    background-image: url('../images/index/vrinfo-active.png');
+}
+.nav-tv{
+    background: url('../images/index/tv.png');
+}
+.nav-tv:hover{
+    background-image: url('../images/index/tv-active.png');
+}
+.nav-game{
+    background: url('../images/index/game.png');
+}
+.nav-game:hover{
+    background-image: url('../images/index/game-active.png');
+}
+.nav-com{
+    background: url('../images/index/com.png');
+}
+.nav-com:hover{
+    background-image: url('../images/index/com-active.png');
 }
 @media (max-width: 600px) {
     .img-game-tips{

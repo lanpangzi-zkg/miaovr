@@ -3,6 +3,10 @@ var handleRequest=require("./handleRequest");
 var requestConfig={
     "readResouce":handleRequest.readResouce,
     "/miaovr/views/login.html":handleRequest.page,
+    "/miaovr/views/qiniu-index.html":handleRequest.page,
+    "/miaovr/views/upload.html":handleRequest.page,
+    "/miaovr/views/visitUserHome.html":handleRequest.page,
+    "/miaovr/views/detu.html":handleRequest.page,
     "/miaovr/views/comDetails.html":handleRequest.page,
     "/miaovr/views/history.html":handleRequest.page,
     "/miaovr/views/vrgameDetails.html":handleRequest.page,

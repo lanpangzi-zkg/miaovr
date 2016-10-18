@@ -148,6 +148,7 @@
 .pagination-box{
     text-align: center;
     margin: 10px 0 35px 0;
+    display: none;
 }
 .pagination-box .btn-page{
     width: 200px;

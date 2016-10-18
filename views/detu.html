@@ -1,0 +1,45 @@
+<!doctype html>
+<html>
+    <head>
+        <title>detu</title>
+        <meta charset="utf-8">
+        <style type="text/css">
+            #main{
+                width: 600px;
+                height: 400px;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="main"></div>
+    </body>
+    <script type="text/javascript" src="http://media.qicdn.detu.com/@/sdk-1.2.0/sdk.js"></script>
+    <script type="text/javascript">
+    //用于存储全景对象
+    var pano = null;
+    var config = {
+        target: "main",
+        image: {
+            preview:{
+                type: "CUBESTRIP",
+                url: "http://media.qicdn.detu.com/pano615081470274771298326767/oper/panofile_preview_detunew.jpg?imageView/2/w/256/q/35"
+            },
+            type: "CUBE",
+            url: "http://media.qicdn.detu.com/pano615081470274771298326767/oper/panofile_html_%s.jpg",
+            view: {
+                fov: 90,
+                hlookat:50,
+                vlookat:10,
+                fovmin: 10,
+                fovmax: 110
+            }
+        },
+        ready: function(obj){
+            pano = obj;
+            //开启陀螺仪效果，移动端生效
+            pano.gyro(true);
+        }
+    };
+    detupano(config);
+</script>
+</html>

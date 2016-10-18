@@ -41,7 +41,7 @@
                         <a href="#">VR资讯</a>
                     </li>
                     <li>
-                        <a href="./vrtv.html">VR TV</a>
+                        <a href="./vrtv.html">VRTV</a>
                     </li>
                     <li>
                         <a href="./vrgame.html">VR游戏</a>
@@ -53,7 +53,7 @@
 
                 <ul class="nav navbar-nav navbar-right">
                     <li>
-                      <a href="#">
+                      <a href="http://miaomiaotv.cn/index.html">
                         <img src="../images/common/mobile.png" alt='' class="img-responsive nav-r-icon"/>
                         <p class="nav-r-name">客户端</p>
                       </a>
@@ -97,13 +97,17 @@
     <div class="wrapper">
       <div class="container">
         <ul clsss="vr-info-list" id="main-list">
+          <div class="mask-loading">
+            <div class="loading-icon"></div>
+          </div>
           <li class="vr-info-item">
             <div class="vr-info-box">
+              <div class="player"></div>
               <div class="user-icon-box">
-                <img src="../images/vrinfo/user-icon.png" class="img-responsive">
+                <img src="../images/vrinfo/user-icon.png" class="img-responsive"/>
               </div>
               <div class="live-logo">
-                <img src="../images/vrinfo/live-logo.png" class="img-responsive">
+                <img src="../images/vrinfo/live-logo.png" class="img-responsive"/>
               </div>
               <ul class="vr-menus menus-ul">
                 <li>
@@ -151,18 +155,18 @@
                 </form>
               </div>
               <div class="social-apps">
-                <ul class="menus-ul">
-                  <li>
+                <ul>
+                  <li class="inb">
                     <a href="#">
                       <img src="../images/vrinfo/icon-qq.png" class="img-responsive">
                     </a>
                   </li>
-                  <li>
+                  <li class="inb">
                     <a href="#">
                       <img src="../images/vrinfo/icon-weibo.png" class="img-responsive">
                     </a>
                   </li>
-                  <li>
+                  <li class="inb">
                     <a href="#">
                       <img src="../images/vrinfo/icon-weixing.png" class="img-responsive">
                     </a>
@@ -177,7 +181,7 @@
                       <p class="menu-name">分享</p>
                     </a>
                   </li>
-                  <li>
+                  <!-- <li>
                     <a href="#">
                       <img src="../images/vrinfo/flavor.png" class="img-responsive menu-icon">
                       <p class="menu-name">喜爱</p>
@@ -188,12 +192,12 @@
                       <img src="../images/vrinfo/comment.png" class="img-responsive menu-icon">
                       <p class="menu-name">评论</p>
                     </a>
-                  </li>
+                  </li> -->
                 </ul>
               </div>
             </div>
             <!--vr-info-box-->
-            <p class="bottom-title">日出前的珠江明月</p>
+            <p class="bottom-title"></p>
           </li>
         </ul>
         <div class="btn-load-box">
@@ -265,18 +269,42 @@
     <script type="text/javascript" src="../js/jquery-1.11.1.min.js"></script>
     <script type="text/javascript" src="../js/common.js"></script>
     <script type="text/javascript" src="../js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="http://media.qicdn.detu.com/@/sdk-1.2.0/sdk.js"></script>
     <script type="text/javascript">
       var off=0;
       var len=10;
       $(document).ready(function(){
-        queryVrinfo(off);
-        $("#btn-load").on("click",function(){
-          loadMore();
-        });
+        vid=Base.searchParam("vid","id");
+        if(vid){
+          $(".btn-load-box").css("display","none");
+         querySingleVrInfo();
+        }else{
+          queryVrinfo(off);
+          $("#btn-load").on("click",function(){
+            loadMore();
+          });
+        }
       });
+      function querySingleVrInfo(){
+        Base.queryData("/news/newsId","POST",{"newsId":vid},function(data){
+          console.log(data);
+          if(Base.isSuccess(data)){
+            handleItem(data);
+          }else{
+            Base.showAlert(data.error_msg,"error");
+          }
+        },function(err){
+          console.log(err);
+          Base.showAlert(err,"error");
+        });
+      }
       function queryVrinfo(offNum){
         Base.queryData("/news/all?offset="+offNum+"&limit="+len,null,null,function(data){
           if(Base.isSuccess(data)){
+            if(data.list_result.length==0){
+              $("#btn-load").val("已经到底部啦").off("click");
+              return;
+            }
             handleItem(data);
             console.log("----queryVrinfo----");
             console.log(data);
@@ -296,8 +324,6 @@
         var list=data.list_result;
         var temp_result=null;
         var temp_box=null;
-        var isVod=false;
-        var temp_child=null;
         for (var i=0,j=list.length; i<j; i++){
           temp_result=list[i];
           if(childrenBoxs.length<=i){
@@ -306,13 +332,11 @@
           }else{
               temp_box=$(childrenBoxs[i]);
           }
-          if(temp_result.isVod){//视频
-          }else{
-            childrenBoxs.find(".vr-info-box").css("backgroundImage","url("+temp_result.news_url+")");
-          }
-          childrenBoxs.find(".vr-info-box").attr("role-id",temp_result.newsId);
+          childrenBoxs.find(".player").attr("id","detu-"+temp_result.newsId);
           childrenBoxs.find(".bottom-title").html(temp_result.description);
+          playVr("detu-"+temp_result.newsId,temp_result.description,temp_result.news_url);
         }
+
         $parentBox.find(".mask-loading").fadeOut();
       }
       function loadMore(){
@@ -323,6 +347,52 @@
       function finishLoadMore(){
         Base.setBtnEnabled("#btn-load").val("加载更多");
       }
+      function playVr(target_id,name,url){
+        var suffixArr=url.split(".");
+        var img_suffix=suffixArr[suffixArr.length-1];
+        if(img_suffix==="jpg"||img_suffix==="jpeg"){
+          playVrImage(target_id,name,url);
+        }else{
+          playVrVideo(target_id,name,url);
+        }
+      }
+      function playVrVideo(target_id,name,url){
+        var config = {
+          target: target_id,
+          islive: false,
+          videos:[
+            {name: name, txt: "标清", video: url, play: true}
+          ],
+          ready: function(pano){
+              pano.gyro(true);
+          }
+        };
+        detupano(config);
+      }
+      function playVrImage(target_id,name,url){
+        var config = {
+          target: target_id,
+          image: {
+              preview:{
+                  type: "CUBESTRIP",
+                  url: url
+              },
+              type: "CUBE",
+              url: url,
+              view: {
+                  fov: 90,
+                  hlookat:50,
+                  vlookat:10,
+                  fovmin: 10,
+                  fovmax: 110
+              }
+          },
+          ready: function(pano){
+              pano.gyro(true);
+          }
+        };
+        detupano(config);
+      }  
     </script>
   </body>
 </html>

@@ -42,7 +42,7 @@
                         <a href="./vrinfo.html">VR资讯</a>
                     </li>
                     <li class="choose">
-                        <a href="./vrtv.html">VR TV</a>
+                        <a href="./vrtv.html">VRTV</a>
                     </li>
                     <li>
                         <a href="./vrgame.html">VR游戏</a>
@@ -54,25 +54,25 @@
 
                 <ul class="nav navbar-nav navbar-right">
                     <li>
-                      <a href="#">
+                      <a href="http://miaomiaotv.cn/index.html">
                         <img src="../images/common/mobile.png" alt='' class="img-responsive nav-r-icon"/>
                         <p class="nav-r-name">客户端</p>
                       </a>
                     </li>
                     <li>
-                      <a href="#">
+                      <a href="./upload.html">
                         <img src="../images/common/history.png" alt='' class="img-responsive nav-r-icon"/>
                         <p class="nav-r-name">上传视频</p>
                       </a>
                     </li>
                     <li>
-                      <a href="./views/history.html">
+                      <a href="./history.html">
                         <img src="../images/common/history.png" alt='' class="img-responsive nav-r-icon"/>
                         <p class="nav-r-name">历史观看</p>
                       </a>
                     </li>
                     <li>
-                      <a href="./views/login.html">
+                      <a href="./login.html">
                         <img src="../images/common/man.png" alt='' class="img-responsive nav-r-icon"/>
                         <p class="nav-r-name">登陆/注册</p>
                       </a>
@@ -295,7 +295,7 @@
             if(Base.isSuccess(data)){
               if(data.list_result.length<1){
                   $(".comments-list").css("display","none");
-                  $("#tv-comments-box").find(".mask-loading").fadeOut();
+                  $(".comments-box").find(".mask-loading").fadeOut();
               }else{
                 Base.handleComments(data);                
               }
@@ -329,13 +329,11 @@
           },function(err){
             Base.showAlert(err,"error");
           });
-
         }
 
         $(".btn-publish").on("click",function(e){
           e.preventDefault();
           var btn=$(this);
-          btn.attr("disabled","disabled").addClass("btn-disabled");
           var comment=$("#tv-comment").val();
           console.log(comment);
           if(!comment){
@@ -343,6 +341,7 @@
              $("#tv-comment").focus();
              return;
           }
+          btn.attr("disabled","disabled").addClass("btn-disabled");
           Base.queryData("/vod/comment/vod","POST",
             {"comment":comment,
             "from_uuid":"bb90efc3-27c4-240c-b5ba-4561e3faf3e2",//$.cookie("uuid")
@@ -438,15 +437,9 @@
           target: "detu_container",
           islive: false,
           videos:[
-            {name: "bq", txt: "标清", video: "http://media.qicdn.detu.com/@/68095950-956A-82A0-AC71-F66F23312713/2016-05-05/572aa0ac7f0d3-512x256.mp4", mp3: "http://media.qicdn.detu.com/@/68095950-956A-82A0-AC71-F66F23312713/2016-05-05/572aa0ac7f0d3.mp3", poster: "", play: true}
+            {name: "bq", txt: "标清", video: "http://media.qicdn.detu.com/@/68095950-956A-82A0-AC71-F66F23312713/2016-05-05/572aa0ac7f0d3-512x256.mp4", play: true}
           ],
-          // videos:[
-          //     {name: "bq", txt: "标清", video: "http://media.qicdn.detu.com/@/68095950-956A-82A0-AC71-F66F23312713/2016-05-05/572aa0ac7f0d3-512x256.mp4", mp3: "http://media.qicdn.detu.com/@/68095950-956A-82A0-AC71-F66F23312713/2016-05-05/572aa0ac7f0d3.mp3", poster: "", play: true},
-          //     {name: "gq", txt: "高清", video: "http://media.qicdn.detu.com/@/68095950-956A-82A0-AC71-F66F23312713/2016-05-05/572aa0ac7f0d3-1024x512-1.3m.mp4", mp3: "http://media.qicdn.detu.com/@/68095950-956A-82A0-AC71-F66F23312713/2016-05-05/572aa0ac7f0d3.mp3", poster: "", play: false},
-          //     {name: "cq", txt: "超清", video: "http://media.qicdn.detu.com/@/68095950-956A-82A0-AC71-F66F23312713/2016-05-05/572aa0ac7f0d3-2048x1024.mp4", mp3: "http://media.qicdn.detu.com/@/68095950-956A-82A0-AC71-F66F23312713/2016-05-05/572aa0ac7f0d3.mp3", poster: "", play: false}
-          // ],
           ready: function(pano){
-              //开启陀螺仪
               pano.gyro(true);
           }
       };

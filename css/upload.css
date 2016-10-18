@@ -65,6 +65,10 @@
     border: none;
     background: url('../images/upload/upload-add.png') no-repeat;
 }
+.upload-content a{
+    display: block;
+    margin: 0 auto;
+}
 .upload-btn-group{
     padding-bottom: 20px;
 }

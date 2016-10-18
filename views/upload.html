@@ -42,7 +42,7 @@
                         <a href="./vrinfo.html">VR资讯</a>
                     </li>
                     <li>
-                        <a href="./vrtv.html">VR TV</a>
+                        <a href="./vrtv.html">VRTV</a>
                     </li>
                     <li>
                         <a href="./vrgame.html">VR游戏</a>
@@ -54,13 +54,13 @@
 
                 <ul class="nav navbar-nav navbar-right">
                     <li>
-                      <a href="#">
+                      <a href="http://miaomiaotv.cn/index.html">
                         <img src="../images/common/mobile.png" alt='' class="img-responsive nav-r-icon"/>
                         <p class="nav-r-name">客户端</p>
                       </a>
                     </li>
-                    <li class="choose">
-                      <a href="#">
+                    <li>
+                      <a href="./upload.html">
                         <img src="../images/common/history.png" alt='' class="img-responsive nav-r-icon"/>
                         <p class="nav-r-name">上传视频</p>
                       </a>
@@ -123,7 +123,7 @@
                 <img src="../images/upload/Media.png" alt="#" class="img-responsive">
               </div>
               <div class="tab-btn-group">
-                <input type="button" value="上传全景图片" class="btn" role-id="upload-video"/>
+                <input type="button" value="上传全景视频" class="btn" role-id="upload-video"/>
               </div>
             </div>
           </li>
@@ -138,10 +138,10 @@
             上传全景图片
           </div>
           <div class="upload-title">
-            <input type="text" class="inp-title">
+            <input type="text" id="title-image" class="inp-title" placeHolder="请输入标题">
           </div>
-          <div class="upload-content">
-            <input type="button" class="upload-add">
+          <div class="upload-content" id="upload-image-c">
+            <a href="#" id="pickfiles-image" class="upload-add"></a>
           </div>
           <div class="upload-btn-group">
             <div class="row">
@@ -149,7 +149,7 @@
                 <input type="button" value="上传规则" class="btn btn-rule">
               </div>
               <div class="col-sm-6">
-                <input type="button" value="立即发布" class="btn btn-publish">
+                <input type="button" id="btn-upload-image" value="立即发布" class="btn btn-publish">
               </div>
             </div>
           </div>
@@ -161,7 +161,7 @@
             上传全景视频
           </div>
           <div class="upload-title">
-            <input type="text" class="inp-title" placeHolder="请输入标题">
+            <input type="text" class="inp-title" id="title-video" placeHolder="请输入标题">
             <input type="button" value="视频类型" class="btn-video-type">
             <div class="video-type-box">
               <ul>
@@ -194,8 +194,8 @@
           </div>
           <div class="row">
             <div class="col-sm-6">
-              <div class="upload-content">
-                <input type="button" class="upload-add">
+              <div class="upload-content" id="upload-video-c">
+                <a href="#" class="upload-add" id="pickfiles-video"></a>
               </div>
             </div>
             <div class="col-sm-6">
@@ -210,14 +210,14 @@
                 <input type="button" value="上传规则" class="btn btn-rule">
               </div>
               <div class="col-sm-6">
-                <input type="button" value="立即发布" class="btn btn-publish">
+                <input type="button" id="btn-upload-video" value="立即发布" class="btn btn-publish">
               </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-   
+    <table id="fsUploadProgress"></table>
     <!--end of container-->
     <div class="footer">
       <div class="container">
@@ -280,24 +280,41 @@
     </div>
     <!--end of footer-->
     <script src="../js/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../js/common.js"></script>
     <script src="../js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="http://jssdk.demo.qiniu.io/bower_components/plupload/js/moxie.js"></script>
+    <script type="text/javascript" src="http://jssdk.demo.qiniu.io/bower_components/plupload/js/plupload.full.min.js"></script> 
+    <script type="text/javascript" src="../js/qiniu-ui.js"></script>
+    <script type="text/javascript" src="../js/qiniu-dev.js"></script>
+    <script type="text/javascript" src="../js/qiniu-highlight.js"></script>
+    <script type="text/javascript" src="../js/qiniu-config.js"></script>
     <script type="text/javascript">
       $(document).ready(function(){
-          $("#upload-video .btn-video-type").on("click",function(){
-              $typeBox=$(".video-type-box");
-              if($typeBox.css("display")==="none"){
-                $(".video-type-box").fadeIn();
-              }else{
-                $(".video-type-box").fadeOut();
-              }
-          });
-          $("#upload-video .video-type-box li").on("click",function(){
-              $(".video-type-box").fadeOut();
-          });
-          $(".tab-btn-group .btn").on("click",function(){
-            var id=$(this).attr("role-id");
-            $("#"+id).css("display","block").siblings().css("display","none");
-          });
+        $("#upload-video .btn-video-type").on("click",function(){
+          $typeBox=$(".video-type-box");
+          if($typeBox.css("display")==="none"){
+            $(".video-type-box").fadeIn();
+          }else{
+            $(".video-type-box").fadeOut();
+          }
+        });
+        $("#upload-video .video-type-box li").on("click",function(){
+            $(".video-type-box").fadeOut();
+        });
+        $(".tab-btn-group .btn").on("click",function(){
+          var id=$(this).attr("role-id");
+          $("#"+id).css("display","block").siblings().css("display","none");
+        });
+        $("#btn-upload-image").on("click",function(){
+           Base.setBtnDisabled("#btn-upload-image");
+           uploader1.start();
+        });
+        $("#btn-upload-video").on("click",function(){
+           Base.setBtnDisabled("#btn-upload-video");
+           uploader2.start();
+        });
+        hljs.initHighlightingOnLoad();
+        initUpload();
       });
     </script>
   </body>

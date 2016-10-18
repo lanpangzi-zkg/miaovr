@@ -52,3 +52,49 @@
 .up-box .up-icon:hover{
     background-image: url('../images/vrtvChannel/up-active.png');   
 }
+#category-name{
+    margin-left: 5px;
+}
+#tv-category-box .row-vr a{
+    display: block;
+    position: relative;
+}
+.item-title {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    color: #fff;
+    height: 36px;
+    line-height: 36px;
+    padding-left: 5px;
+    padding-right: 5px;
+    background: url('../images/common/item-title-bg.png') repeat-x;
+}
+.item-title .duration-time {
+    float: right;
+}
+.hover-mask{
+    position: absolute;
+    left:0;
+    top:0;
+    right: 0;
+    bottom: 0;
+    background-color: #000;
+    z-index: 99;
+    opacity: 0.5; 
+    display: none;
+}
+.play-icon{
+    width: 47px;
+    height:47px;
+    position: absolute;
+    left: 50%;
+    top:50%;
+    margin-left: -23px;
+    margin-top: -23px;
+    background: url('../images/common/play.png') no-repeat;
+}
+#tv-category-box .row-vr a:hover .hover-mask {
+    display: block;
+}

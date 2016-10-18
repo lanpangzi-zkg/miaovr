@@ -2,28 +2,13 @@ var Base=(function($,b){
     var config={
         basePath:"http://127.0.0.1:8080/miaovr/queryApi"
     };
-    // var auth="Basic OTczZmU5MDMtMzdiMy05MTMyLTlkYWEtMmQyNzRjNjYxODZhOjVmOGE5ZjJk";
-    // var accessToken="MVYybWJvVGVLdzdEa3FDVXFGNXpYVTltU3BGblIzR25rcGcvU2hJWEY5akxKUmdVUlRoRHVkS2lPMkJ4NlNNRA==";
-    // var javaServerUrl="http://api2.app.miaomiaotv.cn:8080/miaomiaotv";
-    // var phpServerUrl="http://api.app.miaomiaotv.cn";
     b.queryData=function(method,requestType,param,successCallBack,failCallBack){
-        // var basePath=javaServerUrl;
-        // if(method.match(".php?")){
-        //     basePath=phpServerUrl+method;
-        // }else{
-        //     basePath=javaServerUrl+method;      
-        // }
         var _param=param||{};
         _param.method=method;
-        //_param.accessToken=accessToken;
         $.ajax({
             url:config.basePath,
-            //url:basePath,
             type:requestType||"GET",
             data:_param,
-            // headers: {
-            // 'Authorization': auth,
-            // }
             dataType:"json",
             success:function(data){
                 if(typeof successCallBack=="function"){
@@ -89,12 +74,12 @@ var Base=(function($,b){
     };
     var searchMatch={
         "number":/^[0-9]+$/,
-        "id":/^[0-9a-zA-Z]+$/
+        "id":/^[0-9a-zA-Z-]+$/
     }
     b.searchParam=function(key,type){
         var search_param=window.location.search;
         var value=null;
-        if(!search_param.match((/^(\?)[\w]+(=)[\w]+/))||!searchMatch[type]){
+        if(!search_param.match((/^(\?)[\w]+(=)[\w-]+/))||!searchMatch[type]){
             return value;
         }
         var search_arr=search_param.slice(1).split("&");
@@ -137,14 +122,14 @@ var Base=(function($,b){
             if(k==="img"){
                 temp_child.attr("src",temp[resultItems[k]]);
             }else if(k.indexOf("txt")>=0){
-                temp_child.html(temp[resultItems[k]]);
+                temp_child.html(handleText(temp_child,temp,resultItems[k]));
             }else if(k==="role-id"){
                 temp_child.attr("role-id",temp[resultItems[k]]);
             }else if(k==="href"){
                 if(temp_child.attr("role-base")){
                     temp_child.attr("href",temp_child.attr("role-base")+temp[resultItems[k]]);
                 }else{
-                    temp_child.attr("href",temp[resultItems[k]]);
+                    temp_child.attr("href",temp_child.attr("href")+temp[resultItems[k]]);
                 }
             }else if(k==="title"){
                  temp_child.attr("title",temp[resultItems[k]]);
@@ -152,6 +137,19 @@ var Base=(function($,b){
                 return;
             }             
         }
+    }
+    function handleText(ele,data,txt){
+        var result=data[txt];
+        if(txt==="publish_time"){
+            result=b.formatDate(data[txt]);
+        }else if(txt==="duration"){
+            result=b.formatTime(data[txt]);
+        }
+        var limit=ele.attr("role-limit");
+        if(limit){
+            result=result.length>limit?result.slice(0,limit)+"...":result
+        }
+        return result;
     }
     b.isLogin=function(){
         return true;
@@ -176,11 +174,41 @@ var Base=(function($,b){
         handleDate(date.getMonth())+
         "-"+handleDate(date.getDate());
     };
+    b.formatTime=function(longtime){
+        if(!longtime){
+           return "00:00"; 
+        }
+        var allSeconds=parseInt(longtime)/1000;
+        var result="";
+        var minutes=Math.floor(allSeconds/60);
+        var hour=Math.floor(allSeconds/3600);
+        var seconds=Math.floor(allSeconds%60);
+        if(hour>0){
+            console.log(hour);
+            result=handleDate(hour)+":"+handleDate(minutes)+":"+handleDate(seconds);
+        }else{
+            result=handleDate(minutes)+":"+handleDate(seconds);
+        }
+        return result;
+    };
+    //统一处理错误
     b.errorBack=function(msg){
         
     };
+    var genderObj={"1":"男","2":"女"};
+    b.handleGender=function(gender){
+        if(!gender){
+            return "暂无";
+        }else if(gender=="1"){
+            return "男";
+        }else if(gender=="2"){
+            return "女";
+        }else{
+            return "";
+        }
+    }
     b.handleComments=function(data){
-        var $parentBox=$("#user-comments-box");
+        var $parentBox=$(".comments-box");
         $parentBox.find("img").on("error",function(){
           var _this=$(this);
           _this.attr("src",_this.attr("role-err"));
@@ -201,16 +229,7 @@ var Base=(function($,b){
                 console.log("yes");
                 continue;
             }
-            // if(childrenBoxs.length<=i){
-            //     temp_box= $(childrenBoxs[0]).clone(true); 
-            //     $parentBox.append(temp_box);
-            // }else{
-            //     temp_box=$(childrenBoxs[i]);
-            // }
             temp_box=addComment(temp_result);
-            // temp_box.find(".user-comment").html(temp_result.comment);
-            // temp_box.find(".user-name").html(temp_result.from_uuid);
-            // temp_box.find(".btn-show-reply").attr("role-id",temp_result.commentId);
         }
         $parentBox.find(".mask-loading").fadeOut();
     };
@@ -227,8 +246,7 @@ var Base=(function($,b){
         return parComment;
     }
     function test(commentData){
-        return
-        "<div></div>";
+        return "<div></div>";
     }
     function handleDate(t){
         return ("0"+t).slice(-2);
