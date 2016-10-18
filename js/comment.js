@@ -12,6 +12,13 @@ var comment=(function(c){
         commentBox=config.commentBox||"#c-comment-box";
         //发布评论
         $(".btn-publish").on("click",function(e){
+          if(!Base.isLogin()){
+            LoginValid.init("login-form",function(data){
+              $(".login-mask").click();
+            });
+            Base.showLoginBox();
+            return;
+          }
           e.preventDefault();
           var btn=$(this);
           var comment=$(".commment-body").val();
@@ -25,10 +32,9 @@ var comment=(function(c){
             {"comment":comment,
             "from_uuid":"bb90efc3-27c4-240c-b5ba-4561e3faf3e2",
              "forumId":config.id},function(data){
-            console.log("提交评论");
-            console.log(data);
             if(Base.isSuccess(data)){
               Base.showAlert("点评成功");
+              $(".commment-body").val("");
               c.queryComment();
             }else{
               Base.showAlert(data.error_msg,"error");
@@ -42,6 +48,13 @@ var comment=(function(c){
         $comments_list=$(".comments-list");
         //显示与隐藏回复输入框
         $comments_list.delegate(".btn-show-reply","click",function(){
+          if(!Base.isLogin()){
+            LoginValid.init("login-form",function(data){
+              $(".login-mask").click();
+            });
+            Base.showLoginBox();
+            return;
+          }
           var _this=$(this);
           var reply_main=_this.parent().find(".reply-main");
           if(reply_main.length<1){
@@ -76,7 +89,6 @@ var comment=(function(c){
           Base.queryData(config.reply,"POST",paramObj,function(data){
             if(Base.isSuccess(data)){
               Base.showAlert("回复成功");
-              //addReplyComment(paramObj);
             }else{
               Base.showAlert(data.error_msg,"error");
             }
@@ -94,7 +106,7 @@ var comment=(function(c){
         if($(commentBox).find("li").length>0){
           $(commentBox).empty();
         }
-        Base.queryData(config.query,"POST",{"forumId":config.id},function(data){
+        Base.queryData(config.query,"POST",queryParam,function(data){
             console.log("查询评论信息");
             console.log(data);
             if(Base.isSuccess(data)){
@@ -106,6 +118,7 @@ var comment=(function(c){
             }else{
               Base.showAlert(data.error_msg,"error");
             }
+            $(".comments-box").find(".mask-loading").fadeOut();
           },function(err){
             Base.showAlert(err);
         });

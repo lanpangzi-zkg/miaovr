@@ -152,7 +152,41 @@ var Base=(function($,b){
         return result;
     }
     b.isLogin=function(){
-        return true;
+        uuid=$.cookie("uuid");
+        if(uuid){
+            return true;
+        }else{
+            // b.showAlert("请先登录","error");
+            return false;
+        }
+    };
+    var loginMask=null;
+    var loginBox=null;
+    var uname=null;
+    var pass=null;
+    b.showLoginBox=function(){
+        if(!loginMask){
+            loginMask=$("<div class='login-mask'></div>");
+            loginMask.on("click",function(){
+                $(this).fadeOut();
+                loginBox.fadeOut();
+            });
+            loginMask.appendTo($("body"));
+        }
+        if(!loginBox){
+            loginBox=$(".a-login-box");
+        }
+        if(!uname){
+            uname=$("#uname");
+        }
+        if(!pass){
+            pass=$("#pass");
+        }
+        uname.val("");
+        pass.val("");
+        loginMask.height($(document).height());
+        loginMask.fadeIn();
+        loginBox.fadeIn();
     };
     b.setBtnDisabled=function(selector){
         var btn=$(selector);
@@ -214,7 +248,6 @@ var Base=(function($,b){
           _this.attr("src",_this.attr("role-err"));
           _this.off("error");
         });
-        var childrenBoxs=$parentBox.find(".comment-item");
         var temp_result=null;
         var temp_box=null;
         var vnum=0;

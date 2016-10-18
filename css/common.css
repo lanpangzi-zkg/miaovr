@@ -180,6 +180,9 @@ input{
     margin: 7px 0;
     font-size: 10px;
 }
+.container{
+    position: relative;
+}
 /***********content*************/
 .container-white{
     position: relative;
@@ -283,6 +286,92 @@ input{
     margin-left: -30px;
     margin-top: -30px;
 }
+/**********logn start***************/
+.login-mask{
+    position: absolute;
+    left: 0;
+    top:0;
+    right: 0;
+    bottom: 0;
+    background-color: #000;
+    opacity: 0.5;
+    *filter:alpha(opacity=50);
+    z-index: 9996;
+    display: none;
+}
+.a-login-box{
+    position: fixed;
+    left: 50%;
+    top: 50%;    
+    margin-left: -160px;
+    margin-top: -118px;
+    background-color: #fff;
+    border-radius: 3px;
+    z-index: 9997;
+    display: none;
+}
+.a-login-form{
+    width: 300px;
+    margin: 0 auto;
+    font-size: 1.2em;
+    padding: 10px;
+}
+.a-login-title {
+    font-size: 1.2em;
+    padding: 15px 0;
+    text-align: center;
+}
+.a-login-item {
+   margin: 10px 5px;
+}
+.a-login-item .inp {
+    width: 100%;
+    padding: 5px 0;
+    border: 1px solid #cdced0;
+}
+.a-login-item .btn-login{
+    width: 100%;
+    height: 40px;
+    border: none;
+    color: #fff;
+    background-color: #ffd737;
+    font-size: inherit;
+}
+.a-login-item .register {
+    margin-left: 15px;
+    color: #ffd737;
+}
+.inp.err-tip{
+    border-color:red;
+}
+.err-tips{
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    z-index: 9999;
+    padding: 15px 10px;
+    background-color: #ff9a37;
+    border-radius: 3px;
+    color: #fff;
+    opacity: 0;
+    *filter:alpha(opacity=0);
+}
+.err-tips:before{
+    position: absolute;
+    left: -20px;
+    top: 50%;
+    margin-top: -10px;
+    content: "";
+    display: block;
+    width: 0;
+    height: 0;
+    border: 10px solid transparent;
+    border-right: 10px solid #ff9a37;
+}
+.btn-login.disabled{
+    background-color: #c1c1c1;
+}
+/************login end***************/
 .alertBox{
     position: fixed;
     right: 0;

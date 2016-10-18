@@ -205,7 +205,11 @@
     <script src="../js/jquery.cookie.js"></script>
     <script type="text/javascript">
       $(document).ready(function() {
-        LoginValid.init("login-form");
+        if(Base.isLogin()){
+          window.location.href="./userCenter.html";
+        }else{
+          LoginValid.init("login-form");
+        }
       });
     </script>
   </body>

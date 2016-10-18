@@ -132,12 +132,12 @@
             </div>
             <div class="note-comment">
               <p class="title">主题点评</p>
-              <form action="#">
+              <div class="comment-main">
                 <textarea class="commment-body"></textarea>
                 <div class="btn-group">
                   <input type="submit" value="发布" class="btn-publish">
                 </div>
-              </form>
+              </div>
             </div>
             <div class="comments-box">
                 <ul class="comments-list" id="c-comment-box">
@@ -292,18 +292,45 @@
         <input type="button" value="取消" class="btn-theme-cancel btn">
       </div>
     </div>
+    <div class="a-login-box">
+      <form action="/v1/account_password_login.php" class="a-login-form" id="login-form">
+        <p class="a-login-title">
+          账号登陆
+        </p>
+        <p class="a-login-item">
+          <input type="text" role-type="mobile" role-null="请输入手机号" role-err="请检查手机号码格式" class="inp" placeholder="手机号" id="uname">
+        </p>
+        <p class="a-login-item">
+          <input type="password" role-type="pass" name="pass" role-null="请输入密码" role-err="密码包含数字字母或者下划线，6~16位长度" class="inp" placeholder="密码" id="pass">
+        </p>
+        <p class="a-login-item">
+          <input type="submit" value="登录" id="btn-login" class="btn-login">
+        </p>
+        <p class="a-login-item">
+          没有账号?<a href="./register.html" class="register">免费注册</a>
+        </p>
+      </form>
+    </div>
     <script type="text/javascript" src="../js/jquery-1.11.1.min.js"></script>
     <script type="text/javascript" src="../js/bootstrap.min.js"></script>
     <script type="text/javascript" src="../js/common.js"></script>
+    <script type="text/javascript" src="../js/jquery.cookie.js"></script>
     <script type="text/javascript" src="../js/comment.js"></script>
+    <script type="text/javascript" src="../js/login.js"></script>
     <script type="text/javascript">
+      var queryParam={};
       $(document).ready(function(){
         // $("#chart").on("click",function(e){
         //   e.preventDefault();
         // });
         $(".btn-publish-theme").on("click",function(e){
           e.preventDefault();
-          if(Base.isLogin()){
+          if(!Base.isLogin()){
+            LoginValid.init("login-form",function(data){
+              $(".login-mask").click();
+            });
+            Base.showLoginBox();
+          }else{
             $(".theme-mask").height($(document).height()).fadeIn();
             $(".add-theme-box").fadeIn();
           }
@@ -322,7 +349,6 @@
             Base.showAlert("请输入主题内容","error");
             return;
           }
-          console.log(_title+":"+_content);
           Base.queryData("/forum/save","POST",{"title":_title,"forum_details":_content,"uuid":"bb90efc3-27c4-240c-b5ba-4561e3faf3e2"},function(data){
             hideThemePop();
             console.log(data);
@@ -340,6 +366,7 @@
         if(!nid){
           Base.showAlert("抱歉,你所查找的资源不存在","error");
         }else{
+          queryParam.forumId=nid;
           //查询主题信息
           Base.queryData("/forum/forumId","POST",{"forumId":nid},function(data){
             console.log("查询主题信息");

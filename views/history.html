@@ -217,47 +217,65 @@
         </div>
       </div> 
     </div>
+    <div class="a-login-box">
+      <form action="/v1/account_password_login.php" class="a-login-form" id="login-form">
+        <p class="a-login-title">
+          账号登陆
+        </p>
+        <p class="a-login-item">
+          <input type="text" role-type="mobile" role-null="请输入手机号" role-err="请检查手机号码格式" class="inp" placeholder="手机号" id="uname">
+        </p>
+        <p class="a-login-item">
+          <input type="password" role-type="pass" name="pass" role-null="请输入密码" role-err="密码包含数字字母或者下划线，6~16位长度" class="inp" placeholder="密码" id="pass">
+        </p>
+        <p class="a-login-item">
+          <input type="submit" value="登录" id="btn-login" class="btn-login">
+        </p>
+        <p class="a-login-item">
+          没有账号?<a href="./register.html" class="register">免费注册</a>
+        </p>
+      </form>
+    </div>
     <!--end of footer-->
-    <script src="../js/jquery-1.11.1.min.js"></script>
-    <script src="../js/bootstrap.min.js"></script>
-    <script src="../js/common.js"></script>
-    <script src="../js/jquery.cookie.js"></script>
+    <script type="text/javascript" src="../js/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../js/common.js"></script>
+    <script type="text/javascript" src="../js/jquery.cookie.js"></script>
+    <script type="text/javascript" src="../js/login.js"></script>
     <script type="text/javascript">
-      var access_token=$.cookie("access_token");
-      if(!access_token){
-        Base.showAlert("请先登录","error");
-      }else{
-        $(".delete-box").on("click",function(){
-            var _dialog=$(".delete-dialog");
-            if(_dialog.css("display")=="none"){
-              _dialog.css("display","block");
-            }else{
-              _dialog.css("display","none");            
-            }
-        });
-        $(".btn-ok").on("click",function(){
-          $(".delete-dialog").css("display","none");
-        });
-        $(".btn-cancel").on("click",function(){
-          $(".delete-dialog").css("display","none");
-        });
-        //查询历史记录
+      $(document).ready(function(){
+        if(!Base.isLogin()){
+          LoginValid.init("login-form",function(data){
+            $(".login-mask").click();
+            queryHistory();
+          });
+          Base.showLoginBox();
+        }else{
+          $(".delete-box").on("click",function(){
+              var _dialog=$(".delete-dialog");
+              if(_dialog.css("display")=="none"){
+                _dialog.css("display","block");
+              }else{
+                _dialog.css("display","none");            
+              }
+          });
+          $(".btn-ok").on("click",function(){
+            $(".delete-dialog").css("display","none");
+          });
+          $(".btn-cancel").on("click",function(){
+            $(".delete-dialog").css("display","none");
+          });
+          queryHistory();
+        }
+      });
+      function queryHistory(){
         Base.queryData("/v1/lives_history.php?offset=1&limit=10",null,null,function(data){
           if(Base.isSuccess(data)){
             console.log(data);
-            // Base.handleResult("vr-recommend-box",data,
-            // {"childrenBox":".recommed-item",
-            //   "img":"img",
-            //   "txt":".title",
-            //   "href":"a"},
-            // {"img":"pic_url",
-            //   "txt":"showname",
-            //   "href":"url"});
           }
         },function(err){
           console.log(err);
         });
-
       }
     </script>
   </body>

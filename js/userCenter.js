@@ -1,14 +1,22 @@
 $(document).ready(function(){
-  var access_token=$.cookie("access_token");
-  if(!access_token){
-    alert("请重新登录");
+  if(!Base.isLogin()){
     window.location.href="./login.html";
+    return;
   }
-  var nickname=$.cookie("nickname");
-  $("#nickname").html(nickname);
-  $("#cur-nickname").html(nickname);
-  var thumb_avatar=$.cookie("thumb_avatar");
-  $("#thumb_avatar").attr("src",thumb_avatar).on("error",userIcon);
+  var access_token=$.cookie("access_token");
+  Base.queryData("/v1/account_information.php?access_token="+access_token,null,null,function(data){
+      console.log(data);
+    if(Base.isSuccess(data)){
+      $(".mask-loading").fadeOut();
+      $("#nickname").html(data.nickname);
+      $("#cur-nickname").html(data.nickname);
+      $("#thumb_avatar").attr("src",data.thumb_avatar).on("error",userIcon);
+    }else{
+      Base.showAlert(data.error_msg,"error");
+    }
+  },function(err){
+    Base.showAlert(err);
+  });
   genderManage.init();
   $(".tabs li").on("click",function(){
       $(this).addClass("choose").siblings().removeClass("choose");

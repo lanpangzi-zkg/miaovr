@@ -145,31 +145,18 @@
               </div>
               <div class="vr-video-comment">
                 <p class="title">视频点评</p>
-                <form action="/vod/comment/vod" method="post">
+                <div class="comment-main">
                   <textarea class="commment-body" id="tv-comment" name="comment"></textarea>
                   <div class="btn-group">
                     <input type="submit" value="发布" class="btn-publish">
                   </div>
-                </form>
+                </div>
               </div>
               <div class="comments-box" id="user-comments-box">
                 <div class="mask-loading">
                   <div class="loading-icon"></div>
                 </div>
-                <ul class="comments-list">
-                  <!-- <li class="comment-item">
-                    <div class="user-icon"></div>
-                    <div class="comment-main">
-                      <div class="user-info">
-                        <span class="user-name"></span>
-                        <span class="floor">0#</span>
-                      </div>
-                      <div class="user-comment"></div>
-                    </div>
-                    <div class="reply-box">
-                      <input type="button" class="btn-show-reply btn" value="回复"/> 
-                    </div>
-                  </li> -->
+                <ul class="comments-list" id="c-comment-box">
                 </ul>
               </div>
             </div>
@@ -256,23 +243,45 @@
         </div>
       </div> 
     </div>
+    <div class="a-login-box">
+      <form action="/v1/account_password_login.php" class="a-login-form" id="login-form">
+        <p class="a-login-title">
+          账号登陆
+        </p>
+        <p class="a-login-item">
+          <input type="text" role-type="mobile" role-null="请输入手机号" role-err="请检查手机号码格式" class="inp" placeholder="手机号" id="uname">
+        </p>
+        <p class="a-login-item">
+          <input type="password" role-type="pass" name="pass" role-null="请输入密码" role-err="密码包含数字字母或者下划线，6~16位长度" class="inp" placeholder="密码" id="pass">
+        </p>
+        <p class="a-login-item">
+          <input type="submit" value="登录" id="btn-login" class="btn-login">
+        </p>
+        <p class="a-login-item">
+          没有账号?<a href="./register.html" class="register">免费注册</a>
+        </p>
+      </form>
+    </div>
     <!--end of footer-->
-    <script src="../js/jquery-1.11.1.min.js"></script>
-    <script src="../js/bootstrap.min.js"></script>
-    <script src="../js/jquery.cookie.js"></script>
-    <script src="../js/common.js"></script>
+    <script type="text/javascript" src="../js/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../js/jquery.cookie.js"></script>
+    <script type="text/javascript" src="../js/common.js"></script>
+    <script type="text/javascript" src="../js/comment.js"></script>
+    <script type="text/javascript" src="../js/login.js"></script>
     <script type="text/javascript" src="http://media.qicdn.detu.com/@/sdk-1.2.0/sdk.js"></script>
     <script type="text/javascript">
       var vid="";
+      var queryParam={};
       $(document).ready(function(){
         vid=Base.searchParam("vid","id");
         if(!vid){
           Base.showAlert("抱歉,你所查找的资源不存在","error");
+          return;
         }else{
+          queryParam.fileid=vid;
           //查询视频信息
           Base.queryData("/search/fileid","POST",{"fileid":vid},function(data){
-            console.log("查询视频信息");
-            console.log(data);
             if(Base.isSuccess(data)&&data.list_result.length>0){
               var info=data.list_result[0];
               $("#category-"+info.category).css("display","inherit");
@@ -288,27 +297,8 @@
           },function(err){
              Base.showAlert(err,"error");
           });
-          //查询视频评论信息
-          Base.queryData("/vod/comment/fileId","POST",{"fileid":vid},function(data){
-            console.log("查询视频评论信息");
-            console.log(data);
-            if(Base.isSuccess(data)){
-              if(data.list_result.length<1){
-                  $(".comments-list").css("display","none");
-                  $(".comments-box").find(".mask-loading").fadeOut();
-              }else{
-                Base.handleComments(data);                
-              }
-            }else{
-              Base.showAlert(data.error_msg,"error");
-            }
-          },function(err){
-            Base.showAlert(err);
-          });
           //查询相关视频
           Base.queryData("/search/category?offset=0&length=5","POST",{"category":"0"},function(data){
-            console.log("查询相关视频");
-            console.log(data);
             if(Base.isSuccess(data)){
               if(data.list_result.length<1){
                   $(".other-video").css("display","none");
@@ -329,110 +319,18 @@
           },function(err){
             Base.showAlert(err,"error");
           });
-        }
-
-        $(".btn-publish").on("click",function(e){
-          e.preventDefault();
-          var btn=$(this);
-          var comment=$("#tv-comment").val();
-          console.log(comment);
-          if(!comment){
-             Base.showAlert("请输入视频点评","error");
-             $("#tv-comment").focus();
-             return;
-          }
-          btn.attr("disabled","disabled").addClass("btn-disabled");
-          Base.queryData("/vod/comment/vod","POST",
-            {"comment":comment,
-            "from_uuid":"bb90efc3-27c4-240c-b5ba-4561e3faf3e2",//$.cookie("uuid")
-            "fileid":vid},function(data){
-            console.log("提交评论");
-            console.log(data);
-            if(Base.isSuccess(data)){
-              Base.showAlert("点评成功");
-              addComment(data.list_result[0]);
-            }else{
-              Base.showAlert(data.error_msg,"error");
-            }
-            btn.removeAttr("disabled").removeClass("btn-disabled");
-          },function(err){
-            Base.showAlert(err);
-            btn.removeAttr("disabled").removeClass("btn-disabled");
+          comment.init({
+              "query":"/vod/comment/fileId",
+              "publish":"/vod/comment/vod",
+              "reply":"/vod/comment/reply",
+              "nameId":"fileid",
+              "id":vid,
+              "textArea":".commment-body"
           });
-        });
-        $(".comments-list").delegate(".btn-show-reply","click",function(){
-          var _this=$(this);
-          console.log(_this.attr("role-id"));
-          var reply_main=_this.parent().find(".reply-main");
-          if(reply_main.length<1){
-            reply_main=$(replyMainModule(_this.attr("role-id")));
-            reply_main.insertAfter(_this);
-          }
-          if(reply_main.css("display")!=="block"){
-            _this.val("取消回复");
-            reply_main.css("display","block");
-          }else{
-            _this.val("回复");
-            reply_main.css("display","none");
-          }
-        });
-        $(".comments-list").delegate(".btn-reply","click",function(){
-          var _btn=$(this);
-          var reply_content=_btn.parent().siblings(".reply-content");
-          var reply=reply_content.val();
-          if(!reply){
-            Base.showAlert("请填写回复内容","error");
-            reply_content.focus();
-            return;
-          }
-          _btn.attr("disabled","disabled").addClass("btn-disabled");
-          var paramObj={"comment":reply,
-            "from_uuid":"xixixixi",//$.cookie("uuid")
-            "to_commentId":_btn.attr("reply-id"),
-            "fileid":vid};
-          Base.queryData("/vod/comment/reply","POST",paramObj,function(data){
-            if(Base.isSuccess(data)){
-              Base.showAlert("回复成功");
-              addReplyComment(paramObj);
-            }else{
-              Base.showAlert(data.error_msg,"error");
-            }
-            reply_content.val("");
-            _btn.removeAttr("disabled").removeClass("btn-disabled");
-          },function(err){
-            reply_content.val("");
-            Base.showAlert(err);
-            _btn.removeAttr("disabled").removeClass("btn-disabled");
-          });        
-        });
+          comment.queryComment();
+        }
       });
-      function replyMainModule(commentId){
-        return "<div class='reply-main'>"
-            +"<textarea class='reply-content'></textarea>"
-            +"<div class='btn-reply-group'>"
-              +"<input type='button' value='提交' class='btn-reply' reply-id='"+commentId+"'>"
-            +"</div>"
-          +"</div>";
-      }
-      function addComment(data){
-        var commentItem="<li class='comment-item'>"+
-          "<div class='user-icon'></div>"+
-          "<div class='comment-main'>"+
-            "<div class='user-info'>"+
-              "<span class='user-name'>"+data.from_uuid+"</span>"+
-              "<span class='floor'>0#</span>"+
-            "</div>"+
-            "<div class='user-comment'>"+data.comment+"</div>"+
-          "</div>"+
-          "<div class='reply-box'>"+
-             "<input type='button' class='btn-show-reply btn' role-id='"+data.commentId+"' value='回复'/>"+
-          "</div>"+
-        "</li>";
-        $(commentItem).appendTo($(".comments-list"));
-      }
-      function addReplyComment(data){
-          
-      }
+
       var config = {
           target: "detu_container",
           islive: false,

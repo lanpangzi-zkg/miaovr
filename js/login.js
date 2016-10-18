@@ -15,11 +15,13 @@ var LoginValid=(function(){
     "pass":validatePass
   };
   var submitUrl="";
-  function init(formId){
+  var loginSuccessCallBack=null;
+  function init(formId,callBack){
     var validate_form=$("#"+formId);
     if(validate_form.length<1){
-      throw new error("初始化表单失败");
+      throw "初始化表单失败";
     }
+    loginSuccessCallBack=callBack;
     submitUrl=validate_form.attr("action");
     var inputs=validate_form.find("input");
     var temp_input=null;
@@ -43,22 +45,23 @@ var LoginValid=(function(){
            "source":"1"
           },function(data){
             console.log(data);
-            if(data.error_msg){
-              alert(data.error_msg);
+            if(!Base.isSuccess(data)){
+              Base.showAlert(data.error_msg,"error");
               enSubmitBtn();
             }else{
-              if($("#remember").is(":checked")){
-                $.cookie("uname", getMobileEle().val());
+                $.cookie("access_token",data.access_token);
+                $.cookie("uuid",data.uuid);
+              if(typeof loginSuccessCallBack=="function"){
+                loginSuccessCallBack(data);
+              }else{
+                if($("#remember").is(":checked")){
+                  $.cookie("uname", getMobileEle().val());
+                }
+                window.location.href="./userCenter.html";
               }
-              $.cookie("access_token",data.access_token);
-              $.cookie("nickname",data.nickname);
-              $.cookie("gender",data.gender);
-              $.cookie("thumb_avatar",data.thumb_avatar);
-              $.cookie("uuid",data.uuid);
-              window.location.href="./userCenter.html";
             }
           },function(err){  
-            alert("登录失败:"+err);
+            Base.showAlert("登录失败:"+err,"error");
             enSubmitBtn();
         });
       }else{
@@ -141,13 +144,13 @@ var LoginValid=(function(){
   }
   function getMobileEle(){
     if(!_mobile){
-      _mobile=$(".login-item #uname");
+      _mobile=$("#uname");
     }
     return _mobile;
   }
   function getPassEle(){
     if(!_pass){
-      _pass=$(".login-item #pass");
+      _pass=$("#pass");
     }
     return _pass;
   }

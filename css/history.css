@@ -7,6 +7,9 @@
     background-color: #fff;
     position: relative;
 }
+.history-details{
+    visibility: hidden;
+}
 .history-header .delete-box{
     float: right;
     cursor: pointer;

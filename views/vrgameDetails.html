@@ -97,6 +97,9 @@
     <div class="hor-line"></div>
     <!--end of container-->
     <div class="vr-game-info">
+      <div class="mask-loading">
+        <div class="loading-icon"></div>
+      </div>
       <div class="game-basic">
         <div class="container">
           <div class="row">
@@ -105,37 +108,37 @@
             </div>
             <div class="col-sm-6">
               <div class="game-header">
-                <span class="game-title">智能危机</span>
+                <span class="game-title" id="game_name"></span>
                 <span class="os-icon apple"></span>
                 <span class="os-icon android"></span>
                 <span class="os-icon pc"></span>
               </div>
               <p class="game-item">
                 <span>发布时间:</span>
-                <span class="date val">2016-7-11</span>
+                <span class="date val" id="upload_time"></span>
                 <span>文件大小:</span>
-                <span class="f-size val">333M</span>
+                <span class="f-size val" id="game_size">未知</span>
                 <span>应用语言:</span>
-                <span class="lang val">中文</span>
+                <span class="lang val" id="language">中文</span>
               </p>
               <p class="game-item">
                 <span>开发商:</span>
-                <span class="author val">未知</span>
+                <span class="author val" id="developers">未知</span>
                 <span>移动版本:</span>
-                <span class="author val">steamVR</span>
+                <span class="author val">暂无</span>
               </p>
               <p class="game-item">
                 <span>硬件支持:</span>
-                <span class="author val">HTC Vive</span>
+                <span class="author val" id="hardware_support"></span>
               </p>
-              <p class="game-item">
+             <!--  <p class="game-item">
                 <span>控制外设:</span>
-                <span class="author val">HTC Vive</span>
-              </p>
+                <span class="author val" id="control_of_peripherals">HTC Vive</span>
+              </p> -->
             </div>
             <div class="col-sm-3">
               <div class="download-box">
-                <input type="button" value="免费下载" class="btn-download"/>
+                <a href="#" class="btn-download" id="download_url">免费下载</a>
               </div>
             </div>
           </div>
@@ -151,12 +154,16 @@
             </div>
             <div class="col-sm-9">
               <p class="game-item">
-                <span>标签:</span>
-                <span class="game-tags">
-                  <span class="game-type-tag shoot"></span>
-                  <span class="game-type-tag risk"></span>
-                  <span class="game-type-tag scene"></span>
-                  <span class="game-type-tag building"></span>
+                <span class="inb">标签:</span>
+                <span class="game-tags inb" id="game_tag">
+                  <span class="game-type-tag" id="tag-0">养成</span>
+                  <span class="game-type-tag" id="tag-1">场景体验</span>
+                  <span class="game-type-tag" id="tag-2">运动冒险</span>
+                  <span class="game-type-tag" id="tag-3">格斗</span>
+                  <span class="game-type-tag" id="tag-4">动作</span>
+                  <span class="game-type-tag" id="tag-5">射击</span>
+                  <span class="game-type-tag" id="tag-6">角色扮演</span>
+                  <span class="game-type-tag" id="tag-7">策略</span>
                 </span>
               </p>
             </div>
@@ -188,49 +195,19 @@
           <div class="vr-game-basic">
             <div class="vr-game-description">
               <p class="title">应用描述</p>
-              <p class="content">视频描述视频描述视频描述视频描述视频描述视频描述视频描述视频描述视频描述视频描述视频描述视频描述视频描述</p>
+              <p class="content" id="game_description"></p>
             </div>
             <div class="vr-game-comment">
               <p class="title">应用点评</p>
-              <form action="#">
+              <div class="comment-main">
                 <textarea class="commment-body"></textarea>
                 <div class="btn-group">
                   <input type="submit" value="发布" class="btn-publish">
                 </div>
-              </form>
+              </div>
             </div>
             <div class="comments-box">
-              <ul class="comments-list">
-                <li class="comment-item">
-                  <div class="user-icon"></div>
-                  <div class="comment-main">
-                    <div class="user-info">
-                      <span class="user-name">哈哈</span>
-                      <span class="floor">23#</span>
-                    </div>
-                    <div class="user-comment">
-                      很好玩,有木有
-                    </div>
-                  </div>
-                  <div class="reply-box">
-                     <input type="button" class="btn-reply" value="回复"/> 
-                  </div>
-                </li>
-                <li class="comment-item">
-                  <div class="user-icon"></div>
-                  <div class="comment-main">
-                    <div class="user-info">
-                      <span class="user-name">哈哈</span>
-                      <span class="floor">23#</span>
-                    </div>
-                    <div class="user-comment">
-                      很好玩,有木有
-                    </div>
-                  </div>
-                  <div class="reply-box">
-                     <input type="button" class="btn-reply" value="回复"/> 
-                  </div>
-                </li>
+              <ul class="comments-list" id="c-comment-box">
               </ul>
             </div>
           </div>
@@ -312,12 +289,47 @@
         </div>
       </div> 
     </div>
+    <div class="a-login-box">
+      <form action="/v1/account_password_login.php" class="a-login-form" id="login-form">
+        <p class="a-login-title">
+          账号登陆
+        </p>
+        <p class="a-login-item">
+          <input type="text" role-type="mobile" role-null="请输入手机号" role-err="请检查手机号码格式" class="inp" placeholder="手机号" id="uname">
+        </p>
+        <p class="a-login-item">
+          <input type="password" role-type="pass" name="pass" role-null="请输入密码" role-err="密码包含数字字母或者下划线，6~16位长度" class="inp" placeholder="密码" id="pass">
+        </p>
+        <p class="a-login-item">
+          <input type="submit" value="登录" id="btn-login" class="btn-login">
+        </p>
+        <p class="a-login-item">
+          没有账号?<a href="./register.html" class="register">免费注册</a>
+        </p>
+      </form>
+    </div>
     <!--end of footer-->
-    <script src="../js/jquery-1.11.1.min.js"></script>
-    <script src="../js/unslider.min.js"></script>
-    <script src="../js/bootstrap.min.js"></script>
-    <script src="../js/common.js"></script>
+    <script type="text/javascript" src="../js/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../js/jquery.cookie.js"></script>
+    <script type="text/javascript" src="../js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../js/unslider.min.js"></script>
+    <script type="text/javascript" src="../js/common.js"></script>
+    <script type="text/javascript" src="../js/comment.js"></script>
+    <script type="text/javascript" src="../js/login.js"></script>
     <script type="text/javascript">
+      var queryParam={};
+      var hardwareObj={
+        "0":"HTC Vive",
+        "1":"Oculus Rift",
+        "2":"PS VR",
+        "3":"Mobile VR"
+      };
+      var languageObj={
+        "0":"中文",
+        "1":"英语",
+        "2":"日语",
+        "3":"其他"
+      };
       $(document).ready(function(e) {
         var unslider= $('#banner').unslider({
           dots: true
@@ -330,24 +342,71 @@
       });
       $("#banner").width($("#banner").width()-30);
       var search_param=window.location.search;
-      var game_id=null;
-      if(search_param.match(/(game_id=)[a-z0-9A-Z]+/g)){
-        var search_arr=search_param.slice(1).split("&");
-        for(var i=0,j=search_arr.length;i<j;i++){
-          if(search_arr[i].indexOf("game_id")>=0){
-            game_id=search_arr[i].split("=")[1];
-            i=j;
-          }
-        }
-      }
-      if(game_id){
-        Base.queryData("/game/"+game_id,null,null,function(data){
-            if(Base.isSuccess(data)){
-              console.log(data);
+      game_id=game_id=Base.searchParam("game_id","id");
+      if(!game_id){
+        Base.showAlert("抱歉,你所查找的资源不存在","error");
+      }else{
+        queryParam.gameId=game_id;
+        Base.queryData("/game/id","POST",{"gameId":game_id},function(data){
+          console.log(data);
+          if(Base.isSuccess(data)){
+            var game=data.list_result[0];
+            if(game){
+              $("#game_name").html(game.game_name);
+              $("#game_description").html(game.game_description||"暂无");
+              //$("#control_of_peripherals").html(game.control_of_peripherals);
+              $("#hardware_support").html(game.hardware_support);
+              var _language=game.language;
+              if(_language){
+                var a1=_language.split(",");
+                var language_txt="";
+                for(var i=0;i<a1.length;i++){
+                  if(languageObj[a1[i]]){
+                    language_txt+=languageObj[a1[i]]+",";
+                  }
+                }
+                $("#language").html(language_txt.slice(0,language_txt.length-1));
+              }
+
+              var _hardware_support=game.hardware_support;
+              if(_hardware_support){
+                var a2=_hardware_support.split(",");
+                var hardware_support_txt="";
+                for(var i=0;i<a2.length;i++){
+                  if(hardwareObj[a2[i]]){
+                    hardware_support_txt+=hardwareObj[a2[i]]+",";
+                  }
+                }
+                $("#hardware_support").html(hardware_support_txt.slice(0,hardware_support_txt.length-1));
+              }
+              var _game_tag=game.game_tag;
+              if(_game_tag){
+                var a3=_game_tag.split(",");
+                for(var i=0;i<a3.length;i++){
+                  $("#tag-"+a3[i]).css("display","inherit");
+                }
+              }
+              if(game.download_url){
+                $("#download_url").attr("href",game.download_url);
+              }
+              comment.init({
+                "query":"/game/comment/gameId",
+                "publish":"/game/comment/save",
+                "reply":"/game/comment/reply",
+                "nameId":"gameId",
+                "id":game_id,
+                "textArea":".commment-body"
+              });
+              comment.queryComment();
+              $(".mask-loading").fadeOut();
             }
-          },function(err){
-            console.log(err);
-          });
+          }else{
+            Base.showAlert(data.error_msg,"error");
+          }
+        },function(err){
+          Base.showAlert(err,"error");
+          console.log(err);
+        });
       }
     </script>
   </body>
