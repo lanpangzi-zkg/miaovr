@@ -4,42 +4,338 @@
         <title>detu</title>
         <meta charset="utf-8">
         <style type="text/css">
-            #main{
-                width: 600px;
-                height: 400px;
+            *{
+                margin:0;
+                padding: 0;
+            }
+            ul,li{
+                list-style: none;
+            }
+            html,body{
+                width: 100%;
+                height:100%;
+                overflow: hidden;
+            }
+          .user-icon-box{
+                position: absolute;
+                top: 20px;
+                left: -70px;
+            }
+            .vr-info-box .player{
+                height: 500px;
+                overflow: hidden;
+            }
+            .vr-info-box{
+                position: relative;
+            }
+            .vr-info-box .live-logo{
+                position: absolute;
+                top: 20px;
+                left: 20px;
+            }
+            .vr-info-box .vr-menus{
+                position: absolute;
+                right: 20px;
+                top:20px;
+            }
+            .menus-ul{
+                float: right;
+                margin-top: 20px;
+                margin-right: 20px;
+                margin-bottom: 20px;
+            }
+            .menus-ul li{
+                float: left;
+                margin: 5px 8px;
+            }
+            .menus-ul .menu-icon{
+
+            }
+            .menus-ul .menu-name{
+                color: #fff;
+                font-size: 12px;
+                margin-top: 5px;
+                text-align: center;
+            }
+            .bottom-menus{
+                position: absolute;
+                bottom: 0;
+                right: 0;
+            }
+            .social-apps{
+                position: absolute;
+                right: 30px;
+                bottom: 150px;
+                width: 300px;
+                background: url('../images/vrinfo/icon-bg.png') no-repeat;
+            }
+            .social-apps ul{
+                position: relative;
+                text-align: center;
+                padding: 40px 0;
+            }
+            .social-apps a{
+                display: block;
+            }
+            .vr-comment-box{
+                position: absolute;
+                bottom: 65px;
+                left: 50%;
+                padding: 10px;
+                margin-left: -195px;
+                background-color: #6f6f6f;
+                border-radius: 5px;
+                display: none;
+            }
+            .vr-comment-box .title{
+                line-height: 30px;
+                height: 30px;
+                color: #fff;
+                font-size: 1.2em;
+            }
+            .vr-comment-box .comment-form{
+                padding: 10px;
+            }
+            .comment-form .vr-comment{
+                width: 350px;
+                height: 80px;
+                display: block;
+            }
+            .comment-form .btn-group{
+                display: block;
+                margin-top: 20px;
+            }
+            .comment-form .btn-group input{
+                border: none;
+                color: #fff;
+                width: 100px;
+                height: 40px;
+                line-height: 40px;
+                text-align: center;
+            }
+            .comment-form .btn-reset{
+
+            }
+            .comment-form .btn-publish{
+                float: right;
+                background-color: #f7d950;
+            }
+            .bottom-title{
+                font-size: 22px;
+                color: #fff;
+                margin-top:5px;
+            }
+            .center-box{
+                width: 240px;
+                height: 45px;
+                position: absolute;
+                left: 0;
+                top: -25%;
+                right: 0;
+                bottom: 0;
+                margin: auto;
+                text-align: center;
+                display: none;
+            }
+            .center-box .icon{
+                display: inline-block;
+                *display: inline;
+                *zoom:1;
+                width: 69px;
+                height: 18px;
+                line-height: 45px;
+                vertical-align: middle;
+            }
+            .center-box .arrow-left{
+                background: url('../images/vrinfo/arrow-left.png') no-repeat;
+            }
+            .center-box .finger{
+                width: 41px;
+                height: 45px;
+                margin: 0 8px 0 18px;
+                background: url('../images/vrinfo/finger.png') no-repeat;
+            }
+            .center-box .arrow-right{
+                background: url('../images/vrinfo/arrow-right.png') no-repeat;
+            }
+            .inb{
+                display: inline-block;
+                *display: inline;
+                *zoom:1;
             }
         </style>
     </head>
     <body>
-        <div id="main"></div>
+        <div class="main">
+            <div class="vr-info-box">
+              <div class="player" id="player-box"></div>
+              <div class="user-icon-box">
+                <img src="../images/vrinfo/user-icon.png" class="img-responsive"/>
+              </div>
+              <div class="live-logo">
+                <img src="../images/vrinfo/live-logo.png" class="img-responsive"/>
+              </div>
+              <ul class="vr-menus menus-ul">
+                <li>
+                  <a href="#">
+                    <img src="../images/vrinfo/mobile.png" 
+                    class="img-responsive menu-icon">
+                    <p class="menu-name">手机看</p>
+                  </a>
+                </li>
+                <li>
+                  <a href="#">
+                    <img src="../images/vrinfo/eyes.png" 
+                    class="img-responsive menu-icon">
+                    <p class="menu-name">双眼模式</p>
+                  </a>
+                </li>
+                <li>
+                  <a href="#">
+                    <img src="../images/vrinfo/full-screen.png" 
+                    class="img-responsive menu-icon">
+                    <p class="menu-name">全屏</p>
+                  </a>
+                </li>
+                <li>
+                  <a href="#">
+                    <img src="../images/vrinfo/single-eye.png" 
+                    class="img-responsive menu-icon">
+                    <p class="menu-name">单眼模式</p>
+                  </a>
+                </li>
+              </ul>
+              <div class="center-box">
+                  <i class="icon arrow-left"></i>
+                  <i class="icon finger"></i>
+                  <i class="icon arrow-right"></i>
+              </div>
+              <div class="vr-comment-box">
+                <div class="title">资讯点评</div>
+                <form action="#" class="comment-form">
+                  <textarea class="vr-comment"></textarea>
+                  <p class="btn-group">
+                    <input type="reset" value="取消" class="btn-reset"/>
+                    <input type="submit" value="发布" class="btn-publish"/>
+                  </p>
+                </form>
+              </div>
+              <div class="social-apps">
+                <ul>
+                  <li class="inb">
+                    <a href="#">
+                      <img src="../images/vrinfo/icon-qq.png" class="img-responsive">
+                    </a>
+                  </li>
+                  <li class="inb">
+                    <a href="#">
+                      <img src="../images/vrinfo/icon-weibo.png" class="img-responsive">
+                    </a>
+                  </li>
+                  <li class="inb">
+                    <a href="#">
+                      <img src="../images/vrinfo/icon-weixing.png" class="img-responsive">
+                    </a>
+                  </li>
+                </ul>
+              </div>
+              <div class="bottom-menus">
+                <ul class="menus-ul">
+                  <li>
+                    <a href="#">
+                      <img src="../images/vrinfo/share.png" class="img-responsive menu-icon">
+                      <p class="menu-name">分享</p>
+                    </a>
+                  </li>
+                  <!-- <li>
+                    <a href="#">
+                      <img src="../images/vrinfo/flavor.png" class="img-responsive menu-icon">
+                      <p class="menu-name">喜爱</p>
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#">
+                      <img src="../images/vrinfo/comment.png" class="img-responsive menu-icon">
+                      <p class="menu-name">评论</p>
+                    </a>
+                  </li> -->
+                </ul>
+              </div>
+            </div>
+            <!--vr-info-box-->
+            <p class="bottom-title"></p>
+        </div>
     </body>
+    <script type="text/javascript" src="../js/jquery-1.11.1.min.js"></script>
     <script type="text/javascript" src="http://media.qicdn.detu.com/@/sdk-1.2.0/sdk.js"></script>
     <script type="text/javascript">
-    //用于存储全景对象
-    var pano = null;
-    var config = {
-        target: "main",
-        image: {
-            preview:{
-                type: "CUBESTRIP",
-                url: "http://media.qicdn.detu.com/pano615081470274771298326767/oper/panofile_preview_detunew.jpg?imageView/2/w/256/q/35"
-            },
-            type: "CUBE",
-            url: "http://media.qicdn.detu.com/pano615081470274771298326767/oper/panofile_html_%s.jpg",
-            view: {
-                fov: 90,
-                hlookat:50,
-                vlookat:10,
-                fovmin: 10,
-                fovmax: 110
+    $(document).ready(function(){
+        var search_param=window.location.search;
+        var search_arr=search_param.slice(search_param.indexOf("?")+1).split("&");
+        console.log(search_arr);
+        var temp_arr=[];
+        var name="";
+        var url="";
+        for(var i=0,j=search_arr.length;i<j;i++){
+            temp_arr=search_arr[i].split("=");
+            if(temp_arr[0]=="name"){
+                name=decodeURI(temp_arr[1]);
+                $(".bottom-title").html(name);
             }
-        },
-        ready: function(obj){
-            pano = obj;
-            //开启陀螺仪效果，移动端生效
-            pano.gyro(true);
+            if(temp_arr[0]=="url"){
+                url=temp_arr[1];
+            }
         }
-    };
-    detupano(config);
+        console.log(name+":"+url);
+        if(name&&url){
+            playVr(name,url);
+        }
+    });
+    function playVr(name,url){
+        var suffixArr=url.split(".");
+        var img_suffix=suffixArr[suffixArr.length-1];
+        if(img_suffix==="jpg"||img_suffix==="jpeg"){
+          playVrImage(name,url);
+        }else{
+          playVrVideo(name,url);
+        }
+      }
+      function playVrVideo(name,url){
+        var config = {
+          target: "player-box",
+          islive: false,
+          videos:[
+            {name: name, txt: "标清", video: url, play: true}
+          ],
+          ready: function(pano){
+              pano.gyro(true);
+          }
+        };
+        detupano(config);
+      }
+      function playVrImage(name,url){
+        var config = {
+          target: "player-box",
+          image: {
+              preview:{
+                  type: "CUBESTRIP",
+                  url: url
+              },
+              type: "CUBE",
+              url: url,
+              view: {
+                  fov: 90,
+                  hlookat:50,
+                  vlookat:10,
+                  fovmin: 10,
+                  fovmax: 110
+              }
+          },
+          ready: function(pano){
+              pano.gyro(true);
+          }
+        };
+        detupano(config);
+      }  
 </script>
 </html>

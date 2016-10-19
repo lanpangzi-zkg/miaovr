@@ -278,18 +278,45 @@
         </div>
       </div> 
     </div>
+    <div class="a-login-box">
+      <form action="/v1/account_password_login.php" class="a-login-form" id="login-form">
+        <p class="a-login-title">
+          账号登陆
+        </p>
+        <p class="a-login-item">
+          <input type="text" role-type="mobile" role-null="请输入手机号" role-err="请检查手机号码格式" class="inp" placeholder="手机号" id="uname">
+        </p>
+        <p class="a-login-item">
+          <input type="password" role-type="pass" name="pass" role-null="请输入密码" role-err="密码包含数字字母或者下划线，6~16位长度" class="inp" placeholder="密码" id="pass">
+        </p>
+        <p class="a-login-item">
+          <input type="submit" value="登录" id="btn-login" class="btn-login">
+        </p>
+        <p class="a-login-item">
+          没有账号?<a href="./register.html" class="register">免费注册</a>
+        </p>
+      </form>
+    </div>
     <!--end of footer-->
-    <script src="../js/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../js/jquery-1.11.1.min.js"></script>
     <script type="text/javascript" src="../js/common.js"></script>
-    <script src="../js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../js/bootstrap.min.js"></script>
     <script type="text/javascript" src="http://jssdk.demo.qiniu.io/bower_components/plupload/js/moxie.js"></script>
     <script type="text/javascript" src="http://jssdk.demo.qiniu.io/bower_components/plupload/js/plupload.full.min.js"></script> 
     <script type="text/javascript" src="../js/qiniu-ui.js"></script>
     <script type="text/javascript" src="../js/qiniu-dev.js"></script>
     <script type="text/javascript" src="../js/qiniu-highlight.js"></script>
     <script type="text/javascript" src="../js/qiniu-config.js"></script>
+    <script type="text/javascript" src="../js/login.js"></script>
+    <script type="text/javascript" src="../js/jquery.cookie.js"></script>
     <script type="text/javascript">
       $(document).ready(function(){
+        if(!Base.isLogin()){
+          LoginValid.init("login-form",function(data){
+            $(".login-mask").click();
+          });
+          Base.showLoginBox();
+        }
         $("#upload-video .btn-video-type").on("click",function(){
           $typeBox=$(".video-type-box");
           if($typeBox.css("display")==="none"){
@@ -306,12 +333,26 @@
           $("#"+id).css("display","block").siblings().css("display","none");
         });
         $("#btn-upload-image").on("click",function(){
-           Base.setBtnDisabled("#btn-upload-image");
-           uploader1.start();
+          if(!Base.isLogin()){
+            LoginValid.init("login-form",function(data){
+              $(".login-mask").click();
+            });
+            Base.showLoginBox();
+          }else{
+            Base.setBtnDisabled("#btn-upload-image");
+            uploader1.start();
+          }
         });
         $("#btn-upload-video").on("click",function(){
-           Base.setBtnDisabled("#btn-upload-video");
-           uploader2.start();
+          if(!Base.isLogin()){
+            LoginValid.init("login-form",function(data){
+              $(".login-mask").click();
+            });
+            Base.showLoginBox();
+          }else{
+            Base.setBtnDisabled("#btn-upload-video");
+            uploader2.start();
+          }
         });
         hljs.initHighlightingOnLoad();
         initUpload();

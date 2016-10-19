@@ -3,152 +3,18 @@
     background: url('../images/vrinfo/bg.jpg') no-repeat 0 0;
     background-size: cover;
 }
+#main-list{
+    min-height: 530px;
+    margin-top: 15px;
+}
+.vr-info-item{
+    height:530px;
+    margin: 10px 0;
+}
 .user-icon-box{
     position: absolute;
     top: 20px;
     left: -70px;
-}
-.vr-info-box .player{
-    height: 700px;
-    overflow: hidden;
-}
-.vr-info-box{
-    position: relative;
-/*    background-image: url('../images/vrinfo/bg-chat.jpg');
-    background-repeat:no-repeat;
-    background-position: 0 0;
-*/    margin-top: 20px;
-}
-.vr-info-box .live-logo{
-    position: absolute;
-    top: 20px;
-    left: 20px;
-}
-.vr-info-box .vr-menus{
-    position: absolute;
-    right: 20px;
-    top:20px;
-}
-.menus-ul{
-    float: right;
-    margin-top: 20px;
-    margin-right: 20px;
-    margin-bottom: 20px;
-}
-.menus-ul li{
-    float: left;
-    margin: 5px 8px;
-}
-.menus-ul .menu-icon{
-
-}
-.menus-ul .menu-name{
-    color: #fff;
-    font-size: 12px;
-    margin-top: 5px;
-    text-align: center;
-}
-.bottom-menus{
-    position: absolute;
-    bottom: 0;
-    right: 0;
-}
-.social-apps{
-    position: absolute;
-    right: 30px;
-    bottom: 150px;
-    width: 300px;
-    background: url('../images/vrinfo/icon-bg.png') no-repeat;
-}
-.social-apps ul{
-    position: relative;
-    text-align: center;
-    padding: 40px 0;
-}
-.social-apps a{
-    display: block;
-}
-.vr-comment-box{
-    position: absolute;
-    bottom: 65px;
-    left: 50%;
-    padding: 10px;
-    margin-left: -195px;
-    background-color: #6f6f6f;
-    border-radius: 5px;
-    display: none;
-}
-.vr-comment-box .title{
-    line-height: 30px;
-    height: 30px;
-    color: #fff;
-    font-size: 1.2em;
-}
-.vr-comment-box .comment-form{
-    padding: 10px;
-}
-.comment-form .vr-comment{
-    width: 350px;
-    height: 80px;
-    display: block;
-}
-.comment-form .btn-group{
-    display: block;
-    margin-top: 20px;
-}
-.comment-form .btn-group input{
-    border: none;
-    color: #fff;
-    width: 100px;
-    height: 40px;
-    line-height: 40px;
-    text-align: center;
-}
-.comment-form .btn-reset{
-
-}
-.comment-form .btn-publish{
-    float: right;
-    background-color: #f7d950;
-}
-.bottom-title{
-    font-size: 22px;
-    color: #fff;
-    margin-top:5px;
-    margin-bottom: 80px;
-}
-.center-box{
-    width: 240px;
-    height: 45px;
-    position: absolute;
-    left: 0;
-    top: -25%;
-    right: 0;
-    bottom: 0;
-    margin: auto;
-    text-align: center;
-    display: none;
-}
-.center-box .icon{
-    display: inline-block;
-    *display: inline;
-    *zoom:1;
-    width: 69px;
-    height: 18px;
-    line-height: 45px;
-    vertical-align: middle;
-}
-.center-box .arrow-left{
-    background: url('../images/vrinfo/arrow-left.png') no-repeat;
-}
-.center-box .finger{
-    width: 41px;
-    height: 45px;
-    margin: 0 8px 0 18px;
-    background: url('../images/vrinfo/finger.png') no-repeat;
-}
-.center-box .arrow-right{
-    background: url('../images/vrinfo/arrow-right.png') no-repeat;
 }
 .btn-load-box{
     text-align: center;

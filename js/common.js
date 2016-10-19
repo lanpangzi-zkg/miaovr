@@ -154,9 +154,13 @@ var Base=(function($,b){
     b.isLogin=function(){
         uuid=$.cookie("uuid");
         if(uuid){
+            // $("#main-navbar .header-login").css("display","none");
+            // var userStatus=$("#main-navbar .user-status");
+            // userStatus.css("display","inherit");
+            // userStatus.find(".header-user-name").html("瞄瞄");
+            // userStatus.find("img").attr("src","");
             return true;
         }else{
-            // b.showAlert("请先登录","error");
             return false;
         }
     };

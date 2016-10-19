@@ -70,10 +70,16 @@
                         <p class="nav-r-name">历史观看</p>
                       </a>
                     </li>
-                    <li>
+                    <li class="header-login">
                       <a href="./login.html">
                         <img src="../images/common/man.png" alt='' class="img-responsive nav-r-icon"/>
                         <p class="nav-r-name">登陆/注册</p>
+                      </a>
+                    </li>
+                    <li class="user-status">
+                      <a href="./userCenter.html">
+                        <img src="../images/comDetails/user-icon.png" width=50 alt="用户头像" class="img-responsive header-user-icon inb">
+                        <span class="header-user-name"></span>
                       </a>
                     </li>
                     <li class="search-i">
@@ -120,9 +126,6 @@
                 <span class="view-mobile"><i class="icon"></i>手机看贴</span>
               </div>
               <div class="note-body">
-                <!-- <div class="note-summary">
-                </div>
-                <p class="note-img"></p> -->
                 <p class="note-txt">
                 </p>
                 <p class="end-line">
@@ -168,7 +171,7 @@
               </p>
              </div>
              <div class="sign">
-              <a href="#" class="btn-sign">
+              <a href="#" class="btn-sign" id="btn-user-sign">
                   <img src="../images/community/sign.png" alt='' class="img-responsive"/>
               </a>
              </div>
@@ -264,7 +267,7 @@
         <div class="chat-user-icon">
           <img src="../images/comDetails/user-icon.png">
         </div>
-        <p class="chat-user-name">瞄女郎</p>
+        <p class="chat-user-name"></p>
       </div>
       <div class="chart-content">
         <textarea class="main-chat"></textarea>
@@ -317,12 +320,39 @@
     <script type="text/javascript" src="../js/jquery.cookie.js"></script>
     <script type="text/javascript" src="../js/comment.js"></script>
     <script type="text/javascript" src="../js/login.js"></script>
+    <script src="http://cdn.ronghub.com/RongIMLib-2.2.4.min.js"></script> 
+    <script type="text/javascript" src="../js/message.js"></script>
     <script type="text/javascript">
       var queryParam={};
       $(document).ready(function(){
-        // $("#chart").on("click",function(e){
-        //   e.preventDefault();
-        // });
+        if(Base.isLogin()){
+          initMessage();
+        }
+        $("#chat").on("click",function(e){
+          e.preventDefault();
+          console.log("chat");
+        });
+        //签到
+        $("#btn-user-sign").on("click",function(e){
+          e.preventDefault();
+          if(!Base.isLogin()){
+            LoginValid.init("login-form",function(data){
+              $(".login-mask").click();
+            });
+            Base.showLoginBox();
+          }else{
+            Base.queryData("/attendance/save","POST",{"uuid":$.cookie("uuid")},function(data){
+              if(Base.isSuccess(data)){
+                Base.showAlert("签到成功");
+              }else{
+                Base.showAlert(data.error_msg,"error");
+              }
+            },function(err){
+               Base.showAlert(err);
+            });
+          }   
+        });
+        //发表主题
         $(".btn-publish-theme").on("click",function(e){
           e.preventDefault();
           if(!Base.isLogin()){
