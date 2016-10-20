@@ -1,6 +1,6 @@
 .vr-player-box{
     height: 450px;
-    margin: 15px 0;
+    margin-top: 5px;
     background-color: #555;
 }
 .vr-video-info{
@@ -39,16 +39,24 @@
 }
 .download-box{
     padding: 10px;
+    text-align: center;
 }
 .download-box .btn-download{
     width: 100%;
-    height: 40px;
-    border: none;
-    color: #fff;
-    font-size: 1.2em;
-    background-color: #FF9800;
+    height: 50px;
+    text-align: center;
+    background-color: #ff8b3d;
+}
+.download-box .btn-download .icon{
+    width:88px;
+    height: 100%;
+    background: url('../images/playvr/download-h.png') no-repeat;
+}
+.vr-video-bottom{
+    margin-right: 50px;
 }
 .vr-video-description{
+    margin-top: 20px;
     padding: 10px;
 }
 .vr-video-basic p{
@@ -121,10 +129,6 @@
 .comments-box .comments-list{
 
 }
-.comment-item{
-    padding: 10px 0;
-    list-style: none;
-}
 .comment-item .user-icon{
     float: left;
     width: 35px;
@@ -140,9 +144,6 @@
 .comment-item .user-info{
 
 }
-.user-info .user-name{
-    color: #ffd737;
-}
 .user-info .floor{
     float: right;
     color: #d7d7d7;
@@ -151,11 +152,6 @@
 
 }
 /**********comment***********/
-.comment-item .reply-box{
-    text-align: right;
-    padding-bottom: 10px;
-    border-bottom: 1px solid #eee;
-}
 .comment-item .btn-reply{
     border: none;
     background-color: #ffd737;
@@ -166,20 +162,14 @@
     margin-top: 5px;
 }
 .reply-box .btn-show-reply{
-    color: #fff;
-    background-color:#b1afaa;
-    border-radius: 0;
-    padding: 3px;
+    width: 40px;
+    height: 20px;
+    cursor: pointer;
+    background: url('../images/common/btn-reply.png') no-repeat;
 }
 .reply-main{
     display: none;
     margin: 10px 0;
-}
-.reply-content{
-    width: 100%;
-    height: 65px;
-    border-radius: 5px;
-    border: 1px solid #ffd737;
 }
 .btn-reply-group{
     margin: 10px 0;

@@ -117,12 +117,15 @@ a:hover{
 .vrtv-item-title .duration-time{
     float: right;
 }
-/************vr资讯**************/
+/************vrinfo**************/
 .vr-info-user{
     display: inline-block;
     line-height: 50px;
     vertical-align: middle;
     margin-left: 10px;
+}
+#index-vrinfo{
+    min-height: 200px;
 }
 .header-main .more-link{
 

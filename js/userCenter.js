@@ -3,6 +3,7 @@ $(document).ready(function(){
     window.location.href="./login.html";
     return;
   }
+  initMessage();
   var access_token=$.cookie("access_token");
   Base.queryData("/v1/account_information.php?access_token="+access_token,null,null,function(data){
       console.log(data);

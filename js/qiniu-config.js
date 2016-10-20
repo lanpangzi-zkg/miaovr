@@ -48,6 +48,7 @@ function initUpload(){
             });
         },
         'BeforeUpload': function(up, file) {
+            $(".upload-mask").css("height",$(document).height()).fadeIn();
             var progress = new FileProgress(file, 'fsUploadProgress');
             var chunk_size = plupload.parseSize(this.getOption('chunk_size'));
             if (up.runtime === 'html5' && chunk_size) {
@@ -60,7 +61,7 @@ function initUpload(){
             progress.setProgress(file.percent + "%", file.speed, chunk_size);
         },
         'UploadComplete': function() {
-            console.log("upload complete");
+            $(".upload-mask").fadeOut();
             Base.setBtnEnabled("#btn-upload-image");
         },
         'FileUploaded': function(up, file, info) {
@@ -72,6 +73,7 @@ function initUpload(){
             progress.setError();
             progress.setStatus(errTip);
             Base.setBtnEnabled("#btn-upload-image");
+            $(".upload-mask").fadeOut();
         }
         }
     });
@@ -123,6 +125,7 @@ function initUpload(){
     log_level: 5,
     init: {
         'FilesAdded': function(up, files) {
+            $(".upload-mask").css("height",$(document).height()).fadeIn();
             plupload.each(files, function(file) {
                 var progress = new FileProgress(file, 'fsUploadProgress');
                 progress.setStatus("等待...");
@@ -130,6 +133,7 @@ function initUpload(){
             });
         },
         'BeforeUpload': function(up, file) {
+            $(".upload-mask").css("height",$(document).height()).fadeIn();
             var progress = new FileProgress(file, 'fsUploadProgress');
             var chunk_size = plupload.parseSize(this.getOption('chunk_size'));
             if (up.runtime === 'html5' && chunk_size) {
@@ -142,8 +146,8 @@ function initUpload(){
             progress.setProgress(file.percent + "%", file.speed, chunk_size);
         },
         'UploadComplete': function() {
-            console.log("video upload success");
             Base.setBtnEnabled("#btn-upload-video");
+            $(".upload-mask").fadeOut();
         },
         'FileUploaded': function(up, file, info) {
             var progress = new FileProgress(file, 'fsUploadProgress');
@@ -154,6 +158,7 @@ function initUpload(){
             progress.setError();
             progress.setStatus(errTip);
             Base.setBtnEnabled("#btn-upload-video");
+            $(".upload-mask").fadeOut();
         }
         }
     });

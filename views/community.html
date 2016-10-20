@@ -326,11 +326,12 @@
             Base.showAlert("请输入主题内容","error");
             return;
           }
-          Base.queryData("/forum/save","POST",{"title":_title,"forum_details":_content,"uuid":"bb90efc3-27c4-240c-b5ba-4561e3faf3e2"},function(data){
+          Base.queryData("/forum/save","POST",{"title":_title,"forum_details":_content,"uuid":$.cookie("uuid")},function(data){
             hideThemePop();
             console.log(data);
             if(Base.isSuccess(data)){
               Base.showAlert("发表成功");
+              queryPage(0);
             }else{
               Base.showAlert(data.error_msg,"error");
             }
@@ -385,6 +386,10 @@
           temp_box.find(".note-author").html(temp.user.nickname);
           temp_box.find(".note-date").html(Base.formatDate(temp.publish_time));
           temp_box.find(".comment-count").html(temp.commentNums);
+          temp_box.find(".visit-count").html(temp.views);
+        }
+        if(list.length==0){
+          $("#note-list-box .notes-list").css("display","none");
         }
         $parentBox.find(".mask-loading").fadeOut();
       }

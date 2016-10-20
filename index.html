@@ -100,19 +100,19 @@
     <div class="container" id="banner" role-mn="4">
       <ul>
         <li>
-          <a href="#" class="slider-item">
+          <a href="#" role-base="#" class="slider-item">
             <img src="./images/index/banner-01.jpg" role-err="./images/index/banner-01.jpg" alt="banner-01" width="100%" height="500" class="img-responsive"/>
           </a>
         <li>
-          <a href="#" class="slider-item">
+          <a href="#" role-base="#" class="slider-item">
             <img src="./images/index/banner-02.jpg" role-err="./images/index/banner-01.jpg" alt="banner-02" width="100%" height="500" class="img-responsive"/>
           </a>
         <li>
-          <a href="#" class="slider-item">
+          <a href="#" role-base="#" class="slider-item">
             <img src="./images/index/banner-03.jpg" role-err="./images/index/banner-01.jpg" alt="banner-03" width="100%" height="500" class="img-responsive"/>
           </a>
         <li>
-          <a href="#" class="slider-item">
+          <a href="#" role-base="#" class="slider-item">
             <img src="./images/index/banner-04.jpg" role-err="./images/index/banner-01.jpg" alt="banner-04" width="100%" height="500" class="img-responsive"/>
           </a>
       </ul>
@@ -752,10 +752,12 @@
           data04[fn]();
         });
         $banner.width($banner.width()-30);
-        //querySlider($banner);
+        querySlider($banner);
       }
       function querySlider($banner){
         Base.queryData("/v1/sliders.php?limit=10",null,null,function(data){
+          console.log("querySlider");
+          console.log(data);
           if(Base.isSuccess(data)){
             Base.handleResult("banner",data,
               {"childrenBox":"li",

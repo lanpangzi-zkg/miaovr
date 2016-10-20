@@ -78,7 +78,7 @@
                     </li>
                     <li class="user-status">
                       <a href="./userCenter.html">
-                        <img src="../images/comDetails/user-icon.png" width=50 alt="用户头像" class="img-responsive header-user-icon inb">
+                        <img src="../images/comDetails/user-icon.png" width=50 alt="用户头像" class="img-responsive header-user-icon inb" onerror="userImgErr(this)">
                         <span class="header-user-name"></span>
                       </a>
                     </li>
@@ -160,14 +160,14 @@
               </div>
               <p class="author-name note-author"></p>
               <p class="author-score">
-                <span class="score-line inb"></span>
+                <span class="score-line"></span>
                 <span class="score-val" id="usercode">0</span>
-                <span class="score-line inb"></span>
+                <span class="score-line"></span>
               </p>
               <p class="fen">积分</p>
               <p class="btn-group">
-                <a href="#" id="user-home" class="home">主页</a>
-                <a href="javascript:void(0);" class="chat" id="chat">聊聊</a>
+                <a href="#" id="user-home" class="home inb">主页</a>
+                <a href="javascript:void(0);" class="chat inb" id="chat">聊聊</a>
               </p>
              </div>
              <div class="sign">
@@ -260,8 +260,8 @@
       </div> 
     </div>
     <!--end of footer-->
-    <div class="chat-mask"></div>
-    <div class="chat-dialog">
+    <div class="mask" id="web-chat-mask"></div>
+    <div class="chat-dialog" id="web-chat">
       <div class="chart-close"></div>
       <div class="chat-header">
         <div class="chat-user-icon">
@@ -269,14 +269,15 @@
         </div>
         <p class="chat-user-name"></p>
       </div>
+      <div class="chat-history"></div>
       <div class="chart-content">
         <textarea class="main-chat"></textarea>
       </div>
       <div class="chart-btn-group">
-        <input type="button" value="发送" class="btn-send"/>
+        <input type="button" value="发送" class="btn-send" id="btn-send-massage"/>
       </div>
     </div>
-    <div class="theme-mask"></div>
+    <div class="theme-mask mask"></div>
     <div class="add-theme-box">
       <div class="new-theme-top">
         <p class="theme-label">标题</p>
@@ -315,9 +316,9 @@
       </form>
     </div>
     <script type="text/javascript" src="../js/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../js/jquery.cookie.js"></script>
     <script type="text/javascript" src="../js/bootstrap.min.js"></script>
     <script type="text/javascript" src="../js/common.js"></script>
-    <script type="text/javascript" src="../js/jquery.cookie.js"></script>
     <script type="text/javascript" src="../js/comment.js"></script>
     <script type="text/javascript" src="../js/login.js"></script>
     <script src="http://cdn.ronghub.com/RongIMLib-2.2.4.min.js"></script> 
@@ -328,10 +329,6 @@
         if(Base.isLogin()){
           initMessage();
         }
-        $("#chat").on("click",function(e){
-          e.preventDefault();
-          console.log("chat");
-        });
         //签到
         $("#btn-user-sign").on("click",function(e){
           e.preventDefault();
@@ -358,6 +355,7 @@
           if(!Base.isLogin()){
             LoginValid.init("login-form",function(data){
               $(".login-mask").click();
+              initMessage();
             });
             Base.showLoginBox();
           }else{
@@ -368,6 +366,7 @@
         $(".btn-theme-cancel").on("click",function(){
           hideThemePop();
         });
+        //添加主题
         $(".btn-theme-add").on("click",function(){
           var _title=$("#new-theme-title").val();
           var _content=$("#new-theme-content").val();
@@ -379,7 +378,7 @@
             Base.showAlert("请输入主题内容","error");
             return;
           }
-          Base.queryData("/forum/save","POST",{"title":_title,"forum_details":_content,"uuid":"bb90efc3-27c4-240c-b5ba-4561e3faf3e2"},function(data){
+          Base.queryData("/forum/save","POST",{"title":_title,"forum_details":_content,"uuid":Base.getUUID()},function(data){
             hideThemePop();
             console.log(data);
             if(Base.isSuccess(data)){
@@ -403,6 +402,7 @@
             console.log(data);
             if(Base.isSuccess(data)&&data.list_result.length>0){
               var info=data.list_result[0];
+              $("#btn-send-massage").attr("to_uuid",info.user.uuid);
               $(".note-title").html(info.title);
               $(".note-author").html(info.user.nickname||'佚名');
               $(".publish-date").html(Base.formatDate(info.publish_time));
@@ -423,6 +423,7 @@
           },function(err){
              Base.showAlert(err);
           });
+          $("#chat").on("click",openWebChat);
         }
         comment.init({
             "query":"/forum/comment/forumId?offset=0&length=5",

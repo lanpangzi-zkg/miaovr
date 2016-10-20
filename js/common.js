@@ -1,8 +1,12 @@
+function userImgErr(e){
+  $(e).attr("src","../images/comDetails/user-icon.png");
+  $(e).off("error");
+}
 var Base=(function($,b){
     var config={
         basePath:"http://127.0.0.1:8080/miaovr/queryApi"
     };
-    b.queryData=function(method,requestType,param,successCallBack,failCallBack){
+    b.queryData=function(method,requestType,param,successCallBack,failCallBack,async){
         var _param=param||{};
         _param.method=method;
         $.ajax({
@@ -10,6 +14,7 @@ var Base=(function($,b){
             type:requestType||"GET",
             data:_param,
             dataType:"json",
+            async: async||true, 
             success:function(data){
                 if(typeof successCallBack=="function"){
                     successCallBack(data);
@@ -127,7 +132,7 @@ var Base=(function($,b){
                 temp_child.attr("role-id",temp[resultItems[k]]);
             }else if(k==="href"){
                 if(temp_child.attr("role-base")){
-                    temp_child.attr("href",temp_child.attr("role-base")+temp[resultItems[k]]);
+                    temp_child.attr("href",temp[resultItems[k]]);
                 }else{
                     temp_child.attr("href",temp_child.attr("href")+temp[resultItems[k]]);
                 }
@@ -152,18 +157,40 @@ var Base=(function($,b){
         return result;
     }
     b.isLogin=function(){
-        uuid=$.cookie("uuid");
-        if(uuid){
-            // $("#main-navbar .header-login").css("display","none");
-            // var userStatus=$("#main-navbar .user-status");
-            // userStatus.css("display","inherit");
-            // userStatus.find(".header-user-name").html("瞄瞄");
-            // userStatus.find("img").attr("src","");
+        access_token=$.cookie("access_token");
+        if(access_token){
+            var userStatus=$("#main-navbar .user-status");
+            if(userStatus.css("display")=="block"){
+                return true;
+            }else{
+                Base.queryData("/v1/account_information.php?access_token="+access_token,
+                    null,null,function(data){
+                  if(Base.isSuccess(data)){
+                    $("#main-navbar .header-login").css("display","none");
+                    userStatus.css("display","inherit");
+                    userStatus.find(".header-user-name").html(data.nickname);
+                    userStatus.find("img").attr("src",data.avatar);
+                    uuid=data.uuid;
+                    return true;
+                  }else{
+                    return false;
+                  }
+                },function(){
+                    return false;
+                },false);
+            }
             return true;
         }else{
             return false;
         }
     };
+    var uuid="";
+    b.getUUID=function(){
+        return uuid;
+    };
+    b.setUUID=function(u){
+        uuid=u;
+    }
     var loginMask=null;
     var loginBox=null;
     var uname=null;

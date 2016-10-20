@@ -51,7 +51,14 @@ var LoginValid=(function(){
             }else{
                 $.cookie("access_token",data.access_token);
                 $.cookie("uuid",data.uuid);
+                Base.setUUID(data.uuid);
+                $.cookie("IM_token",data.IM_token);
               if(typeof loginSuccessCallBack=="function"){
+                $("#main-navbar .header-login").css("display","none");
+                var userStatus=$("#main-navbar .user-status");
+                userStatus.css("display","inherit");
+                userStatus.find(".header-user-name").html(data.nickname);
+                userStatus.find("img").attr("src",data.avatar);
                 loginSuccessCallBack(data);
               }else{
                 if($("#remember").is(":checked")){

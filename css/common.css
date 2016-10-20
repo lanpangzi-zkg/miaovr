@@ -191,7 +191,7 @@ input{
     vertical-align: middle;
 }
 .user-status .header-user-name{
-
+    display: none;
 }
 /***********content*************/
 .container-white{
@@ -297,7 +297,7 @@ input{
     margin-top: -30px;
 }
 /**********logn start***************/
-.login-mask{
+.login-mask,.mask{
     position: absolute;
     left: 0;
     top:0;
@@ -403,6 +403,61 @@ input{
 .btn-disabled{
     background-color: #d6d4cd!important;
 }
+/********comment*********/
+.comment-main{
+    margin-top: 10px;
+}
+.comment-item .reply-box {
+    margin-top: 10px;
+    text-align: right;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #eee;
+}
+.comment-item{
+    padding-top: 10px;
+    padding-bottom: 10px;
+    list-style: none;
+}
+.reply-to-comment{
+    width: 100%;
+}
+.user-comment{
+    margin-bottom: 5px;
+}
+.reply-item{
+    padding-left: 20px;
+    padding-right: 20px;
+    background-color: #f1f1f1;
+    margin-right: 40px;
+}
+.quote-box-start .front-quote {
+    background: url('../images/visitUserHome/front-quote.png') no-repeat;
+}
+.quote-box-start .quote-icon {
+    width: 24px;
+    height: 21px;
+}
+.user-info .user-name{
+    color: #ffd737;
+}
+.reply-content .user-info .user-name{
+    color: #a5a5a5;
+}
+.reply-content {
+    color: #a5a5a5;
+    padding: 0 30px;
+    line-height: 1.5;
+}
+.quote-box-end {
+    text-align: right;
+}
+.quote-box-end .back-quote {
+    background: url('../images/visitUserHome/back-quote.png') no-repeat;
+}
+.quote-box-end .quote-icon {
+    width: 24px;
+    height: 21px;
+}
 /********media**********/
 @media (max-width: 1200px) {
     #main-navbar .navbar .navbar-left>li>a{
@@ -421,6 +476,9 @@ input{
 @media (max-width: 992px) {
     .header #main-navbar{
         width: 100%;
+    }
+    .author-box .author-score .score-line{
+        display: none;
     }
 }
 @media (max-width: 964px) {

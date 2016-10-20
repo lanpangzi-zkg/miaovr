@@ -82,11 +82,16 @@ function initMessage(){
             }
         }
     });
-    var token = getTokenFromAppServer();//获取token
+    MI_token = $.cookie("IM_token");//获取token
+    if(!MI_token){
+        return;
+    }
     //链接融云服务器
-    RongIMClient.connect(token, {
+    RongIMClient.connect(MI_token, {
         onSuccess: function(userId) {
           console.log("Login successfully." + userId);
+          isInit=true;
+          queryHistoryMessage(Base.getUUID());
         },
         onTokenIncorrect: function() {
           console.log('token无效');
@@ -113,14 +118,27 @@ function initMessage(){
           console.log(errorCode);
         }
     });
+    $("#btn-send-massage").on("click",function(){
+        var c=chatWords.val();
+        if(!c){
+            Base.showAlert("请输入内容","error");
+            chatWords.focus();
+        }else{
+            var uuid=$(this).attr("uuid");
+            if(!uuid){
+              Base.showAlert("获取用户信息失败","error");  
+            }else{
+                sendMessage(uuid,c);
+            }
+        }
+    });
 }
-function sendMessage(){
-    var msg = new RongIMLib.TextMessage({content:"hello",extra:"附加信息"});
+function sendMessage(to_uuid,msg){
+    var msg = new RongIMLib.TextMessage({content:msg,extra:""});
     //或者使用RongIMLib.TextMessage.obtain 方法.具体使用请参见文档
     //var msg = RongIMLib.TextMessage.obtain("hello");
     var conversationtype = RongIMLib.ConversationType.PRIVATE; // 私聊
-    var targetId = "xxx"; // 目标 Id
-    RongIMClient.getInstance().sendMessage(conversationtype, targetId, msg, {
+    RongIMClient.getInstance().sendMessage(conversationtype, to_uuid, msg, {
         // 发送消息成功
         onSuccess: function (message) {
             //message 为发送的消息对象并且包含服务器返回的消息唯一Id和发送消息时间戳
@@ -152,6 +170,57 @@ function sendMessage(){
                     break;
             }
             console.log('发送失败:' + info);
+            Base.showAlert('发送失败:' + info);
         }
     });
+}
+function queryHistoryMessage(uuid){
+    RongIMClient.getInstance().getHistoryMessages(RongIMLib.ConversationType.PRIVATE, uuid, null, 20, {
+      onSuccess: function(list, hasMsg) {
+        // hasMsg为boolean值，如果为true则表示还有剩余历史消息可拉取，为false的话表示没有剩余历史消息可供拉取。
+           // list 为拉取到的历史消息列表
+           console.log(list);
+      },
+      onError: function(error) {
+      }
+    });
+}
+function openWebChat(e){
+    e.preventDefault();
+    if(!Base.isLogin()){
+        LoginValid.init("login-form",function(data){
+          $(".login-mask").click();
+          initMessage();
+        });
+        Base.showLoginBox();
+    }else if($.cookie("IM_token")){
+        showChatDialog();
+    }else{
+        Base.showAlert("请先登录,刷新页面","error");
+    }
+}
+var isInit=false;
+var webChat=null;
+var chatMask=null;
+var chatWords=null;
+function showChatDialog(){
+    if(!chatMask){
+        chatMask=$("#web-chat-mask");
+        chatMask.on("click",function(){
+            hideChatDialog();
+        });
+    }
+    if(!webChat){
+        webChat=$("#web-chat");
+        chatWords=webChat.find(".main-chat");
+    }
+    if(!isInit){
+        initMessage();
+    }
+    chatMask.css("height",$(document).height()).fadeIn();
+    webChat.fadeIn();
+}
+function hideChatDialog(){
+    chatMask.fadeOut();
+    webChat.fadeOut();
 }

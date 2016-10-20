@@ -104,21 +104,23 @@
           <div class="col-sm-9">
             <div class="vr-video-basic">
               <div class="row">
-                <div class="col-sm-3">
+                <div class="col-sm-4">
                   <div class="vr-video-icon">
                     <img src="#" id="pic_url" class="img-responsive"/>
                   </div>
                   <div class="download-box">
-                    <input type="button" value="下载" class="btn-download"/>
+                    <a class="btn-download inb" href="javascript:void(0);">
+                      <span class="icon inb"></span>
+                    </a>
                   </div>
                 </div>
-                <div class="col-sm-9">
+                <div class="col-sm-8">
                   <div class="video-title" id="showname"></div>
                   <p class="video-item">
                     <span>发布时间:</span>
                     <span class="date val" id="publishtime"></span>
                     <span>文件大小:</span>
-                    <span class="f-size val" id="filesize"></span>
+                    <span class="f-size val" id="filesize">未知</span>
                     <span>视频语言:</span>
                     <span class="lang val">中文</span>
                   </p>
@@ -139,25 +141,27 @@
 
                 </div>
               </div>
-              <div class="vr-video-description">
-                <p class="title">视频描述</p>
-                <p class="content" id="description"></p>
-              </div>
-              <div class="vr-video-comment">
-                <p class="title">视频点评</p>
-                <div class="comment-main">
-                  <textarea class="commment-body" id="tv-comment" name="comment"></textarea>
-                  <div class="btn-group">
-                    <input type="submit" value="发布" class="btn-publish">
+              <div class="vr-video-bottom">
+                <div class="vr-video-description">
+                  <p class="title">视频描述</p>
+                  <p class="content" id="description"></p>
+                </div>
+                <div class="vr-video-comment">
+                  <p class="title">视频点评</p>
+                  <div class="comment-main">
+                    <textarea class="commment-body" id="tv-comment" name="comment"></textarea>
+                    <div class="btn-group">
+                      <input type="submit" value="发布" class="btn-publish">
+                    </div>
                   </div>
                 </div>
-              </div>
-              <div class="comments-box" id="user-comments-box">
-                <div class="mask-loading">
-                  <div class="loading-icon"></div>
+                <div class="comments-box" id="user-comments-box">
+                  <div class="mask-loading">
+                    <div class="loading-icon"></div>
+                  </div>
+                  <ul class="comments-list" id="c-comment-box">
+                  </ul>
                 </div>
-                <ul class="comments-list" id="c-comment-box">
-                </ul>
               </div>
             </div>
           </div>
@@ -282,11 +286,14 @@
           queryParam.fileid=vid;
           //查询视频信息
           Base.queryData("/search/fileid","POST",{"fileid":vid},function(data){
+            console.log(data);
             if(Base.isSuccess(data)&&data.list_result.length>0){
               var info=data.list_result[0];
               $("#category-"+info.category).css("display","inherit");
               $("#pic_url").attr("src",info.pic_url);
-              $("#filesize").html(Math.floor(info.filesize/1024/1024)+"M");
+              if(info.filesize){
+                $("#filesize").html(Math.floor(info.filesize/1024/1024)+"M");
+              }
               $("#showname").html(info.showname);
               $("#description").html(info.description||"暂无");
               config.videos[0].video=info.http_url;

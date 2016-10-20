@@ -177,7 +177,7 @@
         vid=Base.searchParam("vid","id");
         if(vid){
           $(".btn-load-box").css("display","none");
-         querySingleVrInfo();
+          querySingleVrInfo();
         }else{
           queryVrinfo(off);
           $("#btn-load").on("click",function(){
@@ -200,8 +200,10 @@
       }
       function queryVrinfo(offNum){
         Base.queryData("/news/all?offset="+offNum+"&limit="+len,null,null,function(data){
+          console.log(data);
           if(Base.isSuccess(data)){
             if(data.list_result.length==0){
+              $("#main-list").find(".mask-loading").fadeOut();
               $("#btn-load").val("已经到底部啦").off("click");
               return;
             }

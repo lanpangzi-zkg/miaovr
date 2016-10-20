@@ -112,3 +112,37 @@
     margin: 3px 5px;  
     cursor: pointer;
 }
+#fsUploadProgress{
+    position: fixed;
+    z-index: 9999;
+    left: 50%;
+    top: 50%;
+    width: 400px;
+    margin-left: -200px;
+    background-color: #d4d4d4;
+}
+#fsUploadProgress td{
+    vertical-align: middle;
+    padding: 20px;
+}
+#fsUploadProgress .progress{
+    display: none;
+}
+#fsUploadProgress  .progressCancel{
+    display: none;
+}
+#fsUploadProgress .text-left{
+    float: left;
+}
+.upload-mask{
+    position: absolute;
+    left: 0;
+    top:0;
+    right: 0;
+    bottom: 0;
+    background-color: #000;
+    opacity: 0.5;
+    *filter:alpha(opacity=50);
+    z-index: 9996;
+    display: none;
+}

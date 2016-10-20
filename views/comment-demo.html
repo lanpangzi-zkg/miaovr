@@ -1,0 +1,58 @@
+<!doctype>
+<html>
+    <head>
+        <title>comment</title>
+        <meta charset="utf-8">
+        <style type="text/css">
+            ul,li{
+                list-style: none;
+            }
+            .reply-box{
+                border: 1px solid #eee;
+                margin: 5px;
+                padding: 10px;
+            }
+            #demo li{
+                margin: 10px 0;
+            }
+        </style>
+    </head>
+    <body>
+        <ul id="demo">
+            
+        </ul>
+    </body>
+    <script type="text/javascript" src="../js/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript">
+        var arr=[
+            {"id":6,"name":"f","to_id":4},
+            {"id":2,"name":"b","to_id":1},
+            {"id":1,"name":"a"},
+            {"id":5,"name":"e","to_id":4},
+            {"id":4,"name":"d"},
+            {"id":3,"name":"c","to_id":2},
+            {"id":7,"name":"g"}
+        ];
+        $(document).ready(function(){
+            var temp_item=null;
+            var reply_arr=[];
+            var demo=$("#demo");
+            for(var i=0,j=arr.length;i<j;i++){
+                temp_item=arr[i];
+                if(temp_item.to_id){//回复信息
+                    console.log(temp_item);
+                    reply_arr.push(temp_item);
+                }else{
+                    var li=$("<li id='"+temp_item.id+"'>"+temp_item.name+"<li>");
+                    li.appendTo(demo);
+                }
+            }
+            for(var i=0;i<reply_arr.length;i++){
+                temp_item=reply_arr[i];
+                var to_id=temp_item.to_id;
+                var to_comment=demo.find("#"+to_id);
+                $("<div class='reply-box' id='"+temp_item.id+"'>"+temp_item.name+"</div>").appendTo(to_comment);
+            }
+        });
+    </script>
+</html>
