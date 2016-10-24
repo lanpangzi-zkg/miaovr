@@ -12,12 +12,15 @@
 .main-header-r{
     padding: 10px;
 }
+.main-header-r a{
+    cursor: pointer;
+}
 .main-header .theme{
     font-size: 1.1em;
     color: #006987;
     margin: 0 13px;
 }
-.main-header .new-theme{
+.main-header .cur-theme{
     color: #ffd737;
 }
 .community-title{
@@ -148,9 +151,8 @@
 .pagination-box{
     text-align: center;
     margin: 10px 0 35px 0;
-    display: none;
 }
-.pagination-box .btn-page{
+.pagination-box .next,.pagination-box .prev{
     width: 200px;
     padding: 16px 20px;
     left: 35px;
@@ -158,13 +160,25 @@
     background-color: #ffd737;
     color: #fff;
 }
-.pagination-box .pages .page{
-    display: inherit;
-}
-.pagination-box .pages a{
-    display: inherit;
+.pagination-box .current,.pagination-box a{
+    display: inline-block;
     padding: 15px 20px;
     border: 1px solid #d7d7d7;
+    margin: 0 10px;
+    cursor: pointer;
+    text-decoration: none;
+}
+.pagination-box a:hover{
+    color: #fff;
+    background-color: #ffd737;
+    border-color: #ffd737;
+}
+.pagination-box .current{
+    border-color:#ff8b3d;
+}
+.pagination-box .current.prev{
+    border:none;
+    cursor: not-allowed;
 }
 .theme-mask{
     position: absolute;
@@ -180,7 +194,7 @@
 .add-theme-box{
     position: fixed;
     width: 600px;
-    height: 350px;
+    height: 436px;
     left: 0;
     top: 0;
     right: 0;
@@ -225,9 +239,8 @@
     height: 32px;
     line-height: 32px;
 }
-.inputs-area{
-    text-align: center;
-    margin: 10px;
+.inputs-title{
+    margin: 0 10px;
 }
 @media (max-width: 600px) {
     .main-header-r{

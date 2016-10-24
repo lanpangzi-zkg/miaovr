@@ -596,6 +596,9 @@ function QiniuJsSDK() {
         };
 
         var getPutPolicy = function (uptoken) {
+            if(!uptoken){
+                return null;
+            }
             var segments = uptoken.split(":");
             var ak = segments[0];
             var putPolicy = that.parseJSON(that.URLSafeBase64Decode(segments[2]));
@@ -1123,7 +1126,7 @@ function QiniuJsSDK() {
 
         // bind 'Error' event
         // check the err.code and return the errTip
-        uploader.bind('Error', (function(_Error_Handler) {
+         uploader.bind('Error', (function(_Error_Handler) {
             return function(up, err) {
                 logger.error("Error event activated");
                 logger.error("err: ", err);
@@ -1132,20 +1135,20 @@ function QiniuJsSDK() {
                 if (file) {
                     switch (err.code) {
                         case plupload.FAILED:
-                            errTip = '涓婁紶澶辫触銆傝绋嶅悗鍐嶈瘯銆�';
+                            errTip = '上传失败。请稍后再试。';
                             break;
                         case plupload.FILE_SIZE_ERROR:
                             var max_file_size = up.getOption && up.getOption('max_file_size');
                             max_file_size = max_file_size || (up.settings && up.settings.max_file_size);
-                            errTip = '娴忚鍣ㄦ渶澶у彲涓婁紶' + max_file_size + '銆傛洿澶ф枃浠惰浣跨敤鍛戒护琛屽伐鍏枫€�';
+                            errTip = '浏览器最大可上传' + max_file_size + '。更大文件请使用命令行工具。';
                             break;
                         case plupload.FILE_EXTENSION_ERROR:
-                            errTip = '鏂囦欢楠岃瘉澶辫触銆傝绋嶅悗閲嶈瘯銆�';
+                            errTip = '文件验证失败。请稍后重试。';
                             break;
                         case plupload.HTTP_ERROR:
                             if (err.response === '') {
                                 // Fix parseJSON error ,when http error is like net::ERR_ADDRESS_UNREACHABLE
-                                errTip = err.message || '鏈煡缃戠粶閿欒銆�';
+                                errTip = err.message || '未知网络错误。';
                                 if (!unknow_error_retry(file)) {
                                     return;
                                 }
@@ -1155,25 +1158,25 @@ function QiniuJsSDK() {
                             var errorText = errorObj.error;
                             switch (err.status) {
                                 case 400:
-                                    errTip = "璇锋眰鎶ユ枃鏍煎紡閿欒銆�";
+                                    errTip = "请求报文格式错误。";
                                     break;
                                 case 401:
-                                    errTip = "瀹㈡埛绔璇佹巿鏉冨け璐ャ€傝閲嶈瘯鎴栨彁浜ゅ弽棣堛€�";
+                                    errTip = "客户端认证授权失败。请重试或提交反馈。";
                                     break;
                                 case 405:
-                                    errTip = "瀹㈡埛绔姹傞敊璇€傝閲嶈瘯鎴栨彁浜ゅ弽棣堛€�";
+                                    errTip = "客户端请求错误。请重试或提交反馈。";
                                     break;
                                 case 579:
-                                    errTip = "璧勬簮涓婁紶鎴愬姛锛屼絾鍥炶皟澶辫触銆�";
+                                    errTip = "资源上传成功，但回调失败。";
                                     break;
                                 case 599:
-                                    errTip = "缃戠粶杩炴帴寮傚父銆傝閲嶈瘯鎴栨彁浜ゅ弽棣堛€�";
+                                    errTip = "网络连接异常。请重试或提交反馈。";
                                     if (!unknow_error_retry(file)) {
                                         return;
                                     }
                                     break;
                                 case 614:
-                                    errTip = "鏂囦欢宸插瓨鍦ㄣ€�";
+                                    errTip = "文件已存在。";
                                     try {
                                         errorObj = that.parseJSON(errorObj.error);
                                         errorText = errorObj.error || 'file exists';
@@ -1182,31 +1185,31 @@ function QiniuJsSDK() {
                                     }
                                     break;
                                 case 631:
-                                    errTip = "鎸囧畾绌洪棿涓嶅瓨鍦ㄣ€�";
+                                    errTip = "指定空间不存在。";
                                     break;
                                 case 701:
-                                    errTip = "涓婁紶鏁版嵁鍧楁牎楠屽嚭閿欍€傝閲嶈瘯鎴栨彁浜ゅ弽棣堛€�";
+                                    errTip = "上传数据块校验出错。请重试或提交反馈。";
                                     break;
                                 default:
-                                    errTip = "鏈煡閿欒銆�";
+                                    errTip = "未知错误。";
                                     if (!unknow_error_retry(file)) {
                                         return;
                                     }
                                     break;
                             }
-                            errTip = errTip + '(' + err.status + '锛�' + errorText + ')';
+                            errTip = errTip + '(' + err.status + '：' + errorText + ')';
                             break;
                         case plupload.SECURITY_ERROR:
-                            errTip = '瀹夊叏閰嶇疆閿欒銆傝鑱旂郴缃戠珯绠＄悊鍛樸€�';
+                            errTip = '安全配置错误。请联系网站管理员。';
                             break;
                         case plupload.GENERIC_ERROR:
-                            errTip = '涓婁紶澶辫触銆傝绋嶅悗鍐嶈瘯銆�';
+                            errTip = '上传失败。请稍后再试。';
                             break;
                         case plupload.IO_ERROR:
-                            errTip = '涓婁紶澶辫触銆傝绋嶅悗鍐嶈瘯銆�';
+                            errTip = '上传失败。请稍后再试。';
                             break;
                         case plupload.INIT_ERROR:
-                            errTip = '缃戠珯閰嶇疆閿欒銆傝鑱旂郴缃戠珯绠＄悊鍛樸€�';
+                            errTip = '网站配置错误。请联系网站管理员。';
                             uploader.destroy();
                             break;
                         default:

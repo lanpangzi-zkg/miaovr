@@ -5,9 +5,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>VR社区</title>
+    <link href="../ckeditor/ckeditor.css" rel="stylesheet" type="text/css">
     <link href="../css/bootstrap.min.css" rel="stylesheet">
     <link href="../css/common.css" rel="stylesheet">
     <link href="../css/community-details.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="../webim/css/RongIMWidget.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/jPages.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/jPages-animate.css"/>
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -154,22 +158,26 @@
                   <img src="../images/community/publish-theme.png" alt='' class="img-responsive"/>
                 </a>
               </div>
-             <div class="author-box">
+
+             <div class="author-box" ng-app="miaovr">
               <div class="icon">
                 <img src="../images/comDetails/user-icon.png" id="thumbAvatar"  alt='' class="img-responsive"/>
               </div>
-              <p class="author-name note-author"></p>
+              <p class="author-name note-author">未知</p>
               <p class="author-score">
                 <span class="score-line"></span>
                 <span class="score-val" id="usercode">0</span>
                 <span class="score-line"></span>
               </p>
               <p class="fen">积分</p>
-              <p class="btn-group">
-                <a href="#" id="user-home" class="home inb">主页</a>
-                <a href="javascript:void(0);" class="chat inb" id="chat">聊聊</a>
+              <p class="btn-group" id="other-i" ng-controller="main">
+                <a href="#" id="user-home" class="home inb a-aside">主页</a>
+                <input type="hidden" id="to_uuid" ng-model="targetId">
+                <a href="javascript:void(0);" ng-click="onShow()" class="chat inb a-aside" id="chat">聊聊</a>
+                <rong-widget></rong-widget>
               </p>
              </div>
+
              <div class="sign">
               <a href="#" class="btn-sign" id="btn-user-sign">
                   <img src="../images/community/sign.png" alt='' class="img-responsive"/>
@@ -187,15 +195,15 @@
       </div>
       <div class="row">
         <div class="col-sm-9">
-          <div class="pagination-box">
-            <input type="button" value="上一页" class="btn-page">
+          <div class="pagination-box" id="pagination">
+           <!--  <input type="button" value="上一页" class="btn-page">
             <ul class="pages inb">
               <li class="page"><a href="#">1</a></li>
               <li class="page"><a href="#">2</a></li>
               <li class="page"><a href="#">3</a></li>
               <li class="page"><a href="#">4</a></li>
             </ul>
-            <input type="button" value="下一页" class="btn-page">
+            <input type="button" value="下一页" class="btn-page"> -->
           </div>
         </div>
       </div>
@@ -281,14 +289,14 @@
     <div class="add-theme-box">
       <div class="new-theme-top">
         <p class="theme-label">标题</p>
-        <div class="inputs-area">
+        <div class="inputs-title">
           <input type="text" id="new-theme-title">
         </div>
       </div>
       <div class="new-theme-center">
         <p class="theme-label">内容</p>
         <div class="inputs-area">
-          <textarea class="content" id="new-theme-content"></textarea>
+          <div class="content" id="new-theme-content"></div>
         </div>
       </div>
       <div class="new-theme-bottom">
@@ -321,13 +329,18 @@
     <script type="text/javascript" src="../js/common.js"></script>
     <script type="text/javascript" src="../js/comment.js"></script>
     <script type="text/javascript" src="../js/login.js"></script>
-    <script src="http://cdn.ronghub.com/RongIMLib-2.2.4.min.js"></script> 
-    <script type="text/javascript" src="../js/message.js"></script>
+    <script type="text/javascript" src="../webim/angular.js"></script>
+    <script type="text/javascript" src="../webim/RongIMWidget.js"></script>
+    <script type="text/javascript" src="../webim/config.js"></script>
+    <script type="text/javascript" src="../ckeditor/ckeditor.js"></script>
+    <script type="text/javascript" src="../ckeditor/ck-config.js"></script>
+    <script type="text/javascript" src="../js/jPages.min.js"></script>
     <script type="text/javascript">
       var queryParam={};
       $(document).ready(function(){
+        initCkeditor();
         if(Base.isLogin()){
-          initMessage();
+          $("#chat").click();
         }
         //签到
         $("#btn-user-sign").on("click",function(e){
@@ -395,6 +408,15 @@
         if(!nid){
           Base.showAlert("抱歉,你所查找的资源不存在","error");
         }else{
+          comment.init({
+            "query":"/forum/comment/forumId",
+            "publish":"/forum/comment/save",
+            "reply":"/forum/comment/reply",
+            "nameId":"forumId",
+            "id":nid,
+            "textArea":".commment-body",
+            "isPagination":true
+          });
           queryParam.forumId=nid;
           //查询主题信息
           Base.queryData("/forum/forumId","POST",{"forumId":nid},function(data){
@@ -410,34 +432,41 @@
               $("#thumbAvatar").attr("src",info.user.thumbAvatar).on("error",function(){
                 $(this).attr("src","../images/comDetails/user-icon.png").off("error");
               });
+              $("#to_uuid").val(info.uuid);
               $("#usercode").html(info.user.usercode);
               $("#user-home").attr("href","./visitUserHome.html?uid="+info.user.uuid);
               var comments=info.forumComments;
-              if(comments.length<1){
-                $(".pagination-box").css("display","none");
-              } 
+              if(comments.length>1){
+                $(".pagination-box").css("display","block");
+                comment.handleCommentItem(comments);
+                initPagination();
+              }
             }else{
               Base.showAlert(data.error_msg,"error");
             }
             $("#details-box").find(".mask-loading").fadeOut();
+            //$("#other-i").find(".mask-loading").fadeOut();
           },function(err){
              Base.showAlert(err);
           });
-          $("#chat").on("click",openWebChat);
         }
-        comment.init({
-            "query":"/forum/comment/forumId?offset=0&length=5",
-            "publish":"/forum/comment/save",
-            "reply":"/forum/comment/reply",
-            "nameId":"forumId",
-            "id":nid,
-            "textArea":".commment-body"
-        });
-        comment.queryComment();
+        //comment.queryComment();
       });
       function hideThemePop(){
         $(".theme-mask").fadeOut();
         $(".add-theme-box").fadeOut();
+      }
+      function initPagination(){
+        $(".pagination-box").jPages({
+          containerID  : "c-comment-box",
+          previous:"上一页",
+          next:"下一页",
+          perPage      : 2,
+          startPage    : 1,
+          startRange   : 1,
+          midRange     : 5,
+          endRange     : 1
+        });
       }
     </script>
   </body>

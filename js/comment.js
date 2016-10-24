@@ -5,11 +5,41 @@ var comment=(function(c){
     var nameId="";
     var textArea="";
     var commentBox="";
+    var isPagination=true;
+    var $doc=null;
+    var docHeight=0;
+    var docScrollTop=0;
+    var timeout=null;
+    var bottomHeight=0;
+    var winHeight=0;
+    var length=2;
+    var pageParam="";
+    var pageNum=1;
     c.init=function(config_params){
         config=config_params;
         nameId=config.nameId;
         textArea=config.textArea||".commment-body";
         commentBox=config.commentBox||"#c-comment-box";
+        $comments_list=$(commentBox);
+        isPagination=config.isPagination||true;
+        if(!isPagination){
+          bottomHeight=$(".footer").height();
+          $doc=$(document);
+          winHeight=$(window).height();
+          $doc.scroll(function(){ 
+            clearTimeout(timeout);
+            timeout=setTimeout(function(){
+              docHeight=$doc.height();//可见高度  
+              docScrollTop =$doc.scrollTop();//滚动高度  
+              console.log(docHeight-bottomHeight);
+              if(docScrollTop+winHeight>=docHeight-bottomHeight){
+                console.log("arrive bottom");
+              }
+            },1000);
+          });
+        }else{
+          console.log("分页");
+        }
         //发布评论
         $(".btn-publish").on("click",function(e){
           if(!Base.isLogin()){
@@ -36,8 +66,9 @@ var comment=(function(c){
           Base.queryData(config.publish,"POST",_param,function(data){
             if(Base.isSuccess(data)){
               Base.showAlert("点评成功");
+              console.log(data);
               $(".commment-body").val("");
-              c.queryComment();
+              //c.queryComment();
             }else{
               Base.showAlert(data.error_msg,"error");
             }
@@ -47,7 +78,6 @@ var comment=(function(c){
             btn.removeAttr("disabled").removeClass("btn-disabled");
           });
         });
-        $comments_list=$(".comments-list");
         //显示与隐藏回复输入框
         $comments_list.delegate(".btn-show-reply","click",function(e){
           e.preventDefault();
@@ -107,19 +137,24 @@ var comment=(function(c){
         });
     };
     //查询评论
-    c.queryComment=function(){
-        if($(commentBox).find("li").length>0){
-          $(commentBox).empty();
+    c.queryComment=function(page){
+        if(isPagination){
+          if($(commentBox).find("li").length>0){
+            $(commentBox).empty();
+          }
         }
-        Base.queryData(config.query,"POST",queryParam,function(data){
+        var _page=page||1;
+        pageParam="?offset="+length*(_page-1)+"&length="+length;
+        Base.queryData(config.query+pageParam,"POST",queryParam,function(data){
             console.log("查询评论信息");
             console.log(data);
             if(Base.isSuccess(data)){
               if(data.list_result.length<1){
                   $comments_list.find(".mask-loading").fadeOut();
               }else{
-                handleCommentItem(data);               
+                c.handleCommentItem(data);               
               }
+              pageNum=_page;
             }else{
               Base.showAlert(data.error_msg,"error");
             }
@@ -128,7 +163,7 @@ var comment=(function(c){
             Base.showAlert(err);
         });
     };
-    function handleCommentItem(data){
+    c.handleCommentItem=function(data){
         var $parentBox=$(".comments-box");
         $parentBox.find("img").on("error",function(){
           var _this=$(this);
@@ -136,7 +171,12 @@ var comment=(function(c){
           _this.off("error");
         });
         var temp_result=null;
-        var list=data.list_result;
+        var list=[];
+        if(Object.prototype.toString.call(data)=="[object Array]"){
+          list=data;
+        }else if("list_result" in data){
+          list=data.list_result;
+        }
         var list_length=list.length;
         var answer_list=[];//回复
         for (var i=0; i<list_length; i++){
@@ -153,7 +193,7 @@ var comment=(function(c){
           $(addReplyItem(temp_result)).appendTo($to_commentItem.find(".comment-main"));
         }
         $parentBox.find(".mask-loading").fadeOut();
-    }
+    };
 
     function addReplyItem(data){
       var commentItem="<div class='comment-item reply-item' id='"+data.commentId+"'>"+

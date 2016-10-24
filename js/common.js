@@ -199,8 +199,12 @@ var Base=(function($,b){
         if(!loginMask){
             loginMask=$("<div class='login-mask'></div>");
             loginMask.on("click",function(){
-                $(this).fadeOut();
-                loginBox.fadeOut();
+                if(!loginBox.find("#btn-login").attr("disabled")){
+                    $(this).fadeOut();
+                    loginBox.fadeOut();
+                }else{
+                    return;
+                }
             });
             loginMask.appendTo($("body"));
         }

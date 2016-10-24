@@ -3,12 +3,11 @@ $(document).ready(function(){
     window.location.href="./login.html";
     return;
   }
-  initMessage();
   var access_token=$.cookie("access_token");
   Base.queryData("/v1/account_information.php?access_token="+access_token,null,null,function(data){
       console.log(data);
     if(Base.isSuccess(data)){
-      $(".mask-loading").fadeOut();
+      $("#w").fadeOut();
       $("#nickname").html(data.nickname);
       $("#cur-nickname").html(data.nickname);
       $("#thumb_avatar").attr("src",data.thumb_avatar).on("error",userIcon);
@@ -34,10 +33,17 @@ $(document).ready(function(){
           if(isSuccess(data)){
             $("#user-score").html(data.coin_count);
             _this.attr("role-query","ok");
+            $("#score-page-1").children(".mask-loading").fadeOut();
           }
         },function(err){  
-          alert(err);
+          console.log(err);
+          $("#score-page-1").children(".mask-loading").fadeOut();
         });
+      }else if(_id==="aside-page-2"&&!_this.attr("role-query")){
+          initMessage();
+          _this.attr("role-query","ok");
+      }else{
+        return;
       }
   });
 

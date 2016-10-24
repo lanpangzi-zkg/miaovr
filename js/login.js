@@ -47,7 +47,6 @@ var LoginValid=(function(){
             console.log(data);
             if(!Base.isSuccess(data)){
               Base.showAlert(data.error_msg,"error");
-              enSubmitBtn();
             }else{
                 $.cookie("access_token",data.access_token);
                 $.cookie("uuid",data.uuid);
@@ -67,6 +66,7 @@ var LoginValid=(function(){
                 window.location.href="./userCenter.html";
               }
             }
+            enSubmitBtn();
           },function(err){  
             Base.showAlert("登录失败:"+err,"error");
             enSubmitBtn();

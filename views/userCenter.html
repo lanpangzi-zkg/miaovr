@@ -72,12 +72,17 @@
                         <p class="nav-r-name">历史观看</p>
                       </a>
                     </li>
-                    <li>
+                    <li class="header-login">
                       <a href="./login.html">
                         <img src="../images/common/man.png" alt='' class="img-responsive nav-r-icon"/>
                         <p class="nav-r-name">登陆/注册</p>
                       </a>
                     </li>
+                    <li class="user-status">
+                      <a href="./userCenter.html">
+                        <img src="../images/comDetails/user-icon.png" width=50 alt="用户头像" class="img-responsive header-user-icon inb" onerror="userImgErr(this)">
+                        <span class="header-user-name"></span>
+                      </a>
                     <li class="search-i">
                         <form class="form-search">
                           <span class="input-search-box">
@@ -97,7 +102,7 @@
       </div>
     </div>    
     <div class="container">
-      <div class="mask-loading">
+      <div class="mask-loading" id="w">
         <div class="loading-icon"></div>
       </div>
       <div class="user-center-box">
@@ -294,46 +299,28 @@
               </ul>
               <div class="tab-pages">
                 <div class="page active-page" id="message-page-1">
+                  <div class="mask-loading">
+                      <div class="loading-icon"></div>
+                  </div>
                   <ul class="message-sys message-list">
-                    <li>
+                    <li class="message-item">
                       <span class="message-icon inb"></span>
                       <span class="message-author">瞄瞄团队</span>
-                      <span class="message-title">测试测试测试</span>
-                      <span class="message-date">2016-09-18</span>
-                    </li>
-                    <li>
-                      <span class="message-icon inb"></span>
-                      <span class="message-author">瞄瞄团队</span>
-                      <span class="message-title">测试测试测试</span>
-                      <span class="message-date">2016-09-18</span>
-                    </li>
-                    <li>
-                      <span class="message-icon inb"></span>
-                      <span class="message-author">瞄瞄团队</span>
-                      <span class="message-title">测试测试测试</span>
-                      <span class="message-date">2016-09-18</span>
+                      <span class="message-title"></span>
+                      <span class="message-date"></span>
                     </li>
                   </ul>
                 </div>
                 <div class="page" id="message-page-2">
+                  <div class="mask-loading">
+                      <div class="loading-icon"></div>
+                  </div>
                   <ul class="message-list">
-                    <li>
+                    <li class="message-item">
                       <span class="message-icon inb"></span>
-                      <span class="message-author">瞄瞄团队</span>
-                      <span class="message-title">测试测试测试</span>
-                      <span class="message-date">2016-09-18</span>
-                    </li>
-                    <li>
-                      <span class="message-icon inb"></span>
-                      <span class="message-author">瞄瞄团队</span>
-                      <span class="message-title">测试测试测试</span>
-                      <span class="message-date">2016-09-18</span>
-                    </li>
-                    <li>
-                      <span class="message-icon inb"></span>
-                      <span class="message-author">瞄瞄团队</span>
-                      <span class="message-title">测试测试测试</span>
-                      <span class="message-date">2016-09-18</span>
+                      <span class="message-author"></span>
+                      <span class="message-title"></span>
+                      <span class="message-date"></span>
                     </li>
                   </ul>
                 </div>
@@ -350,6 +337,9 @@
               </ul>
               <div class="tab-pages">
                 <div class="page active-page" id="score-page-1">
+                  <div class="mask-loading">
+                      <div class="loading-icon"></div>
+                  </div>
                   <p class="score-tips">已有积分</p>
                   <p class="score" id="user-score">0</p>
                 </div>
@@ -431,7 +421,148 @@
     <script src="../js/jquery.cookie.js"></script>
     <script src="../js/common.js"></script>
     <script src="../js/userCenter.js"></script>
+    <script src="../webim/angular.js"></script> 
+    <script src="../webim/RongIMWidget.js"></script> 
     <script src="http://cdn.ronghub.com/RongIMLib-2.2.4.min.js"></script> 
-    <script type="text/javascript" src="../js/message.js"></script>
+    <script type="text/javascript">
+      function initMessage(){
+        RongIMClient.init("0vnjpoadnwlpz");
+        RongIMClient.connect($.cookie("IM_token"), {
+          onSuccess: function(userId) {
+            console.log(RongIMLib.ConversationType);
+            //查询系统消息
+            RongIMClient.getInstance().getHistoryMessages(RongIMLib.ConversationType.SYSTEM,userId, null, 20, {
+              onSuccess: function(list, hasMsg) {
+                   console.log("history list");
+                   console.log(list);
+                   handleMessage("message-page-1",list);
+              },
+              onError: function(error) {
+                   var $sysMsg=$("#message-page-1");
+                   $sysMsg.find(".mask-loading").fadeOut();
+                   $sysMsg.find(".message-list").css("display","none");
+              }
+            });
+            RongIMClient.getInstance().getHistoryMessages(RongIMLib.ConversationType.PRIVATE,userId, null, 20, {
+              onSuccess: function(list, hasMsg) {
+                   console.log("history list");
+                   console.log(list);
+                   handleMessage("message-page-2",list);
+              },
+              onError: function(error) {
+                   var $sysMsg=$("#message-page-2");
+                   $sysMsg.find(".mask-loading").fadeOut();
+                   $sysMsg.find(".message-list").css("display","none");
+              }
+            });
+          },
+          onTokenIncorrect: function() {
+            console.log('token无效');
+          },
+          onError:function(errorCode){
+                var info = '';
+                switch (errorCode) {
+                  case RongIMLib.ErrorCode.TIMEOUT:
+                    info = '超时';
+                    break;
+                  case RongIMLib.ErrorCode.UNKNOWN_ERROR:
+                    info = '未知错误';
+                    break;
+                  case RongIMLib.ErrorCode.UNACCEPTABLE_PaROTOCOL_VERSION:
+                    info = '不可接受的协议版本';
+                    break;
+                  case RongIMLib.ErrorCode.IDENTIFIER_REJECTED:
+                    info = 'appkey不正确';
+                    break;
+                  case RongIMLib.ErrorCode.SERVER_UNAVAILABLE:
+                    info = '服务器不可用';
+                    break;
+                }
+                console.log(errorCode);
+                Base.showAlert(errorCode,"error");
+              }
+        });
+        RongIMClient.setConnectionStatusListener({
+          onChanged: function (status) {
+              switch (status) {
+                case RongIMLib.ConnectionStatus.CONNECTED:
+                    console.log('链接成功');
+                    break;
+                case RongIMLib.ConnectionStatus.CONNECTING:
+                    console.log('正在链接');
+                    break;
+                case RongIMLib.ConnectionStatus.DISCONNECTED:
+                    console.log('断开连接');
+                    break;
+                case RongIMLib.ConnectionStatus.KICKED_OFFLINE_BY_OTHER_CLIENT:
+                    console.log('其他设备登录');
+                    break;
+                case RongIMLib.ConnectionStatus.NETWORK_UNAVAILABLE:
+                  console.log('网络不可用');
+                  break;
+                }
+          }});
+      RongIMClient.setOnReceiveMessageListener({
+        onReceived: function (message) {
+          switch(message.messageType){
+              case RongIMClient.MessageType.TextMessage:
+                  console.log(message.content.content);
+                  break;
+              case RongIMClient.MessageType.VoiceMessage:
+                  RongIMLib.RongIMVoice.preLoaded(message.content.content);
+                  break;
+              case RongIMClient.MessageType.ImageMessage:
+                  break;
+              case RongIMClient.MessageType.DiscussionNotificationMessage:
+                  break;
+              case RongIMClient.MessageType.LocationMessage:
+                  break;
+              case RongIMClient.MessageType.RichContentMessage:
+                  break;
+              case RongIMClient.MessageType.DiscussionNotificationMessage:
+                  break;
+              case RongIMClient.MessageType.InformationNotificationMessage:
+                  break;
+              case RongIMClient.MessageType.ContactNotificationMessage:
+                  break;
+              case RongIMClient.MessageType.ProfileNotificationMessage:
+                  break;
+              case RongIMClient.MessageType.CommandNotificationMessage:
+                  break;
+              case RongIMClient.MessageType.CommandMessage:
+                  break;
+              case RongIMClient.MessageType.UnknownMessage:
+                  break;
+              default:
+            }
+          }
+        });
+
+      }
+      function handleMessage(parentTd,data){
+          var parentBox=$("#"+parentTd);
+          var messageItems=parentBox.find(".message-item");
+          if(parentBox.length>0){
+            var message=null;
+            var item=null;
+            if(data.length<1){
+              parentBox.find(".message-list").css("display","none");
+            }
+            for(var i=0,j=data.length;i<j;i++){
+              message=data[i];
+              if(messageItems.length<=i){
+                item=$(messageItems[i-1]).clone();
+                item.appendTo(parentBox.find(".message-list"));
+              }else{
+                item=$(messageItems[i]);
+              }
+              item.find(".message-author").html(message.senderUserId);
+              item.find(".message-title").html(message.content.content);
+              item.find(".message-date").html(Base.formatDate(message.sentTime));
+            }
+            parentBox.find(".mask-loading").fadeOut();
+          }
+      }
+    </script>
   </body>
 </html>

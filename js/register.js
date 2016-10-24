@@ -62,16 +62,15 @@ var RegisterValid=(function(){
            "source":"1"
           },function(data){
             console.log(data);
-            if(data.error_msg){
-              alert(data.error_msg);
-              enSubmitBtn();
+            if(Base.isSuccess(data)){
+              window.location.href="./registerSuccess.html";
             }else{
-              //window.location.href="./registerSuccess.html";
+              Base.showAlert(data.error_msg);
+              enSubmitBtn();
             }
           },function(err){  
-            alert("注册失败:"+err);
+            Base.showAlert(err,"error");
             enSubmitBtn();
-            console.log("register err:"+err);
         });
       }else{
         return false;

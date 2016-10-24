@@ -148,6 +148,27 @@
           </div>
           <div class="upload-content" id="upload-image-c">
             <a href="#" id="pickfiles-image" class="upload-add"></a>
+            <div class="file-display">
+              <div class="file-info">
+                <table>
+                  <tr>
+                    <td class="file-label">文件名称:</td>
+                    <td class="file-val"><span class="file-name"></span></td>
+                  </tr>
+                  <tr>
+                    <td class="file-label">文件格式:</td>
+                    <td class="file-val"><span class="file-type"></span></td>
+                  </tr>
+                  <tr>
+                    <td class="file-label">文件大小:</td>
+                    <td class="file-val"><span class="file-size"></span></td>
+                  </tr>
+                </table>
+                <p class="file-item">
+                  <span class="file-delete inb" role-id="upload-image-c">删除</span>
+                </p>
+              </div>
+            </div>
           </div>
           <div class="upload-btn-group">
             <div class="row">
@@ -201,7 +222,28 @@
           <div class="row">
             <div class="col-sm-6">
               <div class="upload-content" id="upload-video-c">
-                <a href="#" class="upload-add" id="pickfiles-video"></a>
+                <a href="#" id="pickfiles-video" class="upload-add"></a>
+                <div class="file-display">
+                  <div class="file-info">
+                    <table>
+                      <tr>
+                        <td class="file-label">文件名称:</td>
+                        <td class="file-val"><span class="file-name"></span></td>
+                      </tr>
+                      <tr>
+                        <td class="file-label">文件格式:</td>
+                        <td class="file-val"><span class="file-type"></span></td>
+                      </tr>
+                      <tr>
+                        <td class="file-label">文件大小:</td>
+                        <td class="file-val"><span class="file-size"></span></td>
+                      </tr>
+                    </table>
+                    <p class="file-item">
+                      <span class="file-delete inb" role-id="upload-video-c">删除</span>
+                    </p>
+                  </div>
+                </div>
               </div>
             </div>
             <div class="col-sm-6">
@@ -223,7 +265,6 @@
         </div>
       </div>
     </div>
-    <table id="fsUploadProgress"></table>
     <!--end of container-->
     <div class="footer">
       <div class="container">
@@ -303,19 +344,24 @@
         </p>
       </form>
     </div>
-    <div class="upload-mask"></div>
+    <div class="upload-mask mask">
+      <div class="upload-status">
+        <span>上传中...</span><span id="percent">0%</span>
+      </div>
+    </div>
     <!--end of footer-->
     <script type="text/javascript" src="../js/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../js/jquery.cookie.js"></script>
     <script type="text/javascript" src="../js/common.js"></script>
     <script type="text/javascript" src="../js/bootstrap.min.js"></script>
     <script type="text/javascript" src="http://jssdk.demo.qiniu.io/bower_components/plupload/js/moxie.js"></script>
-    <script type="text/javascript" src="http://jssdk.demo.qiniu.io/bower_components/plupload/js/plupload.full.min.js"></script> 
+    <script type="text/javascript" src="http://jssdk.demo.qiniu.io/bower_components/plupload/js/plupload.full.min.js"></script>
+    <!--<script type="text/javascript" src="../js/plupload-dev.js"></script>-->
     <script type="text/javascript" src="../js/qiniu-ui.js"></script>
     <script type="text/javascript" src="../js/qiniu-dev.js"></script>
     <script type="text/javascript" src="../js/qiniu-highlight.js"></script>
     <script type="text/javascript" src="../js/qiniu-config.js"></script>
     <script type="text/javascript" src="../js/login.js"></script>
-    <script type="text/javascript" src="../js/jquery.cookie.js"></script>
     <script type="text/javascript">
       $(document).ready(function(){
         if(!Base.isLogin()){
@@ -324,6 +370,16 @@
           });
           Base.showLoginBox();
         }
+        $(".upload-content .file-delete").on("click",function(){
+          if(chooseFile){
+              upFile.removeFile(chooseFile);
+              chooseFile.destroy();
+              chooseFile=null;
+              $("#"+$(this).attr("role-id")).children(".file-display").fadeOut();
+          }else{
+            Base.showAlert("请先上传资源文件","error");
+          }
+        });
         $("#upload-video .btn-video-type").on("click",function(){
           $typeBox=$(".video-type-box");
           if($typeBox.css("display")==="none"){
@@ -346,8 +402,19 @@
             });
             Base.showLoginBox();
           }else{
-            Base.setBtnDisabled("#btn-upload-image");
-            uploader1.start();
+            var $titleImage=$("#title-image");
+            var title=$titleImage.val();
+            if(!title){
+              $titleImage.focus();
+              Base.showAlert("请输入图片标题","error");
+              return;
+            }else if(!chooseFile){
+              Base.showAlert("请选择图片","error");
+              return;
+            }else{
+              Base.setBtnDisabled("#btn-upload-image");
+              uploader1.start();
+            }
           }
         });
         $("#btn-upload-video").on("click",function(){
@@ -357,8 +424,19 @@
             });
             Base.showLoginBox();
           }else{
-            Base.setBtnDisabled("#btn-upload-video");
-            uploader2.start();
+            var $titleVideo=$("#title-video");
+            var title=$titleVideo.val();
+            if(!title){
+              $titleVideo.focus();
+              Base.showAlert("请输入视频标题","error");
+              return;
+            }else if(!chooseFile){
+              Base.showAlert("请选择视频文件","error");
+              return;
+            }else{
+              Base.setBtnDisabled("#btn-upload-video");
+              uploader2.start();
+            }
           }
         });
         hljs.initHighlightingOnLoad();

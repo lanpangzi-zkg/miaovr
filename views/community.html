@@ -5,9 +5,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>VR社区</title>
-    <link href="../css/bootstrap.min.css" rel="stylesheet">
-    <link href="../css/common.css" rel="stylesheet">
-    <link href="../css/community.css" rel="stylesheet">
+    <link href="../ckeditor/ckeditor.css" rel="stylesheet" type="text/css">
+    <link href="../css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link href="../css/common.css" rel="stylesheet" type="text/css">
+    <link href="../css/community.css" rel="stylesheet" type="text/css">
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -70,12 +71,17 @@
                         <p class="nav-r-name">历史观看</p>
                       </a>
                     </li>
-                    <li>
+                    <li class="header-login">
                       <a href="./login.html">
                         <img src="../images/common/man.png" alt='' class="img-responsive nav-r-icon"/>
                         <p class="nav-r-name">登陆/注册</p>
                       </a>
                     </li>
+                    <li class="user-status">
+                      <a href="./userCenter.html">
+                        <img src="../images/comDetails/user-icon.png" width=50 alt="用户头像" class="img-responsive header-user-icon inb" onerror="userImgErr(this)">
+                        <span class="header-user-name"></span>
+                      </a>
                     <li class="search-i">
                         <form class="form-search">
                           <span class="input-search-box">
@@ -98,14 +104,14 @@
         <div class="col-sm-9">
           <span class="community-title inb">VR社区</span>
           <ul class="community-nav inb">
-            <li>首页</li>
+            <li><a href="../index.html">首页</a></li>
             <li>></li>
-            <li>VR社区</li>
+            <li><a href="#">VR社区</a></li>
           </ul>
         </div>
         <div class="col-sm-3 main-header-r">
-          <a class="theme new-theme">最新主题</a>
-          <a class="theme">推荐主题</a>
+          <a class="theme cur-theme" role-tag="1">最新主题</a>
+          <a class="theme" role-tag="2">推荐主题</a>
         </div>
       </div>
       <div class="row">
@@ -140,16 +146,7 @@
                 </li>
               </ul>
             </div>
-            <div class="pagination-box">
-              <input type="button" value="上一页" class="btn-page">
-              <ul class="pages inb">
-                <li class="page"><a href="#">1</a></li>
-                <li class="page"><a href="#">2</a></li>
-                <li class="page"><a href="#">3</a></li>
-                <li class="page"><a href="#">4</a></li>
-              </ul>
-              <input type="button" value="下一页" class="btn-page">
-            </div>
+            <div class="pagination-box" id="pagination"></div>
           </div>
           <div class="col-sm-3">
             <div class="aside-box">
@@ -164,15 +161,15 @@
                <ul class="trends-list">
                 <li>
                   <a href="#"></a>
-                  <p class="trends-title">测试测试测试</p>
+                  <p class="trends-title"></p>
                 </li>
                 <li>
                   <a href="#"></a>
-                  <p class="trends-title">测试测试测试</p>
+                  <p class="trends-title"></p>
                 </li>
                 <li>
                   <a href="#"></a>
-                  <p class="trends-title">测试测试测试</p>
+                  <p class="trends-title"></p>
                 </li>
                </ul>
              </div>
@@ -255,14 +252,14 @@
     <div class="add-theme-box">
       <div class="new-theme-top">
         <p class="theme-label">标题</p>
-        <div class="inputs-area">
+        <div class="inputs-title">
           <input type="text" id="new-theme-title">
         </div>
       </div>
       <div class="new-theme-center">
         <p class="theme-label">内容</p>
         <div class="inputs-area">
-          <textarea class="content" id="new-theme-content"></textarea>
+          <div class="content" id="new-theme-content"></div>
         </div>
       </div>
       <div class="new-theme-bottom">
@@ -290,16 +287,27 @@
       </form>
     </div>
     <!--end of footer-->
-    <script src="../js/jquery-1.11.1.min.js"></script>
-    <script src="../js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../js/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../js/bootstrap.min.js"></script>
     <script type="text/javascript" src="../js/jquery.cookie.js"></script>
     <script type="text/javascript" src="../js/login.js"></script>
-    <script src="../js/common.js"></script>
+    <script type="text/javascript" src="../js/common.js"></script>
+    <script type="text/javascript" src="../ckeditor/ckeditor.js"></script>
+    <script type="text/javascript" src="../ckeditor/ck-config.js"></script>
+    <script type="text/javascript" src="http://www.zhangxinxu.com/jq/pagination_zh/lib/jquery.pagination.js"></script>
     <script type="text/javascript">
-      var off=0;
-      var len=10;
+      var pageSize=2;
+      var curPage=0;
+      var isQuery=true;
       $(document).ready(function(){
-        queryPage(0);
+        if(Base.isLogin()){
+          initCkeditor();
+        }
+        queryPage(curPage);
+        $(".main-header-r a").on("click",function(e){
+          $(this).addClass("cur-theme").siblings("a").removeClass("cur-theme");
+          console.log($(this).attr("role-tag"));
+        });
         $(".btn-publish-theme").on("click",function(e){
           e.preventDefault();
           if(!Base.isLogin()){
@@ -345,14 +353,36 @@
         $(".theme-mask").fadeOut();
         $(".add-theme-box").fadeOut();
       }
+      var isPageInit=false;
+      function initPagination(size){
+        $("#pagination").pagination(size, {
+          callback: function(data){
+            if(data==curPage){
+              return;
+            }else{
+              queryPage(data);
+            }
+          }, 
+          prev_text: "上一页",
+          next_text: "下一页",
+          items_per_page:2,
+          num_edge_entries: 2, 
+          num_display_entries: 6, 
+          current_page: curPage
+        });
+        isPageInit=!isPageInit;
+      }
       function queryPage(pageId){
         var _pageId=parseInt(pageId);
-        off=_pageId*len;
         $("#note-list-box").find("mask-loading").fadeIn();
-        Base.queryData("/forum/all?offset="+off+"&length="+len,null,null,function(data){
+        Base.queryData("/forum/all?offset="+_pageId+"&length="+pageSize,null,null,function(data){
           console.log(data);
           if(Base.isSuccess(data)){
-            handleNote(data);
+            if(!isPageInit){
+              initPagination(data.list_size);
+            }
+            handPageSizeNote(data);
+            curPage=_pageId;
           }else{
             Base.showAlert(data.error_msg,"error");
           }
@@ -360,7 +390,7 @@
            Base.showAlert(err);
         });
       }
-      function handleNote(data){
+      function handPageSizeNote(data){
         var $parentBox=$("#note-list-box");
         $parentBox.find("img").on("error",function(){
           var _this=$(this);
@@ -368,6 +398,7 @@
           _this.off("error");
         });
         var childrenBoxs=$parentBox.find(".note-item");
+        $parentBox.find(".notes-list").css("display","block");
         var list=data.list_result;
         var temp_result=null;
         var temp_box=null;
@@ -377,7 +408,7 @@
           temp=list[i];
           if(childrenBoxs.length<=i){
             temp_box= $(childrenBoxs[0]).clone(true); 
-            $parentBox.append(temp_box);
+            childrenBoxs.append(temp_box);
           }else{
             temp_box=$(childrenBoxs[i]);
           }
