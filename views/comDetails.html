@@ -83,8 +83,16 @@
                     <li class="user-status">
                       <a href="./userCenter.html">
                         <img src="../images/comDetails/user-icon.png" width=50 alt="用户头像" class="img-responsive header-user-icon inb" onerror="userImgErr(this)">
-                        <span class="header-user-name"></span>
                       </a>
+                      <span class="arrow"></span>
+                      <div class="user-hidden-box">
+                        <span class="header-user-name inb"></span>
+                        <p class="exit-box">
+                          <a href="./userCenter.html">个人中心</a>
+                          <span class="h-line"></span>
+                          <a href="javascript:void(0);"class="exit">退出</a>
+                        </p>
+                      </div>
                     </li>
                     <li class="search-i">
                         <form class="form-search">
@@ -147,8 +155,9 @@
               </div>
             </div>
             <div class="comments-box">
-                <ul class="comments-list" id="c-comment-box">
-                </ul>
+              <ul class="comments-list" id="c-comment-box">
+              </ul>
+              <div class="pagination-box" id="pagination"></div>
             </div>
           </div>
           <div class="col-sm-3">
@@ -192,20 +201,6 @@
              </div>
             </div>
           </div>
-      </div>
-      <div class="row">
-        <div class="col-sm-9">
-          <div class="pagination-box" id="pagination">
-           <!--  <input type="button" value="上一页" class="btn-page">
-            <ul class="pages inb">
-              <li class="page"><a href="#">1</a></li>
-              <li class="page"><a href="#">2</a></li>
-              <li class="page"><a href="#">3</a></li>
-              <li class="page"><a href="#">4</a></li>
-            </ul>
-            <input type="button" value="下一页" class="btn-page"> -->
-          </div>
-        </div>
       </div>
     </div>
     <div class="footer">
@@ -339,9 +334,10 @@
       var queryParam={};
       $(document).ready(function(){
         initCkeditor();
+        Base.initHeaderUser();
         if(Base.isLogin()){
           $("#chat").click();
-        }
+        }         
         //签到
         $("#btn-user-sign").on("click",function(e){
           e.preventDefault();
@@ -351,7 +347,7 @@
             });
             Base.showLoginBox();
           }else{
-            Base.queryData("/attendance/save","POST",{"uuid":$.cookie("uuid")},function(data){
+            Base.queryData("/attendance/save","POST",{"uuid":Base.getUUID()},function(data){
               if(Base.isSuccess(data)){
                 Base.showAlert("签到成功");
               }else{
@@ -368,7 +364,6 @@
           if(!Base.isLogin()){
             LoginValid.init("login-form",function(data){
               $(".login-mask").click();
-              initMessage();
             });
             Base.showLoginBox();
           }else{
@@ -436,10 +431,9 @@
               $("#usercode").html(info.user.usercode);
               $("#user-home").attr("href","./visitUserHome.html?uid="+info.user.uuid);
               var comments=info.forumComments;
-              if(comments.length>1){
+              if(comments.length>0){
                 $(".pagination-box").css("display","block");
-                comment.handleCommentItem(comments);
-                initPagination();
+                comment.displayData(comments);
               }
             }else{
               Base.showAlert(data.error_msg,"error");
@@ -450,23 +444,10 @@
              Base.showAlert(err);
           });
         }
-        //comment.queryComment();
       });
       function hideThemePop(){
         $(".theme-mask").fadeOut();
         $(".add-theme-box").fadeOut();
-      }
-      function initPagination(){
-        $(".pagination-box").jPages({
-          containerID  : "c-comment-box",
-          previous:"上一页",
-          next:"下一页",
-          perPage      : 2,
-          startPage    : 1,
-          startRange   : 1,
-          midRange     : 5,
-          endRange     : 1
-        });
       }
     </script>
   </body>

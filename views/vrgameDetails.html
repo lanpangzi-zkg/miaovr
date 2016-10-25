@@ -79,8 +79,17 @@
                     <li class="user-status">
                       <a href="./userCenter.html">
                         <img src="../images/comDetails/user-icon.png" width=50 alt="用户头像" class="img-responsive header-user-icon inb" onerror="userImgErr(this)">
-                        <span class="header-user-name"></span>
                       </a>
+                      <span class="arrow"></span>
+                      <div class="user-hidden-box">
+                        <span class="header-user-name inb"></span>
+                        <p class="exit-box">
+                          <a href="./userCenter.html">个人中心</a>
+                          <span class="h-line"></span>
+                          <a href="javascript:void(0);"class="exit">退出</a>
+                        </p>
+                      </div>
+                    </li>
                     <li class="search-i">
                         <form class="form-search">
                           <span class="input-search-box">
@@ -214,6 +223,7 @@
             <div class="comments-box">
               <ul class="comments-list" id="c-comment-box">
               </ul>
+              <div class="pagination-box" id="pagination"></div>
             </div>
           </div>
         </div>
@@ -321,6 +331,7 @@
     <script type="text/javascript" src="../js/common.js"></script>
     <script type="text/javascript" src="../js/comment.js"></script>
     <script type="text/javascript" src="../js/login.js"></script>
+    <script type="text/javascript" src="../js/jPages.min.js"></script>
     <script type="text/javascript">
       var queryParam={};
       var hardwareObj={
@@ -336,6 +347,7 @@
         "3":"其他"
       };
       $(document).ready(function(e) {
+        Base.initHeaderUser();
         var unslider= $('#banner').unslider({
           dots: true
         }),
@@ -402,7 +414,11 @@
                 "id":game_id,
                 "textArea":".commment-body"
               });
-              comment.queryComment();
+              var comments=game.gameComments;
+              if(comments.length>0){
+                $(".pagination-box").css("display","block");
+                comment.displayData(comments);
+              }
               $(".mask-loading").fadeOut();
             }
           }else{

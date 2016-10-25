@@ -159,6 +159,7 @@
     border: none;
     background-color: #ffd737;
     color: #fff;
+    border: none!important;
 }
 .pagination-box .current,.pagination-box a{
     display: inline-block;

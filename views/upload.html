@@ -80,8 +80,16 @@
                     <li class="user-status">
                       <a href="./userCenter.html">
                         <img src="../images/comDetails/user-icon.png" width=50 alt="用户头像" class="img-responsive header-user-icon inb" onerror="userImgErr(this)">
-                        <span class="header-user-name"></span>
                       </a>
+                      <span class="arrow"></span>
+                      <div class="user-hidden-box">
+                        <span class="header-user-name inb"></span>
+                        <p class="exit-box">
+                          <a href="./userCenter.html">个人中心</a>
+                          <span class="h-line"></span>
+                          <a href="javascript:void(0);"class="exit">退出</a>
+                        </p>
+                      </div>
                     </li>
                     <li class="search-i">
                         <form class="form-search">
@@ -364,6 +372,7 @@
     <script type="text/javascript" src="../js/login.js"></script>
     <script type="text/javascript">
       $(document).ready(function(){
+        Base.initHeaderUser();
         if(!Base.isLogin()){
           LoginValid.init("login-form",function(data){
             $(".login-mask").click();

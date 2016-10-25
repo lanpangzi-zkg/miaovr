@@ -159,6 +159,9 @@ var Base=(function($,b){
     b.isLogin=function(){
         access_token=$.cookie("access_token");
         if(access_token){
+            if(!uuid){
+                uuid=$.cookie("uuid");
+            }
             var userStatus=$("#main-navbar .user-status");
             if(userStatus.css("display")=="block"){
                 return true;
@@ -170,6 +173,7 @@ var Base=(function($,b){
                     userStatus.css("display","inherit");
                     userStatus.find(".header-user-name").html(data.nickname);
                     userStatus.find("img").attr("src",data.avatar);
+                    userStatus.find("a").attr("href","./userCenter.html");
                     uuid=data.uuid;
                     return true;
                   }else{
@@ -319,5 +323,30 @@ var Base=(function($,b){
     function handleDate(t){
         return ("0"+t).slice(-2);
     }
+    b.initHeaderUser=function(){
+        $("#main-navbar .arrow").on("click",function(e){
+          var $box=$(this).siblings(".user-hidden-box");
+          if($box.css("display")=="block"){
+            $box.css("display","none");
+          }else{
+            $box.css("display","block");
+          }
+        }); 
+        $("#main-navbar .exit").on("click",function(e){
+          var $us=$("#main-navbar .user-status");
+          $us.find("a").attr("href","#");
+          $us.find("img").attr("src","../images/comDetails/user-icon.png");
+          $us.find(".user-hidden-box").css("display","none");
+          $us.find(".header-user-name").html("");
+          $us.css("display","none");
+          $us.siblings(".header-login").css("display","block");
+          $.cookie("uuid","");
+          uuid="";
+          $.cookie("access_token","");
+          $.cookie("IM_token","");
+          $.cookie("uname","");
+          Base.showAlert("退出成功");
+        }); 
+    };
     return b;
 })($,Base||{});

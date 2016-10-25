@@ -185,13 +185,56 @@ input{
 }
 #main-navbar nav ul li.user-status{
     display: none;
+    margin-right: 16px;
+    margin-left: 0;
 }
 .user-status .header-user-icon{
     line-height: 50px;
     vertical-align: middle;
 }
 .user-status .header-user-name{
+    width: 100px;
+    height: 20px;
+    line-height: 20px;
+}
+.user-status .arrow{
+    display: block;
+    width: 28px;
+    height: 7px;
+    background: url('../images/common/more.png') no-repeat;
+    position: absolute;
+    right: -20px;
+    bottom: 10px;
+}
+.user-hidden-box{
     display: none;
+    position: absolute;
+    padding: 5px;
+    background-color: #ffd737;
+    color: #fff;
+    text-align: center;
+}
+.user-hidden-box .exit-box{
+    margin: 5px 0;
+}
+.exit-box span,.exit-box a{
+    float: left;
+}
+.exit-box:after{
+    content: "";
+    display: block;
+    clear: both;
+}
+.exit-box .h-line{
+    height: 16px;
+    width: 1px;
+    background-color: #fff;
+    margin-top: 5px;
+}
+.user-hidden-box .exit-box .exit,.user-hidden-box .exit-box a{
+   padding: 5px; 
+   cursor: pointer;
+   color: #fff;
 }
 /***********content*************/
 .container-white{
@@ -296,7 +339,7 @@ input{
     margin-left: -30px;
     margin-top: -30px;
 }
-/**********logn start***************/
+/**********login start***************/
 .login-mask,.mask{
     position: absolute;
     left: 0;
@@ -439,6 +482,7 @@ input{
     background: url('../images/common/btn-reply.png') no-repeat;
 }
 .quote-box-start .front-quote {
+    margin-left: 20px;
     background: url('../images/visitUserHome/front-quote.png') no-repeat;
 }
 .quote-box-start .quote-icon {
@@ -460,6 +504,7 @@ input{
     text-align: right;
 }
 .quote-box-end .back-quote {
+    margin-right: 20px;
     background: url('../images/visitUserHome/back-quote.png') no-repeat;
 }
 .quote-box-end .quote-icon {

@@ -45,13 +45,14 @@ var LoginValid=(function(){
            "source":"1"
           },function(data){
             console.log(data);
+            enSubmitBtn();
             if(!Base.isSuccess(data)){
               Base.showAlert(data.error_msg,"error");
             }else{
-                $.cookie("access_token",data.access_token);
-                $.cookie("uuid",data.uuid);
-                Base.setUUID(data.uuid);
-                $.cookie("IM_token",data.IM_token);
+              $.cookie("access_token",data.access_token);
+              $.cookie("uuid",data.uuid);
+              Base.setUUID(data.uuid);
+              $.cookie("IM_token",data.IM_token);
               if(typeof loginSuccessCallBack=="function"){
                 $("#main-navbar .header-login").css("display","none");
                 var userStatus=$("#main-navbar .user-status");
@@ -66,7 +67,6 @@ var LoginValid=(function(){
                 window.location.href="./userCenter.html";
               }
             }
-            enSubmitBtn();
           },function(err){  
             Base.showAlert("登录失败:"+err,"error");
             enSubmitBtn();

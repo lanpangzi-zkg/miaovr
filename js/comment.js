@@ -13,8 +13,10 @@ var comment=(function(c){
     var bottomHeight=0;
     var winHeight=0;
     var length=2;
+    var pagePerNum=2;
     var pageParam="";
     var pageNum=1;
+    var commentsLength=0;
     c.init=function(config_params){
         config=config_params;
         nameId=config.nameId;
@@ -38,7 +40,6 @@ var comment=(function(c){
             },1000);
           });
         }else{
-          console.log("分页");
         }
         //发布评论
         $(".btn-publish").on("click",function(e){
@@ -51,7 +52,7 @@ var comment=(function(c){
           }
           e.preventDefault();
           var btn=$(this);
-          var comment=$(".commment-body").val();
+          var comment=$(""+textArea).val();
           if(!comment){
              Base.showAlert("请输入点评内容","error");
              $(""+textArea).focus();
@@ -59,16 +60,35 @@ var comment=(function(c){
           }
           btn.attr("disabled","disabled").addClass("btn-disabled");
           var _param={"comment":comment,
-            "from_uuid":$.cookie("uuid")};
+            "from_uuid":Base.getUUID()};
           for(var k in queryParam){
             _param[k]=queryParam[k];
           }  
+          console.log(_param);
+          console.log(Base.getUUID());
           Base.queryData(config.publish,"POST",_param,function(data){
             if(Base.isSuccess(data)){
               Base.showAlert("点评成功");
               console.log(data);
               $(".commment-body").val("");
-              //c.queryComment();
+              var fList=$comments_list.find(".comment-item")[0];
+              var nf=$(addItemComment(data.result));
+              if(fList){
+                nf.insertBefore($(fList));
+              }else{
+                nf.appendTo($comments_list);
+                $(".pagination-box").css("display","block");
+              }
+              commentsLength++;
+              if(!commentsLength%pagePerNum==0){
+                c.initPagination();
+                $comments_list.find(".comment-item").removeClass("jp-hidden").css("display","none");
+                if(fList){
+                  $(fList).removeClass({"display":"list-item","opacity":"1"});
+                }
+                nf.removeClass({"display":"list-item","opacity":"1"});
+                $(".pagination-box a").eq(1).click();
+              }
             }else{
               Base.showAlert(data.error_msg,"error");
             }
@@ -105,7 +125,7 @@ var comment=(function(c){
         //回复
         $comments_list.delegate(".btn-reply","click",function(){
           var _btn=$(this);
-          var reply_content=_btn.parent().siblings(".reply-content");
+          var reply_content=_btn.parent().siblings(".reply-to-comment");
           var reply=reply_content.val();
           if(!reply){
             Base.showAlert("请填写回复内容","error");
@@ -113,17 +133,20 @@ var comment=(function(c){
             return;
           }
           _btn.attr("disabled","disabled").addClass("btn-disabled");
-
+          var to_commentId=_btn.attr("reply-id");
           var _param={"comment":reply,
-            "from_uuid":$.cookie("uuid"),
-            "to_commentId":_btn.attr("reply-id")};
+            "from_uuid":Base.getUUID(),
+            "to_commentId":to_commentId};
           for(var k in queryParam){
             _param[k]=queryParam[k];
           }
           Base.queryData(config.reply,"POST",_param,function(data){
             if(Base.isSuccess(data)){
               Base.showAlert("回复成功");
-              c.queryComment();
+              console.log(data);
+              var $par=$comments_list.find("#"+to_commentId);
+              var $targetBox=$par.find(".comment-main");
+              $(addReplyItem(data.result)).appendTo($targetBox);
             }else{
               Base.showAlert(data.error_msg,"error");
             }
@@ -136,6 +159,10 @@ var comment=(function(c){
           });        
         });
     };
+    c.displayData=function(comments){
+      c.handleCommentItem(comments);
+      c.initPagination();
+    }
     //查询评论
     c.queryComment=function(page){
         if(isPagination){
@@ -185,8 +212,10 @@ var comment=(function(c){
                 answer_list.push(temp_result);
                 continue;
             }
-            addItemComment(temp_result);
+            commentsLength++;
+            $(addItemComment(temp_result)).appendTo($comments_list);
         }
+        console.log("commentsLength:"+commentsLength);
         for(var i=0;i<answer_list.length;i++){
           temp_result=answer_list[i];
           var $to_commentItem=$parentBox.find("#"+temp_result.to_commentId);
@@ -194,7 +223,19 @@ var comment=(function(c){
         }
         $parentBox.find(".mask-loading").fadeOut();
     };
-
+    c.initPagination=function (){
+        $(".pagination-box").jPages({
+          containerID  : "c-comment-box",
+          previous:"上一页",
+          next:"下一页",
+          perPage      : pagePerNum,
+          startPage    : 1,
+          startRange   : 1,
+          midRange     : 5,
+          endRange     : 1,
+          minHeight:false
+        });
+    };
     function addReplyItem(data){
       var commentItem="<div class='comment-item reply-item' id='"+data.commentId+"'>"+
         "<div class='quote-box-start'>"+
@@ -233,6 +274,7 @@ var comment=(function(c){
         return "";
       }
     }
+    var allNickNames={};
     function getCommentName(data){
       if("nickname" in data){
           return data.nickname;
@@ -256,7 +298,7 @@ var comment=(function(c){
              "<a class='btn-show-reply inb' role-id='"+data.commentId+"' href='javascript:void(0);'></a>"+
           "</div>"+
         "</li>";
-        $(commentItem).appendTo($comments_list);
+        return commentItem;
     }
     return c;
 })(comment||{});

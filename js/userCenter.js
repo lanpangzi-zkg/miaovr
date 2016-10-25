@@ -1,4 +1,5 @@
 $(document).ready(function(){
+  Base.initHeaderUser();
   if(!Base.isLogin()){
     window.location.href="./login.html";
     return;

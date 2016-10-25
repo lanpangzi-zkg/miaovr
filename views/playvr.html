@@ -80,8 +80,17 @@
                     <li class="user-status">
                       <a href="./userCenter.html">
                         <img src="../images/comDetails/user-icon.png" width=50 alt="用户头像" class="img-responsive header-user-icon inb" onerror="userImgErr(this)">
-                        <span class="header-user-name"></span>
                       </a>
+                      <span class="arrow"></span>
+                      <div class="user-hidden-box">
+                        <span class="header-user-name inb"></span>
+                        <p class="exit-box">
+                          <a href="./userCenter.html">个人中心</a>
+                          <span class="h-line"></span>
+                          <a href="javascript:void(0);"class="exit">退出</a>
+                        </p>
+                      </div>
+                    </li>
                     <li class="search-i">
                         <form class="form-search">
                           <span class="input-search-box">
@@ -166,6 +175,7 @@
                   </div>
                   <ul class="comments-list" id="c-comment-box">
                   </ul>
+                  <div class="pagination-box" id="pagination"></div>
                 </div>
               </div>
             </div>
@@ -279,10 +289,12 @@
     <script type="text/javascript" src="../js/comment.js"></script>
     <script type="text/javascript" src="../js/login.js"></script>
     <script type="text/javascript" src="http://media.qicdn.detu.com/@/sdk-1.2.0/sdk.js"></script>
+    <script type="text/javascript" src="../js/jPages.min.js"></script>
     <script type="text/javascript">
       var vid="";
       var queryParam={};
       $(document).ready(function(){
+        Base.initHeaderUser();
         vid=Base.searchParam("vid","id");
         if(!vid){
           Base.showAlert("抱歉,你所查找的资源不存在","error");
@@ -303,6 +315,13 @@
               $("#description").html(info.description||"暂无");
               config.videos[0].video=info.http_url;
               detupano(config);
+              var comments=info.bfVodComments;
+              if(comments.length>0){
+                $(".pagination-box").css("display","block");
+                comment.displayData(comments);
+              }else{
+                $("#user-comments-box").find(".mask-loading").fadeOut();
+              }
             }else{
               Base.showAlert(data.error_msg,"error");
             }
@@ -339,7 +358,6 @@
               "id":vid,
               "textArea":".commment-body"
           });
-          comment.queryComment();
         }
       });
 
@@ -347,7 +365,7 @@
           target: "detu_container",
           islive: false,
           videos:[
-            {name: "bq", txt: "标清", video: "http://media.qicdn.detu.com/@/68095950-956A-82A0-AC71-F66F23312713/2016-05-05/572aa0ac7f0d3-512x256.mp4", play: true}
+            {name: "bq", txt: "标清", video: "", play: true}
           ],
           ready: function(pano){
               pano.gyro(true);

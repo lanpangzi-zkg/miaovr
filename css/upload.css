@@ -44,10 +44,49 @@
     border: 1px solid #cccccc;
 }
 .upload-content{
+    position: relative;
     text-align: center;
     padding: 60px 0;
     background-color: #f5f5f5;
     margin: 20px 0;
+}
+.file-display{
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 99;
+    background-color: #f1f2f6;
+    display: none;
+}
+.file-display .file-info{
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 30%;
+}
+.file-display table{
+    width: 100%;
+    font-size: 1.3em;
+    line-height: 1.8em;
+}
+.file-display table tr{
+
+}
+.file-display table td.file-label{
+    width: 40%;
+    text-align: right;
+}
+.file-display table td.file-val{
+    width: 60%;
+    text-align: left;
+}
+.file-info .file-item .file-delete{
+    background-color: #ffd737;
+    color: #fff;
+    padding: 5px;
+    cursor: pointer;
 }
 .upload-description{
     margin: 20px 0;
@@ -134,15 +173,16 @@
 #fsUploadProgress .text-left{
     float: left;
 }
-.upload-mask{
-    position: absolute;
-    left: 0;
-    top:0;
-    right: 0;
-    bottom: 0;
-    background-color: #000;
-    opacity: 0.5;
-    *filter:alpha(opacity=50);
-    z-index: 9996;
-    display: none;
+.upload-status{
+    position: fixed;
+    left: 50%;
+    top:50%;
+    margin-left: -72px;
+    margin-top: -10px;
+    z-index: 9997;
+    color: #fff;
+    font-size: 1.5em;
+}
+.upload-status #percent{
+    margin-left: 10px;
 }

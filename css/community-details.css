@@ -31,6 +31,9 @@
     margin: 0 5px;
     color: #c2c2c2;
 }
+.community-nav li a{
+    color: inherit;
+}
 .note-details-box{
     min-height: 100px;
 }
@@ -137,36 +140,32 @@
     cursor: pointer;
     margin: 0 5px;
     color: #333;
-    padding: 10px;
+    padding: 10px 15px;
+    text-decoration: none;
+    border: 1px solid #eee;
 }
-
 .pagination-box a:hover {
-background-color: #222;
-color: #fff;
+    background-color: #ffd737;
+    color: #fff;
 }
-
 .pagination-box a.jp-previous,.pagination-box a.jp-next { 
     background-color: #ffd737;
     color: #fff;
     padding-left: 30px;
     padding-right: 30px;
 }
-
 .pagination-box a.jp-current, a.jp-current:hover {
     color: #FF4242;
     font-weight: bold;
-  }
-
+}
 .pagination-box a.jp-disabled, a.jp-disabled:hover {
     color: #bbb;
-  }
-
+    background-color: #ececec;
+}
 .pagination-box a.jp-current, a.jp-current:hover,
 .pagination-box a.jp-disabled, a.jp-disabled:hover {
     cursor: default;
-    background: none;
-  }
-
+}
 .pagination-box span { margin: 0 5px; }
 /*******文章点评********/
 .note-comment form{
