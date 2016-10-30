@@ -1,0 +1,32 @@
+.main{
+  margin: 20px 0;
+}
+.main .container{
+  min-height: 150px;
+}
+.item{
+  padding: 10px 0;
+  border-bottom: 1px solid #eee;
+  color: #999;
+}
+.item a{
+  font-size: 1.2em;
+  color: #333;
+  margin-bottom: 10px;
+  display: block;
+}
+.item p{
+  margin: 5px 0;
+  line-height: 25px;
+}
+.tips{
+  color: #ff8b3d;
+}
+.container-title:before {
+  content: "";
+  display: inline-block;
+  width: 5px;
+  height: 16px;
+  background-color: #ffd737;
+  margin-right: 10px;
+}

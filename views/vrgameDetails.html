@@ -91,13 +91,13 @@
                       </div>
                     </li>
                     <li class="search-i">
-                        <form class="form-search">
-                          <span class="input-search-box">
-                            <input type="text" class="input-search">
-                          </span><span class="btn-search-box">
-                            <input type="submit" value="搜索" class="btn-search">
-                          </span>
-                        </form>
+                      <form class="form-search" action="./search.html" onSubmit="return searchConfirm();">
+                        <span class="input-search-box">
+                          <input type="text" name="search_txt" id="t-search" class="input-search">
+                        </span><span class="btn-search-box">
+                          <input type="submit" value="搜索" id="btn-search" class="btn-search">
+                        </span>
+                      </form>
                     </li>
                 </ul>
             </div>
@@ -359,7 +359,7 @@
       });
       $("#banner").width($("#banner").width()-30);
       var search_param=window.location.search;
-      game_id=game_id=Base.searchParam("game_id","id");
+      game_id=Base.searchParam("game_id","id");
       if(!game_id){
         Base.showAlert("抱歉,你所查找的资源不存在","error");
       }else{

@@ -125,11 +125,11 @@ var comment=(function(c){
         //回复
         $comments_list.delegate(".btn-reply","click",function(){
           var _btn=$(this);
-          var reply_content=_btn.parent().siblings(".reply-to-comment");
-          var reply=reply_content.val();
+          var $reply_content=_btn.parent().siblings(".reply-to-comment");
+          var reply=$reply_content.val();
           if(!reply){
             Base.showAlert("请填写回复内容","error");
-            reply_content.focus();
+            $reply_content.focus();
             return;
           }
           _btn.attr("disabled","disabled").addClass("btn-disabled");
@@ -143,17 +143,17 @@ var comment=(function(c){
           Base.queryData(config.reply,"POST",_param,function(data){
             if(Base.isSuccess(data)){
               Base.showAlert("回复成功");
-              console.log(data);
               var $par=$comments_list.find("#"+to_commentId);
               var $targetBox=$par.find(".comment-main");
               $(addReplyItem(data.result)).appendTo($targetBox);
             }else{
               Base.showAlert(data.error_msg,"error");
             }
-            reply_content.val("");
+            $reply_content.val("");
+            $reply_content.parent().css("display","none");
             _btn.removeAttr("disabled").removeClass("btn-disabled");
           },function(err){
-            reply_content.val("");
+            $reply_content.val("");
             Base.showAlert(err);
             _btn.removeAttr("disabled").removeClass("btn-disabled");
           });        
@@ -215,7 +215,6 @@ var comment=(function(c){
             commentsLength++;
             $(addItemComment(temp_result)).appendTo($comments_list);
         }
-        console.log("commentsLength:"+commentsLength);
         for(var i=0;i<answer_list.length;i++){
           temp_result=answer_list[i];
           var $to_commentItem=$parentBox.find("#"+temp_result.to_commentId);
@@ -244,7 +243,7 @@ var comment=(function(c){
         "<div class='user-icon'><img src='"+getCommentIcon(data)+"' onerror='userImgErr(this)' class='img-responsive'/></div>"+
         "<div class='comment-main'>"+
           "<div class='user-info'>"+
-            "<span class='user-name'>"+getCommentName(data)+"</span>"+
+            "<span class='user-name' id='u-"+data.commentId+"'>"+getCommentName(data)+"</span>"+
             "<span class='floor'>0#</span>"+
           "</div>"+
           "<div class='user-comment'>"+data.comment+"</div>"+
@@ -275,13 +274,26 @@ var comment=(function(c){
       }
     }
     var allNickNames={};
-    function getCommentName(data){
-      if("nickname" in data){
-          return data.nickname;
-      }else if("user" in data){
-          return data.user.nickname;
+    function getCommentName(c){
+      if("nickname" in c){
+          return c.nickname;
+      }else if("user" in c){
+          return c.user.nickname;
       }else{
-        return data.from_uuid;
+        var from_uuid=c.from_uuid;
+        if(from_uuid in allNickNames){
+          return allNickNames[from_uuid];
+        }else{
+          Base.queryData("/user/friend_detail","POST",{"uuid":c.from_uuid},function(data){
+              if(Base.isSuccess(data)){
+                var nn=data.result.nickname;
+                allNickNames[from_uuid]=nn;
+                $("#u-"+c.commentId).html(nn);
+                $("#"+c.commentId).find("img").attr("src",data.result.thumbAvatar);
+              }
+            });
+          return "瞄瞄用户";
+        }
       }
     }
     function addItemComment(data){
@@ -289,7 +301,7 @@ var comment=(function(c){
           "<div class='user-icon'><img src='"+getCommentIcon(data)+"' onerror='userImgErr(this)' class='img-responsive'/></div>"+
           "<div class='comment-main'>"+
             "<div class='user-info'>"+
-              "<span class='user-name'>"+getCommentName(data)+"</span>"+
+              "<span class='user-name' id='u-"+data.commentId+"'>"+getCommentName(data)+"</span>"+
               "<span class='floor'>0#</span>"+
             "</div>"+
             "<div class='user-comment'>"+data.comment+"</div>"+

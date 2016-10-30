@@ -3,11 +3,11 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>用户注册</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1.0,user-scalable=0">
+    <title>搜索结果</title>
     <link href="../css/bootstrap.min.css" rel="stylesheet">
     <link href="../css/common.css" rel="stylesheet">
-    <link href="../css/register.css" rel="stylesheet">
+    <link href="../css/search.css" rel="stylesheet">
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -43,7 +43,7 @@
                     <li>
                         <a href="./vrtv.html">VRTV</a>
                     </li>
-                    <li>
+                    <li class="choose">
                         <a href="./vrgame.html">VR游戏</a>
                     </li>
                     <li>
@@ -79,9 +79,17 @@
                     <li class="user-status">
                       <a href="./userCenter.html">
                         <img src="../images/comDetails/user-icon.png" width=50 alt="用户头像" class="img-responsive header-user-icon inb" onerror="userImgErr(this)">
-                        <span class="header-user-name"></span>
                       </a>
-                    </li>  
+                      <span class="arrow"></span>
+                      <div class="user-hidden-box">
+                        <span class="header-user-name inb"></span>
+                        <p class="exit-box">
+                          <a href="./userCenter.html">个人中心</a>
+                          <span class="h-line"></span>
+                          <a href="javascript:void(0);"class="exit">退出</a>
+                        </p>
+                      </div>
+                    </li>
                     <li class="search-i">
                       <form class="form-search" action="./search.html" onSubmit="return searchConfirm();">
                         <span class="input-search-box">
@@ -98,49 +106,69 @@
           <!-- end of container-fluid -->
         </nav>
       </div>
-    </div>   
-    <div class="wrapper">
-      <div class="register-box">
-        <div class="row">
-          <div class="col-sm-12">
-            <form action="/v1/mobile_register.php" class="register-form" id="register-form">
-              <p class="register-title">
-                欢迎注册瞄瞄VR
+    </div>
+    <!--end of header-->
+    <div class="main">
+      <div class="container container-white" id="game-c">
+        <div class="container-title">VR游戏</div>
+        <p class="tips">搜索结果:<span class="result-length">0</span>条</p>
+          <ul id="game-list">
+            <div class="mask-loading">
+              <div class="loading-icon"></div>
+            </div>
+            <li class="game-item item">
+              <a href="./vrgameDetails.html?game_id=" class="link">
+                <span class="game-name"></span>
+              </a>
+              <p>
+                <span class="s-label">语言:</span><span class="language"></span>
+                <span class="s-label">硬件支持:</span><span class="hardware_support"></span>
+                <span class="s-label">上传时间:</span><span class="upload_time"></span>
               </p>
-              <p class="register-item">
-                <input type="text" role-type="mobile" role-null="请输入手机号" role-err="请检查手机号码格式" class="inp" id="mobile" name="uname" placeHolder="手机号">
-              </p>
-              <p class="register-item">
-                <input type="text" role-type="code" role-null="请输入验证码" role-err="验证码为六位数字" class="inp validate-code" name="code" id="code" placeHolder="验证码">
-                <input type="button" class="btn-code" id="btn-send-code" value="获取验证码">
-                <span class="seconds-count">60秒</span>
-              </p>
-              <p class="register-item">
-                <input type="password" role-type="pass" name="pass" role-null="请输入密码" role-err="密码包含数字字母或者下划线，6~16位长度" class="inp" id="pass" placeHolder="登陆密码">
-              </p>
-              <p class="register-item">
-                <input type="password" role-type="repass" role-repeat="pass" name="repass" role-null="请再次输入密码" role-err="两次密码输入不一致" class="inp" id="repass" placeHolder="确认密码">
-              </p>
-              <p class="register-item">
-                <input type="checkbox" role-type="checkbox" id="agree" role-err="请确保已阅读并同意瞄瞄VR用户协议">
-                <label for="agree" class="agree-label">
-                  <span>我已阅读并同意</span>
-                  <a href="#" class="register-deal">瞄瞄VR用户协议</a>
-                </label>
-                
-              </p>
-              <p class="register-item">
-                <input type="submit" value="注册" class="btn-register" id="btn-register"/>
-              </p>
-              <p class="register-item">
-                已有账号?<a href="./login.html" class="login">立即登陆</a>
-              </p>
-            </form>
+            </li>
+          </ul>
+      </div>
+      <!--end of container--> 
+      <div class="container container-white" id="info-c">
+        <div class="container-title">VR资讯</div>
+        <p class="tips">搜索结果:<span class="result-length">0</span>条</p>
+        <ul id="info-list">
+          <div class="mask-loading">
+            <div class="loading-icon"></div>
           </div>
-        </div>
+          <li class="info-item item">
+            <a href="./vrinfo.html?vid=" class="link">
+              <p class="description"></p>
+              <span class="s-label">点赞数:</span><span class="favor"></span>
+              <span class="s-label">资源类型:</span><span class="isVod"></span>
+            </a>
+          </li>
+        </ul>
+
+      </div>
+      <!--end of container-->
+      <div class="container container-white" id="video-c">
+        <div class="container-title">VR视频</div>
+        <p class="tips">搜索结果:<span class="result-length">0</span>条</p>
+        <ul id="tv-list">
+          <div class="mask-loading">
+            <div class="loading-icon"></div>
+          </div>
+          <li class="tv-item item">
+            <a href="./playvr.html?vid=">
+              <p class="showname"></p>
+            </a>  
+            <p class="description" role-limit="20"></p>
+            <p>
+              <span class="publishtime"></span>
+              <span class="s-label">观看次数:</span><span class="views"></span>
+              <span class="s-label">时长:</span><span class="duration"></span>
+            </p>
+          </li>
+        </ul>
       </div>
     </div>
-    <!--end of wrapper-->
+    <!--end of container-->
     <div class="footer">
       <div class="container">
         <div class="row">
@@ -203,12 +231,110 @@
     <!--end of footer-->
     <script src="../js/jquery-1.11.1.min.js"></script>
     <script src="../js/common.js"></script>
-    <script src="../js/register.js"></script>
     <script src="../js/bootstrap.min.js"></script>
     <script type="text/javascript">
-      $(document).ready(function(e) {
-          RegisterValid.init("register-form");
-      });     
+      $(document).ready(function(){
+        var search_param=window.location.search;
+        var search_txt=Base.searchParam("search_txt","txt");
+        console.log(search_txt);
+        //模糊搜索游戏
+        Base.queryData("/game/name","POST",{"game_name":search_txt},function(data){
+          console.log("搜索游戏");
+          console.log(data);
+          if(Base.isSuccess(data)){
+            if(data.list_result.length>0){
+              Base.handleResult("game-list",data,
+              {"childrenBox":".game-item",
+                "txt":".game-name",
+                "txt-1":".language",
+                "txt-2":".upload_time",
+                "txt-3":".hardware_support",
+                "href":"a"},
+              {"txt":"game_name",
+                "txt-1":"language",
+                "txt-2":"upload_time",
+                "txt-3":"hardware_support",
+                "href":"gameId"});
+              handleTips("game-list",data.list_result.length);
+            }else{
+              handleEmptyResult("game-list");
+            }
+          }else{
+            handleEmptyResult("game-list");
+            Base.showAlert(data.error_msg,"error");
+          }
+        },function(err){
+          handleEmptyResult("game-list");
+          Base.showAlert(err,"error");
+          console.log(err);
+        });
+        //模糊搜索资讯
+        Base.queryData("/news/description","POST",{"description":search_txt},function(data){
+          console.log("搜索资讯");
+          console.log(data);
+          if(Base.isSuccess(data)){
+            if(data.list_result.length>0) {
+              Base.handleResult("info-list",data,
+              {"childrenBox":".info-item",
+                "txt":".description",
+                "txt-1":".favor",
+                "txt-2":".isVod",
+                "href":"a"},
+              {"txt":".description",
+                "txt-1":"favor",
+                "txt-2":"isVod",
+                "href":"newsId"});
+              handleTips("info-list",data.list_result.length);
+            }else{
+              handleEmptyResult("info-list");
+            }
+          }else{
+            handleEmptyResult("info-list");
+            Base.showAlert(data.error_msg,"error");
+          }
+        },function(err){
+          handleEmptyResult("info-list");
+          Base.showAlert(err,"error");
+          console.log(err);
+        });
+        //模糊搜索视频
+        Base.queryData("/search/showname","POST",{"showname":search_txt},function(data){
+          console.log("搜索视频");
+          console.log(data);
+          if(Base.isSuccess(data)){
+            if(data.list_result.length>0){
+              Base.handleResult("tv-list",data,
+              {"childrenBox":".tv-item",
+                "txt":".showname",
+                "txt-1":".description",
+                "txt-2":".views",
+                "txt-3":".duration",
+                "href":"a"},
+              {"txt":"showname",
+                "txt-1":"description",
+                "txt-2":"views",
+                "txt-3":"duration",
+                "href":"fileid"});
+              handleTips("tv-list",data.list_result.length);
+            }else{
+              handleEmptyResult("tv-list");
+            }
+          }else{
+            handleEmptyResult("tv-list");
+            Base.showAlert(data.error_msg,"error");
+          }
+        },function(err){
+          handleEmptyResult("tv-list");
+          Base.showAlert(err,"error");
+          console.log(err);
+        });
+      });
+      function handleEmptyResult(id){
+        $("#"+id).css("display","none");
+      }
+      function handleTips(id,len){
+        $("#"+id).siblings(".tips").children(".result-length").html(len);
+      }
     </script>
   </body>
 </html>

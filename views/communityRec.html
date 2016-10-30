@@ -6,12 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>VR社区</title>
     <link href="../ckeditor/ckeditor.css" rel="stylesheet" type="text/css">
-    <link href="../css/bootstrap.min.css" rel="stylesheet">
-    <link href="../css/common.css" rel="stylesheet">
-    <link href="../css/community-details.css" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="../webim/css/RongIMWidget.css"/>
-    <link rel="stylesheet" type="text/css" href="../css/jPages.css"/>
-    <link rel="stylesheet" type="text/css" href="../css/jPages-animate.css"/>
+    <link href="../css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <link href="../css/common.css" rel="stylesheet" type="text/css">
+    <link href="../css/community.css" rel="stylesheet" type="text/css">
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -51,7 +48,7 @@
                         <a href="./vrgame.html">VR游戏</a>
                     </li>
                     <li class="choose">
-                        <a href="./community.html">VR社区</a>
+                        <a href="#">VR社区</a>
                     </li>
                 </ul>
 
@@ -80,9 +77,9 @@
                         <p class="nav-r-name">登陆/注册</p>
                       </a>
                     </li>
-                    <li class="user-status">
+                   <li class="user-status">
                       <a href="./userCenter.html">
-                        <img src="../images/comDetails/user-icon.png" width=50 alt="用户头像" class="img-responsive header-user-icon inb" onerror="userImgErr(this)">
+                        <img src="../images/comDetails/user-icon.png" width=40 alt="用户头像" class="img-responsive header-user-icon inb" onerror="userImgErr(this)">
                       </a>
                       <span class="arrow"></span>
                       <div class="user-hidden-box">
@@ -110,7 +107,7 @@
           <!-- end of container-fluid -->
         </nav>
       </div>
-    </div>  
+    </div>
     <div class="container community-main">
       <div class="row main-header">
         <div class="col-sm-9">
@@ -118,47 +115,47 @@
           <ul class="community-nav inb">
             <li><a href="../index.html">首页</a></li>
             <li>></li>
-            <li><a href="./community.html">VR社区</a></li>
-            <li>></li>
-            <li>查看内容</li>
+            <li><a href="#">VR社区</a></li>
           </ul>
+        </div>
+        <div class="col-sm-3 main-header-r">
+          <a class="theme" href="./community.html">最新主题</a>
+          <a class="theme cur-theme" href="javascript:void(0);">推荐主题</a>
         </div>
       </div>
       <div class="row">
           <div class="col-sm-9">
-            <div class="note-details-box" id="details-box">
+            <div class="notes-box" id="note-list-box">
               <div class="mask-loading">
-                  <div class="loading-icon"></div>
+                <div class="loading-icon"></div>
               </div>
-              <h2 class="note-title">
-              </h2>
-              <div class="note-info">
-                <span class="note-author"></span>
-                <span class="publish-date"></span>
-                <span class="view-mobile"><i class="icon"></i>手机看贴</span>
-              </div>
-              <div class="note-body">
-                <p class="note-txt">
-                </p>
-                <p class="end-line">
-                  end
-                </p>
-              </div>
-            </div>
-            <div class="note-comment">
-              <p class="title">主题点评</p>
-              <div class="comment-main">
-                <textarea class="commment-body"></textarea>
-                <div class="btn-group">
-                  <input type="submit" value="发布" class="btn-publish">
-                </div>
-              </div>
-            </div>
-            <div class="comments-box">
-              <ul class="comments-list" id="c-comment-box">
+              <ul class="notes-list">
+                <li class="note-item">
+                  <div class="note-icon">
+                    <img src="../images/common/default.png" role-err="../images/common/default.png" class="img-responsive user-icon">
+                  </div>
+                  <div class="note-main">
+                    <div class="note-info">
+                      <a href="#" class="note-name"></a>
+                      <span class="tag inb"></span>
+                    </div>
+                    <div class="note-extra">
+                      <span class="note-author"></span>
+                      <span class="note-date"></span>
+                      <span class="note-chat note-r">
+                        <i class="icon inb"></i>
+                        <span class="num comment-count">0</span>
+                      </span>
+                      <span class="note-off note-r">
+                        <i class="icon inb"></i>
+                        <span class="num visit-count">0</span>
+                      </span>
+                    </div>
+                  </div>
+                </li>
               </ul>
-              <div class="pagination-box" id="pagination"></div>
             </div>
+            <div class="pagination-box" id="pagination"></div>
           </div>
           <div class="col-sm-3">
             <div class="aside-box">
@@ -167,28 +164,26 @@
                   <img src="../images/community/publish-theme.png" alt='' class="img-responsive"/>
                 </a>
               </div>
-
-             <div class="author-box" ng-app="miaovr">
-              <div class="icon">
-                <img src="../images/comDetails/user-icon.png" id="thumbAvatar"  alt='' class="img-responsive"/>
-              </div>
-              <p class="author-name note-author">未知</p>
-              <p class="author-score">
-                <span class="score-line"></span>
-                <span class="score-val" id="usercode">0</span>
-                <span class="score-line"></span>
-              </p>
-              <p class="fen">积分</p>
-              <p class="btn-group" id="other-i" ng-controller="main">
-                <a href="#" id="user-home" class="home inb a-aside">主页</a>
-                <input type="hidden" id="to_uuid" ng-model="targetId">
-                <a href="javascript:void(0);" ng-click="onShow()" class="chat inb a-aside" id="chat">聊聊</a>
-                <rong-widget></rong-widget>
-              </p>
+             <div class="trends">
+               <p class="title">热点动态</p>
+               <div class="line"></div>
+               <ul class="trends-list">
+                <li>
+                  <a href="#"></a>
+                  <p class="trends-title"></p>
+                </li>
+                <li>
+                  <a href="#"></a>
+                  <p class="trends-title"></p>
+                </li>
+                <li>
+                  <a href="#"></a>
+                  <p class="trends-title"></p>
+                </li>
+               </ul>
              </div>
-
              <div class="sign">
-              <a href="#" class="btn-sign" id="btn-user-sign">
+              <a href="javascript:void(0);" id="btn-user-sign" class="btn-sign">
                   <img src="../images/community/sign.png" alt='' class="img-responsive"/>
               </a>
              </div>
@@ -262,25 +257,7 @@
         </div>
       </div> 
     </div>
-    <!--end of footer-->
-    <div class="mask" id="web-chat-mask"></div>
-    <div class="chat-dialog" id="web-chat">
-      <div class="chart-close"></div>
-      <div class="chat-header">
-        <div class="chat-user-icon">
-          <img src="../images/comDetails/user-icon.png">
-        </div>
-        <p class="chat-user-name"></p>
-      </div>
-      <div class="chat-history"></div>
-      <div class="chart-content">
-        <textarea class="main-chat"></textarea>
-      </div>
-      <div class="chart-btn-group">
-        <input type="button" value="发送" class="btn-send" id="btn-send-massage"/>
-      </div>
-    </div>
-    <div class="theme-mask mask"></div>
+    <div class="theme-mask"></div>
     <div class="add-theme-box">
       <div class="new-theme-top">
         <p class="theme-label">标题</p>
@@ -318,26 +295,25 @@
         </p>
       </form>
     </div>
+    <!--end of footer-->
     <script type="text/javascript" src="../js/jquery-1.11.1.min.js"></script>
-    <script type="text/javascript" src="../js/jquery.cookie.js"></script>
     <script type="text/javascript" src="../js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="../js/common.js"></script>
-    <script type="text/javascript" src="../js/comment.js"></script>
+    <script type="text/javascript" src="../js/jquery.cookie.js"></script>
     <script type="text/javascript" src="../js/login.js"></script>
-    <script type="text/javascript" src="../webim/angular.js"></script>
-    <script type="text/javascript" src="../webim/RongIMWidget.js"></script>
-    <script type="text/javascript" src="../webim/config.js"></script>
+    <script type="text/javascript" src="../js/common.js"></script>
     <script type="text/javascript" src="../ckeditor/ckeditor.js"></script>
     <script type="text/javascript" src="../ckeditor/ck-config.js"></script>
-    <script type="text/javascript" src="../js/jPages.min.js"></script>
+    <script type="text/javascript" src="http://www.zhangxinxu.com/jq/pagination_zh/lib/jquery.pagination.js"></script>
     <script type="text/javascript">
-      var queryParam={};
+      var pageSize=2;
+      var curPage=0;
+      var isQuery=true;
       $(document).ready(function(){
-        initCkeditor();
-        Base.initHeaderUser();
         if(Base.isLogin()){
-          $("#chat").click();
-        }         
+          initCkeditor();
+        }
+        Base.initHeaderUser();
+        queryPage(curPage);
         //签到
         $("#btn-user-sign").on("click",function(e){
           e.preventDefault();
@@ -358,7 +334,6 @@
             });
           }   
         });
-        //发表主题
         $(".btn-publish-theme").on("click",function(e){
           e.preventDefault();
           if(!Base.isLogin()){
@@ -374,10 +349,9 @@
         $(".btn-theme-cancel").on("click",function(){
           hideThemePop();
         });
-        //添加主题
         $(".btn-theme-add").on("click",function(){
           var _title=$("#new-theme-title").val();
-          var _content=$("#new-theme-content").val();
+          var _content=CKEDITOR.instances["new-theme-content"].document.getBody().getHtml();
           if(!_title){
             Base.showAlert("请输入主题标题","error");
             return;
@@ -386,11 +360,12 @@
             Base.showAlert("请输入主题内容","error");
             return;
           }
-          Base.queryData("/forum/save","POST",{"title":_title,"forum_details":_content,"uuid":Base.getUUID()},function(data){
+          Base.queryData("/forum/save","POST",{"title":_title,"forum_details":_content,"uuid":$.cookie("uuid")},function(data){
             hideThemePop();
             console.log(data);
             if(Base.isSuccess(data)){
               Base.showAlert("发表成功");
+              queryPage(0);
             }else{
               Base.showAlert(data.error_msg,"error");
             }
@@ -399,55 +374,111 @@
              Base.showAlert(err);
           });
         });
-        nid=Base.searchParam("nid","id");
-        if(!nid){
-          Base.showAlert("抱歉,你所查找的资源不存在","error");
-        }else{
-          comment.init({
-            "query":"/forum/comment/forumId",
-            "publish":"/forum/comment/save",
-            "reply":"/forum/comment/reply",
-            "nameId":"forumId",
-            "id":nid,
-            "textArea":".commment-body",
-            "isPagination":true
-          });
-          queryParam.forumId=nid;
-          //查询主题信息
-          Base.queryData("/forum/forumId","POST",{"forumId":nid},function(data){
-            console.log("查询主题信息");
-            console.log(data);
-            if(Base.isSuccess(data)&&data.list_result.length>0){
-              var info=data.list_result[0];
-              $("#btn-send-massage").attr("to_uuid",info.user.uuid);
-              $(".note-title").html(info.title);
-              $(".note-author").html(info.user.nickname||'佚名');
-              $(".publish-date").html(Base.formatDate(info.publish_time));
-              $(".note-txt").html(info.forum_details);
-              $("#thumbAvatar").attr("src",info.user.thumbAvatar).on("error",function(){
-                $(this).attr("src","../images/comDetails/user-icon.png").off("error");
-              });
-              $("#to_uuid").val(info.uuid);
-              $("#usercode").html(info.user.usercode);
-              $("#user-home").attr("href","./visitUserHome.html?uid="+info.user.uuid);
-              var comments=info.forumComments;
-              if(comments.length>0){
-                $(".pagination-box").css("display","block");
-                comment.displayData(comments);
-              }
-            }else{
-              Base.showAlert(data.error_msg,"error");
-            }
-            $("#details-box").find(".mask-loading").fadeOut();
-            //$("#other-i").find(".mask-loading").fadeOut();
-          },function(err){
-             Base.showAlert(err);
-          });
-        }
       });
       function hideThemePop(){
         $(".theme-mask").fadeOut();
         $(".add-theme-box").fadeOut();
+      }
+      var isPageInit=false;
+      function initPagination(size){
+        $("#pagination").pagination(size, {
+          callback: function(data){
+            if(data==curPage){
+              return;
+            }else{
+              queryPage(data);
+            }
+          }, 
+          prev_text: "上一页",
+          next_text: "下一页",
+          items_per_page:2,
+          num_edge_entries: 2, 
+          num_display_entries: 6, 
+          current_page: curPage
+        });
+        isPageInit=!isPageInit;
+      }
+      var $noteListMask=null;
+      function queryPage(pageId){
+        if(!$noteListMask){
+          $noteListMask=$("#note-list-box").children(".mask-loading");
+        }
+        if($noteListMask.css("display")==="none"){
+          $noteListMask.fadeIn(); 
+        }
+        var _pageId=parseInt(pageId);
+        $("#note-list-box").find("mask-loading").fadeIn();
+        Base.queryData("/forum/tag?offset="+_pageId+"&length="+pageSize,"POST",{"tag":"1"},function(data){
+          console.log(data);
+          if(Base.isSuccess(data)){
+            if(!isPageInit){
+              initPagination(data.list_size);
+            }
+            handPageSizeNote(data);
+            curPage=_pageId;
+          }else{
+            Base.showAlert(data.error_msg,"error");
+          }
+        },function(err){
+           Base.showAlert(err);
+        });
+      }
+      var $noteParentBox=null;
+      function handPageSizeNote(data){
+        if(!$noteParentBox){
+          $noteParentBox=$("#note-list-box");
+        }
+        $noteParentBox.find("img").on("error",function(){
+          var _this=$(this);
+          _this.attr("src",_this.attr("role-err"));
+          _this.off("error");
+        });
+        var childrenBoxs=$noteParentBox.find(".note-item");
+        var $notes_list=$noteParentBox.find(".notes-list");
+        $notes_list.css("display","block");
+        var list=data.list_result;
+        var temp_result=null;
+        var temp_box=null;
+        var vnum=0;
+        var temp_child=null;
+        for (var i=0,j=list.length; i<j; i++){
+          temp=list[i];
+          if(childrenBoxs.length<=i){
+            temp_box= $(childrenBoxs[0]).clone(true); 
+            temp_box.appendTo($notes_list);
+          }else{
+            temp_box=$(childrenBoxs[i]);
+          }
+          temp_box.find(".user-icon").attr("src",temp.user.thumbAvatar);
+          temp_box.find(".note-name").attr("href","./comDetails.html?nid="+temp.forumId).html(temp.title);
+          temp_box.find(".note-author").html(temp.user.nickname);
+          temp_box.find(".note-date").html(Base.formatDate(temp.publish_time));
+          temp_box.find(".comment-count").html(temp.commentNums);
+          temp_box.find(".visit-count").html(temp.views);
+          checkNoteDate(temp.publish_time,temp_box.find(".tag"));
+          //temp_box.find(".tag").addClass(" tag-new");
+        }
+        if(list.length==0){
+          $("#note-list-box .notes-list").css("display","none");
+        }
+        $noteListMask.fadeOut();
+      }
+      var baseDate=null;
+      function checkNoteDate(publish_date,tagObj){
+        if(!publish_date){
+          return;
+        }
+        if(!baseDate){
+          baseDate=new Date();
+        }
+        var pdate=new Date(publish_date);
+        var timeGap=Math.ceil((baseDate-publish_date)/3600000/24);
+        if(timeGap<=3){
+          tagObj.addClass(".tag-new");
+        }
+      }
+      function int(s){
+        return parseInt(s);
       }
     </script>
   </body>

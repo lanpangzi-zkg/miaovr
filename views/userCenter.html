@@ -3,9 +3,8 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1.0,user-scalable=0">
     <title>个人中心</title>
-
     <link href="../css/bootstrap.min.css" rel="stylesheet">
     <link href="../css/common.css" rel="stylesheet">
     <link href="../css/user-center.css" rel="stylesheet">
@@ -80,7 +79,7 @@
                     </li>
                     <li class="user-status">
                       <a href="./userCenter.html">
-                        <img src="../images/comDetails/user-icon.png" width=50 alt="用户头像" class="img-responsive header-user-icon inb" onerror="userImgErr(this)">
+                        <img src="../images/comDetails/user-icon.png" width=40 alt="用户头像" class="img-responsive header-user-icon inb" onerror="userImgErr(this)">
                       </a>
                       <span class="arrow"></span>
                       <div class="user-hidden-box">
@@ -93,13 +92,13 @@
                       </div>
                     </li>
                     <li class="search-i">
-                        <form class="form-search">
-                          <span class="input-search-box">
-                            <input type="text" class="input-search">
-                          </span><span class="btn-search-box">
-                            <input type="submit" value="搜索" class="btn-search">
-                          </span>
-                        </form>
+                      <form class="form-search" action="./search.html" onSubmit="return searchConfirm();">
+                        <span class="input-search-box">
+                          <input type="text" name="search_txt" id="t-search" class="input-search">
+                        </span><span class="btn-search-box">
+                          <input type="submit" value="搜索" id="btn-search" class="btn-search">
+                        </span>
+                      </form>
                     </li>
                 </ul>
 
@@ -174,9 +173,9 @@
                         <span class="edit-sex inb" id="edit-sex-b"></span>
                          <span class="radio-group">
                           <input type="radio" name="sex" id="sex-man" value="男">
-                          <label for="sex-man">男</label>
+                          <label for="sex-man" class="lb">男</label>
                           <input type="radio" name="sex" id="sex-women" value="女">
-                          <label for="sex-women">女</label>
+                          <label for="sex-women" class="lb">女</label>
                           <input type="button" class="btn btn-edit-sex" value="确定">
                           <input type="button" class="btn btn-cancel-sex" value="取消">
                          </span> 
@@ -231,7 +230,7 @@
                     </div>
                     <div class="edit-area">
                     <form action="/v1/account_avatar.php" enctype="multipart/form-data">
-                      <input type="file" name="avatar"/>
+                      <input type="file" name="avatar" style="display:none"/>
                       <input type="submit" class="upload-btn btn" value="上传">
                     </form>
                     </div>
@@ -272,6 +271,9 @@
                       </p>
                       <p class="form-item">
                         <input type="submit" role-type="submit" role-load="修改中..." role-nor="确认修改" class="btn" value="确认修改">
+                      </p>
+                      <p class="form-item tip" style="color:#ff8b3d;">
+                        说明:每个用户只能修改一次昵称!
                       </p>
                     </form>
                   </div>

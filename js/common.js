@@ -2,19 +2,32 @@ function userImgErr(e){
   $(e).attr("src","../images/comDetails/user-icon.png");
   $(e).off("error");
 }
+function searchConfirm(){
+    var t=Base.xssCheck($("#t-search").val());
+    if(t){
+        return true;
+    }else{
+        Base.showAlert("请输入关键字","error");
+        return false;
+    }
+}
 var Base=(function($,b){
     var config={
         basePath:"http://127.0.0.1:8080/miaovr/queryApi"
     };
     b.queryData=function(method,requestType,param,successCallBack,failCallBack,async){
         var _param=param||{};
+        var _async=true;//异步
+        if(arguments.length>5){
+            _async=async;
+        }
         _param.method=method;
         $.ajax({
             url:config.basePath,
             type:requestType||"GET",
             data:_param,
             dataType:"json",
-            async: async||true, 
+            async: _async, 
             success:function(data){
                 if(typeof successCallBack=="function"){
                     successCallBack(data);
@@ -77,14 +90,33 @@ var Base=(function($,b){
     b.isSuccess=function(data){
         return data.status=="1"&&data.error_code=="0";
     };
+    b.trim=function(s){
+        s.replace(/\s+/g,"");
+    };
+    b.xssCheck=function(str,reg){
+        return str ? str.replace(reg || /[&<">'](?:(amp|lt|quot|gt|#39|nbsp|#\d+);)?/g, function (a, b) {
+            if(b){
+                return a;
+            }else{
+                return {
+                    '<':'&lt;',
+                    '&':'&amp;',
+                    '"':'&quot;',
+                    '>':'&gt;',
+                    "'":'&#39;',
+                }[a]
+            }
+        }) : '';
+    };
     var searchMatch={
         "number":/^[0-9]+$/,
-        "id":/^[0-9a-zA-Z-]+$/
-    }
+        "id":/^[0-9a-zA-Z-]+$/,
+        "txt":/^[A-Za-z-0-9%_]+$/
+    };
     b.searchParam=function(key,type){
         var search_param=window.location.search;
         var value=null;
-        if(!search_param.match((/^(\?)[\w]+(=)[\w-]+/))||!searchMatch[type]){
+        if(!search_param.match(/^(\?)[\w]+(=)[A-Za-z-0-9%]+$/g)||!searchMatch[type]){
             return value;
         }
         var search_arr=search_param.slice(1).split("&");
@@ -96,7 +128,7 @@ var Base=(function($,b){
                 i=j;
             }
         }
-        return value;
+        return decodeURI(value);
     };
     var alertBox=null;
     b.showAlert=function(msg,type){
@@ -145,10 +177,16 @@ var Base=(function($,b){
     }
     function handleText(ele,data,txt){
         var result=data[txt];
-        if(txt==="publish_time"){
+        if(txt.indexOf("_time")>0){
             result=b.formatDate(data[txt]);
         }else if(txt==="duration"){
             result=b.formatTime(data[txt]);
+        }else if(txt==="language"){
+            result=b.handleLanguage(data[txt]);
+        }else if(txt==="hardware_support"){
+            result=b.handleHardwareSupport(data[txt]);
+        }else if(txt==="isVod"){
+            result=b.handleVod(data[txt]);
         }
         var limit=ele.attr("role-limit");
         if(limit){
@@ -156,6 +194,57 @@ var Base=(function($,b){
         }
         return result;
     }
+    b.handleVod=function(vod){
+        if(vod){
+            var vodObj={
+                "1":"是",
+                "0":"否"
+            };
+            return vodObj[vod]
+        }else{
+            return "未知";
+        }
+    };
+    b.handleLanguage=function(lan){
+        if(lan){
+            var languageObj={
+                "0":"中文",
+                "1":"英语",
+                "2":"日语",
+                "3":"其他"
+            };
+            var a1=lan.split(",");
+            var language_txt="";
+            for(var i=0;i<a1.length;i++){
+              if(languageObj[a1[i]]){
+                language_txt+=languageObj[a1[i]]+",";
+              }
+            }
+            return language_txt.slice(0,language_txt.length-1);
+        }else{
+            return "";
+        }
+    };
+    b.handleHardwareSupport=function(hs){
+        if(hs){
+            var hardwareObj={
+                "0":"HTC Vive",
+                "1":"Oculus Rift",
+                "2":"PS VR",
+                "3":"Mobile VR"
+            };
+            var a2=hs.split(",");
+            var hardware_support_txt="";
+            for(var i=0;i<a2.length;i++){
+              if(hardwareObj[a2[i]]){
+                hardware_support_txt+=hardwareObj[a2[i]]+",";
+              }
+            }
+            return hardware_support_txt.slice(0,hardware_support_txt.length-1);
+        }else{
+            return "";
+        }
+    };
     b.isLogin=function(){
         access_token=$.cookie("access_token");
         if(access_token){
@@ -346,6 +435,9 @@ var Base=(function($,b){
           $.cookie("IM_token","");
           $.cookie("uname","");
           Base.showAlert("退出成功");
+          if(window.location.href.indexOf("userCenter.html")>0){
+            window.location.href="./login.html";
+          }
         }); 
     };
     return b;

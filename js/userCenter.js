@@ -1,12 +1,12 @@
 $(document).ready(function(){
-  Base.initHeaderUser();
   if(!Base.isLogin()){
     window.location.href="./login.html";
     return;
   }
+  Base.initHeaderUser();
   var access_token=$.cookie("access_token");
   Base.queryData("/v1/account_information.php?access_token="+access_token,null,null,function(data){
-      console.log(data);
+    console.log(data);
     if(Base.isSuccess(data)){
       $("#w").fadeOut();
       $("#nickname").html(data.nickname);
@@ -58,6 +58,7 @@ $(document).ready(function(){
       $.cookie("nickname",data.nickname);
       $("#new-nickname").val("");
       $("#aside-page-1>.tabs>li").eq(0).click();
+      Base.showAlert("修改成功");
     }
   });
   new UserForm().init("form-change-pass");
@@ -81,15 +82,21 @@ var genderManage=(function(){
     curSex=$.cookie("gender");
     getUserSexLabel().html(sexCollection[curSex]);
     sexRadios=$("input:radio[name='sex']");
-    sexRadios.attr("checked",sexCollection[curSex]);
+    //sexRadios.attr("checked",sexCollection[curSex]);
+    //修改
     $("#edit-sex-b").on("click",function(){
-      $(this).siblings(".radio-group").css("display","inline-block");
-      $(this).css("display","none");
-      sexRadios.attr("checked",getUserSexLabel().html());
+      $(this).siblings(".radio-group").addClass("inb");
+      $(this).removeClass("inb").css("display","none");
+      if(curSex==="1"){
+        $(sexRadios[0]).attr("checked","checked");
+      }else{
+        $(sexRadios[1]).attr("checked","checked");        
+      }
     });
+    //保存性别修改
     $(".btn-edit-sex").on("click",function(){
-      $(this).parent().siblings("#edit-sex-b").css("display","inline-block");
-      $(this).parent().css("display","none");
+      $(this).parent().siblings("#edit-sex-b").addClass("inb");
+      $(this).parent().removeClass("inb").css("display","none");
       var val=$("input:radio[name='sex']:checked").val();
       if(val==="男"){
         chooseSex="1";
@@ -101,22 +108,22 @@ var genderManage=(function(){
       }else{
         Base.queryData("/v1/account_gender.php","POST",
           {"gender":chooseSex},function(data){
-            if(data.status=="1"&&data.error_code=="0"){
-              alert("修改成功");
+            if(Base.isSuccess(data)){
               curSex=data.gender;
               $.cookie("gender",curSex);
               getUserSexLabel().html(sexCollection[curSex]);
+              Base.showAlert("修改成功");
             }else{
-              alert(data.error_msg);
+              Base.showAlert(data.error_msg,"error");
             }
           },function(err){  
-            alert(err);
+            Base.showAlert(err,"error");
         });
       }
     });
     $(".btn-cancel-sex").on("click",function(){
-      $(this).parent().siblings("#edit-sex-b").css("display","inline-block");
-      $(this).parent().css("display","none");
+      $(this).parent().siblings("#edit-sex-b").addClass("inb");
+      $(this).parent().removeClass("inb").css("display","none");
     });
   }
   function getUserSexLabel(){
@@ -239,7 +246,7 @@ function validateForm(e){
         if(typeof successCallBack=="function"){
           successCallBack(data);
         }else{
-          alert("修改成功");
+          Base.showAlert("修改成功");
         }
         enSubmitBtn(_btn);
       },function(err){  
@@ -247,6 +254,7 @@ function validateForm(e){
           failCallBack(data);
         }else{
           alert(err);
+          Base.showAlert(err,"error");
         }
         enSubmitBtn(_btn);
     });

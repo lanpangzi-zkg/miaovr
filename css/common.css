@@ -189,7 +189,7 @@ input{
     margin-left: 0;
 }
 .user-status .header-user-icon{
-    line-height: 50px;
+    line-height: 40px;
     vertical-align: middle;
 }
 .user-status .header-user-name{
@@ -203,8 +203,9 @@ input{
     height: 7px;
     background: url('../images/common/more.png') no-repeat;
     position: absolute;
-    right: -20px;
-    bottom: 10px;
+    left:50%;
+    margin-left: -14px;
+    bottom: 3px;
 }
 .user-hidden-box{
     display: none;
@@ -608,9 +609,35 @@ input{
         padding-bottom: 10px;
     }
 }
-@media (max-width: 360px) {
+@media (max-width: 375px) {
+    #main-navbar .container-fluid{
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+    #main-navbar .container-fluid .navbar-header{
+        margin-left: 0;
+        margin-right: 0;
+    }
+    #main-navbar .navbar .navbar-right .search-i{
+        display: block;
+    }
     #main-navbar .navbar .navbar-right>li>a {
         padding: 10px 0px;
+    }
+    #main-navbar .navbar .navbar-left>li>a{
+        width:auto;
+    }
+    #main-navbar .navbar-nav{
+        border-top: none;
+    }
+    #main-navbar .navbar-nav.navbar-right{
+        border-top:1px solid #eee;
+    }
+    .footer .container{
+        padding: 0 50px;
+    }
+    .aside-nav{
+        display: none;
     }
 }
 @media (max-width: 320px) {

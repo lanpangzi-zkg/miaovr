@@ -55,7 +55,7 @@
     margin: 10px 0;
 }
 .tabs .tab{
-    padding: 10px;
+    padding: 10px 20px;
     color: #d2d2d3;
     cursor: pointer;
 }
@@ -87,55 +87,60 @@
     float: left;
 }
 .user-basic .info{
-    margin-left: 130px;
+    margin-left: 140px;
     position: relative;
 }
 .user-basic .info .info-item{
     padding: 15px;
+}
+.user-basic .info .sex-item{
+    margin-top: 17px;
 }
 .user-basic .info .info-name{
     padding-top: 0;
 }
 .user-basic .user-name{
     font-size: 1.2em;
-    vertical-align: middle;
+    float: left;
 }
 .user-basic .edit-name{
     color: #ffd737;
     cursor: pointer;
-    vertical-align: middle;
+    line-height: 16px;
+    padding: 0 5px;
+    float: left;
+    margin-left: 10px;
 }
 .edit-name .icon{
     width: 17px;
     height: 16px;
-    line-height: 20px;
-    vertical-align: middle;
+    vertical-align: sub;
     background:url('../images/userCenter/Pencil.png')  no-repeat;
-}
-.edit-name span{
-    line-height: 20px;
-    vertical-align: middle;  
 }
 .sex-item span,.sex-item label{
     vertical-align: middle;
-    line-height: 20px;
+    line-height: 13px;
+    font-weight: normal;
+}
+.sex-item .lb{
+    margin-top: -2px;
 }
 .sex-item .radio-group input{
     margin-top: 0;
-    line-height: 20px;
+    line-height: 16px;
     vertical-align: middle;
 }
 .info-item .edit-sex{
     width: 30px;
     height: 16px;
-    line-height: 22px;
+    line-height: 16px;
     cursor: pointer;
     background:url('../images/userCenter/edit.png')  no-repeat;
 }
 .info-item .radio-group{
     display: none;
     margin-left: 20px;
-    height: 20px;
+    height: 16px;
 }
 .info-item .radio-group .btn{
     padding: 0 5px;
@@ -143,7 +148,6 @@
     font-size: 12px;
     color: #ffffff;
     background-color: #ff8b3d;
-    margin-left: 5px;
 }
 .info-item .radio-group .btn-cancel-sex{
     background-color: #b19480;
@@ -216,7 +220,7 @@
     background-color: #f5f5f5;
 }
 .edit-box .form-item{
-    padding: 10px 0;
+    padding: 10px 0 10px 66px;
 }
 .edit-box .form-item label{
     display: inline-block;
@@ -224,16 +228,20 @@
     font-weight: normal;
     color: #999999;
 }
+#cur-nickname{
+    color: #999999;
+}
 .edit-box .form-item .inp{
     width: 180px;
     padding: 5px 0;
+    border: 1px solid #b1b1b1;
 }
 .edit-box .form-item .btn,.edit-icon-box .upload-btn{
     background-color: #ffd737;
     color: #fff;
     border-radius: 0;
     width: 120px;
-    margin-left: 105px;
+    margin-left: 114px;
 }
 .edit-icon-box .upload-btn{
     border: none;

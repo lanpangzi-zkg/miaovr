@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1.0,user-scalable=0">
     <title>VR TV</title>
 
     <link href="../css/bootstrap.min.css" rel="stylesheet">
@@ -92,13 +92,13 @@
                       </div>
                     </li>
                     <li class="search-i">
-                        <form class="form-search">
-                          <span class="input-search-box">
-                            <input type="text" class="input-search">
-                          </span><span class="btn-search-box">
-                            <input type="submit" value="搜索" class="btn-search">
-                          </span>
-                        </form>
+                      <form class="form-search" action="./search.html" onSubmit="return searchConfirm();">
+                        <span class="input-search-box">
+                          <input type="text" name="search_txt" id="t-search" class="input-search">
+                        </span><span class="btn-search-box">
+                          <input type="submit" value="搜索" id="btn-search" class="btn-search">
+                        </span>
+                      </form>
                     </li>
                 </ul>
             </div>

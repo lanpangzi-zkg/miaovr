@@ -71,11 +71,25 @@
                         <p class="nav-r-name">历史观看</p>
                       </a>
                     </li>
-                    <li>
-                      <a href="./views/login.html">
-                        <img src="./images/common/man.png" alt='' class="img-responsive nav-r-icon"/>
+                   <li class="header-login">
+                      <a href="./login.html">
+                        <img src="../images/common/man.png" alt='' class="img-responsive nav-r-icon"/>
                         <p class="nav-r-name">登陆/注册</p>
                       </a>
+                    </li>
+                    <li class="user-status">
+                      <a href="./userCenter.html">
+                        <img src="../images/comDetails/user-icon.png" width=50 alt="用户头像" class="img-responsive header-user-icon inb" onerror="userImgErr(this)">
+                      </a>
+                      <span class="arrow"></span>
+                      <div class="user-hidden-box">
+                        <span class="header-user-name inb"></span>
+                        <p class="exit-box">
+                          <a href="./userCenter.html">个人中心</a>
+                          <span class="h-line"></span>
+                          <a href="javascript:void(0);"class="exit">退出</a>
+                        </p>
+                      </div>
                     </li>
                     <li class="search-i">
                         <form class="form-search">
@@ -729,11 +743,14 @@
       </li>
     </ul>
     <script src="./js/jquery-1.11.1.min.js"></script>
+    <script src="./js/jquery.cookie.js"></script>
     <script src="./js/common.js"></script>
     <script src="./js/unslider.min.js"></script>
     <script src="./js/bootstrap.min.js"></script>
     <script type="text/javascript">
       $(document).ready(function(e) {
+        Base.initHeaderUser();
+        Base.isLogin();
         initSlider();
         queryVrInfo();
         queryVrTv();

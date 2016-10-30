@@ -79,7 +79,7 @@
                     </li>
                    <li class="user-status">
                       <a href="./userCenter.html">
-                        <img src="../images/comDetails/user-icon.png" width=50 alt="用户头像" class="img-responsive header-user-icon inb" onerror="userImgErr(this)">
+                        <img src="../images/comDetails/user-icon.png" width=40 alt="用户头像" class="img-responsive header-user-icon inb" onerror="userImgErr(this)">
                       </a>
                       <span class="arrow"></span>
                       <div class="user-hidden-box">
@@ -92,11 +92,11 @@
                       </div>
                     </li>
                     <li class="search-i">
-                        <form class="form-search">
+                        <form class="form-search" action="./search.html" onSubmit="return searchConfirm();">
                           <span class="input-search-box">
-                            <input type="text" class="input-search">
+                            <input type="text" name="search_txt" id="t-search" class="input-search">
                           </span><span class="btn-search-box">
-                            <input type="submit" value="搜索" class="btn-search">
+                            <input type="submit" value="搜索" id="btn-search" class="btn-search">
                           </span>
                         </form>
                     </li>
@@ -119,8 +119,8 @@
           </ul>
         </div>
         <div class="col-sm-3 main-header-r">
-          <a class="theme cur-theme" role-tag="1">最新主题</a>
-          <a class="theme" role-tag="2">推荐主题</a>
+          <a class="theme cur-theme" href="javascript:void(0);">最新主题</a>
+          <a class="theme" href="./communityRec.html">推荐主题</a>
         </div>
       </div>
       <div class="row">
@@ -137,7 +137,7 @@
                   <div class="note-main">
                     <div class="note-info">
                       <a href="#" class="note-name"></a>
-                      <span class="tag inb tag-new"></span>
+                      <span class="tag inb"></span>
                     </div>
                     <div class="note-extra">
                       <span class="note-author"></span>
@@ -183,7 +183,7 @@
                </ul>
              </div>
              <div class="sign">
-              <a href="#" class="btn-sign">
+              <a href="javascript:void(0);" id="btn-user-sign" class="btn-sign">
                   <img src="../images/community/sign.png" alt='' class="img-responsive"/>
               </a>
              </div>
@@ -314,9 +314,25 @@
         }
         Base.initHeaderUser();
         queryPage(curPage);
-        $(".main-header-r a").on("click",function(e){
-          $(this).addClass("cur-theme").siblings("a").removeClass("cur-theme");
-          console.log($(this).attr("role-tag"));
+        //签到
+        $("#btn-user-sign").on("click",function(e){
+          e.preventDefault();
+          if(!Base.isLogin()){
+            LoginValid.init("login-form",function(data){
+              $(".login-mask").click();
+            });
+            Base.showLoginBox();
+          }else{
+            Base.queryData("/attendance/save","POST",{"uuid":Base.getUUID()},function(data){
+              if(Base.isSuccess(data)){
+                Base.showAlert("签到成功");
+              }else{
+                Base.showAlert(data.error_msg,"error");
+              }
+            },function(err){
+               Base.showAlert(err);
+            });
+          }   
         });
         $(".btn-publish-theme").on("click",function(e){
           e.preventDefault();
@@ -335,7 +351,7 @@
         });
         $(".btn-theme-add").on("click",function(){
           var _title=$("#new-theme-title").val();
-          var _content=$("#new-theme-content").val();
+          var _content=CKEDITOR.instances["new-theme-content"].document.getBody().getHtml();
           if(!_title){
             Base.showAlert("请输入主题标题","error");
             return;
@@ -382,7 +398,14 @@
         });
         isPageInit=!isPageInit;
       }
+      var $noteListMask=null;
       function queryPage(pageId){
+        if(!$noteListMask){
+          $noteListMask=$("#note-list-box").children(".mask-loading");
+        }
+        if($noteListMask.css("display")==="none"){
+          $noteListMask.fadeIn(); 
+        }
         var _pageId=parseInt(pageId);
         $("#note-list-box").find("mask-loading").fadeIn();
         Base.queryData("/forum/all?offset="+_pageId+"&length="+pageSize,null,null,function(data){
@@ -400,15 +423,19 @@
            Base.showAlert(err);
         });
       }
+      var $noteParentBox=null;
       function handPageSizeNote(data){
-        var $parentBox=$("#note-list-box");
-        $parentBox.find("img").on("error",function(){
+        if(!$noteParentBox){
+          $noteParentBox=$("#note-list-box");
+        }
+        $noteParentBox.find("img").on("error",function(){
           var _this=$(this);
           _this.attr("src",_this.attr("role-err"));
           _this.off("error");
         });
-        var childrenBoxs=$parentBox.find(".note-item");
-        $parentBox.find(".notes-list").css("display","block");
+        var childrenBoxs=$noteParentBox.find(".note-item");
+        var $notes_list=$noteParentBox.find(".notes-list");
+        $notes_list.css("display","block");
         var list=data.list_result;
         var temp_result=null;
         var temp_box=null;
@@ -418,7 +445,7 @@
           temp=list[i];
           if(childrenBoxs.length<=i){
             temp_box= $(childrenBoxs[0]).clone(true); 
-            childrenBoxs.append(temp_box);
+            temp_box.appendTo($notes_list);
           }else{
             temp_box=$(childrenBoxs[i]);
           }
@@ -428,11 +455,30 @@
           temp_box.find(".note-date").html(Base.formatDate(temp.publish_time));
           temp_box.find(".comment-count").html(temp.commentNums);
           temp_box.find(".visit-count").html(temp.views);
+          checkNoteDate(temp.publish_time,temp_box.find(".tag"));
+          //temp_box.find(".tag").addClass(" tag-new");
         }
         if(list.length==0){
           $("#note-list-box .notes-list").css("display","none");
         }
-        $parentBox.find(".mask-loading").fadeOut();
+        $noteListMask.fadeOut();
+      }
+      var baseDate=null;
+      function checkNoteDate(publish_date,tagObj){
+        if(!publish_date){
+          return;
+        }
+        if(!baseDate){
+          baseDate=new Date();
+        }
+        var pdate=new Date(publish_date);
+        var timeGap=Math.ceil((baseDate-publish_date)/3600000/24);
+        if(timeGap<=3){
+          tagObj.addClass(".tag-new");
+        }
+      }
+      function int(s){
+        return parseInt(s);
       }
     </script>
   </body>

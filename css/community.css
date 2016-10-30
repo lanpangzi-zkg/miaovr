@@ -27,8 +27,8 @@
     font-size: 1.2em;
     padding: 10px 0;
 }
-.community-nav{
-
+.community-nav a{
+    color:#999999;
 }
 .community-nav li{
     float: left;
@@ -47,6 +47,7 @@
 }
 .note-item .note-icon{
     float: left;
+    margin-top: 8px;
     width: 35px;
     height: 35px;
     background-color: #555;
@@ -54,7 +55,7 @@
 }
 .note-item .note-main{
     position: relative;
-    margin-left: 60px;
+    margin-left: 55px;
     line-height: 30px;
     border-bottom: 1px solid #eee;
 }
@@ -77,9 +78,11 @@
 }
 .note-main .note-info .note-name{
    font-size: 1.1em;
+   color: #000000;
 }
 .note-extra{
     color: #dfdfe0;
+    font-size: 12px;
 }
 .note-extra .note-author{
 
@@ -107,7 +110,7 @@
     
 }
 .aside-box{
-    padding: 10px;
+    padding: 25px 10px 10px 10px;
 }
 .aside-box .title{
     padding: 0 10px;
@@ -130,7 +133,7 @@
     background-color: #fff;
 }
 .trends .trends-list li{
-
+    padding: 0 22px;
 }
 .trends .trends-list li a{
     width: 100%;
@@ -242,6 +245,16 @@
 }
 .inputs-title{
     margin: 0 10px;
+}
+@media (max-width: 992px){
+    .main-header .theme{
+        margin: 0;
+    }
+}
+@media (max-width: 985px) {
+    .pagination-box .next, .pagination-box .prev{
+        width: auto;
+    }
 }
 @media (max-width: 600px) {
     .main-header-r{
