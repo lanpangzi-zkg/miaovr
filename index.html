@@ -73,13 +73,13 @@
                     </li>
                    <li class="header-login">
                       <a href="./views/login.html">
-                        <img src="../images/common/man.png" alt='' class="img-responsive nav-r-icon"/>
+                        <img src="./images/common/man.png" alt='' class="img-responsive nav-r-icon"/>
                         <p class="nav-r-name">登陆/注册</p>
                       </a>
                     </li>
                     <li class="user-status">
                       <a href="./userCenter.html">
-                        <img src="../images/comDetails/user-icon.png" width=50 alt="用户头像" class="img-responsive header-user-icon inb" onerror="userImgErr(this)">
+                        <img src="./images/comDetails/user-icon.png" width=50 alt="用户头像" class="img-responsive header-user-icon inb" onerror="userImgErr(this)">
                       </a>
                       <span class="arrow"></span>
                       <div class="user-hidden-box">
@@ -538,7 +538,7 @@
                       <p class="chapter-content"></p>
                       <div class="chapter-bottom">
                         <div class="user-icon">
-                          <img src="../images/common/default.png" role-err="../images/common/default.png" class="icon img-responsive">
+                          <img src="./images/common/default.png" role-err="./images/common/default.png" class="icon img-responsive">
                         </div>
                         <span class="nickname"></span>
                         <div class="chapter-interactive">
@@ -685,12 +685,16 @@
         queryVrGame();
         queryCommunity();
       });
+      function userImgErrIndex(e){
+        $(e).attr("src","./images/common/user-icon.png");
+        e.onerror=null;
+      }
       function initSlider(){
         var $banner=$("#banner");
         querySlider($banner);
       }
       function querySlider($banner){
-        Base.queryData("/v1/sliders.php?limit=10",null,null,function(data){
+        Base.queryData("/v1/sliders.php?limit=10","POST",null,function(data){
           console.log("querySlider");
           console.log(data);
           if(Base.isSuccess(data)){
@@ -720,7 +724,7 @@
         });
       }
       function queryVrInfo(){
-        Base.queryData("/news/all?offset=0&limit=3",null,null,function(data){
+        Base.queryData("/news/all?offset=0&limit=3","POST",null,function(data){
           if(Base.isSuccess(data)){
           Base.handleResult("index-vrinfo",data,
             {"childrenBox":".col-sm-4",

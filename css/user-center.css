@@ -209,7 +209,6 @@
     float: left;
     width: 120px;
     height: 120px;
-    background-color: #eee;
 }
 .edit-icon-box  .edit-area{
     position: relative;
@@ -343,4 +342,49 @@ input.disabled{
 }
 #alert-box .alert-item.fail{
     background-color: #E91E63;
+}
+/******upload image********/
+.fileinput-button{
+    margin-top: 15px;
+}
+#add-file{
+    display: none;
+    margin: 15px 0;
+}
+#add-file .file-btn{
+    border: none;
+    color: #fff;
+    padding: 5px 10px;
+    background-color: #648fb5;
+}
+.file-upload-progress{
+    width:0%;
+    height: 18px;
+    display: none;
+    background-color: #ffd737;
+}
+.fileinput-button {
+  position: relative;
+  overflow: hidden;
+  display: inline-block;
+}
+.fileinput-button input {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 0;
+  opacity: 0;
+  -ms-filter: 'alpha(opacity=0)';
+  font-size: 200px !important;
+  direction: ltr;
+  cursor: pointer;
+}
+
+/* Fixes for IE < 8 */
+@media screen\9 {
+  .fileinput-button input {
+    filter: alpha(opacity=0);
+    font-size: 100%;
+    height: 100%;
+  }
 }

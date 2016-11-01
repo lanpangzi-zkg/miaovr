@@ -9,9 +9,11 @@ $(document).ready(function(){
     console.log(data);
     if(Base.isSuccess(data)){
       $("#w").fadeOut();
+      $("#access_token").val(data.access_token);
       $("#nickname").html(data.nickname);
       $("#cur-nickname").html(data.nickname);
-      $("#thumb_avatar").attr("src",data.thumb_avatar).on("error",userIcon);
+      $("#thumb_avatar").attr("src",data.thumb_avatar);
+      $("#upload_avatar").attr("src",data.thumb_avatar);
     }else{
       Base.showAlert(data.error_msg,"error");
     }

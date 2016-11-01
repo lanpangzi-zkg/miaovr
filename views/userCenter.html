@@ -78,14 +78,14 @@
                       </a>
                     </li>
                     <li class="user-status">
-                      <a href="./userCenter.html">
+                      <a href="javascript:void(0);">
                         <img src="../images/comDetails/user-icon.png" width=40 alt="用户头像" class="img-responsive header-user-icon inb" onerror="userImgErr(this)">
                       </a>
                       <span class="arrow"></span>
                       <div class="user-hidden-box">
                         <span class="header-user-name inb"></span>
                         <p class="exit-box">
-                          <a href="./userCenter.html">个人中心</a>
+                          <a href="javascript:void(0);">个人中心</a>
                           <span class="h-line"></span>
                           <a href="javascript:void(0);"class="exit">退出</a>
                         </p>
@@ -157,7 +157,7 @@
                 <div class="page active-page" id="basic-page-1">
                   <div class="user-basic">
                     <div class="user-icon">
-                      <img id="thumb_avatar" src="../images/userCenter/user-icon.png" class="img-responsive">
+                      <img id="thumb_avatar" src="../images/userCenter/user-icon.png" class="img-responsive" onerror="userImgErr(this)">
                     </div>
                     <div class="info">
                       <p class="info-item info-name">
@@ -226,13 +226,25 @@
                 <div class="page" id="basic-page-2">
                   <div class="edit-icon-box edit-box">
                     <div class="current-icon">
-                      <img src="../images/userCenter/user-icon.png" class="img-responsive">
+                      <img src="../images/userCenter/user-icon.png" id="upload_avatar" class="img-responsive" onerror="userImgErr(this)">
                     </div>
                     <div class="edit-area">
-                    <form action="/v1/account_avatar.php" enctype="multipart/form-data">
-                      <input type="file" name="avatar" style="display:none"/>
-                      <input type="submit" class="upload-btn btn" value="上传">
-                    </form>
+                    <form id="fileupload" action="http://api.app.miaomiaotv.cn/v1/account_avatar.php" enctype="multipart/form-data" method="POST">
+                      <span class="btn btn-success fileinput-button">
+                          <i class="glyphicon glyphicon-plus"></i>
+                          <span>选择图片</span>
+                          <input type="hidden" name="access_token" id="access_token">
+                          <input type="file" name="avatar[]" multiple>
+                      </span>
+                      <div id="add-file">
+                        <span class="file-name"></span>
+                        <span class="file-size"></span>
+                        <span class="file-type"></span>
+                        <input class="file-btn" type="button" id="btn-upload" value="上传"/>
+                        <input class="file-btn" type="button" id="btn-delete" value="删除"/>
+                      </div>
+                      <p class="file-upload-progress"></p>
+                   </form>
                     </div>
                     <div class="clearfix"></div>
                   </div>
@@ -272,7 +284,7 @@
                       <p class="form-item">
                         <input type="submit" role-type="submit" role-load="修改中..." role-nor="确认修改" class="btn" value="确认修改">
                       </p>
-                      <p class="form-item tip" style="color:#ff8b3d;">
+                      <p class="form-item tip" style="color:#ff8b3d;display:none;">
                         说明:每个用户只能修改一次昵称!
                       </p>
                     </form>
@@ -431,6 +443,12 @@
     <script src="../js/bootstrap.min.js"></script>
     <script src="../js/jquery.cookie.js"></script>
     <script src="../js/common.js"></script>
+    <script src="../js/jquery.ui.widget.js"></script>
+    <script src="../js/jquery.fileupload.js"></script>
+    <script src="../js/jquery.fileupload-ui.js"></script>
+    <script src="../js/jquery.iframe-transport.js"></script>
+    <script src="../js/jquery.fileupload-process.js"></script>
+    <script src="../js/jquery-upload-config.js"></script>
     <script src="../js/userCenter.js"></script>
     <script src="../webim/angular.js"></script> 
     <script src="../webim/RongIMWidget.js"></script> 

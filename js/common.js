@@ -1,6 +1,6 @@
 function userImgErr(e){
-  $(e).attr("src","../images/comDetails/user-icon.png");
-  $(e).off("error");
+  $(e).attr("src","../images/common/user-icon.png");
+  e.onerror=null;
 }
 function searchConfirm(){
     var t=Base.xssCheck($("#t-search").val());
