@@ -1,0 +1,109 @@
+.wrapper{
+    background-image:url('../images/login/bg.png');
+    background-size: cover;
+    padding: 100px 0;
+}
+.reset-box{
+    margin: 0 auto;
+    width: 450px;
+    background-color: white;
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 8px 2px #e6e6e6;
+}
+.reset-pass-form{
+    width: 300px;
+    margin: 0 auto;
+}
+.reset-title{
+    font-size: 1.2em;
+    padding: 15px 0;
+    text-align: center;
+    font-weight: bold;
+}
+.reset-item{
+    position: relative;
+    margin: 15px 0;
+}
+.reset-item .reset-deal{
+    color: #22d2fe;
+}
+.reset-item .inp{
+    width: 100%;
+    padding: 8px 5px;
+    border: 1px solid #e9eaea;
+}
+.reset-item .forget{
+    float: right;
+}
+.reset-item .btn-reset{
+    width: 100%;
+    height: 40px;
+    border: none;
+    color: #fff;
+    background-color: #ffd737;
+}
+.reset-item .login{
+    margin-left: 15px;
+    color: #ffd737;
+}
+.btn-code,.seconds-count{
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 85px;
+    text-align: center;
+    height: 100%;
+    background-color: #00ccff;
+    border: none;
+    color: #fff;
+}
+.seconds-count{
+    line-height: 37px;
+    display: none;
+}
+.reset-item .inp.err-tip{
+    border-color:red;
+}
+.err-tips{
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    z-index: 9999;
+    padding: 15px 10px;
+    background-color: #ff9a37;
+    border-radius: 3px;
+    color: #fff;
+    opacity: 0;
+    *filter:alpha(opacity=0);
+}
+.err-tips:before{
+    position: absolute;
+    left: -20px;
+    top: 50%;
+    margin-top: -10px;
+    content: "";
+    display: block;
+    width: 0;
+    height: 0;
+    border: 10px solid transparent;
+    border-right: 10px solid #ff9a37;
+}
+.reset-item .btn-reset.disabled{
+    background-color: #c1c1c1;
+}
+#agree{
+    line-height: 15px; 
+    vertical-align: middle; 
+    margin: 0;
+}
+.reset-item .agree-label{
+    line-height: 15px; 
+    vertical-align: middle; 
+}
+@media (max-width: 600px) {
+    .reset-box{
+        width: inherit;
+    }
+}
+

@@ -1,10 +1,11 @@
 .vr-player-box{
     height: 450px;
-    margin-top: 5px;
+    margin-top: 8px;
     background-color: #555;
 }
 .vr-video-info{
     background-color: #fff;
+    margin-bottom: 10px;
 }
 .vr-video-icon{
     background-color: #555;
@@ -38,7 +39,7 @@
     display: none;
 }
 .download-box{
-    padding: 10px;
+    padding: 18px 10px 10px 10px;
     text-align: center;
 }
 .download-box .btn-download{
@@ -60,15 +61,31 @@
     padding: 10px;
 }
 .vr-video-basic p{
+    position: relative;
     height: 30px;
     line-height: 30px;
     padding-left: 10px;
 }
+.vr-video-basic .title{
+    font-size: 1.2em;
+}
 .vr-video-description .content{
     height: inherit;
 }
-.vr-video-basic .title{
-   border-left: 5px solid #ffd737;
+.vr-video-basic .title .ver-line{
+    width: 5px;
+    height: 20px;
+    background-color: #ffd737;
+    position: absolute;
+    left: 0;
+    top: 8px;
+}
+.vr-video-basic .title .t{
+    display: block;
+    margin-left: 12px;
+}
+.vr-video-basic .hor-line{
+    margin-top: 15px;
 }
 .vr-video-basic .content{
     margin: 10px 0;
@@ -81,10 +98,11 @@
     padding: 10px;
 }
 .other-videos-title{
-    height: 40px;
-    line-height: 40px;
+    height: 50px;
+    line-height: 50px;
     background-color: #dad9d8;
-    color: #fff;
+    background: url('../images/playvr/header-line.png') repeat-x;
+    box-shadow: 0px 3px 2px #eee;
     text-align: center;
     font-size: 1.2em;
 }
@@ -108,11 +126,16 @@
 .vr-video-comment .commment-body{
     width: 100%;
     height: 120px;
+    padding: 15px;
+    color: #ccc;
     border: 1px solid #e0e0e0;
 }
 .vr-video-comment .btn-group{
     display: block;
     text-align: right;
+}
+.vr-video-comment .btn-group .comment-tips{
+    color: #d5ccd5;
 }
 .vr-video-comment .btn-group .btn-publish{
     width: 120px;
@@ -174,6 +197,7 @@
 }
 #other-video-aside{
     position: relative;
+    min-height: 80px;
 }
 /***********分页*************/
 .pagination-box{
@@ -215,3 +239,9 @@
     cursor: default;
 }
 .pagination-box span { margin: 0 5px; }
+
+@media (max-width: 375px) {
+    .vr-video-bottom{
+        margin-right: 0;
+    }
+}

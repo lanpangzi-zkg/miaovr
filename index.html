@@ -72,7 +72,7 @@
                       </a>
                     </li>
                    <li class="header-login">
-                      <a href="./login.html">
+                      <a href="./views/login.html">
                         <img src="../images/common/man.png" alt='' class="img-responsive nav-r-icon"/>
                         <p class="nav-r-name">登陆/注册</p>
                       </a>
@@ -91,14 +91,14 @@
                         </p>
                       </div>
                     </li>
-                    <li class="search-i">
-                        <form class="form-search">
-                          <span class="input-search-box">
-                            <input type="text" class="input-search">
-                          </span><span class="btn-search-box">
-                            <input type="submit" value="搜索" class="btn-search">
-                          </span>
-                        </form>
+                   <li class="search-i">
+                      <form class="form-search" action="./views/search.html" onSubmit="return searchConfirm();">
+                        <span class="input-search-box">
+                          <input type="text" name="search_txt" id="t-search" class="input-search">
+                        </span><span class="btn-search-box">
+                          <input type="submit" value="搜索" id="btn-search" class="btn-search">
+                        </span>
+                      </form>
                     </li>
                 </ul>
 
@@ -111,24 +111,16 @@
     </div> 
     <!-- end of main-navbar -->
     <div class="hor-line"></div>
-    <div class="container" id="banner" role-mn="4">
-      <ul>
-        <li>
-          <a href="#" role-base="#" class="slider-item">
-            <img src="./images/index/banner-01.jpg" role-err="./images/index/banner-01.jpg" alt="banner-01" width="100%" height="500" class="img-responsive"/>
+    <div class="container" id="banner">
+      <ul class="banner-list" id="banner-c">
+        <div class="mask-loading">
+          <div class="loading-icon"></div>
+        </div>
+        <li class="banner-item">
+          <a href="#" class="slider-item">
+            <img src="./images/index/banner-01.jpg" role-err="./images/index/banner-01.jpg" alt="banner-01" width="100%" height="500"/>
           </a>
-        <li>
-          <a href="#" role-base="#" class="slider-item">
-            <img src="./images/index/banner-02.jpg" role-err="./images/index/banner-01.jpg" alt="banner-02" width="100%" height="500" class="img-responsive"/>
-          </a>
-        <li>
-          <a href="#" role-base="#" class="slider-item">
-            <img src="./images/index/banner-03.jpg" role-err="./images/index/banner-01.jpg" alt="banner-03" width="100%" height="500" class="img-responsive"/>
-          </a>
-        <li>
-          <a href="#" role-base="#" class="slider-item">
-            <img src="./images/index/banner-04.jpg" role-err="./images/index/banner-01.jpg" alt="banner-04" width="100%" height="500" class="img-responsive"/>
-          </a>
+        </li>
       </ul>
     </div>
     <!--end of banner-->
@@ -529,9 +521,6 @@
               </div>
             </div>
             <div id="community-main" class="display-box">
-              <div class="mask-loading">
-                <div class="loading-icon"></div>
-              </div>
               <div class="row row-chapter">
                 <div class="col-sm-4">
                   <a href="#">
@@ -539,13 +528,19 @@
                   </a>
                 </div>
                 <div class="col-sm-8">
-                  <ul class="community-center-nav">
+                  <ul class="community-center-nav" id="community-list">
+                    <div class="mask-loading">
+                      <div class="loading-icon"></div>
+                    </div>
                     <li class="community-chapter">
-                      <a href="./views/comDetails.html?nid=" class="chapter-title"></a>
+                      <a href="#" class="chapter-title"></a>
                       <p class="chapter-date"></p>
                       <p class="chapter-content"></p>
                       <div class="chapter-bottom">
-                        <div class="user-icon"></div>
+                        <div class="user-icon">
+                          <img src="../images/common/default.png" role-err="../images/common/default.png" class="icon img-responsive">
+                        </div>
+                        <span class="nickname"></span>
                         <div class="chapter-interactive">
                           <a href="#" class="off">
                             <i class="chapter-off-icon"></i>
@@ -560,65 +555,7 @@
                     </li>
                   </ul>
                 </div>
-              </div>
-              <div class="row row-chapter">
-              <div class="col-sm-4">
-                <a href="#">
-                  <div class="community-temp community-chapter-icon"></div>
-                </a>
-              </div>
-              <div class="col-sm-8">
-                <ul class="community-center-nav">
-                  <li class="community-chapter">
-                    <a href="./views/comDetails.html?nid=" class="chapter-title"></a>
-                    <p class="chapter-date"></p>
-                    <p class="chapter-content"></p>
-                    <div class="chapter-bottom">
-                      <div class="user-icon"></div>
-                      <div class="chapter-interactive">
-                        <a href="#" class="off">
-                          <i class="chapter-off-icon"></i>
-                          <span class="visit-num">0</span>
-                        </a>
-                        <a href="#" class="chat">
-                          <i class="chapter-chat-icon"></i>
-                          <span class="chat-num">0</span>
-                        </a>
-                      </div>
-                    </div>
-                  </li>
-                </ul>
-              </div>
-              </div>
-              <div class="row row-chapter">
-              <div class="col-sm-4">
-                <a href="#">
-                  <div class="community-temp community-chapter-icon"></div>
-                </a>
-              </div>
-              <div class="col-sm-8">
-                <ul class="community-center-nav">
-                  <li class="community-chapter">
-                   <a href="./views/comDetails.html?nid=" class="chapter-title"></a>
-                    <p class="chapter-date"></p>
-                    <p class="chapter-content"></p>
-                    <div class="chapter-bottom">
-                      <div class="user-icon"></div>
-                      <div class="chapter-interactive">
-                        <a href="#" class="off">
-                          <i class="chapter-off-icon"></i>
-                          <span class="visit-num">0</span>
-                        </a>
-                        <a href="#" class="chat">
-                          <i class="chapter-chat-icon"></i>
-                          <span class="chat-num">0</span>
-                        </a>
-                      </div>
-                    </div>
-                  </li>
-                </ul>
-              </div>
-              </div>
+              </div>           
             </div>
           </div>
           <div class="col-sm-3">
@@ -630,16 +567,6 @@
             <div class="row">
               <div class="col-sm-12" style="padding:0">
                 <ul class="hot-community-list">
-                  <li>
-                    <a href="#">
-                      <div class="community-temp"></div>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#">
-                      <div class="community-temp"></div>
-                    </a>
-                  </li>
                   <li>
                     <a href="#">
                       <div class="community-temp"></div>
@@ -760,15 +687,6 @@
       });
       function initSlider(){
         var $banner=$("#banner");
-        var unslider= $banner.unslider({
-            dots: true
-        }),
-        data04 = unslider.data("unslider");
-        $(".unslider-arrow04").click(function() {
-          var fn = this.className.split(' ')[1];
-          data04[fn]();
-        });
-        $banner.width($banner.width()-30);
         querySlider($banner);
       }
       function querySlider($banner){
@@ -776,7 +694,7 @@
           console.log("querySlider");
           console.log(data);
           if(Base.isSuccess(data)){
-            Base.handleResult("banner",data,
+            Base.handleResult("banner-c",data,
               {"childrenBox":"li",
                 "img":"img",
                 "title":".slider-item",
@@ -784,6 +702,15 @@
               {"img":"titlepic",
                 "title":"title",
                 "href":"titleurl"},"slider_items");
+              $banner.width($banner.width()-30);
+              var unslider= $banner.unslider({
+                dots: true
+              });
+              var data04 = unslider.data("unslider");
+              $(".unslider-arrow04").click(function(){
+                var fn = this.className.split(' ')[1];
+                data04[fn]();
+              });
           }else{
             Base.showAlert(data.error_msg,"error");
           }
@@ -838,6 +765,8 @@
       function queryVrHotTv(){
         Base.queryData("/search/selection",null,null,function(data){
           if(Base.isSuccess(data)){
+            console.log("queryVrHotTv");
+            console.log(data);
             Base.handleResult("index-vrtv-r",data,
               {"childrenBox":"li",
                 "img":".video-icon",
@@ -846,6 +775,7 @@
                 "href":"a"},
               {"img":"pic_url",
                 "txt":"showname",
+                "subtxt":".views",
                 "href":"fileid"}
             );
           }else{
@@ -877,23 +807,43 @@
         });
       }
       function queryCommunity(){
+        var $parentBox=$("#community-list");
         Base.queryData("/forum/all?offset=0&length=3",null,null,function(data){
           if(Base.isSuccess(data)){
-            Base.handleResult("community-main",data,
-              {"childrenBox":".community-chapter",
-                "txt":".chapter-title",
-                "txt-1":".chapter-date",
-                "txt-2":".chat-num",
-                "href":".chapter-title"},
-              {"txt":"title",
-                "txt-1":"publish_time",
-                "txt-2":"commentNums",
-                "href":"forumId"}); 
+            console.log("queryCommunity");
+            console.log(data);
+            var childrenBoxs=$parentBox.find(".community-chapter");
+            var temp_box=null;
+            var temp_result=null;
+            var len=childrenBoxs.length;
+            var list=data.list_result;
+            for(var i=0,j=list.length;i<j;i++){
+              temp_result=list[i];
+              if(i<=len){
+                temp_box=$(childrenBoxs[i]);
+              }else{
+                temp_box=$(childrenBoxs[0]).clone(true); 
+                $parentBox.append(temp_box);
+              }
+              temp_box.children(".chapter-title").attr("href","./views/comDetails.html?nid="+temp_result.forumId).html(temp_result.title);
+              temp_box.children(".chapter-date").html(Base.formatDate(temp_result.publish_time));
+              temp_box.find(".chat-num").html(temp_result.commentNums);
+              temp_box.find(".visit-num").html(temp_result.views);
+              temp_box.find(".icon").attr("src",temp_result.user.thumbAvatar);
+              temp_box.find(".nickname").html(temp_result.user.nickname);
+             }
+             $parentBox.find(".icon").on("error",function(){
+              var _this=$(this);
+              _this.attr("src",_this.attr("role-err"));
+              _this.off("error");
+              });
             }else{
+              $parentBox.find("li").css("display","none");
               Base.showAlert(data.error_msg,"error");
             }
+            $parentBox.find(".mask-loading").fadeOut();
           },function(err){  
-            console.log("queryVrGame err:"+err);
+            $parentBox.find(".mask-loading").fadeOut();
             Base.showAlert(err,"error");
         });
       }

@@ -12,17 +12,22 @@ var comment=(function(c){
     var timeout=null;
     var bottomHeight=0;
     var winHeight=0;
-    var length=2;
-    var pagePerNum=2;
+    var pagePerNum=4;
     var pageParam="";
     var pageNum=1;
     var commentsLength=0;
+    var allNum=0;
+    var loginCallBack=null;
     c.init=function(config_params){
         config=config_params;
         nameId=config.nameId;
         textArea=config.textArea||".commment-body";
         commentBox=config.commentBox||"#c-comment-box";
         $comments_list=$(commentBox);
+        $comment_body=$(textArea);
+        if("loginCallBack" in config_params){
+          loginCallBack=config_params.loginCallBack;
+        }
         isPagination=config.isPagination||true;
         if(!isPagination){
           bottomHeight=$(".footer").height();
@@ -41,23 +46,40 @@ var comment=(function(c){
           });
         }else{
         }
+        $comment_body.on("click",function(){
+          var $_this=$(this);
+          if($_this.val()=="请输入评论内容"){
+            $_this.val("");
+          }
+          $_this.css("color","#000");
+        }).on("blur",function(){
+          var $_this=$(this);
+          if(!$_this.val()){
+            $_this.val("请输入评论内容");
+            $_this.css("color","#ccc");
+          }
+        });
         //发布评论
         $(".btn-publish").on("click",function(e){
           if(!Base.isLogin()){
             LoginValid.init("login-form",function(data){
               $(".login-mask").click();
+              if(typeof loginCallBack==="function"){
+                loginCallBack();
+              }
             });
             Base.showLoginBox();
             return;
           }
           e.preventDefault();
           var btn=$(this);
-          var comment=$(""+textArea).val();
+          var comment=$comment_body.val();
           if(!comment){
              Base.showAlert("请输入点评内容","error");
              $(""+textArea).focus();
              return;
           }
+          comment=Base.xssCheck(comment);
           btn.attr("disabled","disabled").addClass("btn-disabled");
           var _param={"comment":comment,
             "from_uuid":Base.getUUID()};
@@ -69,17 +91,17 @@ var comment=(function(c){
           Base.queryData(config.publish,"POST",_param,function(data){
             if(Base.isSuccess(data)){
               Base.showAlert("点评成功");
-              console.log(data);
-              $(".commment-body").val("");
+              $comment_body.val("");
+              commentsLength++;
+              allNum++;
               var fList=$comments_list.find(".comment-item")[0];
-              var nf=$(addItemComment(data.result));
+              var nf=$(addItemComment(data.result,commentsLength));
               if(fList){
                 nf.insertBefore($(fList));
               }else{
                 nf.appendTo($comments_list);
                 $(".pagination-box").css("display","block");
               }
-              commentsLength++;
               if(!commentsLength%pagePerNum==0){
                 c.initPagination();
                 $comments_list.find(".comment-item").removeClass("jp-hidden").css("display","none");
@@ -104,6 +126,9 @@ var comment=(function(c){
           if(!Base.isLogin()){
             LoginValid.init("login-form",function(data){
               $(".login-mask").click();
+              if(typeof loginCallBack==="function"){
+                loginCallBack();
+              }
             });
             Base.showLoginBox();
             return;
@@ -132,6 +157,7 @@ var comment=(function(c){
             $reply_content.focus();
             return;
           }
+          reply=Base.xssCheck(reply);
           _btn.attr("disabled","disabled").addClass("btn-disabled");
           var to_commentId=_btn.attr("reply-id");
           var _param={"comment":reply,
@@ -145,7 +171,8 @@ var comment=(function(c){
               Base.showAlert("回复成功");
               var $par=$comments_list.find("#"+to_commentId);
               var $targetBox=$par.find(".comment-main");
-              $(addReplyItem(data.result)).appendTo($targetBox);
+              allNum++;
+              $(addReplyItem(data.result,allNum)).appendTo($targetBox);
             }else{
               Base.showAlert(data.error_msg,"error");
             }
@@ -171,7 +198,7 @@ var comment=(function(c){
           }
         }
         var _page=page||1;
-        pageParam="?offset="+length*(_page-1)+"&length="+length;
+        pageParam="?offset="+pagePerNum*(_page-1)+"&length="+pagePerNum;
         Base.queryData(config.query+pageParam,"POST",queryParam,function(data){
             console.log("查询评论信息");
             console.log(data);
@@ -205,20 +232,21 @@ var comment=(function(c){
           list=data.list_result;
         }
         var list_length=list.length;
+        allNum=list_length;
         var answer_list=[];//回复
         for (var i=0; i<list_length; i++){
             temp_result=list[i];
             if(temp_result.to_commentId){
-                answer_list.push(temp_result);
+                answer_list.push({"floor":i,"data":temp_result});
                 continue;
             }
             commentsLength++;
-            $(addItemComment(temp_result)).appendTo($comments_list);
+            $(addItemComment(temp_result,i)).appendTo($comments_list);
         }
         for(var i=0;i<answer_list.length;i++){
           temp_result=answer_list[i];
-          var $to_commentItem=$parentBox.find("#"+temp_result.to_commentId);
-          $(addReplyItem(temp_result)).appendTo($to_commentItem.find(".comment-main"));
+          var $to_commentItem=$parentBox.find("#"+temp_result.data.to_commentId);
+          $(addReplyItem(temp_result.data,temp_result.floor)).appendTo($to_commentItem.find(".comment-main"));
         }
         $parentBox.find(".mask-loading").fadeOut();
     };
@@ -235,7 +263,7 @@ var comment=(function(c){
           minHeight:false
         });
     };
-    function addReplyItem(data){
+    function addReplyItem(data,floor){
       var commentItem="<div class='comment-item reply-item' id='"+data.commentId+"'>"+
         "<div class='quote-box-start'>"+
            "<span class='quote-icon front-quote inb'></span>"+
@@ -244,7 +272,7 @@ var comment=(function(c){
         "<div class='comment-main'>"+
           "<div class='user-info'>"+
             "<span class='user-name' id='u-"+data.commentId+"'>"+getCommentName(data)+"</span>"+
-            "<span class='floor'>0#</span>"+
+            "<span class='floor'>"+floor+"#</span>"+
           "</div>"+
           "<div class='user-comment'>"+data.comment+"</div>"+
         "</div>"+
@@ -296,13 +324,13 @@ var comment=(function(c){
         }
       }
     }
-    function addItemComment(data){
+    function addItemComment(data,floor){
         var commentItem="<li class='comment-item' id='"+data.commentId+"'>"+
           "<div class='user-icon'><img src='"+getCommentIcon(data)+"' onerror='userImgErr(this)' class='img-responsive'/></div>"+
           "<div class='comment-main'>"+
             "<div class='user-info'>"+
               "<span class='user-name' id='u-"+data.commentId+"'>"+getCommentName(data)+"</span>"+
-              "<span class='floor'>0#</span>"+
+              "<span class='floor'>"+floor+"#</span>"+
             "</div>"+
             "<div class='user-comment'>"+data.comment+"</div>"+
           "</div>"+

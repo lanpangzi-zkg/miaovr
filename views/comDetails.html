@@ -64,7 +64,7 @@
                     </li>
                     <li>
                       <a href="./upload.html">
-                        <img src="../images/common/history.png" alt='' class="img-responsive nav-r-icon"/>
+                        <img src="../images/common/upload.png" alt='' class="img-responsive nav-r-icon"/>
                         <p class="nav-r-name">上传视频</p>
                       </a>
                     </li>
@@ -135,7 +135,14 @@
               <div class="note-info">
                 <span class="note-author"></span>
                 <span class="publish-date"></span>
-                <span class="view-mobile"><i class="icon"></i>手机看贴</span>
+                <span class="view-mobile">
+                  <i class="icon"></i>
+                  <span class="view-t">手机看贴</span>
+                </span>
+                <div class="sub-info">
+                  <span class="off"></span>
+                  <span class="chat" id="comment-num"></span>
+                </div>
               </div>
               <div class="note-body">
                 <p class="note-txt">
@@ -148,7 +155,7 @@
             <div class="note-comment">
               <p class="title">主题点评</p>
               <div class="comment-main">
-                <textarea class="commment-body"></textarea>
+                <textarea class="commment-body" autocomplete="off">请输入评论内容</textarea>
                 <div class="btn-group">
                   <input type="submit" value="发布" class="btn-publish">
                 </div>
@@ -424,6 +431,8 @@
               $(".note-author").html(info.user.nickname||'佚名');
               $(".publish-date").html(Base.formatDate(info.publish_time));
               $(".note-txt").html(info.forum_details);
+              $("#comment-num").html(info.forumComments.length||0);
+              $(".off").html(info.views||0);
               $("#thumbAvatar").attr("src",info.user.thumbAvatar).on("error",function(){
                 $(this).attr("src","../images/comDetails/user-icon.png").off("error");
               });

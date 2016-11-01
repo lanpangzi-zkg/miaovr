@@ -61,7 +61,7 @@
                     </li>
                     <li>
                       <a href="./upload.html">
-                        <img src="../images/common/history.png" alt='' class="img-responsive nav-r-icon"/>
+                        <img src="../images/common/upload.png" alt='' class="img-responsive nav-r-icon"/>
                         <p class="nav-r-name">上传视频</p>
                       </a>
                     </li>
@@ -262,7 +262,7 @@
     </div>
     <div class="container container-white">
       <div class="container-title">VR TV精选</div>
-      <div id="tv-selection-box" role-mn="10">
+      <div id="tv-selection-box">
         <div class="mask-loading">
           <div class="loading-icon"></div>
         </div>
@@ -487,9 +487,19 @@
         Base.queryData("/search/selection",null,null,function(data){
           console.log(data);
           if(Base.isSuccess(data)){
-            if(data.list_result.length<6){
+            var len=data.list_result.length;
+            if(len<6){
               $("#tv-selection-box .row-vr").eq(1).remove();
               $("#tv-selection-box").attr("role-mn",5);
+            }
+            if(len>10){
+              len=len-10;
+              var $sBox=$("#tv-selection-box");
+              var $cloneRow=$($sBox.children(".row")[0]);
+              var addRow=Math.ceil(len/5);
+              for(var i=0;i<addRow;i++){
+                $cloneRow.clone(true).appendTo($sBox);
+              }
             }
             Base.handleResult("tv-selection-box",data,
             {"childrenBox":".col-sm-2",

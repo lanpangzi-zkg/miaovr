@@ -61,7 +61,7 @@
                     </li>
                     <li>
                       <a href="./upload.html">
-                        <img src="../images/common/history.png" alt='' class="img-responsive nav-r-icon"/>
+                        <img src="../images/common/upload.png" alt='' class="img-responsive nav-r-icon"/>
                         <p class="nav-r-name">上传视频</p>
                       </a>
                     </li>
@@ -118,8 +118,8 @@
         <div class="delete-dialog">
           <p class="title">确定要清除所有记录吗</p>
           <div class="history-btn-group">
-            <input type="button" class="btn btn-ok" value="确认">
-            <input type="button" class="btn btn-cancel" value="取消">            
+            <input type="button" class="btn-h btn-yes">
+            <input type="button" class="btn-h btn-cancel">            
           </div>
         </div>
       </div>
@@ -137,19 +137,11 @@
               </div>
             </div>
             <ul class="time-details">
-              <li class="inb">
-                <img src="../images/history/his.jpg" class="img-responsive" alt="#">
-                <p>测试测试测试</p>
-              </li>
-              <li class="inb">
-                <img src="../images/history/his.jpg" class="img-responsive" alt="#">
-                <p>测试测试测试</p>
-              </li>
             </ul>
           </div>
           <div class="history-time-box">
             <div class="time-line">
-              <span class="time-tag inb">一周内</span>
+              <span class="time-tag inb">一月内</span>
               <div class="time-axis">
                 <div class="time-dot-box">
                   <i class="time-dot inb"></i>
@@ -159,14 +151,34 @@
               </div>
             </div>
             <ul class="time-details">
-              <li class="inb">
-                <img src="../images/history/his.jpg" class="img-responsive" alt="#">
-                <p>测试测试测试</p>
-              </li>
-              <li class="inb">
-                <img src="../images/history/his.jpg" class="img-responsive" alt="#">
-                <p>测试测试测试</p>
-              </li>
+            </ul>
+          </div>
+          <div class="history-time-box">
+            <div class="time-line">
+              <span class="time-tag inb">一年内</span>
+              <div class="time-axis">
+                <div class="time-dot-box">
+                  <i class="time-dot inb"></i>
+                </div>
+                <div class="ver-line">
+                </div>
+              </div>
+            </div>
+            <ul class="time-details">
+            </ul>
+          </div>
+          <div class="history-time-box">
+            <div class="time-line">
+              <span class="time-tag inb">一年前</span>
+              <div class="time-axis">
+                <div class="time-dot-box">
+                  <i class="time-dot inb"></i>
+                </div>
+                <div class="ver-line">
+                </div>
+              </div>
+            </div>
+            <ul class="time-details">
             </ul>
           </div>
         </div>
@@ -250,11 +262,14 @@
         </p>
       </form>
     </div>
+    <div class="mask delete-mask">
+      <span class="tips">删除中......</span>
+    </div>
     <!--end of footer-->
     <script type="text/javascript" src="../js/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../js/jquery.cookie.js"></script>
     <script type="text/javascript" src="../js/bootstrap.min.js"></script>
     <script type="text/javascript" src="../js/common.js"></script>
-    <script type="text/javascript" src="../js/jquery.cookie.js"></script>
     <script type="text/javascript" src="../js/login.js"></script>
     <script type="text/javascript">
       $(document).ready(function(){
@@ -262,35 +277,119 @@
         if(!Base.isLogin()){
           LoginValid.init("login-form",function(data){
             $(".login-mask").click();
-            queryHistory();
+            init();
           });
           Base.showLoginBox();
         }else{
-          $(".delete-box").on("click",function(){
-              var _dialog=$(".delete-dialog");
-              if(_dialog.css("display")=="none"){
-                _dialog.css("display","block");
-              }else{
-                _dialog.css("display","none");            
-              }
-          });
-          $(".btn-ok").on("click",function(){
-            $(".delete-dialog").css("display","none");
-          });
-          $(".btn-cancel").on("click",function(){
-            $(".delete-dialog").css("display","none");
-          });
-          queryHistory();
+          init();
         }
       });
+      var $dialog=null;
+      function init(){
+        $(".delete-box").on("click",function(){
+          if(!$dialog){
+            $dialog=$(".delete-dialog");
+          }
+          if($dialog.css("display")=="none"){
+            $dialog.css("display","block");
+          }else{
+            $dialog.css("display","none");            
+          }
+        });
+        //删除单个历史记录
+        $(".history-time-box").delegate(".delete-icon","click",function(e){
+          e.preventDefault();
+          e.stopPropagation();
+          deleteHistory($(this).attr("role-target"));
+        });
+        //删除所有历史记录
+        $(".btn-yes").on("click",function(){
+          if($(".his-item").length>0){
+            deleteAllHistory();
+          }else{
+            $dialog.css("display","none");
+          }
+        });
+        $(".btn-cancel").on("click",function(){
+          $dialog.css("display","none");
+        });
+        queryHistory();
+      }
+      function deleteAllHistory(){
+        
+      }
+      var mask=null;
+      function deleteHistory(fileid){
+        if(!mask){
+          mask=$(".delete-mask");
+        }
+        mask.css("height",$(document).height()).fadeIn();
+        Base.queryData("/bfVodHistory/remove","POST",{"uuid":Base.getUUID(),"fileid":fileid},function(data){
+          if(Base.isSuccess(data)){
+            $("#"+fileid).remove();
+            mask.fadeOut();
+            Base.showAlert("删除成功");
+          }else{
+            mask.fadeOut();
+            Base.showAlert(data.error_msg,"error");
+          }
+        },function(err){
+          mask.fadeOut();
+          Base.showAlert(err,"error");
+        });
+        $dialog.css("display","none");
+      }
       function queryHistory(){
-        Base.queryData("/v1/lives_history.php?offset=1&limit=10",null,null,function(data){
+        Base.queryData("/bfVodHistory/uuid","POST",{"uuid":Base.getUUID()},function(data){
           if(Base.isSuccess(data)){
             console.log(data);
+            var list=data.list_result;
+            if(list.length>0){
+              var historyTimeBox=$(".history-list>.history-time-box");
+              var temp=null;
+              var $target=null;
+              for(var i=0,j=list.length;i<j;i++){
+                temp=list[i];
+                $target=$(historyTimeBox[checkTime(temp.updateTime)]);
+                if($target.css("display")==="none"){
+                  $target.css("display","block");
+                }
+                handleHisItem($target.children(".time-details"),temp);
+              }
+            }
+          }else{
+            Base.showAlert(data.error_msg,"error");
           }
         },function(err){
           console.log(err);
+          Base.showAlert(err,"error");
         });
+      }
+      function handleHisItem($parent,data){
+        var title=data.bfVod.showname;
+        title=title.length>20?title.slice(0,20)+"...":title;
+        var $item=$("<li class='inb his-item' id='"+data.fileid+"'>"+
+                  "<a href='./playvr.html?vid="+data.fileid+"'><img src='"+data.bfVod.pic_url+
+                  "'role-data='../images/history/his.jpg'"+
+                  "class='img-responsive' alt='#'><div class='play'>"+
+                  "<div class='icon'></div></div><span class='delete-icon' role-target='"+data.fileid+"'></span></a>"+
+                  "<p class='his-title'>"+title+"</p>"+
+                  "</li>");
+        $item.appendTo($parent);
+      }
+      function checkTime(longTime){
+        var off=new Date()-longTime;
+        var hours=off/1000/3600;
+        var day=hours/24;
+        if(Math.floor(day)<7){
+          return 0;
+        }else if(Math.floor(day)<30){
+          return 1;
+        }else if(Math.floor(day)<365){
+          return 2;
+        }else{
+          return 3;
+        }
       }
     </script>
   </body>

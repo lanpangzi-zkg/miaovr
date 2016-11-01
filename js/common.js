@@ -61,29 +61,28 @@ var Base=(function($,b){
         var vnum=0;
         var temp_child=null;
         for (var i=0,j=list.length; i<j; i++){
-          temp_result=list[i];
-          if(!mn){//不限制
-            if(childrenBoxs.length<=i){
-                temp_box= $(childrenBoxs[0]).clone(true); 
-                $parentBox.append(temp_box);
-            }else{
-                temp_box=$(childrenBoxs[i]);
-            }
-            handleResultItem(temp_result,temp_box,searchItems,resultItems);
-          }else{//限制显示条数
-             if(i<mn){
-                temp_box=$(childrenBoxs[i]);
+            temp_result=list[i];
+            if(!mn){//不限制
+                temp_box=handleEleItem(childrenBoxs,i,$parentBox);
                 handleResultItem(temp_result,temp_box,searchItems,resultItems);
-                vnum++;
-              }else{
-                i=j;
-              }
-          }      
+            }else{//限制显示条数
+                if(i<mn){
+                    temp_box=handleEleItem(childrenBoxs,i,$parentBox);
+                    handleResultItem(temp_result,temp_box,searchItems,resultItems);
+                    vnum++;
+                }else{
+                    i=j;
+                }
+            }      
         }
         if(vnum<mn){
           for (var i=vnum;i<mn;i++) {
             $(childrenBoxs[i]).css("display","none");
-          };
+          }
+        }else if(childrenBoxs.length>list.length){
+          for (var i=list.length,j=childrenBoxs.length;i<j;i++) {
+            $(childrenBoxs[i]).css("display","none");
+          }  
         }
         $parentBox.find(".mask-loading").fadeOut();
     };
@@ -152,7 +151,15 @@ var Base=(function($,b){
             $(this).remove();
         });
     }
-
+    function handleEleItem(childrenBoxs,index,$parentBox){
+        if(!childrenBoxs[index]){
+            temp_box= $(childrenBoxs[0]).clone(true); 
+            $parentBox.append(temp_box);
+        }else{
+            temp_box=$(childrenBoxs[index]);
+        }
+        return temp_box;
+    }
     function handleResultItem(temp,temp_box,searchItems,resultItems){
         for(var k in searchItems){
             var temp_child=temp_box.find(searchItems[k]);
@@ -270,7 +277,7 @@ var Base=(function($,b){
                   }
                 },function(){
                     return false;
-                },false);
+                });
             }
             return true;
         }else{
@@ -346,7 +353,6 @@ var Base=(function($,b){
         var hour=Math.floor(allSeconds/3600);
         var seconds=Math.floor(allSeconds%60);
         if(hour>0){
-            console.log(hour);
             result=handleDate(hour)+":"+handleDate(minutes)+":"+handleDate(seconds);
         }else{
             result=handleDate(minutes)+":"+handleDate(seconds);
@@ -354,8 +360,9 @@ var Base=(function($,b){
         return result;
     };
     //统一处理错误
-    b.errorBack=function(msg){
-        
+    b.errorBack=function(id,msg){
+        var $mask=$("#"+id).find(".mask-loading");
+        $mask.children(".loading-icon").css("display","none");
     };
     var genderObj={"1":"男","2":"女"};
     b.handleGender=function(gender){

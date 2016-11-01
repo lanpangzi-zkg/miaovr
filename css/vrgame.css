@@ -73,3 +73,8 @@
         padding: 0;
    }
 }
+@media (max-width: 375px) {
+  .container .row-vr a .title{
+    text-align: center;
+  }
+}

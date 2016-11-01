@@ -199,6 +199,8 @@
 .vr-game-comment .commment-body{
     width: 100%;
     height: 120px;
+    padding: 15px;
+    color: #ccc;
     border: 1px solid #e0e0e0;
 }
 .vr-game-comment .btn-group{

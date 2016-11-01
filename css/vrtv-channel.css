@@ -55,6 +55,9 @@
 #category-name{
     margin-left: 5px;
 }
+#tv-category-box{
+    min-height: 300px;
+}
 #tv-category-box .row-vr a{
     display: block;
     position: relative;

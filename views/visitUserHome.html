@@ -62,7 +62,7 @@
                     </li>
                     <li>
                       <a href="./upload.html">
-                        <img src="../images/common/history.png" alt='' class="img-responsive nav-r-icon"/>
+                        <img src="../images/common/upload.png" alt='' class="img-responsive nav-r-icon"/>
                         <p class="nav-r-name">上传视频</p>
                       </a>
                     </li>
@@ -381,13 +381,17 @@
         Base.queryData("/forum/comment/uuid?offset=0&length=10","POST",{"from_uuid":uid},function(data){
           if(Base.isSuccess(data)){
             $("#reply-count").html(data.list_result.length||0);
+            if(data.list_result.length<1){
+              $("#reply-list-main").css("display","none");
+              return;
+            }
             Base.handleResult("reply-list-main",data,
               {"childrenBox":".reply",
                 "txt":".t2"},
               {"txt":"comment"});
-            }else{
-              Base.showAlert(data.error_msg,"error");
-            }
+          }else{
+            Base.showAlert(data.error_msg,"error");
+          }
         },function(err){  
           Base.showAlert(err,"error");
         });
@@ -397,6 +401,11 @@
         Base.queryData("/news/uuid","POST",{"fromUuid":uid},function(data){
           if(Base.isSuccess(data)){
             console.log(data);
+            return;
+            Base.handleResult("publish-video-main",data,
+              {"childrenBox":".video",
+                "txt":".t2"},
+              {"txt":"publish-date"});
             }else{
               Base.showAlert(data.error_msg,"error");
             }

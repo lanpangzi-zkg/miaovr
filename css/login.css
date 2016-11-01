@@ -67,13 +67,19 @@
     padding: 20px 0;
     text-align: center;
 }
-.login-r .apps span{
-    width: 40px;
-    height: 40px;
-    line-height: 40px;
-    border-radius: 50%;
-    background-color: #eee;
+.login-r .apps a{
+    width: 54px;
+    height: 54px;
     margin: 0 5px;
+}
+.login-r .apps .qq{
+    background: url('../images/login/icon_qq.png') no-repeat;
+}
+.login-r .apps .weibo{
+    background: url('../images/login/icon_weibo.png') no-repeat;
+}
+.login-r .apps .weixin{
+    background: url('../images/login/icon_weixin.png') no-repeat;
 }
 @media (max-width: 600px) {
     .login-box{

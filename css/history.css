@@ -8,7 +8,11 @@
     position: relative;
 }
 .history-details{
-    visibility: hidden;
+    min-height: 350px;
+}
+.history-details .history-time-box{
+    display: none;
+    position: relative;
 }
 .history-header .delete-box{
     float: right;
@@ -28,7 +32,9 @@
     padding: 5px 0;
 }
 .time-line{
-    float: left;
+    position: absolute;
+    top: 0;
+    bottom: 0;
 }
 .time-details{
     position: relative;
@@ -39,14 +45,19 @@
     background-color: #fff;
     border-radius: 5px;
     color: #ffd737;
-    padding: 2px 2px;
+    height: 18px;
+    line-height: 18px;
     margin-left: 10px;
+    width: 50px;
+    text-align: center;
 }
 .time-line .time-axis{
     position: relative;
+    height: 100%;
+    overflow: hidden;
 }
 .time-line .ver-line{
-    height: 100px;
+    height: 100%;
     width: 1px;
     background-color: #d6d6d6;
     margin-left: 2px;
@@ -60,7 +71,60 @@
     background: url('../images/history/dot.png') no-repeat;
 }
 .time-details li{
-    margin: 0 5px;
+    margin: 0 10px;
+}
+.time-details .his-item a{
+    position: relative;
+    display: block;
+    z-index: 998;
+}
+.time-details .his-item .his-title{
+    line-height: 30px;
+}
+.time-details .his-item a:hover .play{
+    display: block;
+}
+.time-details .his-item a:hover .delete-icon{
+    display: block;
+}
+.time-details .his-item .play{
+    position: absolute;
+    left: 0;
+    top:0;
+    right: 0;
+    bottom: 0;
+    background-color: #000;
+    opacity: 0.3;
+    *filter:alpha(opacity=30);
+    display: none;
+}
+.delete-mask{
+    color: #fff;
+    text-align: center;
+}
+.delete-mask .tips{
+    position: absolute;
+    top:49%;
+}
+.time-details .his-item .play .icon{
+    width:29px;
+    height: 29px;
+    position: absolute;
+    left: 50%;
+    top:50%;
+    margin-left: -15px;
+    margin-top: -15px;
+    background: url('../images/history/play.png');
+}
+.time-details .his-item .delete-icon{
+    position: absolute;
+    width: 22px;
+    height: 22px;
+    right: -11px;
+    top:-11px;
+    background: url('../images/history/delete.png') no-repeat;
+    display: none;
+    z-index: 999;
 }
 .delete-dialog{
     position: absolute;
@@ -79,12 +143,14 @@
 .history-btn-group{
     margin-top: 15px;
 }
-.history-btn-group .btn{
-    color: #fff;
-    background-color: #ffd737;
-    border-radius: 0;
-    padding: 2px 8px;
+.history-btn-group .btn-h{
+    width:66px;
+    height: 30px;
+    border: none;
+}
+.history-btn-group .btn-yes{
+    background: url('../images/history/btn-yes.png') no-repeat;
 }
 .history-btn-group .btn-cancel{
-    background-color: #a0a0a0;
+    background: url('../images/history/btn-cancel.png') no-repeat;
 }

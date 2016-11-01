@@ -61,7 +61,7 @@
                     </li>
                     <li>
                       <a href="./upload.html">
-                        <img src="../images/common/history.png" alt='' class="img-responsive nav-r-icon"/>
+                        <img src="../images/common/upload.png" alt='' class="img-responsive nav-r-icon"/>
                         <p class="nav-r-name">上传视频</p>
                       </a>
                     </li>
@@ -132,24 +132,28 @@
                   <div class="video-title" id="showname"></div>
                   <p class="video-item">
                     <span>发布时间:</span>
-                    <span class="date val" id="publishtime"></span>
+                    <span class="date val" id="uploadtime">未知</span>
                     <span>文件大小:</span>
                     <span class="f-size val" id="filesize">未知</span>
                     <span>视频语言:</span>
                     <span class="lang val">中文</span>
                   </p>
                   <p class="video-item">
-                    <span>作者:</span>
+                    <span>作&nbsp;&nbsp;者:</span>
                     <span class="author val">未知</span>
                   </p>
 
                   <p class="video-item">
                     <span>视频类型:</span>
                     <span class="video-type">
-                      <span class="video-type-tag" id="category-0">游戏</span>
-                      <span class="video-type-tag" id="category-1">动画</span>
-                      <span class="video-type-tag" id="category-2">电影</span>
-                      <span class="video-type-tag" id="category-3">美女</span>
+                      <span class="video-type-tag" id="category-0">美女</span>
+                      <span class="video-type-tag" id="category-1">风景</span>
+                      <span class="video-type-tag" id="category-2">动画</span>
+                      <span class="video-type-tag" id="category-3">电影</span>
+                      <span class="video-type-tag" id="category-4">惊险</span>
+                      <span class="video-type-tag" id="category-5">游戏</span>
+                      <span class="video-type-tag" id="category-6">惊悚</span>
+                      <span class="video-type-tag" id="category-7">音乐</span>
                     </span>
                   </p>
 
@@ -157,14 +161,22 @@
               </div>
               <div class="vr-video-bottom">
                 <div class="vr-video-description">
-                  <p class="title">视频描述</p>
+                  <p class="title">
+                    <span class="ver-line inb"></span>
+                    <span class="t">视频描述</span>
+                  </p>
+                  <div class="hor-line"></div>
                   <p class="content" id="description"></p>
                 </div>
                 <div class="vr-video-comment">
-                  <p class="title">视频点评</p>
+                  <p class="title">
+                    <span class="ver-line inb"></span>
+                    <span class="t">视频点评</span>
+                  </p>
                   <div class="comment-main">
-                    <textarea class="commment-body" id="tv-comment" name="comment"></textarea>
+                    <textarea class="commment-body" autocomplete="off" id="tv-comment" name="comment">请输入评论内容</textarea>
                     <div class="btn-group">
+                      <span class="comment-tips">最多可输入64个字</span>
                       <input type="submit" value="发布" class="btn-publish">
                     </div>
                   </div>
@@ -298,6 +310,7 @@
         vid=Base.searchParam("vid","id");
         if(!vid){
           Base.showAlert("抱歉,你所查找的资源不存在","error");
+          Base.errorBack("user-comments-box");
           return;
         }else{
           queryParam.fileid=vid;
@@ -311,6 +324,7 @@
               if(info.filesize){
                 $("#filesize").html(Math.floor(info.filesize/1024/1024)+"M");
               }
+              $("#uploadtime").html(info.uploadtime);
               $("#showname").html(info.showname);
               $("#description").html(info.description||"暂无");
               config.videos[0].video=info.http_url;
@@ -324,9 +338,11 @@
               }
             }else{
               Base.showAlert(data.error_msg,"error");
+              Base.errorBack("user-comments-box");
             }
           },function(err){
-             Base.showAlert(err,"error");
+            Base.errorBack("user-comments-box");
+            Base.showAlert(err,"error");
           });
           //查询相关视频
           Base.queryData("/search/category?offset=0&length=5","POST",{"category":"0"},function(data){
@@ -356,11 +372,13 @@
               "reply":"/vod/comment/reply",
               "nameId":"fileid",
               "id":vid,
-              "textArea":".commment-body"
+              "textArea":".commment-body",
+              "loginCallBack":readyColHis
           });
+          
         }
       });
-
+      var vrPano=null;
       var config = {
           target: "detu_container",
           islive: false,
@@ -368,9 +386,61 @@
             {name: "bq", txt: "标清", video: "", play: true}
           ],
           ready: function(pano){
-              pano.gyro(true);
+            pano.gyro(true);
+            vrPano=pano;
+            if(Base.isLogin()){
+              readyColHis();
+            }
           }
       };
+      function readyColHis(){
+        hisAdd(false);
+        startLoop();
+      }
+      function startLoop(){
+        setTimeout(hisAdd.bind(this,true),10000);
+      }
+      function hisAdd(flag){
+        var uuid=Base.getUUID();
+        if(uuid){
+          timeLine=getTimeLine();
+          if(timeLine!=null){
+            Base.queryData("/bfVodHistory/add","POST",{"uuid":Base.getUUID(),"fileid":vid,"timeLine":timeLine},function(data){
+              if(Base.isSuccess(data)&&flag){
+                startLoop();
+              }
+            },function(err){
+            });
+          }else{
+            startLoop();
+          }
+        }
+      }
+      var timeLine=-10;
+      function getTimeLine(){
+        if(!vrPano){
+          timeLine=null;
+        }else{
+          if(!timeLine){
+            timeLine=-10;
+          }
+          var txt=vrPano.krpano.innerText;
+          if(txt){
+            timeLine=getTimeSeconds(txt.split("\n")[0]);
+          }else{
+            timeLine+=10;
+          }
+        }
+        return timeLine;
+      }
+      function getTimeSeconds(time){
+        var t=time.split(":");
+        var seconds=0;
+        for(var i=t.length-1;i>0;i--){
+          seconds+=parseInt(t[i])*Math.pow(60,(t.length-i-1));
+        }
+        return seconds;
+      }
     </script>
   </body>
 </html>

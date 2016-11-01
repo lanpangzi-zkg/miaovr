@@ -4,10 +4,10 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>VR资讯</title>
+    <title>用户密码重置</title>
     <link href="../css/bootstrap.min.css" rel="stylesheet">
     <link href="../css/common.css" rel="stylesheet">
-    <link href="../css/vrinfo.css" rel="stylesheet">
+    <link href="../css/reset-pass.css" rel="stylesheet">
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -37,8 +37,8 @@
                     <li>
                         <a href="../index.html">首页</a>
                     </li>
-                    <li class="choose">
-                        <a href="#">VR资讯</a>
+                    <li>
+                        <a href="./vrinfo.html">VR资讯</a>
                     </li>
                     <li>
                         <a href="./vrtv.html">VRTV</a>
@@ -79,17 +79,9 @@
                     <li class="user-status">
                       <a href="./userCenter.html">
                         <img src="../images/comDetails/user-icon.png" width=50 alt="用户头像" class="img-responsive header-user-icon inb" onerror="userImgErr(this)">
+                        <span class="header-user-name"></span>
                       </a>
-                      <span class="arrow"></span>
-                      <div class="user-hidden-box">
-                        <span class="header-user-name inb"></span>
-                        <p class="exit-box">
-                          <a href="./userCenter.html">个人中心</a>
-                          <span class="h-line"></span>
-                          <a href="javascript:void(0);"class="exit">退出</a>
-                        </p>
-                      </div>
-                    </li>
+                    </li>  
                     <li class="search-i">
                       <form class="form-search" action="./search.html" onSubmit="return searchConfirm();">
                         <span class="input-search-box">
@@ -106,21 +98,38 @@
           <!-- end of container-fluid -->
         </nav>
       </div>
-    </div>
-    <div class="hor-y-line"></div>
+    </div>   
     <div class="wrapper">
-      <div class="container">
-        <ul clsss="vr-info-list" id="main-list">
-          <div class="mask-loading">
-            <div class="loading-icon"></div>
+      <div class="reset-box">
+        <div class="row">
+          <div class="col-sm-12">
+            <form action="/v1/account_password_reset.php" class="reset-pass-form" id="reset-pass-form">
+              <p class="reset-title">
+                密码重置
+              </p>
+              <p class="reset-item">
+                <input type="text" role-type="mobile" role-null="请输入手机号" role-err="请检查手机号码格式" class="inp" id="mobile" name="uname" placeHolder="手机号">
+              </p>
+              <p class="reset-item">
+                <input type="text" role-type="code" role-null="请输入验证码" role-err="验证码为六位数字" class="inp validate-code" name="code" id="code" placeHolder="验证码">
+                <input type="button" class="btn-code" id="btn-send-code" value="获取验证码">
+                <span class="seconds-count">60秒</span>
+              </p>
+              <p class="reset-item">
+                <input type="password" role-type="pass" name="pass" role-null="请输入密码" role-err="密码包含数字字母或者下划线，6~16位长度" class="inp" id="pass" placeHolder="登陆密码">
+              </p>
+              <p class="reset-item">
+                <input type="password" role-type="repass" role-repeat="pass" name="repass" role-null="请再次输入密码" role-err="两次密码输入不一致" class="inp" id="repass" placeHolder="确认密码">
+              </p>
+              <p class="reset-item">
+                <input type="submit" value="确定" class="btn-reset" id="btn-reset"/>
+              </p>
+            </form>
           </div>
-        </ul>
-        <div class="btn-load-box">
-          <input type="button" value="加载更多" id="btn-load" class="btn">
         </div>
       </div>
-      <!--end of container-->
     </div>
+    <!--end of wrapper-->
     <div class="footer">
       <div class="container">
         <div class="row">
@@ -181,85 +190,14 @@
       </div> 
     </div>
     <!--end of footer-->
-    <script type="text/javascript" src="../js/jquery-1.11.1.min.js"></script>
-    <script type="text/javascript" src="../js/common.js"></script>
-    <script type="text/javascript" src="../js/bootstrap.min.js"></script>
+    <script src="../js/jquery-1.11.1.min.js"></script>
+    <script src="../js/common.js"></script>
+    <script src="../js/reset-pass.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
     <script type="text/javascript">
-      var off=0;
-      var len=10;
-      $(document).ready(function(){
-        Base.initHeaderUser();
-        vid=Base.searchParam("vid","id");
-        if(vid){
-          $(".btn-load-box").css("display","none");
-          querySingleVrInfo();
-        }else{
-          queryVrinfo(off);
-          $("#btn-load").on("click",function(){
-            loadMore();
-          });
-        }
-      });
-      function querySingleVrInfo(){
-        Base.queryData("/news/newsId","POST",{"newsId":vid},function(data){
-          console.log(data);
-          if(Base.isSuccess(data)){
-            handleItem(data);
-          }else{
-            Base.showAlert(data.error_msg,"error");
-          }
-        },function(err){
-          console.log(err);
-          Base.showAlert(err,"error");
-        });
-      }
-      function queryVrinfo(offNum){
-        Base.queryData("/news/all?offset="+offNum+"&limit="+len,null,null,function(data){
-          console.log(data);
-          if(Base.isSuccess(data)){
-            if(data.list_result.length==0){
-              $("#main-list").find(".mask-loading").fadeOut();
-              if(offNum==0){
-                $("#btn-load").remove();
-              }else{
-                $("#btn-load").val("已经到底部啦").off("click");
-              }
-              return;
-            }
-            handleItem(data);
-          }else{
-            Base.showAlert(data.error_msg,"error");
-          }
-          finishLoadMore();
-        },function(err){
-          console.log(err);
-          Base.showAlert(err,"error");
-          finishLoadMore();
-        });
-      }
-      function handleItem(data){
-        var $parentBox=$("#main-list");
-        var list=data.list_result;
-        var temp_result=null;
-        var temp_box=null;
-        for (var i=0,j=list.length; i<j; i++){
-          temp_result=list[i];
-          temp_box=$("<li class='vr-info-item'></li>");
-          $parentBox.append(temp_box);
-          var _iframe=$("<iframe width='100%' height='100%' frameborder='no' marginheight='0' marginwidth='0' src='./detu.html?name="+temp_result.description+"&url="+temp_result.news_url+"'></iframe>");
-           _iframe.appendTo(temp_box);
-        }
-
-        $parentBox.find(".mask-loading").fadeOut();
-      }
-      function loadMore(){
-        off+=1;
-        Base.setBtnDisabled("#btn-load").val("加载中...");
-        queryVrinfo(off*len);
-      }
-      function finishLoadMore(){
-        Base.setBtnEnabled("#btn-load").val("加载更多");
-      }
+      $(document).ready(function(e) {
+          resetPassValid.init("reset-pass-form");
+      });     
     </script>
   </body>
 </html>

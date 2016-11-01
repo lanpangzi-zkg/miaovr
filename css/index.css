@@ -13,6 +13,10 @@ a:hover{
     padding: 0;
 }
 #banner li { list-style: none; }
+#banner ul.banner-list{
+    height: 500px;
+    overflow: hidden;
+}
 #banner ul li { float: left; }
 #banner .dots { position: absolute; left: 0; right: 0; bottom: 20px;}
 #banner .dots li { 
@@ -183,14 +187,21 @@ a:hover{
 .hot-video-list li{
     margin: 10px;
 }
+.hot-video-list li a:hover{
+    color: #ffd737;
+}
 .hot-video-list .video-icon{
-    float: left;
+    margin: 0;
+    display: inline-block;
+    *display: inline;
+    *zoom:1;
 }
 .hot-video-list .video-info{
-    height: 120px;
-    position: relative;
-    margin-left: 128px;
-    margin-right: 10px;
+    height: 100%;
+    position: absolute;
+    left: 128px;
+    top: 0;
+    right: 10px;
     font-size: 12px;
     line-height: 1.5em;
 }
@@ -202,7 +213,7 @@ a:hover{
 }
 .video-info .video-rank{
     position: absolute;
-    right: 17px;
+    right: 0;
     bottom: 0;
 }
 #index-vrtv-r .mask-loading{
@@ -217,6 +228,7 @@ a:hover{
 }
 .vr-game .game-tabs li{
     float: left;
+    margin-right: 15px;
 }
 .vr-game .game-tabs li a{
     height: 30px;
@@ -266,12 +278,17 @@ a:hover{
     margin-left: 10px;
 }
 .community-chapter{
-    padding: 5px;
+    padding: 0 5px 10px 5px;
+    margin: 0 0 10px 0;
+    border-bottom: 1px solid #eee;
 }
 .community-chapter .chapter-title{
     font-size: 16px;
-    padding: 10px 0;
+    padding-bottom: 10px;
     color: #333333;
+}
+.community-chapter .chapter-title:hover{
+    color: #ffd737;
 }
 .community-chapter .chapter-date{
     font-size: 12px;
@@ -282,24 +299,34 @@ a:hover{
     margin: 5px 0;
 }
 .community-temp{
-    height: 100px;
+    height: 118px;
     background-color: #ccc;
 }
 .chapter-bottom{
+    position: relative;
+    color: #dedede;
     padding: 10px 0;
 }
+.chapter-bottom .nickname{
+    position: absolute;
+    left: 60px;
+    /*top:24px;*/
+    bottom: 10px;
+}
 .chapter-bottom .user-icon{
-    float: left;
+    position: relative;
     width: 50px;
     height: 50px;
-    background-color: #555;
+    overflow: hidden;
     border-radius: 50%;
 }
 .chapter-interactive{
-    position: relative;
+    position: absolute;
     margin-left: 50px;
-    padding: inherit;
+    width: 100%;
     text-align: right;
+    bottom: 10px;
+    right: 0;
 }
 .chapter-interactive a {
     display: inline!important;

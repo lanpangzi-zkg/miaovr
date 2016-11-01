@@ -37,6 +37,7 @@
 }
 .notes-box{
     padding: 10px;
+    min-height: 200px;
 }
 .notes-box .notes-list{
     
@@ -80,6 +81,10 @@
    font-size: 1.1em;
    color: #000000;
 }
+.note-main .note-info .note-name:hover{
+    color: #ffd737;
+    text-decoration: none;
+}
 .note-extra{
     color: #dfdfe0;
     font-size: 12px;
@@ -111,16 +116,26 @@
 }
 .aside-box{
     padding: 25px 10px 10px 10px;
+    position: relative;
 }
 .aside-box .title{
+    position: relative;
     padding: 0 10px;
-    margin: 0 15px;
+    margin: 0 10px 10px 10px;
     line-height: 30px;
     height: 30px;
     font-size: 1.2em;
     font-weight: bold;
-    border-left: 3px solid #ffd737;
-    margin-bottom: 10px;
+}
+.aside-box .ver-line{
+    position: absolute;
+    height: 20px;
+    width: 3px;
+    top: 8px;
+    background-color: #ffd737;
+}
+.aside-box .t{
+    margin-left: 10px;
 }
 .aside-box .line{
     height: 1px;
@@ -133,7 +148,7 @@
     background-color: #fff;
 }
 .trends .trends-list li{
-    padding: 0 22px;
+    padding: 0 25px;
 }
 .trends .trends-list li a{
     width: 100%;
@@ -180,9 +195,10 @@
 .pagination-box .current{
     border-color:#ff8b3d;
 }
-.pagination-box .current.prev{
+.pagination-box .current.prev,.pagination-box .current.next{
     border:none;
     cursor: not-allowed;
+    background-color: #eee;
 }
 .theme-mask{
     position: absolute;
