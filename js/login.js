@@ -37,9 +37,10 @@ var LoginValid=(function(){
     }
     $("#btn-login").on("click",function(e){
       e.preventDefault();
+      e.stopPropagation();
       if(validateForm()){//校验通过
         $(this).attr("disabled","disabled").addClass("disabled").val("登录中...");
-        Base.queryData(submitUrl,"POST",
+        Base.excuteAjax(submitUrl,"POST",
           {"account":getMobileEle().val(),
            "password":getPassEle().val(),
            "source":"1"

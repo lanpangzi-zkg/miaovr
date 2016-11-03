@@ -305,3 +305,11 @@
     cursor: default;
 }
 .pagination-box span { margin: 0 5px; }
+@media (max-width: 414px) {
+    .game-header {
+        margin: 10px 0;
+    }
+    .vr-game-stars{
+        text-align: left;
+    }
+}

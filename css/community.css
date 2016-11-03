@@ -281,3 +281,8 @@
         padding: 16px 5px;
     }
 }
+@media (max-width: 414px) {
+    .aside-box .title{
+        text-align: center;
+    }
+}

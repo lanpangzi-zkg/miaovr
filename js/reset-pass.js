@@ -54,7 +54,7 @@ var resetPassValid=(function(){
       e.preventDefault();
       if(validateForm()){//校验通过
         $(this).attr("disabled","disabled").addClass("disabled").val("注册中...");
-        Base.queryData(submitUrl,"POST",
+        Base.excuteAjax(submitUrl,"POST",
           {"mobile":getMobileEle().val(),
            "verification_code":getCodeEle().val(),
            "password":getPassEle().val()
@@ -213,7 +213,7 @@ var resetPassValid=(function(){
       _btn.attr("disabled","disabled").css("display","none");
       _label.css("display","block");
       setTimeout(changeSeconds,1000);
-      Base.queryData("/v1/mobile_verification_send.php","POST",{"mobile":mobile_val},null,function(err){  
+      Base.excuteAjax("/v1/mobile_verification_send.php","POST",{"mobile":mobile_val},null,function(err){  
           console.log("sendCode err:"+err);
       });
     }else{

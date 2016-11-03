@@ -293,7 +293,7 @@
         <p class="a-login-item">
           <input type="submit" value="登录" id="btn-login" class="btn-login">
         </p>
-        <p class="a-login-item">
+        <p class="a-login-item login-item-register">
           没有账号?<a href="./register.html" class="register">免费注册</a>
         </p>
       </form>
@@ -326,7 +326,7 @@
             });
             Base.showLoginBox();
           }else{
-            Base.queryData("/attendance/save","POST",{"uuid":Base.getUUID()},function(data){
+            Base.excuteAjax("/attendance/save","POST",{"uuid":Base.getUUID()},function(data){
               if(Base.isSuccess(data)){
                 Base.showAlert("签到成功");
               }else{
@@ -363,7 +363,7 @@
             Base.showAlert("请输入主题内容","error");
             return;
           }
-          Base.queryData("/forum/save","POST",{"title":_title,"forum_details":_content,"uuid":$.cookie("uuid")},function(data){
+          Base.excuteAjax("/forum/save","POST",{"title":_title,"forum_details":_content,"uuid":$.cookie("uuid")},function(data){
             hideThemePop();
             console.log(data);
             if(Base.isSuccess(data)){
@@ -411,7 +411,7 @@
         }
         var _pageId=parseInt(pageId);
         $("#note-list-box").find("mask-loading").fadeIn();
-        Base.queryData("/forum/tag?offset="+_pageId+"&length="+pageSize,"POST",{"tag":"1"},function(data){
+        Base.excuteAjax("/forum/tag?offset="+_pageId+"&length="+pageSize,"POST",{"tag":"1"},function(data){
           console.log(data);
           if(Base.isSuccess(data)){
             if(data.list_result.length<1){

@@ -5,10 +5,6 @@ var comment=(function(c){
     var nameId="";
     var textArea="";
     var commentBox="";
-    var isPagination=true;
-    var $doc=null;
-    var docHeight=0;
-    var docScrollTop=0;
     var timeout=null;
     var bottomHeight=0;
     var winHeight=0;
@@ -28,24 +24,7 @@ var comment=(function(c){
         if("loginCallBack" in config_params){
           loginCallBack=config_params.loginCallBack;
         }
-        isPagination=config.isPagination||true;
-        if(!isPagination){
-          bottomHeight=$(".footer").height();
-          $doc=$(document);
-          winHeight=$(window).height();
-          $doc.scroll(function(){ 
-            clearTimeout(timeout);
-            timeout=setTimeout(function(){
-              docHeight=$doc.height();//可见高度  
-              docScrollTop =$doc.scrollTop();//滚动高度  
-              console.log(docHeight-bottomHeight);
-              if(docScrollTop+winHeight>=docHeight-bottomHeight){
-                console.log("arrive bottom");
-              }
-            },1000);
-          });
-        }else{
-        }
+        Base.isLogin();
         $comment_body.on("click",function(){
           var $_this=$(this);
           if($_this.val()=="请输入评论内容"){
@@ -74,7 +53,7 @@ var comment=(function(c){
           e.preventDefault();
           var btn=$(this);
           var comment=$comment_body.val();
-          if(!comment){
+          if(!comment||comment=="请输入评论内容"){
              Base.showAlert("请输入点评内容","error");
              $(""+textArea).focus();
              return;
@@ -88,7 +67,7 @@ var comment=(function(c){
           }  
           console.log(_param);
           console.log(Base.getUUID());
-          Base.queryData(config.publish,"POST",_param,function(data){
+          Base.excuteAjax(config.publish,"POST",_param,function(data){
             if(Base.isSuccess(data)){
               Base.showAlert("点评成功");
               $comment_body.val("");
@@ -166,7 +145,7 @@ var comment=(function(c){
           for(var k in queryParam){
             _param[k]=queryParam[k];
           }
-          Base.queryData(config.reply,"POST",_param,function(data){
+          Base.excuteAjax(config.reply,"POST",_param,function(data){
             if(Base.isSuccess(data)){
               Base.showAlert("回复成功");
               var $par=$comments_list.find("#"+to_commentId);
@@ -199,7 +178,7 @@ var comment=(function(c){
         }
         var _page=page||1;
         pageParam="?offset="+pagePerNum*(_page-1)+"&length="+pagePerNum;
-        Base.queryData(config.query+pageParam,"POST",queryParam,function(data){
+        Base.excuteAjax(config.query+pageParam,"POST",queryParam,function(data){
             console.log("查询评论信息");
             console.log(data);
             if(Base.isSuccess(data)){
@@ -312,7 +291,7 @@ var comment=(function(c){
         if(from_uuid in allNickNames){
           return allNickNames[from_uuid];
         }else{
-          Base.queryData("/user/friend_detail","POST",{"uuid":c.from_uuid},function(data){
+          Base.excuteAjax("/user/friend_detail","POST",{"uuid":c.from_uuid},function(data){
               if(Base.isSuccess(data)){
                 var nn=data.result.nickname;
                 allNickNames[from_uuid]=nn;

@@ -100,6 +100,10 @@
 .note-body{
     margin-top: 20px;
 }
+.note-body img{
+    max-width: 100%;
+    height: auto;
+}
 .end-line{
     text-align: center;
     border-top: 1px solid #eee;
@@ -385,4 +389,20 @@
 }
 .inputs-title{
     margin: 0 10px;
+}
+@media (max-width: 375px) {
+    .note-info{
+        text-align: left;
+    }
+    .note-info span{
+        margin: 0 3px;
+    }
+    .comments-box{
+        border-bottom: 1px solid #ffd737;
+    }
+}
+@media (max-width: 320px) {
+    .view-mobile{
+        display: none;
+    }
 }

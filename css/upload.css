@@ -186,3 +186,11 @@
 .upload-status #percent{
     margin-left: 10px;
 }
+@media (max-width: 375px) {
+    .tab-btn-group .btn{
+       padding: 5px 10px;
+    }
+    .upload-btn-group .btn.btn-rule{
+        margin-bottom: 10px;
+    }
+}

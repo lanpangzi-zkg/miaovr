@@ -239,9 +239,27 @@
     cursor: default;
 }
 .pagination-box span { margin: 0 5px; }
-
-@media (max-width: 375px) {
+@media (max-width: 414px){
+    .vr-player-box{
+        height: 280px;
+    }
     .vr-video-bottom{
         margin-right: 0;
+    }
+    .video-title{
+        padding-left: 8px;
+    }
+    .video-item .date,.video-item .f-size{
+        margin-right: 0;
+    }
+    .vr-video-basic p{
+        height: auto;
+    }
+}
+@media (max-width: 375px) {
+}
+@media(max-width: 320px){
+    .vr-player-box{
+        height: 250px;
     }
 }

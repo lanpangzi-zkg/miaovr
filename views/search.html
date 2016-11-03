@@ -238,7 +238,7 @@
         var search_txt=Base.searchParam("search_txt","txt");
         console.log(search_txt);
         //模糊搜索游戏
-        Base.queryData("/game/name","POST",{"game_name":search_txt},function(data){
+        Base.excuteAjax("/game/name","POST",{"game_name":search_txt},function(data){
           console.log("搜索游戏");
           console.log(data);
           if(Base.isSuccess(data)){
@@ -269,7 +269,7 @@
           console.log(err);
         });
         //模糊搜索资讯
-        Base.queryData("/news/description","POST",{"description":search_txt},function(data){
+        Base.excuteAjax("/news/description","POST",{"description":search_txt},function(data){
           console.log("搜索资讯");
           console.log(data);
           if(Base.isSuccess(data)){
@@ -298,7 +298,7 @@
           console.log(err);
         });
         //模糊搜索视频
-        Base.queryData("/search/showname","POST",{"showname":search_txt},function(data){
+        Base.excuteAjax("/search/showname","POST",{"showname":search_txt},function(data){
           console.log("搜索视频");
           console.log(data);
           if(Base.isSuccess(data)){

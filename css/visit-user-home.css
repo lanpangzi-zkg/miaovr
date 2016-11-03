@@ -267,3 +267,15 @@ a.link-details:hover {
     margin-top: 5px;
     color: #a6a6a6;
 }
+@media (max-width: 414px){
+    .user-basic .cell {
+        width:auto;
+        margin: 10px;
+    }
+    .sign-label{
+        margin-left: 10px;
+    }
+    .aside-page{
+        padding: 10px;
+    }
+}

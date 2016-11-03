@@ -330,13 +330,15 @@
     </div>
     <!--end of footer-->
     <script src="../js/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../js/jquery.cookie.js"></script>
     <script src="../js/common.js"></script>
     <script src="../js/bootstrap.min.js"></script>
     <script type="text/javascript">
       $(document).ready(function(){
         Base.initHeaderUser();
+        Base.isLogin();
         //游戏推荐
-        Base.queryData("/game/recommend",null,null,function(data){
+        Base.excuteAjax("/game/recommend",null,null,function(data){
           if(Base.isSuccess(data)){
             Base.handleResult("game-recommend-box",data,
             {"childrenBox":".recommed-item",
@@ -349,7 +351,7 @@
           console.log(err);
         });
         //游戏精选
-        Base.queryData("/game/selection",null,null,function(data){
+        Base.excuteAjax("/game/selection",null,null,function(data){
           if(Base.isSuccess(data)){
             if(data.list_result.length<6){
               $("#game-selection-box .row-vr").eq(1).remove();

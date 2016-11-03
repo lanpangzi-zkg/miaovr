@@ -84,5 +84,14 @@
 @media (max-width: 600px) {
     .login-box{
         width: inherit;
+        margin: 10px;
+    }
+}
+@media (max-width: 320px){
+    .login-form{
+        width: 280px;
+    }
+    .login-r{
+        margin-top: 25px;
     }
 }

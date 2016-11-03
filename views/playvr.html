@@ -130,7 +130,7 @@
                 </div>
                 <div class="col-sm-8">
                   <div class="video-title" id="showname"></div>
-                  <p class="video-item">
+                  <p class="video-item basic">
                     <span>发布时间:</span>
                     <span class="date val" id="uploadtime">未知</span>
                     <span>文件大小:</span>
@@ -288,7 +288,7 @@
         <p class="a-login-item">
           <input type="submit" value="登录" id="btn-login" class="btn-login">
         </p>
-        <p class="a-login-item">
+        <p class="a-login-item login-item-register">
           没有账号?<a href="./register.html" class="register">免费注册</a>
         </p>
       </form>
@@ -315,7 +315,7 @@
         }else{
           queryParam.fileid=vid;
           //查询视频信息
-          Base.queryData("/search/fileid","POST",{"fileid":vid},function(data){
+          Base.excuteAjax("/search/fileid","POST",{"fileid":vid},function(data){
             console.log(data);
             if(Base.isSuccess(data)&&data.list_result.length>0){
               var info=data.list_result[0];
@@ -345,7 +345,7 @@
             Base.showAlert(err,"error");
           });
           //查询相关视频
-          Base.queryData("/search/category?offset=0&length=5","POST",{"category":"0"},function(data){
+          Base.excuteAjax("/search/category?offset=0&length=5","POST",{"category":"0"},function(data){
             if(Base.isSuccess(data)){
               if(data.list_result.length<1){
                   $(".other-video").css("display","none");
@@ -405,7 +405,7 @@
         if(uuid){
           timeLine=getTimeLine();
           if(timeLine!=null){
-            Base.queryData("/bfVodHistory/add","POST",{"uuid":Base.getUUID(),"fileid":vid,"timeLine":timeLine},function(data){
+            Base.excuteAjax("/bfVodHistory/add","POST",{"uuid":Base.getUUID(),"fileid":vid,"timeLine":timeLine},function(data){
               if(Base.isSuccess(data)&&flag){
                 startLoop();
               }

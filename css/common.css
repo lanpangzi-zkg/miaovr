@@ -357,7 +357,7 @@ input{
     position: fixed;
     left: 50%;
     top: 50%;    
-    margin-left: -160px;
+    margin-left: -150px;
     margin-top: -118px;
     background-color: #fff;
     border-radius: 3px;
@@ -377,6 +377,9 @@ input{
 }
 .a-login-item {
    margin: 10px 5px;
+}
+.login-item-register{
+    font-size: 14px;
 }
 .a-login-item .inp {
     width: 100%;
@@ -605,6 +608,28 @@ input{
         padding-bottom: 10px;
     }
 }
+@media (max-width: 500px) {
+    #vr-recommend-box{
+        text-align: center;
+    }
+    .container .row-vr a{
+        display: inline-block!important;
+    }
+    .col-sm-20, .col-sm-40, .col-sm-60 {
+        text-align: center;
+    }
+}
+@media (max-width: 414px){
+    #main-navbar .navbar .navbar-left>li>a{
+        width:auto;
+    }
+    #main-navbar .navbar .navbar-right .search-i{
+        display: block;
+    }
+    .input-search{
+        width: 237px;
+    }
+}
 @media (max-width: 375px) {
     #main-navbar .container-fluid{
         padding-left: 15px;
@@ -614,14 +639,8 @@ input{
         margin-left: 0;
         margin-right: 0;
     }
-    #main-navbar .navbar .navbar-right .search-i{
-        display: block;
-    }
     #main-navbar .navbar .navbar-right>li>a {
         padding: 10px 0px;
-    }
-    #main-navbar .navbar .navbar-left>li>a{
-        width:auto;
     }
     #main-navbar .navbar-nav{
         border-top: none;
@@ -630,10 +649,13 @@ input{
         border-top:1px solid #eee;
     }
     .footer .container{
-        padding: 0 50px;
+        padding: 0 20px;
     }
     .aside-nav{
         display: none;
+    }
+    .input-search{
+        width: 182px;
     }
 }
 @media (max-width: 320px) {

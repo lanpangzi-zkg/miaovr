@@ -170,7 +170,7 @@
           <div class="col-sm-3">
             <div class="aside-box">
               <div class="publish-theme">
-                <a href="#" class="btn-publish-theme">
+                <a href="javascript:void(0);" class="btn-publish-theme">
                   <img src="../images/community/publish-theme.png" alt='' class="img-responsive"/>
                 </a>
               </div>
@@ -187,7 +187,7 @@
               </p>
               <p class="fen">积分</p>
               <p class="btn-group" id="other-i" ng-controller="main">
-                <a href="#" id="user-home" class="home inb a-aside">主页</a>
+                <a href="javascript:void(0);" id="user-home" class="home inb a-aside">主页</a>
                 <input type="hidden" id="to_uuid" ng-model="targetId">
                 <a href="javascript:void(0);" ng-click="onShow()" class="chat inb a-aside" id="chat">聊聊</a>
                 <rong-widget></rong-widget>
@@ -195,7 +195,7 @@
              </div>
 
              <div class="sign">
-              <a href="#" class="btn-sign" id="btn-user-sign">
+              <a href="javascript:void(0);" class="btn-sign" id="btn-user-sign">
                   <img src="../images/community/sign.png" alt='' class="img-responsive"/>
               </a>
              </div>
@@ -320,7 +320,7 @@
         <p class="a-login-item">
           <input type="submit" value="登录" id="btn-login" class="btn-login">
         </p>
-        <p class="a-login-item">
+        <p class="a-login-item login-item-register">
           没有账号?<a href="./register.html" class="register">免费注册</a>
         </p>
       </form>
@@ -354,7 +354,7 @@
             });
             Base.showLoginBox();
           }else{
-            Base.queryData("/attendance/save","POST",{"uuid":Base.getUUID()},function(data){
+            Base.excuteAjax("/attendance/save","POST",{"uuid":Base.getUUID()},function(data){
               if(Base.isSuccess(data)){
                 Base.showAlert("签到成功");
               }else{
@@ -393,7 +393,7 @@
             Base.showAlert("请输入主题内容","error");
             return;
           }
-          Base.queryData("/forum/save","POST",{"title":_title,"forum_details":_content,"uuid":Base.getUUID()},function(data){
+          Base.excuteAjax("/forum/save","POST",{"title":_title,"forum_details":_content,"uuid":Base.getUUID()},function(data){
             hideThemePop();
             console.log(data);
             if(Base.isSuccess(data)){
@@ -421,7 +421,7 @@
           });
           queryParam.forumId=nid;
           //查询主题信息
-          Base.queryData("/forum/forumId","POST",{"forumId":nid},function(data){
+          Base.excuteAjax("/forum/forumId","POST",{"forumId":nid},function(data){
             console.log("查询主题信息");
             console.log(data);
             if(Base.isSuccess(data)&&data.list_result.length>0){

@@ -255,6 +255,7 @@
 }
 .aside-page{
     display: none;
+    position: relative;
 }
 .aside-page.cur{
     display: block;
@@ -387,4 +388,30 @@ input.disabled{
     font-size: 100%;
     height: 100%;
   }
+}
+@media (max-width: 375px) {
+    .tabs{
+        margin:10px;
+    }
+    .tabs .tab+.tab{
+        margin:0;
+    }
+    .tab-pages{
+        width: 100%;
+    }
+    .user-basic .user-icon{
+        margin-left: 20px;
+    }
+    .user-basic .info{
+        margin-left: 90px;
+    }
+    .edit-box{
+        margin:10px;
+    }
+    .edit-box .form-item label{
+        margin-bottom: 5px;
+    }
+    .tab-pages .score-rule li{
+        padding-left: 15px;
+    }
 }

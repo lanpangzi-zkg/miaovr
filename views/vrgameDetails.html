@@ -192,7 +192,7 @@
             </li>
             <li>
               <img src="../images/index/banner-01.jpg" alt="banner-02" width="100%" height="auto" class="img-responsive">
-            <li>
+            </li>
           </ul>
           <a href="javascript:void(0);" class="unslider-arrow04 prev">
             <img class="arrow" id="al" src="../images/index/arrowl.png" alt="prev" width="20" height="35"></a>
@@ -316,7 +316,7 @@
         <p class="a-login-item">
           <input type="submit" value="登录" id="btn-login" class="btn-login">
         </p>
-        <p class="a-login-item">
+        <p class="a-login-item login-item-register">
           没有账号?<a href="./register.html" class="register">免费注册</a>
         </p>
       </form>
@@ -362,7 +362,7 @@
         Base.showAlert("抱歉,你所查找的资源不存在","error");
       }else{
         queryParam.gameId=game_id;
-        Base.queryData("/game/id","POST",{"gameId":game_id},function(data){
+        Base.excuteAjax("/game/id","POST",{"gameId":game_id},function(data){
           console.log(data);
           if(Base.isSuccess(data)){
             var game=data.list_result[0];

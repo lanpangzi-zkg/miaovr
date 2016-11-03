@@ -15,19 +15,15 @@ var Base=(function($,b){
     var config={
         basePath:"http://127.0.0.1:8080/miaovr/queryApi"
     };
-    b.queryData=function(method,requestType,param,successCallBack,failCallBack,async){
+    b.excuteAjax=function(method,requestType,param,successCallBack,failCallBack){
         var _param=param||{};
-        var _async=true;//异步
-        if(arguments.length>5){
-            _async=async;
-        }
         _param.method=method;
         $.ajax({
             url:config.basePath,
             type:requestType||"GET",
             data:_param,
             dataType:"json",
-            async: _async, 
+            async: true, 
             success:function(data){
                 if(typeof successCallBack=="function"){
                     successCallBack(data);
@@ -36,6 +32,8 @@ var Base=(function($,b){
             error:function(err){
                 if(typeof failCallBack=="function"){
                     failCallBack(err);
+                }else{
+                    
                 }
             }
         });
@@ -262,7 +260,7 @@ var Base=(function($,b){
             if(userStatus.css("display")=="block"){
                 return true;
             }else{
-                Base.queryData("/v1/account_information.php?access_token="+access_token,
+                Base.excuteAjax("/v1/account_information.php?access_token="+access_token,
                     null,null,function(data){
                   if(Base.isSuccess(data)){
                     $("#main-navbar .header-login").css("display","none");
@@ -367,7 +365,7 @@ var Base=(function($,b){
     var genderObj={"1":"男","2":"女"};
     b.handleGender=function(gender){
         if(!gender){
-            return "暂无";
+            return "未知";
         }else if(gender=="1"){
             return "男";
         }else if(gender=="2"){
@@ -419,13 +417,22 @@ var Base=(function($,b){
     function handleDate(t){
         return ("0"+t).slice(-2);
     }
+    var $headerhiddenBox=null;
     b.initHeaderUser=function(){
         $("#main-navbar .arrow").on("click",function(e){
-          var $box=$(this).siblings(".user-hidden-box");
-          if($box.css("display")=="block"){
-            $box.css("display","none");
+          e.stopPropagation();
+          if(!$headerhiddenBox){
+            $headerhiddenBox=$(this).siblings("#main-navbar .user-hidden-box");
+          }
+          if($headerhiddenBox.css("display")=="block"){
+            $headerhiddenBox.css("display","none");
           }else{
-            $box.css("display","block");
+            $headerhiddenBox.css("display","block");
+            $("body").on("click",function(e){
+                e.stopPropagation();
+                $headerhiddenBox.css("display","none");
+                $(this).off("click");
+            });
           }
         }); 
         $("#main-navbar .exit").on("click",function(e){

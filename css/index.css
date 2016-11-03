@@ -410,3 +410,37 @@ a:hover{
         margin: auto;
     }
 }
+@media (max-width: 414px) {
+    .col-sm-3 .vr-box .row a,.vr-box .col-sm-9 .row .col-sm-3{
+        text-align: center;
+    }
+    .vr-box .row a{
+        display: inline-block;
+    }
+    .hot-video-list li a,
+    .hot-equipment-list li a,
+    #community-main a,
+    .hot-community-list a{
+        display: block!important;
+    }
+    .vr-game .game-info{
+        text-align: center;
+    }
+    .aside-nav{
+        display: none;
+    }
+    .equipment-icon{
+        margin-left: 53px;
+    }
+    .content-center .col-sm-12{
+        padding: 0;
+    }
+    .community-chapter{
+        padding-left: 10px;
+    }
+}
+@media (max-width: 375px) {
+    .equipment-icon{
+        margin-left: 33px;
+    }
+}

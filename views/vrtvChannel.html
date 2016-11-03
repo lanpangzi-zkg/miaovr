@@ -375,7 +375,7 @@
           Base.showAlert("获取栏目信息失败","error");
         }else{
           $("#category-name").html(categoryName[category]);
-          Base.queryData("/search/category?offset=0&length=10","POST",{"category":category},function(data){
+          Base.excuteAjax("/search/category?offset=0&length=10","POST",{"category":category},function(data){
             if(Base.isSuccess(data)){
               Base.handleResult("tv-category-box",data,
               {"childrenBox":".col-sm-2",

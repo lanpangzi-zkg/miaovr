@@ -118,7 +118,7 @@
         </div>
         <li class="banner-item">
           <a href="#" class="slider-item">
-            <img src="./images/index/banner-01.jpg" role-err="./images/index/banner-01.jpg" alt="banner-01" width="100%" height="500"/>
+            <img src="./images/index/banner-01.jpg" role-err="./images/index/banner-01.jpg" alt="banner-01" width="100%" height="500" class="slider-img"/>
           </a>
         </li>
       </ul>
@@ -690,13 +690,13 @@
         e.onerror=null;
       }
       function initSlider(){
-        var $banner=$("#banner");
-        querySlider($banner);
+        querySlider($("#banner"));
       }
       function querySlider($banner){
-        Base.queryData("/v1/sliders.php?limit=10","POST",null,function(data){
+        Base.excuteAjax("/v1/sliders.php?limit=10","POST",null,function(data){
           console.log("querySlider");
           console.log(data);
+          $banner.find(".slider-item img").attr("height",$(document).width()/1024*500);
           if(Base.isSuccess(data)){
             Base.handleResult("banner-c",data,
               {"childrenBox":"li",
@@ -724,7 +724,7 @@
         });
       }
       function queryVrInfo(){
-        Base.queryData("/news/all?offset=0&limit=3","POST",null,function(data){
+        Base.excuteAjax("/news/all?offset=0&limit=3","POST",null,function(data){
           if(Base.isSuccess(data)){
           Base.handleResult("index-vrinfo",data,
             {"childrenBox":".col-sm-4",
@@ -743,7 +743,7 @@
         });
       }
       function queryVrTv(){
-        Base.queryData("/search/allByPage?offset=0&length=8",null,null,function(data){
+        Base.excuteAjax("/search/allByPage?offset=0&length=8",null,null,function(data){
           if(Base.isSuccess(data)){
             Base.handleResult("index-vrtv-l",data,
               {"childrenBox":".col-sm-3",
@@ -767,7 +767,7 @@
         });
       }
       function queryVrHotTv(){
-        Base.queryData("/search/selection",null,null,function(data){
+        Base.excuteAjax("/search/selection",null,null,function(data){
           if(Base.isSuccess(data)){
             console.log("queryVrHotTv");
             console.log(data);
@@ -791,7 +791,7 @@
         });
       }
       function queryVrGame(){
-        Base.queryData("/game/selection",null,null,function(data){
+        Base.excuteAjax("/game/selection",null,null,function(data){
           if(Base.isSuccess(data)){
             Base.handleResult("index-vrgame-l",data,
               {"childrenBox":".col-sm-3",
@@ -812,7 +812,7 @@
       }
       function queryCommunity(){
         var $parentBox=$("#community-list");
-        Base.queryData("/forum/all?offset=0&length=3",null,null,function(data){
+        Base.excuteAjax("/forum/all?offset=0&length=3",null,null,function(data){
           if(Base.isSuccess(data)){
             console.log("queryCommunity");
             console.log(data);
@@ -833,8 +833,10 @@
               temp_box.children(".chapter-date").html(Base.formatDate(temp_result.publish_time));
               temp_box.find(".chat-num").html(temp_result.commentNums);
               temp_box.find(".visit-num").html(temp_result.views);
-              temp_box.find(".icon").attr("src",temp_result.user.thumbAvatar);
-              temp_box.find(".nickname").html(temp_result.user.nickname);
+              if (temp_result.user){
+                temp_box.find(".icon").attr("src",temp_result.user.thumbAvatar);
+                temp_box.find(".nickname").html(temp_result.user.nickname);
+              }
              }
              $parentBox.find(".icon").on("error",function(){
               var _this=$(this);

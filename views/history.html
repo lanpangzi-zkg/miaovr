@@ -257,7 +257,7 @@
         <p class="a-login-item">
           <input type="submit" value="登录" id="btn-login" class="btn-login">
         </p>
-        <p class="a-login-item">
+        <p class="a-login-item login-item-register">
           没有账号?<a href="./register.html" class="register">免费注册</a>
         </p>
       </form>
@@ -324,11 +324,12 @@
           mask=$(".delete-mask");
         }
         mask.css("height",$(document).height()).fadeIn();
-        Base.queryData("/bfVodHistory/remove","POST",{"uuid":Base.getUUID(),"fileid":fileid},function(data){
+        Base.excuteAjax("/bfVodHistory/remove","POST",{"uuid":Base.getUUID(),"fileid":fileid},function(data){
           if(Base.isSuccess(data)){
             $("#"+fileid).remove();
             mask.fadeOut();
             Base.showAlert("删除成功");
+             $("#history-count").html(--parseInt($("#history-count").html()));
           }else{
             mask.fadeOut();
             Base.showAlert(data.error_msg,"error");
@@ -340,10 +341,11 @@
         $dialog.css("display","none");
       }
       function queryHistory(){
-        Base.queryData("/bfVodHistory/uuid","POST",{"uuid":Base.getUUID()},function(data){
+        Base.excuteAjax("/bfVodHistory/uuid","POST",{"uuid":Base.getUUID()},function(data){
           if(Base.isSuccess(data)){
             console.log(data);
             var list=data.list_result;
+            $("#history-count").html(list.length);
             if(list.length>0){
               var historyTimeBox=$(".history-list>.history-time-box");
               var temp=null;

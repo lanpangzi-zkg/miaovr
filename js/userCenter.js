@@ -5,7 +5,7 @@ $(document).ready(function(){
   }
   Base.initHeaderUser();
   var access_token=$.cookie("access_token");
-  Base.queryData("/v1/account_information.php?access_token="+access_token,null,null,function(data){
+  Base.excuteAjax("/v1/account_information.php?access_token="+access_token,null,null,function(data){
     console.log(data);
     if(Base.isSuccess(data)){
       $("#w").fadeOut();
@@ -32,8 +32,8 @@ $(document).ready(function(){
       _this.addClass("cur").siblings().removeClass("cur");
       $("#"+_id).addClass("cur").siblings().removeClass("cur");
       if(_id==="aside-page-3"&&!_this.attr("role-query")){
-        Base.queryData("/v1/mmcoin_count.php","POST",null,function(data){
-          if(isSuccess(data)){
+        Base.excuteAjax("/v1/mmcoin_count.php","POST",null,function(data){
+          if(Base.isSuccess(data)){
             $("#user-score").html(data.coin_count);
             _this.attr("role-query","ok");
             $("#score-page-1").children(".mask-loading").fadeOut();
@@ -54,7 +54,7 @@ $(document).ready(function(){
     $(".tabs li").eq(3).click();
   });
   new UserForm().init("form-edit-nickname",function(data){
-    if(isSuccess(data)){
+    if(Base.isSuccess(data)){
       $("#nickname").html(data.nickname);
       $("#cur-nickname").html(data.nickname);
       $.cookie("nickname",data.nickname);
@@ -66,11 +66,7 @@ $(document).ready(function(){
   new UserForm().init("form-change-pass");
   new UserForm().init("form-edit-phone");
   mobileCode.init();
-  //showAlertTip("haha");
 });
-function isSuccess(data){
-  return data.status=="1"&&data.error_code=="0";
-}
 var genderManage=(function(){
   var sexRadios=null;
   var curSex="";
@@ -84,7 +80,6 @@ var genderManage=(function(){
     curSex=$.cookie("gender");
     getUserSexLabel().html(sexCollection[curSex]);
     sexRadios=$("input:radio[name='sex']");
-    //sexRadios.attr("checked",sexCollection[curSex]);
     //修改
     $("#edit-sex-b").on("click",function(){
       $(this).siblings(".radio-group").addClass("inb");
@@ -108,7 +103,7 @@ var genderManage=(function(){
       if(curSex==chooseSex){
         return;
       }else{
-        Base.queryData("/v1/account_gender.php","POST",
+        Base.excuteAjax("/v1/account_gender.php","POST",
           {"gender":chooseSex},function(data){
             if(Base.isSuccess(data)){
               curSex=data.gender;
@@ -138,10 +133,6 @@ var genderManage=(function(){
     init:init
   }
 })();
-function userIcon(){
-  $("#thumb_avatar").attr("src","../images/userCenter/user-icon.png");
-  $("#thumb_avatar").onerror=null;
-}
 
 function UserForm(){
   this.submitUrl="";
@@ -244,7 +235,7 @@ function validateForm(e){
     var _btn=$(this);
     dataObj.access_token=$.cookie("access_token");
     _btn.attr("disabled","disabled").addClass("disabled").val(_btn.attr("role-load"));
-    Base.queryData(submitUrl,"POST",dataObj,function(data){
+    Base.excuteAjax(submitUrl,"POST",dataObj,function(data){
         if(typeof successCallBack=="function"){
           successCallBack(data);
         }else{
@@ -323,7 +314,7 @@ var mobileCode=(function(){
       seconds_label.addClass("inb");
       setTimeout(changeSeconds,1000);
       return;
-      Base.queryData("/v1/mobile_verification_send.php","POST",{"mobile":mobile_val},null,function(err){  
+      Base.excuteAjax("/v1/mobile_verification_send.php","POST",{"mobile":mobile_val},null,function(err){  
           console.log("sendCode err:"+err);
       });
     }else{

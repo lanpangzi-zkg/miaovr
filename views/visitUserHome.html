@@ -158,7 +158,7 @@
                         </span>
                       </p>
                       <p class="info-item">
-                        <span class="inb">
+                        <span class="inb sign-label">
                           用户签名：
                         </span>
                         <span id="signature"></span>
@@ -341,7 +341,7 @@
         if(!uid){
           Base.showAlert("抱歉,你所查找的资源不存在","error");
         }else{
-          Base.queryData("/v1/friend_detail.php","POST",{"uuid":uid},function(data){
+          Base.excuteAjax("/v1/friend_detail.php","POST",{"uuid":uid},function(data){
             if(Base.isSuccess(data)){
               $(".nickname").html(data.nickname);
               $("#gender").html(Base.handleGender(data.gender));
@@ -359,7 +359,7 @@
       });
       function queryPublishNote(){
         //查询发帖
-        Base.queryData("/forum/uuid?offset=0&length=10","POST",{"uuid":uid},function(data){
+        Base.excuteAjax("/forum/uuid?offset=0&length=10","POST",{"uuid":uid},function(data){
           if(Base.isSuccess(data)){
             $("#note-count").html(data.list_result.length||0);
             Base.handleResult("note-list-main",data,
@@ -378,7 +378,7 @@
         });
 
         //查询回复
-        Base.queryData("/forum/comment/uuid?offset=0&length=10","POST",{"from_uuid":uid},function(data){
+        Base.excuteAjax("/forum/comment/uuid?offset=0&length=10","POST",{"from_uuid":uid},function(data){
           if(Base.isSuccess(data)){
             $("#reply-count").html(data.list_result.length||0);
             if(data.list_result.length<1){
@@ -398,10 +398,13 @@
 
       }
       function queryPublishVideo(){
-        Base.queryData("/news/uuid","POST",{"fromUuid":uid},function(data){
+        Base.excuteAjax("/news/uuid","POST",{"fromUuid":uid},function(data){
           if(Base.isSuccess(data)){
             console.log(data);
-            return;
+            if(data.list_result.length<1){
+              $("#publish-video-main").css("display","none");
+              return;
+            }
             Base.handleResult("publish-video-main",data,
               {"childrenBox":".video",
                 "txt":".t2"},

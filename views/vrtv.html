@@ -454,13 +454,15 @@
     </div>
     <!--end of footer-->
     <script src="../js/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../js/jquery.cookie.js"></script>
     <script src="../js/bootstrap.min.js"></script>
     <script src="../js/common.js"></script>
     <script type="text/javascript">
       $(document).ready(function(){
         Base.initHeaderUser();
+        Base.isLogin();
         //tv推荐
-        Base.queryData("/search/allByPage?offset=0&length=7",null,null,function(data){
+        Base.excuteAjax("/search/allByPage?offset=0&length=7",null,null,function(data){
           console.log(data);
           if(Base.isSuccess(data)){
             Base.handleResult("vr-recommend-box",data,
@@ -484,7 +486,7 @@
         });
 
         //tv精选
-        Base.queryData("/search/selection",null,null,function(data){
+        Base.excuteAjax("/search/selection",null,null,function(data){
           console.log(data);
           if(Base.isSuccess(data)){
             var len=data.list_result.length;
