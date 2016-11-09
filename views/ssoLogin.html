@@ -4,10 +4,10 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>用户密码重置</title>
+    <title>用户登陆</title>
     <link href="../css/bootstrap.min.css" rel="stylesheet">
     <link href="../css/common.css" rel="stylesheet">
-    <link href="../css/reset-pass.css" rel="stylesheet">
+    <link href="../css/login.css" rel="stylesheet">
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -80,9 +80,17 @@
                       <li class="user-status">
                         <a href="./userCenter.html">
                           <img src="../images/common/default.png" width=50 alt="用户头像" class="img-responsive header-user-icon inb" onerror="userImgErr(this)">
-                          <span class="header-user-name"></span>
                         </a>
-                      </li>  
+                        <span class="arrow"></span>
+                        <div class="user-hidden-box">
+                          <span class="header-user-name inb"></span>
+                          <p class="exit-box">
+                            <a href="./userCenter.html">个人中心</a>
+                            <span class="h-line"></span>
+                            <a href="javascript:void(0);"class="exit">退出</a>
+                          </p>
+                        </div>
+                      </li>
                       <li class="search-i">
                         <form class="form-search" action="./search.html" onSubmit="return searchConfirm();">
                           <span class="input-search-box">
@@ -101,36 +109,8 @@
         </div>
       </div>
       <div class="header-bottom-line"></div>
-    </div>   
+    </div>  
     <div class="wrapper">
-      <div class="reset-box">
-        <div class="row">
-          <div class="col-sm-12">
-            <form action="/v1/account_password_reset.php" class="reset-pass-form" id="reset-pass-form">
-              <p class="reset-title">
-                密码重置
-              </p>
-              <p class="reset-item">
-                <input type="text" role-type="mobile" role-null="请输入手机号" role-err="请检查手机号码格式" class="inp" id="mobile" name="uname" placeHolder="手机号">
-              </p>
-              <p class="reset-item">
-                <input type="text" role-type="code" role-null="请输入验证码" role-err="验证码为六位数字" class="inp validate-code" name="code" id="code" placeHolder="验证码">
-                <input type="button" class="btn-code" id="btn-send-code" value="获取验证码">
-                <span class="seconds-count">60秒</span>
-              </p>
-              <p class="reset-item">
-                <input type="password" role-type="pass" name="pass" role-null="请输入密码" role-err="密码包含数字字母或者下划线，6~16位长度" class="inp" id="pass" placeHolder="登陆密码">
-              </p>
-              <p class="reset-item">
-                <input type="password" role-type="repass" role-repeat="pass" name="repass" role-null="请再次输入密码" role-err="两次密码输入不一致" class="inp" id="repass" placeHolder="确认密码">
-              </p>
-              <p class="reset-item">
-                <input type="submit" value="确定" class="btn-reset" id="btn-reset"/>
-              </p>
-            </form>
-          </div>
-        </div>
-      </div>
     </div>
     <!--end of wrapper-->
     <div class="footer">
@@ -194,13 +174,36 @@
     </div>
     <!--end of footer-->
     <script src="../js/jquery-1.11.1.min.js"></script>
-    <script src="../js/common.js"></script>
-    <script src="../js/reset-pass.js"></script>
     <script src="../js/bootstrap.min.js"></script>
+    <script src="../js/jquery.cookie.js"></script>
+    <script type="text/javascript" src="http://qzonestyle.gtimg.cn/qzone/openapi/qc_loader.js" charset="utf-8" data-appid="101359235" data-redirecturi="http://127.0.0.1:8080/miaovr/views/ssoLogin.html" data-callback="true"></script>
     <script type="text/javascript">
-      $(document).ready(function(e) {
-          resetPassValid.init("reset-pass-form");
-      });     
+    //从页面收集OpenAPI必要的参数。get_user_info不需要输入参数，因此paras中没有参数
+    var paras = {};
+
+    //用JS SDK调用OpenAPI
+    QC.api("get_user_info", paras)
+      //指定接口访问成功的接收函数，s为成功返回Response对象
+      .success(function(s){
+        //成功回调，通过s.data获取OpenAPI的返回数据
+        alert("获取用户信息成功！当前用户昵称为："+s.data.nickname);
+      })
+      //指定接口访问失败的接收函数，f为失败返回Response对象
+      .error(function(f){
+        //失败回调
+        alert("获取用户信息失败！");
+      })
+      //指定接口完成请求后的接收函数，c为完成请求返回Response对象
+      .complete(function(c){
+        //完成请求回调
+        alert("获取用户信息完成！");
+      });
+    </script>
+    <script type="text/javascript">
+      $(document).ready(function() {
+        
+      });
+
     </script>
   </body>
 </html>

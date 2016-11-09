@@ -27,7 +27,7 @@ function initUpload(){
             url:"http://127.0.0.1:8080/miaovr/queryApi",
             type:"POST",
             async: false,
-            data:{"description":$("#title-image").val(),
+            data:{"description":$("#description-image").val(),
               "fromUuid":Base.getUUID(),
               "isVod":false,
               "method":"/news/upLoadToken"},
@@ -66,7 +66,7 @@ function initUpload(){
         'UploadComplete': function() {
             hideUploadMask();
             hideFileDisplay("upload-image-c");
-            $("#title-image").val("");
+            $("#description-image").val("");
             Base.setBtnEnabled("#btn-upload-image");
         },
         'FileUploaded': function(up, file, info) {
@@ -113,7 +113,7 @@ function initUpload(){
             url:"http://127.0.0.1:8080/miaovr/queryApi",
             type:"POST",
             async: false,
-            data:{"description":$("#title-video").val(),
+            data:{"description":$("#description-video").val(),
               "fromUuid":Base.getUUID(),
               "isVod":false,
               "method":"/news/upLoadToken"},
@@ -151,7 +151,7 @@ function initUpload(){
         'UploadComplete': function() {
             hideUploadMask();
             hideFileDisplay("upload-video-c");
-            $("#title-video").val("");
+            $("#description-video").val("");
             Base.setBtnEnabled("#btn-upload-video");
         },
         'FileUploaded': function(up, file, info) {

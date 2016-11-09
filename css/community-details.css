@@ -214,6 +214,10 @@
     cursor: default;
 }
 .pagination-box span { margin: 0 5px; }
+.holder a.jp-disabled:hover, a.jp-disabled:hover{
+    background: #ececec!important;
+    cursor: not-allowed!important;
+}
 /*******文章点评********/
 .note-comment form{
     margin: 15px 0px 10px 0;
@@ -242,9 +246,6 @@
     padding-top: 10px;
     padding-bottom: 10px;
 }
-.comments-box .comments-list{
-
-}
 .comment-item{
     padding: 10px 0;
 }
@@ -253,8 +254,8 @@
     width: 35px;
     height: 35px;
     margin: 12px 0;
-    background-color: #555;
     border-radius: 50%;
+    overflow: hidden;
 }
 .comment-item .comment-main{
     position: relative;

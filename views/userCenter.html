@@ -17,97 +17,100 @@
   </head>
   <body>
     <div class="header">
-      <div id="main-navbar" class="container">
-        <nav class="navbar navbar-default">
-          <div class="container-fluid">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a id="logo" title="Start..." class="navbar-brand" href="#">
-                    <img src="../images/common/logo1.png" alt="miaovr Logo">
-                </a>
-                <div class="clearfix"></div>
+      <div class="header-c">
+        <div id="main-navbar" class="container">
+          <nav class="navbar navbar-default">
+            <div class="container-fluid">
+              <div class="navbar-header">
+                  <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                      <span class="sr-only">Toggle navigation</span>
+                      <span class="icon-bar"></span>
+                      <span class="icon-bar"></span>
+                      <span class="icon-bar"></span>
+                  </button>
+                  <a id="logo" title="Start..." class="navbar-brand" href="#">
+                      <img src="../images/common/logo1.png" alt="miaovr Logo">
+                  </a>
+                  <div class="clearfix"></div>
+              </div>
+
+              <div class="navbar-collapse collapse" id="bs-example-navbar-collapse-1" aria-expanded="false">
+                  <ul class="nav navbar-nav navbar-left">
+                      <li>
+                          <a href="../index.html">首页</a>
+                      </li>
+                      <li>
+                          <a href="./vrinfo.html">VR资讯</a>
+                      </li>
+                      <li>
+                          <a href="./vrtv.html">VRTV</a>
+                      </li>
+                      <li>
+                          <a href="./vrgame.html">VR游戏</a>
+                      </li>
+                      <li>
+                          <a href="./community.html">VR社区</a>
+                      </li>
+                  </ul>
+
+                  <ul class="nav navbar-nav navbar-right">
+                      <li>
+                        <a href="http://miaomiaotv.cn/index.html">
+                          <img src="../images/common/mobile.png" alt='' class="img-responsive nav-r-icon"/>
+                          <p class="nav-r-name">客户端</p>
+                        </a>
+                      </li>
+                      <li>
+                        <a href="./upload.html">
+                          <img src="../images/common/upload.png" alt='' class="img-responsive nav-r-icon"/>
+                          <p class="nav-r-name">上传视频</p>
+                        </a>
+                      </li>
+                      <li>
+                        <a href="./history.html">
+                          <img src="../images/common/history.png" alt='' class="img-responsive nav-r-icon"/>
+                          <p class="nav-r-name">历史观看</p>
+                        </a>
+                      </li>
+                      <li class="header-login">
+                        <a href="./login.html">
+                          <img src="../images/common/man.png" alt='' class="img-responsive nav-r-icon"/>
+                          <p class="nav-r-name">登陆/注册</p>
+                        </a>
+                      </li>
+                      <li class="user-status">
+                        <a href="javascript:void(0);">
+                          <img src="../images/common/default.png" width=40 alt="用户头像" class="img-responsive header-user-icon inb" onerror="userImgErr(this)">
+                        </a>
+                        <span class="arrow"></span>
+                        <div class="user-hidden-box">
+                          <span class="header-user-name inb"></span>
+                          <p class="exit-box">
+                            <a href="javascript:void(0);">个人中心</a>
+                            <span class="h-line"></span>
+                            <a href="javascript:void(0);"class="exit">退出</a>
+                          </p>
+                        </div>
+                      </li>
+                      <li class="search-i">
+                        <form class="form-search" action="./search.html" onSubmit="return searchConfirm();">
+                          <span class="input-search-box">
+                            <input type="text" name="search_txt" id="t-search" class="input-search">
+                          </span><span class="btn-search-box">
+                            <input type="submit" value="搜索" id="btn-search" class="btn-search">
+                          </span>
+                        </form>
+                      </li>
+                  </ul>
+
+              </div>
+              <!-- end of navbar-collapse -->
             </div>
-
-            <div class="navbar-collapse collapse" id="bs-example-navbar-collapse-1" aria-expanded="false">
-                <ul class="nav navbar-nav navbar-left">
-                    <li>
-                        <a href="../index.html">首页</a>
-                    </li>
-                    <li>
-                        <a href="./vrinfo.html">VR资讯</a>
-                    </li>
-                    <li>
-                        <a href="./vrtv.html">VRTV</a>
-                    </li>
-                    <li>
-                        <a href="./vrgame.html">VR游戏</a>
-                    </li>
-                    <li>
-                        <a href="./community.html">VR社区</a>
-                    </li>
-                </ul>
-
-                <ul class="nav navbar-nav navbar-right">
-                    <li>
-                      <a href="http://miaomiaotv.cn/index.html">
-                        <img src="../images/common/mobile.png" alt='' class="img-responsive nav-r-icon"/>
-                        <p class="nav-r-name">客户端</p>
-                      </a>
-                    </li>
-                    <li>
-                      <a href="./upload.html">
-                        <img src="../images/common/upload.png" alt='' class="img-responsive nav-r-icon"/>
-                        <p class="nav-r-name">上传视频</p>
-                      </a>
-                    </li>
-                    <li>
-                      <a href="./history.html">
-                        <img src="../images/common/history.png" alt='' class="img-responsive nav-r-icon"/>
-                        <p class="nav-r-name">历史观看</p>
-                      </a>
-                    </li>
-                    <li class="header-login">
-                      <a href="./login.html">
-                        <img src="../images/common/man.png" alt='' class="img-responsive nav-r-icon"/>
-                        <p class="nav-r-name">登陆/注册</p>
-                      </a>
-                    </li>
-                    <li class="user-status">
-                      <a href="javascript:void(0);">
-                        <img src="../images/comDetails/user-icon.png" width=40 alt="用户头像" class="img-responsive header-user-icon inb" onerror="userImgErr(this)">
-                      </a>
-                      <span class="arrow"></span>
-                      <div class="user-hidden-box">
-                        <span class="header-user-name inb"></span>
-                        <p class="exit-box">
-                          <a href="javascript:void(0);">个人中心</a>
-                          <span class="h-line"></span>
-                          <a href="javascript:void(0);"class="exit">退出</a>
-                        </p>
-                      </div>
-                    </li>
-                    <li class="search-i">
-                      <form class="form-search" action="./search.html" onSubmit="return searchConfirm();">
-                        <span class="input-search-box">
-                          <input type="text" name="search_txt" id="t-search" class="input-search">
-                        </span><span class="btn-search-box">
-                          <input type="submit" value="搜索" id="btn-search" class="btn-search">
-                        </span>
-                      </form>
-                    </li>
-                </ul>
-
-            </div>
-            <!-- end of navbar-collapse -->
-          </div>
-          <!-- end of container-fluid -->
-        </nav>
+            <!-- end of container-fluid -->
+          </nav>
+        </div>
       </div>
+      <div class="header-bottom-line"></div>
     </div>    
     <div class="container">
       <div class="mask-loading" id="w">
@@ -264,7 +267,7 @@
                         <label>确认密码</label>
                         <input type="password" role-repeat="new-pass" id="new-repass" role-type="repass" role-null="请重新输入新密码" role-err="密码输入不一致" class="inp" name="repeat-password">
                       </p>
-                      <p class="form-item">
+                      <p class="form-item item-btn">
                         <input type="submit" role-load="修改中..." role-nor="确认修改" role-type="submit" class="btn" value="确认修改">
                       </p>
                     </form>
@@ -281,7 +284,7 @@
                         <label>新昵称</label>
                         <input type="text" role-type="nickname" role-null="请输入昵称" role-err="昵称包含数字字母或者中文" class="inp" id="new-nickname" name="nickname">
                       </p>
-                      <p class="form-item">
+                      <p class="form-item item-btn">
                         <input type="submit" role-type="submit" role-load="修改中..." role-nor="确认修改" class="btn" value="确认修改">
                       </p>
                       <p class="form-item tip" style="color:#ff8b3d;display:none;">

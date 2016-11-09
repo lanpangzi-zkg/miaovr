@@ -1,5 +1,5 @@
 function userImgErr(e){
-  $(e).attr("src","../images/common/user-icon.png");
+  $(e).attr("src","../images/common/default.png");
   e.onerror=null;
 }
 function searchConfirm(){
@@ -399,21 +399,6 @@ var Base=(function($,b){
         }
         $parentBox.find(".mask-loading").fadeOut();
     };
-    //根据回复信息找到该回复的评论
-    function searchReplyComment(comments,to_commentId){
-        var parComment=null;
-        for(var i=0,j=comments.length;i<j;i++){
-            if(comments[i].commentId==to_commentId){//找到评论
-                console.log(comments[i].comment);
-                parComment=comments[i];
-                i=j;
-            }
-        }
-        return parComment;
-    }
-    function test(commentData){
-        return "<div></div>";
-    }
     function handleDate(t){
         return ("0"+t).slice(-2);
     }
@@ -451,6 +436,8 @@ var Base=(function($,b){
           Base.showAlert("退出成功");
           if(window.location.href.indexOf("userCenter.html")>0){
             window.location.href="./login.html";
+          }else{
+            window.location.reload();
           }
         }); 
     };

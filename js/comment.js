@@ -65,8 +65,6 @@ var comment=(function(c){
           for(var k in queryParam){
             _param[k]=queryParam[k];
           }  
-          console.log(_param);
-          console.log(Base.getUUID());
           Base.excuteAjax(config.publish,"POST",_param,function(data){
             if(Base.isSuccess(data)){
               Base.showAlert("点评成功");
@@ -95,7 +93,7 @@ var comment=(function(c){
             }
             btn.removeAttr("disabled").removeClass("btn-disabled");
           },function(err){
-            Base.showAlert(err);
+            Base.showAlert(err,"error");
             btn.removeAttr("disabled").removeClass("btn-disabled");
           });
         });
@@ -160,7 +158,7 @@ var comment=(function(c){
             _btn.removeAttr("disabled").removeClass("btn-disabled");
           },function(err){
             $reply_content.val("");
-            Base.showAlert(err);
+            Base.showAlert(err,"error");
             _btn.removeAttr("disabled").removeClass("btn-disabled");
           });        
         });
@@ -193,7 +191,7 @@ var comment=(function(c){
             }
             $(".comments-box").find(".mask-loading").fadeOut();
           },function(err){
-            Base.showAlert(err);
+            Base.showAlert(err,"error");
         });
     };
     c.handleCommentItem=function(data){
@@ -277,7 +275,7 @@ var comment=(function(c){
       if("thumbAvatar" in data){
         return data.thumbAvatar;
       }else{
-        return "";
+        return "../images/common/default.png";
       }
     }
     var allNickNames={};

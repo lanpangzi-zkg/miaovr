@@ -155,13 +155,23 @@
 .history-btn-group .btn-cancel{
     background: url('../images/history/btn-cancel.png') no-repeat;
 }
+@media (max-width: 414px) {
+    .history-header .delete-box .delete-icon{
+        position: absolute;
+        left: -20px;
+        top: 0;
+    }
+}
+@media (max-width: 360px) {
+    .history-header .delete-box .delete-icon{
+        top: 0;
+    }
+}
 @media (max-width: 320px) {
     .history-header{
         padding: 10px 5px;
     }
     .history-header .delete-box .delete-icon{
-        position: absolute;
-        left: -16px;
         top: 1px;
     }
 }

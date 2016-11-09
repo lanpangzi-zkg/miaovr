@@ -92,12 +92,10 @@
 }
 .user-basic .info .info-item{
     padding: 15px;
+    padding-top: 0;
 }
 .user-basic .info .sex-item{
     margin-top: 17px;
-}
-.user-basic .info .info-name{
-    padding-top: 0;
 }
 .user-basic .user-name{
     font-size: 1.2em;
@@ -389,29 +387,48 @@ input.disabled{
     height: 100%;
   }
 }
-@media (max-width: 375px) {
+@media (max-width: 414px) {
+    .tab-pages{
+        width: 100%;
+        padding: 10px;
+    }
     .tabs{
         margin:10px;
     }
     .tabs .tab+.tab{
         margin:0;
     }
-    .tab-pages{
-        width: 100%;
-    }
-    .user-basic .user-icon{
-        margin-left: 20px;
-    }
     .user-basic .info{
         margin-left: 90px;
     }
-    .edit-box{
-        margin:10px;
+    #form-edit-nickname .form-item{
+        padding: 10px 0;
+    }
+    #form-edit-nickname .form-item label{
+        width: inherit;
     }
     .edit-box .form-item label{
         margin-bottom: 5px;
     }
     .tab-pages .score-rule li{
         padding-left: 15px;
+    }
+    .edit-box .form-item.item-btn{
+        padding: 0;
+        text-align: center;
+    }
+    .edit-box .form-item.item-btn .btn{
+        margin-left: 0;
+    }
+    .user-basic .edit-name{
+        margin-left: 0;
+    }
+}
+@media (max-width: 375px) {
+    .user-basic .user-icon{
+        margin-left: 20px;
+    }
+    .edit-box{
+        margin:10px;
     }
 }

@@ -444,3 +444,13 @@ a:hover{
         margin-left: 33px;
     }
 }
+@media (max-width: 360px) {
+    .equipment-icon{
+        margin-left: 27px;
+    }
+}
+@media (max-width: 320px) {
+    .equipment-icon{
+        margin-left: 7px;
+    }
+}

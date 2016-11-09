@@ -77,4 +77,7 @@
   .container .row-vr a .title{
     text-align: center;
   }
+  .banner-box img{
+    height: 50px;
+  }
 }

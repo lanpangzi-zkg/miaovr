@@ -1,5 +1,6 @@
 .upload-box{
     background-color: #fff;
+    margin: 10px 0;
 }
 .upload-tabs{
     padding: 20px 0;
@@ -68,18 +69,18 @@
 }
 .file-display table{
     width: 100%;
-    font-size: 1.3em;
+    font-size: 1.2em;
     line-height: 1.8em;
 }
 .file-display table tr{
 
 }
 .file-display table td.file-label{
-    width: 40%;
-    text-align: right;
+    width: 30%;
+    /*text-align: right;*/
 }
 .file-display table td.file-val{
-    width: 60%;
+    width: 70%;
     text-align: left;
 }
 .file-info .file-item .file-delete{

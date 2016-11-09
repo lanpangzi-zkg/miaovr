@@ -9,6 +9,7 @@
     <link href="../css/bootstrap.min.css" rel="stylesheet">
     <link href="../css/common.css" rel="stylesheet">
     <link href="../css/visit-user-home.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="../webim/css/RongIMWidget.css"/>
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -18,102 +19,107 @@
   </head>
   <body>
     <div class="header">
-      <div id="main-navbar" class="container">
-        <nav class="navbar navbar-default">
-          <div class="container-fluid">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a id="logo" title="Start..." class="navbar-brand" href="#">
-                    <img src="../images/common/logo1.png" alt="miaovr Logo">
-                </a>
-                <div class="clearfix"></div>
-            </div>
+      <div class="header-c">
+        <div id="main-navbar" class="container">
+          <nav class="navbar navbar-default">
+            <div class="container-fluid">
+              <div class="navbar-header">
+                  <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                      <span class="sr-only">Toggle navigation</span>
+                      <span class="icon-bar"></span>
+                      <span class="icon-bar"></span>
+                      <span class="icon-bar"></span>
+                  </button>
+                  <a id="logo" title="Start..." class="navbar-brand" href="#">
+                      <img src="../images/common/logo1.png" alt="miaovr Logo">
+                  </a>
+                  <div class="clearfix"></div>
+              </div>
 
-            <div class="navbar-collapse collapse" id="bs-example-navbar-collapse-1" aria-expanded="false">
-                <ul class="nav navbar-nav navbar-left">
-                    <li>
-                        <a href="../index.html">首页</a>
-                    </li>
-                    <li>
-                        <a href="./vrinfo.html">VR资讯</a>
-                    </li>
-                    <li>
-                        <a href="./vrtv.html">VRTV</a>
-                    </li>
-                    <li>
-                        <a href="./vrgame.html">VR游戏</a>
-                    </li>
-                    <li>
-                        <a href="./community.html">VR社区</a>
-                    </li>
-                </ul>
+              <div class="navbar-collapse collapse" id="bs-example-navbar-collapse-1" aria-expanded="false">
+                  <ul class="nav navbar-nav navbar-left">
+                      <li>
+                          <a href="../index.html">首页</a>
+                      </li>
+                      <li>
+                          <a href="./vrinfo.html">VR资讯</a>
+                      </li>
+                      <li>
+                          <a href="./vrtv.html">VRTV</a>
+                      </li>
+                      <li>
+                          <a href="./vrgame.html">VR游戏</a>
+                      </li>
+                      <li>
+                          <a href="./community.html">VR社区</a>
+                      </li>
+                  </ul>
 
-                <ul class="nav navbar-nav navbar-right">
-                    <li>
-                      <a href="http://miaomiaotv.cn/index.html">
-                        <img src="../images/common/mobile.png" alt='' class="img-responsive nav-r-icon"/>
-                        <p class="nav-r-name">客户端</p>
-                      </a>
-                    </li>
-                    <li>
-                      <a href="./upload.html">
-                        <img src="../images/common/upload.png" alt='' class="img-responsive nav-r-icon"/>
-                        <p class="nav-r-name">上传视频</p>
-                      </a>
-                    </li>
-                    <li>
-                      <a href="./history.html">
-                        <img src="../images/common/history.png" alt='' class="img-responsive nav-r-icon"/>
-                        <p class="nav-r-name">历史观看</p>
-                      </a>
-                    </li>
-                    <li class="header-login">
-                      <a href="./login.html">
-                        <img src="../images/common/man.png" alt='' class="img-responsive nav-r-icon"/>
-                        <p class="nav-r-name">登陆/注册</p>
-                      </a>
-                    </li>
-                    <li class="user-status">
-                      <a href="./userCenter.html">
-                        <img src="../images/comDetails/user-icon.png" width=50 alt="用户头像" class="img-responsive header-user-icon inb" onerror="userImgErr(this)">
-                      </a>
-                      <span class="arrow"></span>
-                      <div class="user-hidden-box">
-                        <span class="header-user-name inb"></span>
-                        <p class="exit-box">
-                          <a href="./userCenter.html">个人中心</a>
-                          <span class="h-line"></span>
-                          <a href="javascript:void(0);"class="exit">退出</a>
-                        </p>
-                      </div>
-                    </li>
-                    <li class="search-i">
-                      <form class="form-search" action="./search.html" onSubmit="return searchConfirm();">
-                        <span class="input-search-box">
-                          <input type="text" name="search_txt" id="t-search" class="input-search">
-                        </span><span class="btn-search-box">
-                          <input type="submit" value="搜索" id="btn-search" class="btn-search">
-                        </span>
-                      </form>
-                    </li>
-                </ul>
+                  <ul class="nav navbar-nav navbar-right">
+                      <li>
+                        <a href="http://miaomiaotv.cn/index.html">
+                          <img src="../images/common/mobile.png" alt='' class="img-responsive nav-r-icon"/>
+                          <p class="nav-r-name">客户端</p>
+                        </a>
+                      </li>
+                      <li>
+                        <a href="./upload.html">
+                          <img src="../images/common/upload.png" alt='' class="img-responsive nav-r-icon"/>
+                          <p class="nav-r-name">上传视频</p>
+                        </a>
+                      </li>
+                      <li>
+                        <a href="./history.html">
+                          <img src="../images/common/history.png" alt='' class="img-responsive nav-r-icon"/>
+                          <p class="nav-r-name">历史观看</p>
+                        </a>
+                      </li>
+                      <li class="header-login">
+                        <a href="./login.html">
+                          <img src="../images/common/man.png" alt='' class="img-responsive nav-r-icon"/>
+                          <p class="nav-r-name">登陆/注册</p>
+                        </a>
+                      </li>
+                      <li class="user-status">
+                        <a href="./userCenter.html">
+                          <img src="../images/common/default.png" width=50 alt="用户头像" class="img-responsive header-user-icon inb" onerror="userImgErr(this)">
+                        </a>
+                        <span class="arrow"></span>
+                        <div class="user-hidden-box">
+                          <span class="header-user-name inb"></span>
+                          <p class="exit-box">
+                            <a href="./userCenter.html">个人中心</a>
+                            <span class="h-line"></span>
+                            <a href="javascript:void(0);"class="exit">退出</a>
+                          </p>
+                        </div>
+                      </li>
+                      <li class="search-i">
+                        <form class="form-search" action="./search.html" onSubmit="return searchConfirm();">
+                          <span class="input-search-box">
+                            <input type="text" name="search_txt" id="t-search" class="input-search">
+                          </span><span class="btn-search-box">
+                            <input type="submit" value="搜索" id="btn-search" class="btn-search">
+                          </span>
+                        </form>
+                      </li>
+                  </ul>
+              </div>
+              <!-- end of navbar-collapse -->
             </div>
-            <!-- end of navbar-collapse -->
-          </div>
-          <!-- end of container-fluid -->
-        </nav>
+            <!-- end of container-fluid -->
+          </nav>
+        </div>
       </div>
+      <div class="header-bottom-line"></div>
     </div>    
     <div class="container">
-      <div class="user-center-box">
-        <div class="user-header">
+      <div class="user-center-box" ng-app="miaovr">
+        <div class="user-header" ng-controller="main">
           <h3 class="nickname"></h3>
-          <a class="chat" href="#"></a>
+          <input type="hidden" id="to_uuid" ng-model="targetId">
+          <a class="chat" href="javascript:void(0);" ng-click="onShow()" id="chat"></a>
+          <rong-widget></rong-widget>
         </div>
         <div class="row user-main">
           <div class="col-sm-2">
@@ -312,12 +318,39 @@
         </div>
       </div> 
     </div>
+    <div class="a-login-box">
+      <form action="/v1/account_password_login.php" class="a-login-form" id="login-form">
+        <p class="a-login-title">
+          账号登陆
+        </p>
+        <p class="a-login-item">
+          <input type="text" role-type="mobile" role-null="请输入手机号" role-err="请检查手机号码格式" class="inp" placeholder="手机号" id="uname">
+        </p>
+        <p class="a-login-item">
+          <input type="password" role-type="pass" name="pass" role-null="请输入密码" role-err="密码包含数字字母或者下划线，6~16位长度" class="inp" placeholder="密码" id="pass">
+        </p>
+        <p class="a-login-item">
+          <input type="submit" value="登录" id="btn-login" class="btn-login">
+        </p>
+        <p class="a-login-item login-item-register">
+          没有账号?<a href="./register.html" class="register">免费注册</a>
+        </p>
+      </form>
+    </div>
     <!--end of footer-->
     <script src="../js/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="../js/jquery.cookie.js"></script>
     <script type="text/javascript" src="../js/common.js"></script>
     <script src="../js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../js/login.js"></script>
+    <script type="text/javascript" src="../webim/angular.js"></script>
+    <script type="text/javascript" src="../webim/RongIMWidget.js"></script>
+    <script type="text/javascript" src="../webim/config.js"></script>
     <script type="text/javascript">
       $(document).ready(function(){
+        if(Base.isLogin()){
+          $("#chat").click();
+        }  
         Base.initHeaderUser();
         $(".tabs li").bind("click",function(){
             $(this).addClass("choose").siblings().removeClass("choose");
@@ -341,6 +374,7 @@
         if(!uid){
           Base.showAlert("抱歉,你所查找的资源不存在","error");
         }else{
+          $("#to_uuid").val(uid);
           Base.excuteAjax("/v1/friend_detail.php","POST",{"uuid":uid},function(data){
             if(Base.isSuccess(data)){
               $(".nickname").html(data.nickname);
