@@ -161,13 +161,13 @@
     </div>
     <!--end of container-->
     <div class="container container-white">
-      <div class="container-title">VR TV推荐</div>
+      <div class="container-title">VR&nbsp;TV推荐</div>
         <div class="row row-vr" id="vr-recommend-box" role-mn="7">
           <div class="mask-loading">
             <div class="loading-icon"></div>
           </div>
-          <div class="col-sm-2 col-sm-40 recommed-item">
-            <a href="./playvr.html?vid=" class="inb">
+          <div class="col-sm-2 col-sm-40 recommed-item inb f-vr-box">
+            <a href="./playvr.html?vid=" class="f-vr">
               <img src="../images/vrtv/image-big.png" role-err="../images/vrtv/image-big.png" alt="image" class="img-responsive"/>
               <p class="title item-title">
                 <span class="item-name" role-limit="4"></span>
@@ -180,7 +180,7 @@
           </div>
           <div class="col-sm-2 col-sm-60">
             <div class="row row-pb-10">
-              <div class="col-sm-4 recommed-item">
+              <div class="col-sm-4 recommed-item inb">
                 <a href="./playvr.html?vid=">
                   <img src="../images/vrtv/image-small.png"  role-err="../images/vrtv/image-small.png" alt="image" class="img-responsive"/>
                   <p class="title item-title">
@@ -192,7 +192,7 @@
               </div>
                 </a>
               </div>
-              <div class="col-sm-4 recommed-item">
+              <div class="col-sm-4 recommed-item inb">
                 <a href="./playvr.html?vid=">
                   <img src="../images/vrtv/image-small.png"  role-err="../images/vrtv/image-small.png" alt="image" class="img-responsive"/>
                   <p class="title item-title">
@@ -204,7 +204,7 @@
               </div>
                 </a>
               </div>
-              <div class="col-sm-4 recommed-item">
+              <div class="col-sm-4 recommed-item inb">
                 <a href="./playvr.html?vid=">
                   <img src="../images/vrtv/image-small.png"  role-err="../images/vrtv/image-small.png" alt="image" class="img-responsive"/>
                   <p class="title item-title">
@@ -218,7 +218,7 @@
               </div>
             </div>
             <div class="row">
-              <div class="col-sm-4 recommed-item">
+              <div class="col-sm-4 recommed-item inb">
                 <a href="./playvr.html?vid=">
                   <img src="../images/vrtv/image-small.png"  role-err="../images/vrtv/image-small.png" alt="image" class="img-responsive"/>
                   <p class="title item-title">
@@ -230,7 +230,7 @@
               </div>
                 </a>
               </div>
-              <div class="col-sm-4 recommed-item">
+              <div class="col-sm-4 recommed-item inb">
                 <a href="./playvr.html?vid=">
                   <img src="../images/vrtv/image-small.png"  role-err="../images/vrtv/image-small.png" alt="image" class="img-responsive"/>
                   <p class="title item-title">
@@ -242,7 +242,7 @@
               </div>
                 </a>
               </div>
-              <div class="col-sm-4 recommed-item">
+              <div class="col-sm-4 recommed-item inb">
                 <a href="./playvr.html?vid=">
                   <img src="../images/vrtv/image-small.png"  role-err="../images/vrtv/image-small.png" alt="image" class="img-responsive"/>
                   <p class="title item-title">
@@ -260,10 +260,12 @@
     </div>
     <!--end of container--> 
     <div class="container banner-box" class="img-responsive">
-      <img src="../images/vrtv/banner.png">
+      <div class="banner-img">
+        <img src="../images/vrtv/banner.png">
+      </div>
     </div>
     <div class="container container-white">
-      <div class="container-title">VR TV精选</div>
+      <div class="container-title">VR&nbsp;TV精选</div>
       <div id="tv-selection-box">
         <div class="mask-loading">
           <div class="loading-icon"></div>
@@ -403,18 +405,18 @@
           </div>
           <div class="col-sm-6">
             <div class="row">
-              <div class="col-sm-3 footer-menu">
+              <a href="./vrinfo.html" class="col-sm-3 footer-menu">
                 VR资讯
-              </div>
-              <div class="col-sm-3 footer-menu">
-                VR TV
-              </div>
-              <div class="col-sm-3 footer-menu">
-                VR 游戏
-              </div>
-              <div class="col-sm-3 footer-menu">
+              </a>
+              <a href="./vrtv.html" class="col-sm-3 footer-menu">
+                VRTV
+              </a>
+              <a href="./vrgame.html" class="col-sm-3 footer-menu">
+                VR游戏
+              </a>
+              <a href="./community.html" class="col-sm-3 footer-menu">
                 VR社区
-              </div>
+              </a>
             </div>
             <div class="footer-link content-center">
               <div class="footer-link-line"></div>
@@ -465,7 +467,6 @@
         Base.isLogin();
         //tv推荐
         Base.excuteAjax("/search/allByPage?offset=0&length=7",null,null,function(data){
-          console.log(data);
           if(Base.isSuccess(data)){
             Base.handleResult("vr-recommend-box",data,
             {"childrenBox":".recommed-item",
@@ -489,7 +490,6 @@
 
         //tv精选
         Base.excuteAjax("/search/selection",null,null,function(data){
-          console.log(data);
           if(Base.isSuccess(data)){
             var len=data.list_result.length;
             if(len<6){

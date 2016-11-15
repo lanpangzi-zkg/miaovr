@@ -205,7 +205,7 @@
                   <div class="loading-icon"></div>
                 </div>
                 <div class="other-video">
-                  <a href="#">
+                  <a href="http://127.0.0.1:8080/miaovr/views/playvr.html?vid=">
                     <div class="other-video-icon">
                       <img src="#" class="img-responsive">
                     </div>
@@ -226,18 +226,18 @@
           </div>
           <div class="col-sm-6">
             <div class="row">
-              <div class="col-sm-3 footer-menu">
+              <a href="./vrinfo.html" class="col-sm-3 footer-menu">
                 VR资讯
-              </div>
-              <div class="col-sm-3 footer-menu">
-                VR TV
-              </div>
-              <div class="col-sm-3 footer-menu">
-                VR 游戏
-              </div>
-              <div class="col-sm-3 footer-menu">
+              </a>
+              <a href="./vrtv.html" class="col-sm-3 footer-menu">
+                VRTV
+              </a>
+              <a href="./vrgame.html" class="col-sm-3 footer-menu">
+                VR游戏
+              </a>
+              <a href="./community.html" class="col-sm-3 footer-menu">
                 VR社区
-              </div>
+              </a>
             </div>
             <div class="footer-link content-center">
               <div class="footer-link-line"></div>
@@ -319,7 +319,6 @@
           queryParam.fileid=vid;
           //查询视频信息
           Base.excuteAjax("/search/fileid","POST",{"fileid":vid},function(data){
-            console.log(data);
             if(Base.isSuccess(data)&&data.list_result.length>0){
               var info=data.list_result[0];
               $("#category-"+info.category).css("display","inherit");
@@ -360,7 +359,7 @@
                 "href":"a"},
                 {"img":"pic_url",
                 "txt":"showname",
-                "href":"url"});                
+                "href":"fileid"});                
               }
             }else{
               Base.showAlert(data.error_msg,"error");

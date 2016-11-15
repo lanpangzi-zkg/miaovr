@@ -17,7 +17,7 @@
 }
 .main-header .theme{
     font-size: 1.1em;
-    color: #006987;
+    color: #0491b9;
     margin: 0 13px;
 }
 .main-header .cur-theme{
@@ -49,10 +49,11 @@
 .note-item .note-icon{
     float: left;
     margin-top: 8px;
-    width: 35px;
-    height: 35px;
+    width: 40px;
+    height: 40px;
     background-color: #555;
     border-radius: 50%;
+    overflow: hidden;
 }
 .note-item .note-main{
     position: relative;
@@ -88,9 +89,7 @@
 .note-extra{
     color: #dfdfe0;
     font-size: 12px;
-}
-.note-extra .note-author{
-
+    margin-bottom: 5px;
 }
 .note-extra .note-date{
     margin-left: 10px;
@@ -121,7 +120,7 @@
 .aside-box .title{
     position: relative;
     padding: 0 10px;
-    margin: 0 10px 10px 10px;
+    margin: 0 10px 5px 10px;
     line-height: 30px;
     height: 30px;
     font-size: 1.2em;

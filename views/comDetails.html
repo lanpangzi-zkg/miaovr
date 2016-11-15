@@ -151,7 +151,7 @@
                 <p class="note-txt">
                 </p>
                 <p class="end-line">
-                  end
+                  End
                 </p>
               </div>
             </div>
@@ -221,18 +221,18 @@
           </div>
           <div class="col-sm-6">
             <div class="row">
-              <div class="col-sm-3 footer-menu">
+              <a href="./vrinfo.html" class="col-sm-3 footer-menu">
                 VR资讯
-              </div>
-              <div class="col-sm-3 footer-menu">
-                VR TV
-              </div>
-              <div class="col-sm-3 footer-menu">
-                VR 游戏
-              </div>
-              <div class="col-sm-3 footer-menu">
+              </a>
+              <a href="./vrtv.html" class="col-sm-3 footer-menu">
+                VRTV
+              </a>
+              <a href="./vrgame.html" class="col-sm-3 footer-menu">
+                VR游戏
+              </a>
+              <a href="./community.html" class="col-sm-3 footer-menu">
                 VR社区
-              </div>
+              </a>
             </div>
             <div class="footer-link content-center">
               <div class="footer-link-line"></div>
@@ -273,23 +273,6 @@
       </div> 
     </div>
     <!--end of footer-->
-    <div class="mask" id="web-chat-mask"></div>
-    <div class="chat-dialog" id="web-chat">
-      <div class="chart-close"></div>
-      <div class="chat-header">
-        <div class="chat-user-icon">
-          <img src="../images/comDetails/default.png">
-        </div>
-        <p class="chat-user-name"></p>
-      </div>
-      <div class="chat-history"></div>
-      <div class="chart-content">
-        <textarea class="main-chat"></textarea>
-      </div>
-      <div class="chart-btn-group">
-        <input type="button" value="发送" class="btn-send" id="btn-send-massage"/>
-      </div>
-    </div>
     <div class="theme-mask mask"></div>
     <div class="add-theme-box">
       <div class="new-theme-top">
@@ -398,7 +381,6 @@
           }
           Base.excuteAjax("/forum/save","POST",{"title":_title,"forum_details":_content,"uuid":Base.getUUID()},function(data){
             hideThemePop();
-            console.log(data);
             if(Base.isSuccess(data)){
               Base.showAlert("发表成功");
             }else{
@@ -425,8 +407,6 @@
           queryParam.forumId=nid;
           //查询主题信息
           Base.excuteAjax("/forum/forumId","POST",{"forumId":nid},function(data){
-            console.log("查询主题信息");
-            console.log(data);
             if(Base.isSuccess(data)&&data.list_result.length>0){
               var info=data.list_result[0];
               $("#btn-send-massage").attr("to_uuid",info.user.uuid);

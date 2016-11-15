@@ -106,8 +106,10 @@ input{
     z-index: 998;
 }
 #main-navbar {
-    z-index: 9995;
     position: relative;
+    padding-left: 0;
+    padding-right: 0;
+    z-index: 9995;
 }
 #main-navbar .navbar-default {
     background-color: #fff;
@@ -321,6 +323,7 @@ input{
 }
 .footer-menu:hover{
     color: #ffd737;
+    text-decoration: none;
 }
 .footer-link{
     color: #949494;
@@ -545,6 +548,9 @@ input{
     .author-box .author-score .score-line{
         display: none;
     }
+    .footer-menu{
+        padding: 0 5px;
+    }
 }
 @media (max-width: 964px) {
     #main-navbar .navbar .navbar-right .search-i{
@@ -557,6 +563,9 @@ input{
     }
     .navbar-toggle{
         margin-top: 30px;
+    }
+    .footer .row{
+        text-align: center;
     }
 }
 @media (max-width: 600px) {

@@ -38,8 +38,11 @@
     margin: inherit;
 }
 .banner-box{
-    width: 100%;
     text-align: center;
+    background-color: #fff;
+}
+.banner-box .banner-img{
+  overflow: hidden;
 }
 #game-selection-box{
   position: relative;
@@ -55,7 +58,7 @@
     color: #333333;
     padding: 5px 0;
 }
-@media (max-width: 600px) {
+@media (max-width: 768px) {
    .img-left.vr-category-link .vr-category,.img-right.vr-category-link .vr-category{
         margin: 0 auto;
    } 

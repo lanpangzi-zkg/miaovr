@@ -4,8 +4,10 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" type="image/x-icon" href="/images/common/favicon.ico"/>
+    <meta name="Keywords" content="瞄瞄vr,vr"/>         
+    <meta name="Description" itemprop="description" content="瞄瞄vr"/>
     <title>瞄瞄VR</title>
-
     <link href="./css/bootstrap.min.css" rel="stylesheet">
     <link href="./css/common.css" rel="stylesheet">
     <link href="./css/index.css" rel="stylesheet">
@@ -729,7 +731,9 @@
       function queryVrInfo(){
         Base.excuteAjax("/news/all?offset=0&limit=3","POST",null,function(data){
           if(Base.isSuccess(data)){
-          Base.handleResult("index-vrinfo",data,
+            console.log("queryVrInfo");
+            console.log(data);
+            Base.handleResult("index-vrinfo",data,
             {"childrenBox":".col-sm-4",
               "img":".vr-info-icon img",
               "txt":".vr-info-sub .sub-txt",
@@ -790,7 +794,7 @@
           }
           },function(err){  
             console.log("queryVrHotTv err:"+err);
-             Base.showAlert(err,"error");
+            Base.showAlert(err,"error");
         });
       }
       function queryVrGame(){

@@ -24,7 +24,7 @@ function initUpload(){
     uptoken_func: function(file){
         var uploadToken="";
         $.ajax({
-            url:"http://127.0.0.1:8080/miaovr/queryApi",
+            url:"http://api2.app.miaomiaotv.cn:8080/miaomiaotv/news/upLoadToken",
             type:"POST",
             async: false,
             data:{"description":$("#description-image").val(),
@@ -110,7 +110,7 @@ function initUpload(){
     uptoken_func: function(){
         var uploadToken="";
         $.ajax({
-            url:"http://127.0.0.1:8080/miaovr/queryApi",
+            url:"http://api2.app.miaomiaotv.cn:8080/miaomiaotv/news/upLoadToken ",
             type:"POST",
             async: false,
             data:{"description":$("#description-video").val(),
